@@ -158,6 +158,13 @@ function flushRoot(root: FiberRoot): void {
   pending.sort((a, b) => fiberDepth(a) - fiberDepth(b))
   for (const fiber of pending) {
     if (!fiber.dy || fiber.um || fiber.pd) continue
+    // An earlier ancestor in this batch may have retained this subtree after
+    // suspending. Work queued before that hide must also retry through the
+    // boundary, never render a retained child against its previous props.
+    if (fiber.su) {
+      scheduleUpdate(fiber)
+      continue
+    }
     const boundary = root.eb && findErrorBoundary(fiber)
     const checkpoint = boundary || (root.sp && findSuspenseBoundary(fiber)) ? checkpointCommit(fiber) : -1
     try {
@@ -165,6 +172,9 @@ function flushRoot(root: FiberRoot): void {
     } catch (error) {
       if (error instanceof RenderSuspenseCapture) {
         rewindCommit(checkpoint)
+        // Retry the suspended descendant through unchanged memo/context ancestors.
+        // Scheduling only Suspense can otherwise skip a captured error fallback.
+        for (let retry: Fiber | null = fiber; retry && retry !== error.boundary; retry = retry.parent) retry.dy = true
         error.boundary.ms.u = true
         scheduleUpdate(error.boundary)
         continue
@@ -587,19 +597,8 @@ export function reconcileChildren(
     prevNewFiber = fiber
   }
 
-  // Pass 2: walk the sibling chain we just built and render each fiber
-  // forward with the correct per-child anchor. During hydration the cursor
-  // walks DOM forward and each renderFiber adopts the next existing node,
-  // so per-child anchors are moot — fall back to the parent's anchor.
-  const hydrating = !!currentRoot?.h
-  // New siblings have no DOM yet, so searching them for an anchor cannot help.
-  // An empty replacement has no new chain. The old children remain linked
-  // until cleanup below, and must not render again on their way out.
-  if (prevNewFiber) renderChildChain(parent, domParent, anchor, hydrating || existing.length === 0)
-
-  if (!prevNewFiber) parent.child = null
-  else prevNewFiber.sibling = null
-
+  // Queue deletions before placements, while keeping both deferred until commit.
+  // A document cannot accept its replacement HTML node before the old one leaves.
   // Head content is additive — server may inject metadata/stylesheets (Vite
   // dev styles, Sentry, analytics) that aren't in the React tree. Unmounting
   // them on every reconcile thrashes styles and causes flash of unstyled
@@ -618,6 +617,19 @@ export function reconcileChildren(
       }
     }
   }
+
+  // Pass 2: walk the sibling chain we just built and render each fiber
+  // forward with the correct per-child anchor. During hydration the cursor
+  // walks DOM forward and each renderFiber adopts the next existing node,
+  // so per-child anchors are moot — fall back to the parent's anchor.
+  const hydrating = !!currentRoot?.h
+  // New siblings have no DOM yet, so searching them for an anchor cannot help.
+  // An empty replacement has no new chain. Unclaimed old children are already
+  // scheduled for deletion and must not render again on their way out.
+  if (prevNewFiber) renderChildChain(parent, domParent, anchor, hydrating || existing.length === 0)
+
+  if (!prevNewFiber) parent.child = null
+  else prevNewFiber.sibling = null
 
   // During hydration, DOM is already in document order from the cursor-driven
   // adoption walk. Running placeChildrenInOrder here would reappend nodes to
@@ -1234,8 +1246,12 @@ export function findSuspenseBoundary(fiber: Fiber): Fiber | null {
 
 export class RenderErrorCapture {
   stack: string
-  constructor(public boundary: Fiber, public error: unknown, source: Fiber = boundary) {
+  props: Fiber['pp']
+  state: unknown
+  constructor(public boundary: Fiber, public error: unknown, public source: Fiber = boundary) {
     this.stack = componentStack(source)
+    this.props = boundary.pp
+    this.state = boundary.sn?.state
   }
 }
 
@@ -1246,9 +1262,16 @@ function captureError(capture: RenderErrorCapture): void {
   scheduleUpdate(fiber)
 }
 
+// Errors from an error fallback belong to an ancestor, never its owner.
+const renderingErrorFallbacks = new Set<Fiber>()
+export function renderErrorFallback(fiber: Fiber, render: () => void): void {
+  renderingErrorFallbacks.add(fiber)
+  try { render() } finally { renderingErrorFallbacks.delete(fiber) }
+}
+
 function findErrorBoundary(fiber: Fiber): Fiber | null {
   for (let parent = fiber.parent; parent; parent = parent.parent) {
-    if (parent.um || parent.pd) continue
+    if (parent.um || parent.pd || renderingErrorFallbacks.has(parent)) continue
     const instance = parent.sn
     if (instance?._fiber === parent && (parent.ms?.b?.getDerivedStateFromError || instance.componentDidCatch)) return parent
   }
@@ -1670,6 +1693,29 @@ export function enqueueEffect(fiber: Fiber, effect: Effect): void {
 export function scheduleLifecycle(fiber: Fiber, fn: () => void): void {
   if (isActivityHidden(fiber) || layoutIsDisconnected(fiber)) return
   stageCommit(fiber, fn)
+}
+
+// Suspense reconnects retained layouts after rendering the successful primary.
+// Keep error notifications with their boundary until that child-first walk.
+const pendingErrorLifecycles = new WeakMap<Fiber, Array<() => void>>()
+
+export function scheduleErrorLifecycle(fiber: Fiber, fn: () => void): void {
+  if (isActivityHidden(fiber)) return
+  if (!layoutIsDisconnected(fiber)) { stageCommit(fiber, fn); return }
+  const previous = pendingErrorLifecycles.get(fiber)
+  pendingErrorLifecycles.set(fiber, previous ? [...previous, fn] : [fn])
+  onCommitRollback(() => {
+    if (previous) pendingErrorLifecycles.set(fiber, previous)
+    else pendingErrorLifecycles.delete(fiber)
+  })
+}
+
+export function reconnectErrorLifecycles(fiber: Fiber): void {
+  const pending = pendingErrorLifecycles.get(fiber)
+  if (!pending) return
+  pendingErrorLifecycles.delete(fiber)
+  onCommitRollback(() => { pendingErrorLifecycles.set(fiber, pending) })
+  for (const fn of pending) stageCommit(fiber, fn)
 }
 
 export function runEffects(root: FiberRoot): void {

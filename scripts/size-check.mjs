@@ -7,26 +7,26 @@ import { measureSizes } from './measure-size.mjs'
 const BUDGETS = {
   'redact': 2793,
   'redact/jsx-runtime': 217,
-  // Recovery preserves provider ancestry. The reviewed built entry grows by
-  // 36 bytes, while the combined client shrinks by 64. Keep the approved budget.
-  // See benchmarks/HYDRATION_RECOVERY.md for the bound source/dist measurements.
-  'redact/dom': 25282,
-  'redact/dom-client': 25006,
-  'redact/server': 8989,
-  'client total': 28183,
-  'client total (default Vite)': 23335,
-  'redact/dom-client (activity=stub)': 24438,
-  'redact/dom-client (fragmentRefs=stub)': 22814,
-  'redact/dom-client (viewTransitions=stub)': 20159,
-  'redact/dom-client (portal=stub)': 24972,
-  'redact/dom-client (context=stub)': 24719,
-  'redact/dom-client (suspense=stub)': 23479,
-  'redact/dom-client (memo=stub)': 24912,
-  'redact/dom-client (forwardRef=stub)': 24973,
-  'redact/dom-client (lazy=stub)': 24983,
-  'redact/dom-client (classComponents=stub)': 24512,
-  'redact/dom-client (hydration=stub)': 22400,
-  'redact/dom-client (nano)': 12491,
+  // Hydration and Suspense correctness costs are measured against pristine main.
+  // Only exceeded limits changed, with no added margin.
+  // See benchmarks/HYDRATION_SUSPENSE_RECOVERY.md for the complete comparison.
+  'redact/dom': 25949,
+  'redact/dom-client': 25461,
+  'redact/server': 9318,
+  'client total': 28634,
+  'client total (default Vite)': 23814,
+  'redact/dom-client (activity=stub)': 24911,
+  'redact/dom-client (fragmentRefs=stub)': 23273,
+  'redact/dom-client (viewTransitions=stub)': 20674,
+  'redact/dom-client (portal=stub)': 25428,
+  'redact/dom-client (context=stub)': 25179,
+  'redact/dom-client (suspense=stub)': 23907,
+  'redact/dom-client (memo=stub)': 25371,
+  'redact/dom-client (forwardRef=stub)': 25415,
+  'redact/dom-client (lazy=stub)': 25449,
+  'redact/dom-client (classComponents=stub)': 24857,
+  'redact/dom-client (hydration=stub)': 22986,
+  'redact/dom-client (nano)': 12905,
 }
 
 let failed = false
