@@ -58,3 +58,37 @@ Built output adds 574 gzip bytes to the combined client and 582 bytes with defau
 `REDACT_TEST_SOURCE=/absolute/path/to/pristine/packages/redact/src pnpm exec vitest run --config scripts/hydration-recovery.config.mjs` runs the regressions against a separate pristine source checkout. The original jsdom run reproduced nine failures before the fixes. The full browser suite reproduced eleven failing cases and three passing controls on pristine main. The browser configuration supports the same source override.
 
 These tests cover library contracts. They do not claim complete React compatibility or whole-application parity.
+
+
+## Noscript follow-up
+
+Commit `b1c945f` adds opaque noscript hydration and skips client fallback child
+rendering. The native-browser regression checks that the server fallback renders
+once, its raw text remains intact, and an adjacent button retains its DOM node
+and updates its state. A separate regression covers client mount and update.
+
+[CI run 38592959191](https://github.com/TanStack/redact/actions/runs/38592959191)
+passed 1,653 unit tests, TypeScript, and build/export verification. It stopped at
+the size gate, before the Chromium regression stage. Local runtime tests were
+not rerun for this follow-up. Only exceeded budgets are updated to that run's
+measured maximum across source and built bundles, without additional margin.
+These are differences against previous budget ceilings, not an isolated
+measurement of the noscript fix against the prior commit.
+
+| Bundle | Previous ceiling | CI maximum gzip | Increase |
+| --- | ---: | ---: | ---: |
+| redact/server | 9318 B | 9336 B | 18 B |
+| redact/dom | 25949 B | 25977 B | 28 B |
+| redact/dom-client | 25461 B | 25494 B | 33 B |
+| client total | 28634 B | 28668 B | 34 B |
+| redact/dom-client (activity=stub) | 24911 B | 24939 B | 28 B |
+| redact/dom-client (fragmentRefs=stub) | 23273 B | 23305 B | 32 B |
+| redact/dom-client (portal=stub) | 25428 B | 25462 B | 34 B |
+| redact/dom-client (context=stub) | 25179 B | 25214 B | 35 B |
+| redact/dom-client (suspense=stub) | 23907 B | 23942 B | 35 B |
+| redact/dom-client (memo=stub) | 25371 B | 25400 B | 29 B |
+| redact/dom-client (forwardRef=stub) | 25415 B | 25445 B | 30 B |
+| redact/dom-client (lazy=stub) | 25449 B | 25482 B | 33 B |
+| redact/dom-client (classComponents=stub) | 24857 B | 24891 B | 34 B |
+| redact/dom-client (hydration=stub) | 22986 B | 23036 B | 50 B |
+| redact/dom-client (nano) | 12905 B | 12920 B | 15 B |

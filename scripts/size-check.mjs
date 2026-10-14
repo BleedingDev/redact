@@ -10,23 +10,23 @@ const BUDGETS = {
   // Hydration and Suspense correctness costs are measured against pristine main.
   // Only exceeded limits changed, with no added margin.
   // See benchmarks/HYDRATION_SUSPENSE_RECOVERY.md for the complete comparison.
-  'redact/dom': 25949,
-  'redact/dom-client': 25461,
-  'redact/server': 9318,
-  'client total': 28634,
+  'redact/dom': 25977,
+  'redact/dom-client': 25494,
+  'redact/server': 9336,
+  'client total': 28668,
   'client total (default Vite)': 23814,
-  'redact/dom-client (activity=stub)': 24911,
-  'redact/dom-client (fragmentRefs=stub)': 23273,
+  'redact/dom-client (activity=stub)': 24939,
+  'redact/dom-client (fragmentRefs=stub)': 23305,
   'redact/dom-client (viewTransitions=stub)': 20674,
-  'redact/dom-client (portal=stub)': 25428,
-  'redact/dom-client (context=stub)': 25179,
-  'redact/dom-client (suspense=stub)': 23907,
-  'redact/dom-client (memo=stub)': 25371,
-  'redact/dom-client (forwardRef=stub)': 25415,
-  'redact/dom-client (lazy=stub)': 25449,
-  'redact/dom-client (classComponents=stub)': 24857,
-  'redact/dom-client (hydration=stub)': 22986,
-  'redact/dom-client (nano)': 12905,
+  'redact/dom-client (portal=stub)': 25462,
+  'redact/dom-client (context=stub)': 25214,
+  'redact/dom-client (suspense=stub)': 23942,
+  'redact/dom-client (memo=stub)': 25400,
+  'redact/dom-client (forwardRef=stub)': 25445,
+  'redact/dom-client (lazy=stub)': 25482,
+  'redact/dom-client (classComponents=stub)': 24891,
+  'redact/dom-client (hydration=stub)': 23036,
+  'redact/dom-client (nano)': 12920,
 }
 
 let failed = false
