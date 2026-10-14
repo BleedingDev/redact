@@ -976,14 +976,16 @@ function renderHost(fiber: Fiber, domParent: Node, anchor: Node | null): void {
 
   // Children go into this DOM node
   // Textarea's value/defaultValue owns its text node, not child fibers.
+  // With scripting enabled, the HTML parser treats noscript contents as raw
+  // text. Keep that fallback opaque and never render its children on the client.
   if (!hadDom && !hydrated) {
     // Only a host allocated by this render is safe to assemble eagerly.
     // User-owned detached roots and portal containers still commit normally.
     const previous = preparedParent
     preparedParent = fiber.dom
-    try { reconcileChildren(fiber, isTextarea ? [] : childrenToArray(props.children), fiber.dom!, null) }
+    try { reconcileChildren(fiber, (isTextarea || type === 'noscript') ? [] : childrenToArray(props.children), fiber.dom!, null) }
     finally { preparedParent = previous }
-  } else reconcileChildren(fiber, isTextarea ? [] : childrenToArray(props.children), fiber.dom!, null)
+  } else reconcileChildren(fiber, (isTextarea || type === 'noscript') ? [] : childrenToArray(props.children), fiber.dom!, null)
 
   // During hydration, if after reconciling all client-expected children we
   // still have server DOM left in the cursor for this host, that's a
@@ -994,7 +996,7 @@ function renderHost(fiber: Fiber, domParent: Node, anchor: Node | null): void {
     const parentTag = (fiber.type as string).toLowerCase()
     const hasOpaqueHydrationChildren =
       props.dangerouslySetInnerHTML != null ||
-      isTextarea
+      isTextarea || type === 'noscript'
     if (
       parentTag !== 'head' &&
       parentTag !== 'html' &&

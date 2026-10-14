@@ -1,6 +1,6 @@
 import { afterEach, expect, it, vi } from 'vitest'
 import * as React from 'react'
-import { hydrateRoot, type Root } from 'react-dom/client'
+import { createRoot, hydrateRoot, type Root } from 'react-dom/client'
 import { flushSync } from 'react-dom'
 import { renderToString } from 'react-dom/server'
 
@@ -116,3 +116,47 @@ for (const suppressed of [false, true]) {
     expect(errors).toHaveLength(suppressed ? 0 : 1)
   })
 }
+
+
+it.skipIf(!nativeBrowser)('preserves opaque noscript fallback and neighboring interactive DOM during hydration', async () => {
+  let fallbackRenders = 0
+  function Fallback() {
+    fallbackRenders++
+    return <div>Enable JavaScript</div>
+  }
+  function App() {
+    const [count, setCount] = React.useState(0)
+    return <div><noscript><Fallback /></noscript><button onClick={() => setCount(count + 1)}>{count}</button></div>
+  }
+  const element = container(renderToString(<App />))
+  expect(fallbackRenders).toBe(1)
+  const fallback = element.querySelector('noscript')!.firstChild!
+  expect(fallback.nodeType).toBe(Node.TEXT_NODE)
+  const button = element.querySelector('button')!
+  const errors: unknown[] = []
+  roots.push(hydrateRoot(element, <App />, { onRecoverableError: error => errors.push(error) }))
+  await tick()
+  expect(fallbackRenders).toBe(1)
+  expect(element.querySelector('noscript')!.firstChild).toBe(fallback)
+  expect(element.querySelector('button')).toBe(button)
+  flushSync(() => button.click())
+  expect(button.textContent).toBe('1')
+  expect(fallbackRenders).toBe(1)
+  expect(element.querySelector('noscript')!.firstChild).toBe(fallback)
+  expect(errors).toEqual([])
+})
+
+it('does not render noscript child components on client mount or update', () => {
+  function Fallback(): React.ReactNode {
+    throw new Error('noscript fallback rendered on the client')
+  }
+  const element = container('')
+  const root = createRoot(element)
+  roots.push(root)
+  flushSync(() => root.render(<noscript><Fallback /></noscript>))
+  const fallback = element.querySelector('noscript')!
+  expect(fallback.childNodes).toHaveLength(0)
+  flushSync(() => root.render(<noscript><Fallback key="next" /></noscript>))
+  expect(element.querySelector('noscript')).toBe(fallback)
+  expect(fallback.childNodes).toHaveLength(0)
+})
