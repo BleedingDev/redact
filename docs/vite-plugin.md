@@ -15,7 +15,7 @@ redact({
 
 | Option | Type | Behavior |
 | --- | --- | --- |
-| `preset` | `'full' | 'nano'` | Defaults to `full`. Full enables every optional feature except native animation. Nano disables all optional features. |
+| `preset` | `'full'` or `'nano'` | Defaults to `full`. Full enables every optional feature except native animation. Nano disables all optional features. |
 | `features` | `RedactFeatures` | Boolean overrides merged with the preset. See [Feature Flags](./feature-flags.md). |
 | `skip` | `ReadonlyArray<string>` | Import specifiers to exclude from aliasing. |
 | `resolveFrom` | `string` | Package resolution root, defaults to the Vite config root. Useful in monorepos. |
