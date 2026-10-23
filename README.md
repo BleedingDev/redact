@@ -6,6 +6,8 @@ The goal is React's APIs and everyday behavior without concurrent scheduling, no
 
 These APIs are included in Redact 0.1.0. Comparisons use pinned React 19.3.0 and were recorded September 11, 2026. The benchmark reports retain the exact measured source snapshots and build inputs.
 
+[Documentation](https://tanstack.com/redact/latest/docs/overview) · [Website](https://tanstack.com/redact/latest)
+
 ## Quick start
 
 ```bash
