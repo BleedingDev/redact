@@ -1,0 +1,52 @@
+{
+  "$schema": "https://raw.githubusercontent.com/TanStack/tanstack.com/main/tanstack-docs-config.schema.json",
+  "sections": [
+    {
+      "label": "Getting Started",
+      "children": [
+        {
+          "label": "Overview",
+          "to": "overview"
+        },
+        {
+          "label": "Installation",
+          "to": "installation"
+        },
+        {
+          "label": "Quick Start",
+          "to": "quick-start"
+        }
+      ]
+    },
+    {
+      "label": "Guides",
+      "children": [
+        {
+          "label": "Compatibility",
+          "to": "compatibility"
+        },
+        {
+          "label": "Feature Flags",
+          "to": "feature-flags"
+        },
+        {
+          "label": "Bundle Size and Performance",
+          "to": "performance"
+        },
+        {
+          "label": "Testing Your Integration",
+          "to": "verification"
+        }
+      ]
+    },
+    {
+      "label": "Reference",
+      "children": [
+        {
+          "label": "Vite Plugin",
+          "to": "vite-plugin"
+        }
+      ]
+    }
+  ]
+}
