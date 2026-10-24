@@ -1,6 +1,6 @@
 # redact
 
-**Built for the React you love.** We love React, and we want to keep writing it. Redact is an alternative runtime for React apps, with a smaller footprint and synchronous rendering. Keep your components, hooks, and imports, and try it with one Vite plugin.
+**For the love of React, and smaller bundles.** We love React, and we want to keep writing it. Redact is an alternative runtime for React apps, with a smaller footprint and synchronous rendering. Keep your components, hooks, and imports, and try it with one Vite plugin.
 
 React's APIs and component model are the reason this project exists. Redact explores a different set of runtime tradeoffs within that ecosystem, not a new direction for React or a replacement for the project. Synchronous rendering keeps the runtime small, while React's concurrent scheduling supports behavior Redact doesn't provide. The [compatibility table](#compatibility) explains those differences.
 
