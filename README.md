@@ -135,7 +135,7 @@ This is the default Vite configuration. API availability is not a promise of eve
 | Caching | `cache` returns its function, `cacheSignal` returns `null`, and `unstable_useCacheRefresh` is a stable client no-op. Invoking a server refresh throws. Client/DOM-server rendering is uncached. |
 | React Compiler | The `react/compiler-runtime` memo-cache entrypoint is implemented and aliased. This is not validation of every compiler output pattern. |
 | Server Components / Flight | Kept on upstream React in the RSC environment, not reimplemented by Redact. |
-| Debugging | Fast Refresh works with `@vitejs/plugin-react`, preserving state for compatible edits and remounting when hook signatures change. `StrictMode` / `Profiler` render children without double invocation or profiling. `useDebugValue` is a no-op. React DevTools inspection is not implemented. |
+| Debugging | Fast Refresh preserves state for compatible edits. React DevTools supports component and hook inspection, edits, owners, error and Suspense controls, and commit profiling in development. `useDebugValue` labels appear in DevTools. All DevTools code is removed in production. `StrictMode` still avoids double invocation, and the `<Profiler>` callback remains a no-op. [DevTools checks and timings](docs/devtools-implementation-status.md). |
 
 Native animation is not exhaustive visual parity. Production animation, hidden-tab behavior, broader resource/navigation races, and Safari/Firefox remain unverified. [API details](./docs/REACT_19_3_SUPPORT.md), [upstream audit](./docs/REACT_19_3_AUDIT.md), [native animation limits](./docs/VIEW_TRANSITION_EXPERIMENT.md).
 

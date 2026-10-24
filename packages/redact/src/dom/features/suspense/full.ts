@@ -27,6 +27,7 @@ import {
   handleCommitError,
 } from '../../reconcile'
 import { cleanupEffect } from '../../dispatcher'
+import { devToolsSuspension } from '../../devtools'
 import { retainedEffects, inSuspensePrimary, setLayoutDisconnected, walkRetained } from '../../retained-effects'
 import {
   HydrationCursor,
@@ -136,7 +137,9 @@ function renderSuspense(fiber: Fiber, domParent: Node, anchor: Node | null): voi
     pendingThenable = thenable
   }
   try {
-    reconcileChildren(fiber, childrenToArray(props.children), domParent, anchor)
+    // A forced suspension uses the normal retained-tree path until released.
+    ;(process.env.NODE_ENV === 'production' || !(pendingThenable = devToolsSuspension(fiber))) &&
+      reconcileChildren(fiber, childrenToArray(props.children), domParent, anchor)
   } finally {
     suspendHandler = prevHandler
   }

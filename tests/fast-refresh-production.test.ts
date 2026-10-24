@@ -31,7 +31,7 @@ it('removes the refresh bridge and all hook interaction from production bundles'
   expect(code).not.toContain('scheduleRefresh')
   for (const output of Object.values(result.metafile!.outputs)) {
     for (const [file, input] of Object.entries(output.inputs)) {
-      if (file.endsWith('/dom/refresh.ts')) expect(input.bytesInOutput).toBe(0)
+      if (file.endsWith('/dom/refresh.ts') || /\/devtools(?:-effects)?\.ts$/.test(file)) expect(input.bytesInOutput).toBe(0)
     }
   }
   const dom = new JSDOM('<!doctype html><body></body>', { runScripts: 'outside-only' })

@@ -1,7 +1,8 @@
 import { FiberTag, type Fiber, type FiberRoot, type ReactNode } from '../core'
 import { REACT_FORWARD_REF_TYPE, REACT_MEMO_TYPE, REACT_LAZY_TYPE } from '../react'
 import { flushSyncWork, renderRoot, scheduleRootRender, scheduleUpdate } from './reconcile'
-import { queueCommitEffects } from './commit'
+import { queueCommitEffects, onCommitFailure } from './commit'
+import { enableDevTools, devToolsRenderer, commitDevTools } from './devtools'
 
 // Only referenced inside development guards. The production renderer does not
 // register a hook, allocate refresh bookkeeping, or check component families.
@@ -34,7 +35,9 @@ function getRefreshRoot(root: FiberRoot): RefreshRoot | undefined {
     const candidate = (globalThis as { __REACT_DEVTOOLS_GLOBAL_HOOK__?: RefreshHook }).__REACT_DEVTOOLS_GLOBAL_HOOK__
     if (!candidate || candidate.isDisabled) return
     try {
+      enableDevTools(candidate)
       rendererID = candidate.inject({
+        ...devToolsRenderer(),
         rendererPackageName: '@tanstack/redact',
         bundleType: 1,
         setRefreshHandler(handler: typeof resolveFamily) { resolveFamily = handler },
@@ -69,15 +72,28 @@ export function scheduleRefreshRoot(root: FiberRoot, children: ReactNode): void 
 }
 
 export function commitRefreshRoot(root: FiberRoot): void {
+  if (pendingCommits.has(root)) return
+  pendingCommits.add(root)
+  onCommitFailure(() => pendingCommits.delete(root))
+  queueCommitEffects(() => {
+    pendingCommits.delete(root)
+    notifyCommit(root)
+  })
+}
+
+const pendingCommits = /* @__PURE__ */ new WeakSet<FiberRoot>()
+
+function notifyCommit(root: FiberRoot): void {
   const adapter = roots.get(root)
   if (!adapter) return
   const previous = adapter.current.memoizedState
+  const failed = adapter.failed
+  adapter.failed = false
+  if (commitDevTools(root, adapter, hook, rendererID, failed)) return
   adapter.current = {
     memoizedState: { element: root.r.mp?.children ?? null },
     alternate: { memoizedState: previous },
   }
-  const failed = adapter.failed
-  adapter.failed = false
   try { hook!.onCommitFiberRoot?.(rendererID, adapter, undefined, failed) } catch {}
 }
 

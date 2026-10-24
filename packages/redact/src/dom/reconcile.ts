@@ -25,6 +25,8 @@ import { componentStack } from './error-info'
 import { resourceKind } from '../core/resource-hints'
 import { rememberRefreshRender, scheduleRefreshRoot, commitRefreshRoot, failRefreshRoot, failRefreshBoundary, resolveRefreshType, sameRefreshFamily, needsRefreshRemount } from './refresh'
 import { acquireResource } from './resources'
+import { beginDevToolsRender, endDevToolsRender, rememberDevToolsFiber, markDevToolsUpdate, beginDevToolsCallback, endDevToolsCallback } from './devtools'
+import { startDevToolsEffect, finishDevToolsLayout, wrapDevToolsLayout, wrapDevToolsPassive } from './devtools-effects'
 import { currentCommit, commitSynchronously, queueMutation, queueText, queueCommitEffects, setCommitCheckpointHook, onCommitRollback, onCommitFailure, checkpointCommit, rewindCommit, rememberChildList } from './commit'
 import { markTransitionUpdate, deferTransition, cancelTransitions, deferTransitionLayout, deferTransitionPassive } from './features/view-transition'
 import { createFragmentInstance, updateFragmentHost, refreshFragmentInstances } from './features/fragment-refs'
@@ -66,6 +68,7 @@ export function scheduleUpdate(fiber: Fiber): void {
   // missed, and letting those reach rerenderFiber mounts zombie DOM into the
   // old .parent's DOM (which stays reachable via the stale pointer).
   if (fiber.um || fiber.pd) return
+  if (process.env.NODE_ENV !== 'production') markDevToolsUpdate(fiber)
   fiber.dy = true
   // A component finishes its render-phase updates before reconciling children.
   if (ReactSharedInternals.F === fiber) return
@@ -180,6 +183,7 @@ function flushRoot(root: FiberRoot): void {
     }
   }
   runEffects(root)
+  if (process.env.NODE_ENV !== 'production') commitRefreshRoot(root)
 }
 
 export function scheduleRootRender(root: FiberRoot, render: () => void): void {
@@ -241,7 +245,7 @@ export function renderRoot(root: FiberRoot, children: ReactNode): void {
     currentRoot = null
   }
   runEffects(root)
-  if (process.env.NODE_ENV !== 'production') queueCommitEffects(() => commitRefreshRoot(root))
+  if (process.env.NODE_ENV !== 'production') commitRefreshRoot(root)
 }
 
 function rerenderFiber(fiber: Fiber, root: FiberRoot): void {
@@ -405,6 +409,7 @@ function fiberFromChild(child: NormalizedChild, parent: Fiber): Fiber {
   const f = createFiber(tag, type, child.key ?? null)
   f.ref = (child as any).ref ?? null
   f.pp = child.props
+  if (process.env.NODE_ENV !== 'production') rememberDevToolsFiber(f, child)
   f.parent = parent
   return f
 }
@@ -446,6 +451,7 @@ export function reconcileChildren(
         }
         if (f.type !== (child as ReactElement).type) { ok = false; break }
         f.pp = (child as ReactElement).props
+        if (process.env.NODE_ENV !== 'production') rememberDevToolsFiber(f, child as ReactElement)
         f.ref = (child as any).ref ?? null
       }
       f = f.sibling
@@ -572,6 +578,7 @@ export function reconcileChildren(
       } else {
         fiber.type = (child as ReactElement).type
         fiber.pp = (child as ReactElement).props
+        if (process.env.NODE_ENV !== 'production') rememberDevToolsFiber(fiber, child as ReactElement)
         fiber.ref = (child as any).ref ?? null
       }
     } else {
@@ -837,14 +844,18 @@ export function renderFiber(fiber: Fiber, domParent: Node, anchor: Node | null):
   if (fiber.root?.sp && fiber.parent?.ld && fiber.mp === null) setLayoutDisconnected(fiber, true)
   if (fiber.root?.a) CAPABILITIES.prepareActivityFiber(fiber)
   const fn = RENDERERS[fiber.tag]
+  let devTiming
+  if (process.env.NODE_ENV !== 'production') devTiming = beginDevToolsRender(fiber)
   try {
     if (fn) fn(fiber, domParent, anchor)
   } catch (error) {
+    if (process.env.NODE_ENV !== 'production') endDevToolsRender(devTiming)
     removeStagedCommits(fiber)
     if (currentRoot?.h || error instanceof RenderErrorCapture || error instanceof RenderSuspenseCapture || isHydrationBailout(error)) throw error
     if (isThenable(error)) handleSuspended(fiber, error)
     else handleErrorInRender(fiber, error)
   }
+  if (process.env.NODE_ENV !== 'production') endDevToolsRender(devTiming)
   if (fiber.root?.a) CAPABILITIES.syncActivity(fiber)
   if (lastStagedFiber === fiber) flushFiberCommits(fiber)
 }
@@ -1339,6 +1350,8 @@ export function isThenable(x: any): x is Promise<any> {
 export function unmountFiber(fiber: Fiber, domParent: Node, remove = true): void {
   if (fiber.um) return
   if (currentCommit) return queueUnmount(fiber, domParent, remove)
+  let previous
+  process.env.NODE_ENV !== 'production' && (previous = beginDevToolsCallback(fiber))
   removeStagedCommits(fiber)
   if (fiber.type === REACT_FRAGMENT_TYPE && fiber.sn) {
     if (fiber.cu) {
@@ -1394,6 +1407,7 @@ export function unmountFiber(fiber: Fiber, domParent: Node, remove = true): void
     c = next
   }
   fiber.child = null
+  process.env.NODE_ENV !== 'production' && endDevToolsCallback(previous)
 
   // Remove DOM if host
   if (remove && (fiber.tag === FiberTag.Host || fiber.tag === FiberTag.Text) && fiber.dom?.parentNode) {
@@ -1690,27 +1704,44 @@ function flushEffects(root: FiberRoot): void {
     pendingEffects.unshift(...batch)
   })
   queueCommitEffects(() => {
+  let devEffectStart
+  if (process.env.NODE_ENV !== 'production') devEffectStart = startDevToolsEffect()
   for (const [fiber, effect] of insertion) runEffect(fiber, effect, root)
+  if (process.env.NODE_ENV !== 'production') finishDevToolsLayout(root, devEffectStart)
   if (layout.length) {
+    if (process.env.NODE_ENV !== 'production') devEffectStart = startDevToolsEffect()
     for (const [fiber, work] of layout) {
       if (typeof work !== 'function' && !fiber.um && !isActivityHidden(fiber) && !layoutIsDisconnected(fiber)) work.d?.()
     }
+    if (process.env.NODE_ENV !== 'production') finishDevToolsLayout(root, devEffectStart)
     const runLayout = () => {
       for (const [fiber, work] of layout) {
         if (typeof work !== 'function') runEffect(fiber, work, root)
         else if (!fiber.um && !isActivityHidden(fiber) && !layoutIsDisconnected(fiber)) {
-          try { work() } catch (error) { handleCommitError(fiber, error) }
+          let previous
+          process.env.NODE_ENV !== 'production' && (previous = beginDevToolsCallback(fiber))
+          try { work() } catch (error) {
+            process.env.NODE_ENV !== 'production' && endDevToolsCallback(previous)
+            handleCommitError(fiber, error)
+          }
+          process.env.NODE_ENV !== 'production' && endDevToolsCallback(previous)
         }
       }
     }
-    if (!deferTransitionLayout(runLayout)) runLayout()
+    if (process.env.NODE_ENV !== 'production') {
+      const measured = wrapDevToolsLayout(root, runLayout)
+      if (!deferTransitionLayout(measured)) measured()
+    } else if (!deferTransitionLayout(runLayout)) runLayout()
   }
   // Passive fx on microtask
   if (batch.length) {
     const passive = () => {
       for (const [fiber, effect] of batch) runEffect(fiber, effect, root)
     }
-    if (!deferTransitionPassive(passive)) queueMicrotask(passive)
+    if (process.env.NODE_ENV !== 'production') {
+      const measured = wrapDevToolsPassive(root, passive)
+      if (!deferTransitionPassive(measured)) queueMicrotask(measured)
+    } else if (!deferTransitionPassive(passive)) queueMicrotask(passive)
   }
   })
 }
@@ -1738,6 +1769,8 @@ setCommitCheckpointHook(() => {
 function runEffect(fiber: Fiber, effect: Effect, root: FiberRoot): void {
   if (fiber.um) return
   if (effect.t !== 2 && (isActivityHidden(fiber) || activityIsDisconnected(fiber) || (effect.t === 1 && !effect.s && fiber.ld))) return
+  let previous
+  process.env.NODE_ENV !== 'production' && (previous = beginDevToolsCallback(fiber))
   try {
     const cleanup = effect.c()
     if (typeof cleanup == 'function') {
@@ -1745,8 +1778,10 @@ function runEffect(fiber: Fiber, effect: Effect, root: FiberRoot): void {
       fiber.cu.push(cleanup)
     }
   } catch (e) {
+    process.env.NODE_ENV !== 'production' && endDevToolsCallback(previous)
     handleCommitError(fiber, e)
   }
+  process.env.NODE_ENV !== 'production' && endDevToolsCallback(previous)
 }
 
 // ---------------------------------------------------------------------------

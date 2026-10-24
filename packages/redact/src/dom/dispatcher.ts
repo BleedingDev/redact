@@ -5,6 +5,7 @@ import { REACT_RECOVERABLE_TYPE } from '../core/browser'
 import { queueCommitEffects } from './commit'
 import { deferTransitionPassive } from './features/view-transition'
 import { isRefreshing, finishRefresh, resolveRefreshType } from './refresh'
+import { devToolsDispatcher, beginDevToolsCallback, endDevToolsCallback, wrapDevToolsRender } from './devtools'
 
 function getCurrentFiber(): Fiber {
   const f = ReactSharedInternals.F
@@ -84,6 +85,7 @@ export function renderWithHooks(
     if (isRefreshing(fiber)) canBail = false
   }
   const previousDispatcher = ReactSharedInternals.H, previousFiber = ReactSharedInternals.F, previousIndex = ReactSharedInternals.I
+  process.env.NODE_ENV !== 'production' && (render = wrapDevToolsRender(render))
   const previousEffects = hookEffects, previousFlags = hookFlags
   hookEffects = undefined
   hookFlags = 0
@@ -98,6 +100,7 @@ export function renderWithHooks(
         hookEffects = undefined
       }
       ReactSharedInternals.I = 0
+      process.env.NODE_ENV !== 'production' && (ReactSharedInternals.H = devToolsDispatcher(fiber, DISPATCHER))
       fiber.dy = false
       rendered = render(props, ref)
     } while (fiber.dy)
@@ -136,7 +139,13 @@ export function cleanupEffect(hook: Hook, fiber: Fiber): void {
     const index = fiber.cu.indexOf(cleanup)
     if (index >= 0) fiber.cu.splice(index, 1)
   }
-  try { cleanup() } catch (error) { handleCommitError(fiber, error) }
+  let previous
+  process.env.NODE_ENV !== 'production' && (previous = beginDevToolsCallback(fiber))
+  try { cleanup() } catch (error) {
+    process.env.NODE_ENV !== 'production' && endDevToolsCallback(previous)
+    handleCommitError(fiber, error)
+  }
+  process.env.NODE_ENV !== 'production' && endDevToolsCallback(previous)
 }
 
 function useEffectImpl(type: Effect['t'], create: () => any, deps?: ReadonlyArray<unknown>): void {

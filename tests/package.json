@@ -11,11 +11,12 @@
     "@tanstack/redact": "workspace:*"
   },
   "devDependencies": {
-    "react-refresh": "0.19.0",
-    "vitest": "^2.1.8",
     "@vitest/browser": "^2.1.8",
     "jsdom": "^25.0.1",
     "preact": "10.29.1",
-    "preact-render-to-string": "^6.5.0"
+    "preact-render-to-string": "^6.5.0",
+    "react-devtools-inline": "8.0.0",
+    "react-refresh": "0.19.0",
+    "vitest": "^2.1.8"
   }
 }
