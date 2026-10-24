@@ -1,6 +1,7 @@
 import { FiberTag, type Fiber, type ReactNode } from '../../../core'
 import { checkpointCommit, rewindCommit, queueBeforeMutation, queueMutation } from '../../commit'
 import { failRefreshBoundary } from '../../refresh'
+import { devToolsError, markDevToolsError, markDevToolsClassUpdate, consumeDevToolsClassUpdate } from '../../devtools'
 import {
   registerRenderer,
   reconcileChildren,
@@ -34,6 +35,18 @@ function renderClass(fiber: Fiber, domParent: Node, anchor: Node | null): void {
   // `this.context` reflects the nearest Provider. Evaluated every render.
   const ctxValue = Ctor.contextType ? readContext(fiber, Ctor.contextType) : undefined
   const contextChanged = instance && !Object.is(instance.context, ctxValue)
+  let devReset = false
+  if (process.env.NODE_ENV !== 'production') {
+    const override = devToolsError(fiber)
+    if (override === true) {
+      captured = new RenderErrorCapture(fiber, new Error('Simulated error coming from DevTools'))
+    } else if (override === false && instance) {
+      // React enqueues the constructor state before deriving state from props.
+      instance.state = { ...instance.state, ...new Ctor(fiber.mp ?? props, instance.context).state }
+      captured = undefined
+      devReset = true
+    }
+  }
 
   if (isNew) {
     instance = new Ctor(props, ctxValue)
@@ -50,6 +63,7 @@ function renderClass(fiber: Fiber, domParent: Node, anchor: Node | null): void {
       scheduleUpdate(fiber)
     }
     instance._forceUpdate = (cb?: () => void) => {
+      if (process.env.NODE_ENV !== 'production') markDevToolsClassUpdate(fiber)
       if (cb) {
         fiber.cu ||= []
         fiber.cu.push(cb)
@@ -68,7 +82,7 @@ function renderClass(fiber: Fiber, domParent: Node, anchor: Node | null): void {
       const d = Ctor.getDerivedStateFromProps(props, instance.state)
       if (d) instance.state = { ...instance.state, ...d }
     }
-    if (!captured && instance.shouldComponentUpdate && !contextChanged) {
+    if (!(process.env.NODE_ENV !== 'production' && (consumeDevToolsClassUpdate(fiber) || devReset)) && !captured && instance.shouldComponentUpdate && !contextChanged) {
       if (!instance.shouldComponentUpdate(props, instance.state, instance.context)) {
         didRender = false
       }
@@ -143,6 +157,7 @@ function renderClass(fiber: Fiber, domParent: Node, anchor: Node | null): void {
     }
   }
   if (captured) {
+    if (process.env.NODE_ENV !== 'production') markDevToolsError(fiber)
     if (process.env.NODE_ENV !== 'production') failRefreshBoundary(fiber)
     const error = captured.error
     const info = { componentStack: captured.stack }

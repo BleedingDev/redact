@@ -1,8 +1,13 @@
 import { REACT_ELEMENT_TYPE, type ReactElement } from '../core'
+import { rememberDevToolsElement } from '../core/devtools'
 
 export { Fragment } from './element'
 
 export function jsx(type: any, props: any, key?: any): ReactElement {
+  if (process.env.NODE_ENV !== 'production') return rememberDevToolsElement({
+    $$typeof: REACT_ELEMENT_TYPE, type, key: key == null ? null : '' + key,
+    ref: props?.ref ?? null, props,
+  })
   return {
     $$typeof: REACT_ELEMENT_TYPE,
     type,
@@ -13,7 +18,14 @@ export function jsx(type: any, props: any, key?: any): ReactElement {
 }
 
 export const jsxs = jsx
-export const jsxDEV = jsx
+export const jsxDEV = process.env.NODE_ENV !== 'production'
+  ? (type: any, props: any, key?: any, _staticChildren?: boolean, source?: any) => {
+      return rememberDevToolsElement({
+        $$typeof: REACT_ELEMENT_TYPE, type, key: key == null ? null : '' + key,
+        ref: props?.ref ?? null, props,
+      }, source)
+    }
+  : jsx
 
 // Permissive JSX namespace — picked up by TypeScript via the
 // `jsxImportSource: "@tanstack/redact"` + `jsx: "react-jsx"` pair. The

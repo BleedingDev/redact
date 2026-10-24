@@ -105,10 +105,18 @@ export function useActionState<S, P>(
   _action: (state: Awaited<S>, payload: P) => S | Promise<S>,
   initial: Awaited<S>,
 ): [Awaited<S>, (payload: P) => void, boolean] {
+  if (process.env.NODE_ENV !== 'production') {
+    const debug = (ReactSharedInternals.H as any)?.useActionState
+    if (debug) return debug(_action, initial)
+  }
   return [initial, () => {}, false]
 }
 
 export function useFormStatus() {
+  if (process.env.NODE_ENV !== 'production') {
+    const debug = (ReactSharedInternals.H as any)?.useHostTransitionStatus
+    if (debug) return debug()
+  }
   return { pending: false, data: null, method: null, action: null }
 }
 
@@ -116,6 +124,10 @@ export function useOptimistic<S, A = S>(
   state: S,
   _updateFn?: (s: S, a: A) => S,
 ): [S, (action: A) => void] {
+  if (process.env.NODE_ENV !== 'production') {
+    const debug = (ReactSharedInternals.H as any)?.useOptimistic
+    if (debug) return debug(state, _updateFn)
+  }
   return [state, () => {}]
 }
 
@@ -125,6 +137,10 @@ export function useOptimistic<S, A = S>(
 export function useEffectEvent<Args extends unknown[], Return>(
   fn: (...args: Args) => Return,
 ): (...args: Args) => Return {
+  if (process.env.NODE_ENV !== 'production') {
+    const debug = (ReactSharedInternals.H as any)?.useEffectEvent
+    if (debug) return debug(fn)
+  }
   const ref = useRef(fn)
   useInsertionEffect(() => {
     ref.current = fn

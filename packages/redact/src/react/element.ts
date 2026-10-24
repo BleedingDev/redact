@@ -7,6 +7,7 @@ import {
   type Ref,
 } from '../core'
 import type { FragmentInstance } from '../dom/fragment-instance'
+import { rememberDevToolsElement } from '../core/devtools'
 
 export const Fragment = REACT_FRAGMENT_TYPE as unknown as (props: {
   children?: ReactNode
@@ -41,6 +42,7 @@ export function createElement(
     }
   }
 
+  if (process.env.NODE_ENV !== 'production') return rememberDevToolsElement({ $$typeof: REACT_ELEMENT_TYPE, type, key, ref: props.ref ?? null, props }, config?.__source)
   return { $$typeof: REACT_ELEMENT_TYPE, type, key, ref: props.ref ?? null, props }
 }
 
@@ -65,6 +67,7 @@ export function cloneElement(
   if (children.length === 1) props.children = children[0]
   else if (children.length > 1) props.children = children
 
+  if (process.env.NODE_ENV !== 'production') return rememberDevToolsElement({ $$typeof: REACT_ELEMENT_TYPE, type: element.type, key, ref: props.ref === undefined ? element.ref : props.ref, props }, config?.__source, config?.ref === undefined ? element : undefined)
   return { $$typeof: REACT_ELEMENT_TYPE, type: element.type, key, ref: props.ref === undefined ? element.ref : props.ref, props }
 }
 
