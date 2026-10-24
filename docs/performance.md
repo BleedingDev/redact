@@ -4,6 +4,8 @@ title: Bundle Size and Performance
 
 These measurements describe the 0.1.0 release and its frozen pre-release timing snapshot, compared with React 19.3.0 on September 11, 2026. They are not measurements of every later release.
 
+React and Redact make different runtime tradeoffs. These comparisons help you choose for your app, they don't rank the projects or imply that React's broader capabilities are unnecessary.
+
 ## Bundle size
 
 Production ESM bundles retaining all exports from the React, JSX, DOM, and DOM-client entries:

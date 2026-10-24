@@ -2,11 +2,11 @@
 title: Overview
 ---
 
-React, redacted. A small React-compatible runtime with synchronous rendering. One Vite plugin replaces the React, DOM, server, scheduler, and JSX entrypoints, your application's imports stay unchanged.
+We love React, and we want to keep writing it. Redact is an alternative runtime for React apps, built around React's APIs and component model. One Vite plugin routes the React, DOM, server, scheduler, and JSX entrypoints to Redact, your application's imports stay unchanged.
 
-Redact keeps the React component model and everyday APIs without concurrent scheduling. JSX, hooks, context, refs, memo, lazy, portals, error boundaries, streaming SSR, and hydration are supported, but API availability does not mean every React behavior is implemented.
+The goal is another runtime option within the React ecosystem, not a replacement for React as a project. Redact chooses synchronous rendering and a smaller footprint; React's concurrent scheduler supports use cases that need different behavior. JSX, hooks, context, refs, memo, lazy, portals, error boundaries, streaming SSR, and hydration are supported.
 
-Read [Compatibility](./compatibility.md) before switching an existing app, especially if it depends on pending transitions, actions, optimistic state, or React DevTools.
+The [compatibility guide](./compatibility.md) explains the API differences, including pending transitions, actions, and optimistic state. React DevTools supports inspection, editing, and commit profiling in development, with [checks and timings](https://github.com/TanStack/redact/blob/main/docs/devtools-implementation-status.md).
 
 ## Get started
 
