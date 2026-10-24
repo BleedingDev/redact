@@ -1,8 +1,8 @@
 # redact
 
-**React, redacted.** A small React-compatible runtime with synchronous rendering. One Vite plugin replaces the React, DOM, server, scheduler, and JSX entrypoints. Your application's imports stay unchanged.
+**Built for the React you love.** We love React, and we want to keep writing it. Redact is an alternative runtime for React apps, with a smaller footprint and synchronous rendering. Keep your components, hooks, and imports, and try it with one Vite plugin.
 
-The goal is React's APIs and everyday behavior without concurrent scheduling, not a different component model. The intentional differences are in the [compatibility table](#compatibility).
+React's APIs and component model are the reason this project exists. Redact explores a different set of runtime tradeoffs within that ecosystem, not a new direction for React or a replacement for the project. Synchronous rendering keeps the runtime small, while React's concurrent scheduling supports behavior Redact doesn't provide. The [compatibility table](#compatibility) explains those differences.
 
 These APIs are included in Redact 0.1.0. Comparisons use pinned React 19.3.0 and were recorded September 11, 2026. The benchmark reports retain the exact measured source snapshots and build inputs.
 
