@@ -8,9 +8,9 @@ Disabling hydration makes `hydrateRoot` throw. Disabling class components also r
 
 ## Framework release checks
 
-The [Next.js gate](../benchmarks/NEXT_COVERAGE.md) tests 162 configurations and 2,694 scenario groups. The [Vinext gate](../benchmarks/VINEXT_COVERAGE.md) tests 102 configurations and 1,410 scenario groups across mixed-router and Pages-only apps. A separate [hosted Vinext run](../benchmarks/VINEXT_COVERAGE.md#hosted-workers) passes 282 scenarios across 18 configurations. Both automatic matrices use packed packages, verify complete results, retain framework failures reproduced with native React, and block publication when checks fail.
+The [Vinext gate](https://github.com/TanStack/redact/blob/main/benchmarks/VINEXT_COVERAGE.md) tests 102 configurations and 1,410 scenario groups across mixed-router and Pages-only apps. A separate [hosted Vinext run](https://github.com/TanStack/redact/blob/main/benchmarks/VINEXT_COVERAGE.md#hosted-workers) passes 282 scenarios across 18 configurations. The [Next.js gate](https://github.com/TanStack/redact/blob/main/benchmarks/NEXT_COVERAGE.md) tests 162 configurations and 2,694 scenario groups. Both automatic matrices use packed packages, verify complete results, retain framework failures reproduced with native React, and block publication when checks fail.
 
-Run with Node 24.22.0 from `.nvmrc`. `pnpm test:ci` passes 1,835 runtime and tooling tests, type checks, built-package verification, and all 38 source/dist bundle limits. The 91 ordinary-suite skips remain separate from passing tests. `pnpm test:next` and `pnpm test:vinext` run the browser matrices. The release evidence records remaining blockers separately from passing checks.
+Run with Node 24.22.0 from `.nvmrc`. `pnpm test:ci` passes 1,859 runtime and tooling tests, type checks, built-package verification, and all 38 source/dist bundle limits. The 91 ordinary-suite skips remain separate from passing tests. `pnpm test:next` and `pnpm test:vinext` run the browser matrices. The release evidence records the tested versions, configurations, and framework corrections.
 
 ## Published verification
 

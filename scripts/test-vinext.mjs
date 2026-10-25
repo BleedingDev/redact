@@ -32,11 +32,12 @@ const engines = (process.env.VINEXT_TEST_BROWSERS || 'chromium,firefox,webkit').
 const browsers = { chromium, firefox, webkit }
 for (const engine of engines) assert.ok(browsers[engine], `Unknown browser: ${engine}`)
 const port = process.env.VINEXT_TEST_PORT || '4530'
-const origin = `http://localhost:${port}${process.env.VINEXT_TEST_BASE_PATH || ''}`
+// Keep the dev server and client on the same loopback address in containers.
+const origin = `http://127.0.0.1:${port}${process.env.VINEXT_TEST_BASE_PATH || ''}`
 const vite = resolve(dirname(require.resolve('vite/package.json')), 'bin/vite.js')
 const vinext = join(vinextExample, 'node_modules/vinext/dist/cli.js')
 const configuration = join(vinextExample, 'vite.config.mjs')
-const env = { ...process.env, VINEXT_TEST_PACKAGE: packageRoot, VINEXT_TEST_DIR: cwd, NEXT_TELEMETRY_DISABLED: '1', NEXT_PUBLIC_BASE_PATH: process.env.VINEXT_TEST_BASE_PATH || '', PORT: port, HOST: 'localhost', ...(standalone ? { VINEXT_TEST_OUTPUT: 'standalone' } : {}) }
+const env = { ...process.env, VINEXT_TEST_PACKAGE: packageRoot, VINEXT_TEST_DIR: cwd, NEXT_TELEMETRY_DISABLED: '1', NEXT_PUBLIC_BASE_PATH: process.env.VINEXT_TEST_BASE_PATH || '', PORT: port, HOST: '127.0.0.1', ...(standalone ? { VINEXT_TEST_OUTPUT: 'standalone' } : {}) }
 const output = resolve(process.env.VINEXT_TEST_RESULT || `benchmarks/results/vinext/${name}.json`)
 await mkdir(dirname(output), { recursive: true })
 const serverLog = createWriteStream(output.replace(/\.json$/, '.log'))
@@ -79,7 +80,7 @@ try {
   if (production) {
     const child = run([vite, 'build', '--config', configuration])
     assert.equal((await once(child, 'exit'))[0], 0, logs.slice(-20000))
-    server = run(workers ? [vite, 'preview', '--config', configuration, '--host', 'localhost', '--port', port, '--strictPort'] : standalone ? [join(cwd, 'dist/standalone/server.js')] : [vinext, 'start', '--port', port], cwd)
+    server = run(workers ? [vite, 'preview', '--config', configuration, '--host', '127.0.0.1', '--port', port, '--strictPort'] : standalone ? [join(cwd, 'dist/standalone/server.js')] : [vinext, 'start', '--port', port], cwd)
     await ready()
   }
   for (const engine of engines) {
@@ -87,7 +88,7 @@ try {
     const start = Date.now()
     try {
       if (!production) {
-        server = run([vite, 'dev', '--config', configuration, '--host', 'localhost', '--port', port, '--strictPort'])
+        server = run([vite, 'dev', '--config', configuration, '--host', '127.0.0.1', '--port', port, '--strictPort'])
         await ready()
       }
       browser = await browsers[engine].launch({ headless: true })
@@ -102,7 +103,7 @@ try {
           const dismiss = page.getByRole('button', { name: 'Dismiss', exact: true })
           if (await dismiss.isVisible()) await dismiss.click()
         },
-        isExpectedBoundaryLog: isExpectedVinextBoundaryLog,
+        isExpectedBoundaryLog: message => isExpectedVinextBoundaryLog(message, origin),
       }))
       if (!process.env.NEXT_TEST_SCENARIOS) {
         result.scenarios.push(...await checkVinextEdges({ browser, origin, reference }))

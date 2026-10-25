@@ -26,12 +26,20 @@
           "to": "compatibility"
         },
         {
-          "label": "Next.js",
-          "to": "next"
+          "label": "TanStack Start",
+          "to": "start"
+        },
+        {
+          "label": "Vite",
+          "to": "vite-plugin"
         },
         {
           "label": "Vinext",
           "to": "vinext"
+        },
+        {
+          "label": "Next.js",
+          "to": "next"
         },
         {
           "label": "Feature Flags",
@@ -44,15 +52,6 @@
         {
           "label": "Testing Your Integration",
           "to": "verification"
-        }
-      ]
-    },
-    {
-      "label": "Reference",
-      "children": [
-        {
-          "label": "Vite Plugin",
-          "to": "vite-plugin"
         }
       ]
     }

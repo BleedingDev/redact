@@ -14,11 +14,18 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    container:
+      # Keep the browser binaries and system libraries matched to Playwright.
+      image: mcr.microsoft.com/playwright:v1.64.1-noble@sha256:47b510dd9230bf0b9bfc9b20102241e577ea7a99334ab4c3ca19f19770e9b8ea
+      options: --init --shm-size=1gb
     timeout-minutes: 60
     env:
       NEXT_TELEMETRY_DISABLED: '1'
       VINEXT_TEST_CONCURRENCY: '2'
     steps:
+      - name: Match container home ownership
+        # Firefox requires the home directory to belong to its effective user.
+        run: chown "$(id -u):$(id -g)" "$HOME"
       - name: Set test paths
         run: |
           echo "VINEXT_TEST_RESULTS=$RUNNER_TEMP/vinext-results" >> "$GITHUB_ENV"
@@ -40,7 +47,7 @@ jobs:
       - name: Check runtime, types, package and unchanged size limits
         run: pnpm test:ci
       - name: Install browsers
-        run: pnpm exec playwright install --with-deps chromium firefox webkit
+        run: pnpm exec playwright install chromium firefox webkit
       - name: Verify both routers against native React from an unpatched npm install
         run: node scripts/test-vinext-consumer.mjs
       - name: Verify hosted state and cache contracts locally

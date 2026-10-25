@@ -18,7 +18,7 @@ Keep `react` and `react-dom` installed. Keep importing from `react`, `react-dom`
 
 The adapter accepts stable Next.js 15.5 and 16.0 through 16.4 releases. It rejects prereleases and untested minor versions. The release matrix pins 15.5.28, 16.0.11, 16.1.7, 16.2.12, 16.3.8, and 16.4.3. It uses the full Redact runtime, so Vite feature presets do not apply.
 
-The stable release requires the complete matrix to pass. [Current release evidence](../benchmarks/NEXT_COVERAGE.md). The adapter now includes a development cache correction for Next 16.2, so that fix does not require a separate Next release.
+The stable release requires the complete matrix to pass. [Current release evidence](https://github.com/TanStack/redact/blob/main/benchmarks/NEXT_COVERAGE.md). The adapter now includes a development cache correction for Next 16.2, so that fix does not require a separate Next release.
 
 ## Bundlers
 
@@ -32,7 +32,7 @@ Existing Next.js options, Webpack configuration callbacks, and unrelated Turbopa
 
 ## Coverage
 
-`pnpm test:next` tests the packed package in 162 configurations. Next 16 runs with Cache Components both enabled and disabled. All six pinned releases run in Chromium, Firefox, and WebKit with Turbopack and Webpack, in development and production. Next 15.5.28 and 16.4.3 also run standalone and static-export builds with a base path and trailing slashes. [Results and reproduction details](../benchmarks/NEXT_COVERAGE.md).
+`pnpm test:next` tests the packed package in 162 configurations. Next 16 runs with Cache Components both enabled and disabled. All six pinned releases run in Chromium, Firefox, and WebKit with Turbopack and Webpack, in development and production. Next 15.5.28 and 16.4.3 also run standalone and static-export builds with a base path and trailing slashes. [Results and reproduction details](https://github.com/TanStack/redact/blob/main/benchmarks/NEXT_COVERAGE.md).
 
 Every run records the packed package, fixture, and suite fingerprints, browser versions, and each scenario result. Missing configurations, mixed packages, and incomplete scenarios fail the combined report. Both PR checks and release publication require that report to pass.
 
@@ -58,7 +58,7 @@ The gate covers:
 
 Unit tests also cover queued and overlapping actions, action scopes shared across renderer copies, rejection, optimistic rebasing, controlled form resets, submitter overrides, canceled submissions, pending boundary removal and updates, nested stream markers, hydration retries, and Flight resource hints. A separate gate runs 61 Redact regressions in each browser engine, covering actions, suspended transitions and deferred updates, uncontrolled selects, nested transitions inside `flushSync`, input events, lazy wrappers, promised children, pending roots, and document-shell recovery.
 
-The built full-client runtime total measures 27,921 bytes gzip against its pre-integration limit of 28,183. The default Vite total measures 23,304 against 23,335. All 38 source/dist size gates pass with Node 24.22.0 from `.nvmrc`. These totals measure the runtime, not a whole Next.js application. [Measurements](../benchmarks/results/framework-release-sizes.json).
+The built full-client runtime total measures 27,921 bytes gzip against its pre-integration limit of 28,183. The default Vite total measures 23,304 against 23,335. All 38 source/dist size gates pass with Node 24.22.0 from `.nvmrc`. These totals measure the runtime, not a whole Next.js application. [Measurements](https://github.com/TanStack/redact/blob/main/benchmarks/results/framework-release-sizes.json).
 
 ## Scope
 

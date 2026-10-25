@@ -11,6 +11,10 @@ jobs:
   next:
     name: Next ${{ matrix.version }} (${{ matrix.rendering }}, ${{ matrix.bundler }}, ${{ matrix.mode }})
     runs-on: ubuntu-latest
+    container:
+      # Keep the browser binaries and system libraries matched to Playwright.
+      image: mcr.microsoft.com/playwright:v1.64.1-noble@sha256:47b510dd9230bf0b9bfc9b20102241e577ea7a99334ab4c3ca19f19770e9b8ea
+      options: --init --shm-size=1gb
     timeout-minutes: 10
     strategy:
       fail-fast: false
@@ -28,6 +32,9 @@ jobs:
       NEXT_TEST_CACHE_COMPONENTS: ${{ matrix.rendering == 'cache-components' && '1' || '0' }}
       NEXT_TEST_TRACE: ${{ matrix.mode == 'development' && matrix.bundler == 'webpack' && '1' || '' }}
     steps:
+      - name: Match container home ownership
+        # Firefox requires the home directory to belong to its effective user.
+        run: chown "$(id -u):$(id -g)" "$HOME"
       - name: Set test paths
         run: |
           echo "NEXT_TEST_DIR=$RUNNER_TEMP/redact-next" >> "$GITHUB_ENV"
@@ -41,7 +48,7 @@ jobs:
       - name: Build Redact
         run: pnpm build
       - name: Install browsers
-        run: pnpm exec playwright install --with-deps chromium firefox webkit
+        run: pnpm exec playwright install chromium firefox webkit
       - name: Prepare packed fixture
         id: fixture
         run: node scripts/prepare-next-fixture.mjs ${{ matrix.version }} "$NEXT_TEST_DIR" next-demo ${{ matrix.rendering }}
@@ -80,6 +87,10 @@ jobs:
   next-deployment:
     name: Next ${{ matrix.version }} (${{ matrix.rendering }}, ${{ matrix.deployment }}, ${{ matrix.bundler }})
     runs-on: ubuntu-latest
+    container:
+      # Keep the browser binaries and system libraries matched to Playwright.
+      image: mcr.microsoft.com/playwright:v1.64.1-noble@sha256:47b510dd9230bf0b9bfc9b20102241e577ea7a99334ab4c3ca19f19770e9b8ea
+      options: --init --shm-size=1gb
     timeout-minutes: 10
     strategy:
       fail-fast: false
@@ -98,6 +109,9 @@ jobs:
       NEXT_TEST_BASE_PATH: /coverage
       NEXT_TEST_CACHE_COMPONENTS: ${{ matrix.rendering == 'cache-components' && '1' || '0' }}
     steps:
+      - name: Match container home ownership
+        # Firefox requires the home directory to belong to its effective user.
+        run: chown "$(id -u):$(id -g)" "$HOME"
       - name: Set test paths
         run: |
           echo "NEXT_TEST_DIR=$RUNNER_TEMP/redact-next-deployment" >> "$GITHUB_ENV"
@@ -111,7 +125,7 @@ jobs:
       - name: Build Redact
         run: pnpm build
       - name: Install browsers
-        run: pnpm exec playwright install --with-deps chromium firefox webkit
+        run: pnpm exec playwright install chromium firefox webkit
       - name: Prepare packed fixture
         run: node scripts/prepare-next-fixture.mjs ${{ matrix.version }} "$NEXT_TEST_DIR" ${{ matrix.deployment == 'static-export' && 'next-static' || 'next-demo' }} ${{ matrix.rendering }}
       - name: Verify standalone output
