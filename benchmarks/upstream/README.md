@@ -61,3 +61,18 @@ Native React and Redact reproduce repeated document reloads before a streamed Su
 [Next issue 94634](https://github.com/vercel/next.js/issues/94634) tracks the behavior. [PR 97510](https://github.com/vercel/next.js/pull/97510) removes debug-channel persistence and cache detection in later Next versions. That code is present in the tested Next 16.4.3 package. Next 16.2.12 remains the latest published 16.2 patch checked on October 24, 2026.
 
 The four affected Next 16.2 matrix cases stay in the release gate. The tests do not replace `Performance`, suppress reloads, or patch the installed framework.
+
+### Next 16.2 backport path
+
+The earlier targeted fix, [PR 94128](https://github.com/vercel/next.js/pull/94128), already has a [16.2 backport request with a native React reproduction](https://github.com/vercel/next.js/pull/94128#issuecomment-5147626082). The [maintainer response](https://github.com/vercel/next.js/pull/94128#issuecomment-5176202998) directs users to 16.3.0. The existing `next-16-2` branch still contains the faulty `transferSize === 0` check.
+
+Next's current [release policy](https://github.com/vercel/next.js/blob/canary/contributing/repository/release-channels-publishing.md) freezes the old `next-*` branches. A maintainer must create a `releases/16-2` branch from a release tag through the release-bot workflow before accepting and publishing a new 16.2 backport. That branch did not exist when checked on October 24, 2026.
+
+The final upstream fix has two parts: [PR 97505](https://github.com/vercel/next.js/pull/97505) restores `no-store` for development documents and data responses, then [PR 97510](https://github.com/vercel/next.js/pull/97510) removes the cache replay machinery. Removing replay alone would break cached document restores on the old line. Both changes, their browser history tests, and the applicable release-workflow prerequisite need maintainer review for a 16.2 release. No duplicate PR was opened against the frozen branch, and the Redact version range and required checks remain unchanged.
+
+
+## Cloudflare tooling dependency advisory
+
+The PR dependency scan reports [GHSA-xjj6-f33q-929c](https://github.com/advisories/GHSA-xjj6-f33q-929c). The installed Miniflare `5.20261019.2-beta` pins Undici `7.29.1`; the corrected 7.x release is `7.30.1`. A malicious HTTP response with excessive content encodings can crash the local Node process. This dependency belongs to the verification/deployment tooling, not either Redact client bundle.
+
+Wrangler `4.152.0` and Cloudflare Vite plugin `1.65.0` remain the latest published versions checked on October 25, 2026, and both resolve the affected Miniflare dependency. The upstream workspace catalog also still pins `7.29.1`. The advisory is not dismissed. A published tooling update and fresh unpatched verification are needed before calling this stack release-ready.

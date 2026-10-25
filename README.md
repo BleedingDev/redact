@@ -197,7 +197,7 @@ redact({ preset: 'nano', features: { context: true } })
 
 ## Verification
 
-`pnpm test:ci` covers 1,832 passing tests, type checking, built-package verification, and all 38 source/dist size budgets. The 91 ordinary-suite skips are not passes. The built full runtime used by Next.js and Vinext is 27,921 bytes gzip, and the default Vite runtime is 23,304. Both fit their pre-integration limits of 28,183 and 23,335 bytes. [Current size measurements](./benchmarks/results/framework-release-sizes.json).
+`pnpm test:ci` covers 1,835 passing tests, type checking, built-package verification, and all 38 source/dist size budgets. The 91 ordinary-suite skips are not passes. The built full runtime used by Next.js and Vinext is 27,921 bytes gzip, and the default Vite runtime is 23,304. Both fit their pre-integration limits of 28,183 and 23,335 bytes. [Current size measurements](./benchmarks/results/framework-release-sizes.json).
 
 Next.js has a 162-configuration gate covering six pinned releases, both bundlers, three browser engines, development and production, standalone output, and static export. Results preserve individual scenario failures and require complete coverage of the configured matrix. [Coverage, measurements, and reproduction commands](./benchmarks/NEXT_COVERAGE.md). [Earlier release Chrome ledger](./benchmarks/SHIP_CHROME_FINAL.md).
 

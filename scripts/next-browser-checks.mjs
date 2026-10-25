@@ -3,6 +3,7 @@ import { readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { checkExtended } from './next-extended-checks.mjs'
 import { watchBrowserErrors } from './next-browser-errors.mjs'
+import { reloadDocument } from './browser-reload.mjs'
 
 export async function checkNext({ browser, origin, production, cwd, cacheComponents, reference = false, beforeBoundaryReset, isExpectedBoundaryLog, scenarios: scenarioNames }) {
   const errors = []
@@ -25,7 +26,7 @@ export async function checkNext({ browser, origin, production, cwd, cacheCompone
     await observed.navigate(() => page.goto(url, options))
     return page
   }
-  const reload = async () => { await settle(); return observed.navigate(() => page.reload()) }
+  const reload = async () => { await settle(); return observed.navigate(() => reloadDocument(page)) }
   const openPage = async () => {
     page = await context.newPage()
     observed = watchBrowserErrors(page, errors)

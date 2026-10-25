@@ -26,6 +26,7 @@ jobs:
       PLAYWRIGHT_CHANNEL: chromium
       NEXT_TELEMETRY_DISABLED: '1'
       NEXT_TEST_CACHE_COMPONENTS: ${{ matrix.rendering == 'cache-components' && '1' || '0' }}
+      NEXT_TEST_TRACE: ${{ matrix.mode == 'development' && matrix.bundler == 'webpack' && '1' || '' }}
     steps:
       - name: Set test paths
         run: |
@@ -51,6 +52,7 @@ jobs:
           for browser in chromium firefox webkit; do
             PLAYWRIGHT_BROWSER=$browser pnpm test:browser:actions || status=1
             PLAYWRIGHT_BROWSER=$browser node scripts/test-browser-lifecycle.mjs || status=1
+            PLAYWRIGHT_BROWSER=$browser node scripts/test-browser-reload.mjs || status=1
           done
           exit "$status"
       - name: Verify Next.js

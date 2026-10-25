@@ -44,7 +44,7 @@ export async function vinextEvidence(fixture, packageRoot = process.env.VINEXT_T
   const consumer = process.env.VINEXT_TEST_CONSUMER
   const installation = consumer || join(root, 'examples/vinext-demo')
   const dependencyFiles = consumer ? [['npm-lockfile', join(consumer, 'package-lock.json')], ['tarball', join(consumer, 'package-evidence.json')]] : [['framework-patches', join(root, 'patches'), true], ['lockfile', join(root, 'pnpm-lock.yaml')]]
-  const scripts = ['prepare-vinext-consumer', 'test-vinext-consumer', 'test-vinext', 'test-vinext-static', 'prepare-vinext-fixture', 'vinext-test-gate', 'vinext-results', 'vinext-edge-checks', 'vinext-static-checks', 'vinext-browser-errors', 'next-browser-checks', 'next-extended-checks', 'next-browser-errors']
+  const scripts = ['browser-reload', 'prepare-vinext-consumer', 'test-vinext-consumer', 'test-vinext', 'test-vinext-static', 'prepare-vinext-fixture', 'vinext-test-gate', 'vinext-results', 'vinext-edge-checks', 'vinext-static-checks', 'vinext-browser-errors', 'next-browser-checks', 'next-extended-checks', 'next-browser-errors']
   return {
     suiteSha256: await hashFiles([
       ...scripts.map(name => [name, join(root, 'scripts', `${name}.mjs`)]),
@@ -54,7 +54,8 @@ export async function vinextEvidence(fixture, packageRoot = process.env.VINEXT_T
     ...await vinextPackageEvidence(packageRoot),
     fixtureSha256: await hashFiles([
       ...['app', 'pages', 'public'].map(name => [name, join(fixture, name), true]),
-      ...['next.config.mjs', 'jsconfig.json', 'wrangler.jsonc'].map(name => [name, join(fixture, name)]),
+      ...['next.config.mjs', 'jsconfig.json', 'wrangler.jsonc', 'hosted-cache.mjs'].map(name => [name, join(fixture, name)]),
+      ['fixture-vite.config.mjs', join(fixture, 'vite.config.mjs')],
       ...['package.json', 'vite.config.mjs'].map(name => [name, join(installation, name)]),
       ...dependencyFiles,
     ]),

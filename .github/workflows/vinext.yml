@@ -43,6 +43,9 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium firefox webkit
       - name: Verify both routers against native React from an unpatched npm install
         run: node scripts/test-vinext-consumer.mjs
+      - name: Verify hosted state and cache contracts locally
+        if: ${{ !cancelled() }}
+        run: node scripts/test-vinext-hosted-state.mjs
       - name: Save compatibility evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9

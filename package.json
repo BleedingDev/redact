@@ -32,7 +32,8 @@
     "test:vinext": "pnpm build && node scripts/test-vinext-consumer.mjs",
     "test:vinext:dev": "pnpm build && node scripts/test-vinext.mjs",
     "test:vinext:report": "node scripts/report-vinext-coverage.mjs",
-    "test:vinext:workspace": "pnpm build && node scripts/test-vinext-coverage.mjs"
+    "test:vinext:workspace": "pnpm build && node scripts/test-vinext-coverage.mjs",
+    "test:vinext:hosted": "node scripts/test-vinext-hosted.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.31.0",

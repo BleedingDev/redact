@@ -5,8 +5,9 @@
   "sourceSha256": "05155eb8297d246c16ebd79e992c5d7f47eed44e9587a60de2dcf3b0d535f440",
   "buildSha256": "8ebcee93565375ef8e17a82ceaf75fd8759255323e85484c32d2fe550784bb4f",
   "runtime": {
-    "passed": 1832,
-    "skipped": 91
+    "passed": 1835,
+    "skipped": 91,
+    "recordedAt": "2026-10-25T04:17:44.721639+00:00"
   },
   "types": "passed",
   "builtPackage": "passed",
@@ -62,5 +63,33 @@
     "patchedConsumerRejection": "passed",
     "freshReinstallRemovesPatches": "passed",
     "existingReportsRevalidated": "passed"
+  },
+  "browserLifecycle": {
+    "engines": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "passed": 3,
+    "checks": [
+      "delayed observer initialization",
+      "teardown after failed hydration with held scripts",
+      "failure snapshots retain the original assertion"
+    ]
+  },
+  "browserReload": {
+    "engines": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "passed": 15,
+    "checks": [
+      "new document required",
+      "interrupted request completes in replacement document",
+      "canceled navigation fails",
+      "HTTP 500 fails",
+      "redirected URL fails"
+    ]
   }
 }

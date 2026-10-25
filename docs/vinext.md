@@ -51,7 +51,9 @@ The combined gate requires all 102 configurations and 1,410 scenario groups from
 
 The [Vinext compatibility workflow](../.github/workflows/vinext.yml) runs on PRs, before release publication, and on manual dispatch. It also runs runtime tests, type checks, package verification, and all existing size limits. Evidence is saved even when checks fail.
 
-Worker checks run locally. Hosted deployment and account bindings need separate verification.
+The automatic Worker matrix runs locally. A separate hosted gate deploys native React and Redact apps, with and without Cache Components, plus Pages-only apps. It runs all three browsers against the deployed versions. [Hosted verification](../benchmarks/VINEXT_COVERAGE.md#hosted-workers).
+
+Deployed apps need shared data and cache storage. Vinext's default memory cache belongs to one Worker isolate, so `revalidatePath` cannot invalidate another isolate's copy. Configure a shared data-cache adapter through `vinext({ cache })`. Redact does not change server caching.
 
 For a single diagnostic mode:
 

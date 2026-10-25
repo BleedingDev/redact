@@ -4,11 +4,13 @@ The stable release requires all 162 configurations and 2,694 scenario groups to 
 
 ## Recorded run
 
-The final packed-runtime run completes all 162 configurations and all 2,694 scenario groups. It passes 158 configurations and 2,690 scenarios. Every Next 15.5, 16.0, 16.1, 16.3, and 16.4 configuration passes, including all 42 Next 16.4 cases.
+The recorded macOS packed-runtime run completes all 162 configurations and all 2,694 scenario groups. It passes 158 configurations and 2,690 scenarios. Every Next 15.5, 16.0, 16.1, 16.3, and 16.4 configuration passes, including all 42 Next 16.4 cases.
 
 The four failures are Next 16.2.12 development streaming in Firefox, with both bundlers and both Cache Components settings. Native React reproduces the same debug-channel reload loop. All other Next 16.2 scenarios pass. The report records complete coverage with a failing release result.
 
 [Full matrix report](./results/framework-release-next.json), [runtime and release-gate checks](./results/framework-release-validation.json).
+
+The subsequent Linux CI run exposed a Firefox reload assertion failure with native React and Redact. Next's development socket can reconnect during a slow document load and start a second reload, aborting Playwright's wait for the first request. A controlled reproduction showed the replacement document renders the correct full route. The reload check now issues one browser reload, requires a new document at the same URL with a successful HTTP response, and keeps the original UI assertions and deadline. Fifteen browser regressions cover normal and interrupted reloads, canceled loads, server errors, and wrong destinations. [Before/after evidence](./results/framework-reload-diagnostic.json).
 
 ## Matrix
 

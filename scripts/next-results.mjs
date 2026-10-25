@@ -9,7 +9,7 @@ export async function writeNextResults({ cwd, version, results, engines }) {
   const pkg = JSON.parse(await readFile(join(cwd, 'package.json'), 'utf8'))
   const packagePath = pkg.dependencies['@tanstack/redact']
   const hash = createHash('sha256')
-  for (const name of ['test-next.mjs', 'test-next-static.mjs', 'next-browser-checks.mjs', 'next-extended-checks.mjs', 'next-browser-errors.mjs', 'next-results.mjs', 'next-versions.mjs', 'prepare-next-fixture.mjs', 'test-next-matrix.mjs', 'test-next-deployments.mjs', 'test-next-coverage.mjs', 'report-next-coverage.mjs']) {
+  for (const name of ['browser-reload.mjs', 'test-next.mjs', 'test-next-static.mjs', 'next-browser-checks.mjs', 'next-extended-checks.mjs', 'next-browser-errors.mjs', 'next-results.mjs', 'next-versions.mjs', 'prepare-next-fixture.mjs', 'test-next-matrix.mjs', 'test-next-deployments.mjs', 'test-next-coverage.mjs', 'report-next-coverage.mjs']) {
     hash.update(name).update(await readFile(new URL(name, import.meta.url)))
   }
   const fixtureHash = createHash('sha256')

@@ -1,0 +1,3602 @@
+{
+  "purpose": "Compare separate default Worker caches with the shared fixture cache",
+  "releaseEvidence": false,
+  "before": [
+    {
+      "reference": true,
+      "run": 0,
+      "id": "71b070c0-8844-44bb-84a1-6b0528af8c64",
+      "before": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fcca928f4-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fb8a138e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fbb06f374-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fcebc14fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fbc42fb2e-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fd8114ccd-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fcd043203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fcc24a42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fcff607bf-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fcd47e888-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fcdd46c2a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fcdca6c2a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fdfb73b8a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fc9ac7b25-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fdc32a42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fcd0c3203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fdb45f374-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fdad24a4a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fdaac5309-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fd8e75303-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fd809c64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fcb52a28a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fdb4513ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe634fcd0f3203-SLC",
+          "value": "initial"
+        }
+      ],
+      "after": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352fd3328f4-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352f8a338e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352fbfdf374-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63530eb914fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352fbe6fb2e-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352f8ea4ccd-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352fd7c3203-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352fc96a42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352f81d07bf-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352fda1e888-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352fddf6c2a-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63530de96c2a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63530f803b8a-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352f90c7b25-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352fc97a42a-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352fd7d3203-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352fbfef374-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352fb0d4a4a-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352ff055309-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352fcf15303-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352ff76c64b-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63530c09a28a-SLC",
+          "value": "71b070c0-8844-44bb-84a1-6b0528af8c64"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352fa8a13ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6352fd7b3203-SLC",
+          "value": "initial"
+        }
+      ],
+      "clientAfterReload": "71b070c0-8844-44bb-84a1-6b0528af8c64",
+      "stale": 8
+    },
+    {
+      "reference": true,
+      "run": 1,
+      "id": "dd558804-b31e-43be-b21c-f4de5886ab2b",
+      "before": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356dfbc28f4-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356e9b538e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356ee95f374-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356e81914fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356ed2ffb2e-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356eaf74ccd-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356ef3a3203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356eef3a42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356e91e07bf-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356eedde888-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356ef626c2a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356ef616c2a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356e9e73b8a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356eb9f7b25-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356eef4a42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356ef383203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356ee94f374-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356ecb24a4a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356ecf95309-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356ea4f5303-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356e899c64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356ee11a28a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356ec3413ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6356ef393203-SLC",
+          "value": "initial"
+        }
+      ],
+      "after": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4a2b28f4-SLC",
+          "value": "dd558804-b31e-43be-b21c-f4de5886ab2b"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a49df38e9-SLC",
+          "value": "dd558804-b31e-43be-b21c-f4de5886ab2b"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4ee7f374-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a489414fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4dbafb2e-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4b8c4ccd-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4fb23203-SLC",
+          "value": "dd558804-b31e-43be-b21c-f4de5886ab2b"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a486ba42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a497b07bf-SLC",
+          "value": "dd558804-b31e-43be-b21c-f4de5886ab2b"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4faae888-SLC",
+          "value": "dd558804-b31e-43be-b21c-f4de5886ab2b"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4f806c2a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4f7f6c2a-SLC",
+          "value": "dd558804-b31e-43be-b21c-f4de5886ab2b"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4b463b8a-SLC",
+          "value": "dd558804-b31e-43be-b21c-f4de5886ab2b"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4cd67b25-SLC",
+          "value": "dd558804-b31e-43be-b21c-f4de5886ab2b"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a486ca42a-SLC",
+          "value": "dd558804-b31e-43be-b21c-f4de5886ab2b"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4fb33203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4ee9f374-SLC",
+          "value": "dd558804-b31e-43be-b21c-f4de5886ab2b"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4dbb4a4a-SLC",
+          "value": "dd558804-b31e-43be-b21c-f4de5886ab2b"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4a125309-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4ede5303-SLC",
+          "value": "dd558804-b31e-43be-b21c-f4de5886ab2b"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a48f6c64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4ea2a28a-SLC",
+          "value": "dd558804-b31e-43be-b21c-f4de5886ab2b"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4c1b13ed-SLC",
+          "value": "dd558804-b31e-43be-b21c-f4de5886ab2b"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635a4fb43203-SLC",
+          "value": "initial"
+        }
+      ],
+      "clientAfterReload": "initial",
+      "stale": 10
+    },
+    {
+      "reference": true,
+      "run": 2,
+      "id": "0688bba8-9877-48ac-ab18-2e38e897f87c",
+      "before": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e0d0228f4-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1a9038e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1877f374-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e19f914fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1f32fb2e-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1d594ccd-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e19bf3203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1ad3a42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1ba007bf-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1952e888-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e18c26c2a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e18c66c2a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1dca3b8a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1ddf7b25-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1ad2a42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e19c03203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1878f374-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1f2e4a4a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1f365309-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1c9f5303-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e199cc64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1889a28a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e1da713ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe635e19c13203-SLC",
+          "value": "initial"
+        }
+      ],
+      "after": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618f6728f4-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618b6a38e9-SLC",
+          "value": "0688bba8-9877-48ac-ab18-2e38e897f87c"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618a28f374-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618b8914fe-SLC",
+          "value": "0688bba8-9877-48ac-ab18-2e38e897f87c"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618822fb2e-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618ed94ccd-SLC",
+          "value": "0688bba8-9877-48ac-ab18-2e38e897f87c"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618b793203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618d64a42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618d1a07bf-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618ae1e888-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618a136c2a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618a146c2a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618f203b8a-SLC",
+          "value": "0688bba8-9877-48ac-ab18-2e38e897f87c"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618e6e7b25-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618d66a42a-SLC",
+          "value": "0688bba8-9877-48ac-ab18-2e38e897f87c"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618b783203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618a29f374-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636189b34a4a-SLC",
+          "value": "0688bba8-9877-48ac-ab18-2e38e897f87c"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618b8e5309-SLC",
+          "value": "0688bba8-9877-48ac-ab18-2e38e897f87c"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636189545303-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618abbc64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618a95a28a-SLC",
+          "value": "0688bba8-9877-48ac-ab18-2e38e897f87c"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618dd913ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63618b773203-SLC",
+          "value": "0688bba8-9877-48ac-ab18-2e38e897f87c"
+        }
+      ],
+      "clientAfterReload": "0688bba8-9877-48ac-ab18-2e38e897f87c",
+      "stale": 15
+    },
+    {
+      "reference": false,
+      "run": 0,
+      "id": "fe0687af-50c6-4293-b247-375a31c365d0",
+      "before": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63644e5da9e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63644893b73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63644d2b52c1-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63644df37233-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63644a4d14fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63644c1413ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63645f38f481-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63646b1f3203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636458e6c935-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636459c5c774-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636468efb73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63645a5614fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636468e6b73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63646e217233-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63646d858a29-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636469d2c774-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63646ad92269-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63646f4d3b8a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63646a6338e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63645e8fa9e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63646d25b859-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636469dec64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636469eee888-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63646d6ba42a-SLC",
+          "value": "initial"
+        }
+      ],
+      "after": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6368183ca9e9-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682aaeb73f-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682ee752c1-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682faa7233-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682cd914fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682dfb13ed-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682a42f481-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682c4f3203-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682a58c935-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682b47c774-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682ab0b73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682cda14fe-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682aadb73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682fab7233-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682f298a29-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682b43c774-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682c122269-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6368299c3b8a-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682b4638e9-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682846a9e9-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682dc7b859-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682b5dc64b-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682bb4e888-SLC",
+          "value": "fe0687af-50c6-4293-b247-375a31c365d0"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63682ee9a42a-SLC",
+          "value": "initial"
+        }
+      ],
+      "clientAfterReload": "fe0687af-50c6-4293-b247-375a31c365d0",
+      "stale": 7
+    },
+    {
+      "reference": false,
+      "run": 1,
+      "id": "25ccfe35-b371-4243-8ace-bbb3696acc2d",
+      "before": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636bd997a9e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636beda4b73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636be90352c1-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636be9ef7233-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636beee414fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636befba13ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636bebdef481-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636bee283203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636beb86c935-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636bed2ec774-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636beda5b73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636beee514fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636beda6b73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636be9ee7233-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636be8848a29-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636bed2dc774-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636becd42269-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636beb813b8a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636beb8838e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636be99da9e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636bee78b859-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636bec3fc64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636bed92e888-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636be982a42a-SLC",
+          "value": "initial"
+        }
+      ],
+      "after": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1a23a9e9-SLC",
+          "value": "25ccfe35-b371-4243-8ace-bbb3696acc2d"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1e31b73f-SLC",
+          "value": "25ccfe35-b371-4243-8ace-bbb3696acc2d"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f18c852c1-SLC",
+          "value": "25ccfe35-b371-4243-8ace-bbb3696acc2d"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1bbf7233-SLC",
+          "value": "25ccfe35-b371-4243-8ace-bbb3696acc2d"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1f6f14fe-SLC",
+          "value": "25ccfe35-b371-4243-8ace-bbb3696acc2d"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f180013ed-SLC",
+          "value": "25ccfe35-b371-4243-8ace-bbb3696acc2d"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1b80f481-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1ee63203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1b4ec935-SLC",
+          "value": "25ccfe35-b371-4243-8ace-bbb3696acc2d"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1db1c774-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1e30b73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1f7014fe-SLC",
+          "value": "25ccfe35-b371-4243-8ace-bbb3696acc2d"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1e2fb73f-SLC",
+          "value": "25ccfe35-b371-4243-8ace-bbb3696acc2d"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1bc07233-SLC",
+          "value": "25ccfe35-b371-4243-8ace-bbb3696acc2d"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f18668a29-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1db0c774-SLC",
+          "value": "25ccfe35-b371-4243-8ace-bbb3696acc2d"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1b762269-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1bc03b8a-SLC",
+          "value": "25ccfe35-b371-4243-8ace-bbb3696acc2d"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1b6d38e9-SLC",
+          "value": "25ccfe35-b371-4243-8ace-bbb3696acc2d"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1a28a9e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1e12b859-SLC",
+          "value": "25ccfe35-b371-4243-8ace-bbb3696acc2d"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1b4bc64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1d7de888-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe636f1a44a42a-SLC",
+          "value": "initial"
+        }
+      ],
+      "clientAfterReload": "25ccfe35-b371-4243-8ace-bbb3696acc2d",
+      "stale": 10
+    },
+    {
+      "reference": false,
+      "run": 2,
+      "id": "9300589f-008c-4fe3-b104-bdc5f4953dca",
+      "before": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63720abca9e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721eeeb73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe637218d452c1-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721e7a7233-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721ebf14fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721fc813ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721ad2f481-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721e653203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721aa6c935-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721ce9c774-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721ef0b73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721ec014fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721eefb73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721e887233-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721fc28a29-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721ce8c774-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721ac92269-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721b2b3b8a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721a3e38e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721ac2a9e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721deeb859-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721ad9c64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721ce1e888-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63721a6fa42a-SLC",
+          "value": "initial"
+        }
+      ],
+      "after": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753caea9e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753ef9b73f-SLC",
+          "value": "9300589f-008c-4fe3-b104-bdc5f4953dca"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe6375397852c1-SLC",
+          "value": "9300589f-008c-4fe3-b104-bdc5f4953dca"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753f9f7233-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753f4414fe-SLC",
+          "value": "9300589f-008c-4fe3-b104-bdc5f4953dca"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753ff813ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753b12f481-SLC",
+          "value": "9300589f-008c-4fe3-b104-bdc5f4953dca"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753e103203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753ac6c935-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753ccac774-SLC",
+          "value": "9300589f-008c-4fe3-b104-bdc5f4953dca"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753efbb73f-SLC",
+          "value": "9300589f-008c-4fe3-b104-bdc5f4953dca"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753f4514fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753efab73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753fa17233-SLC",
+          "value": "9300589f-008c-4fe3-b104-bdc5f4953dca"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753fab8a29-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753ccbc774-SLC",
+          "value": "9300589f-008c-4fe3-b104-bdc5f4953dca"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753b1d2269-SLC",
+          "value": "9300589f-008c-4fe3-b104-bdc5f4953dca"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753b003b8a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753a0238e9-SLC",
+          "value": "9300589f-008c-4fe3-b104-bdc5f4953dca"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753cb7a9e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753de9b859-SLC",
+          "value": "9300589f-008c-4fe3-b104-bdc5f4953dca"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753a46c64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753d15e888-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe63753b82a42a-SLC",
+          "value": "9300589f-008c-4fe3-b104-bdc5f4953dca"
+        }
+      ],
+      "clientAfterReload": "initial",
+      "stale": 12
+    }
+  ],
+  "after": [
+    {
+      "reference": true,
+      "run": 0,
+      "id": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4",
+      "before": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735beb470a02-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735becb7a28a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735befd0a42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735be98558b0-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bef4f13ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bf91baf95-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735beeb20d15-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bfd7e8a29-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bfff4e888-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bf9d138e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bfa21474d-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bfd96c64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bfaf77bf5-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bff6a13ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735c0e8528f4-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bff6913ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bff7d14fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bf814c935-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735c0df5f58f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bfb620a02-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735c0ec64cb3-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bf8474a4a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bfd97c64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735bfa1e474d-SLC",
+          "value": "initial"
+        }
+      ],
+      "after": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4b420a02-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4c98a28a-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4983a42a-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f494c58b0-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4fd913ed-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f49d7af95-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4e6a0d15-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4cea8a29-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4f9ce888-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f49bb38e9-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4a24474d-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f5d14c64b-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4ae57bf5-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4fdb13ed-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4dc428f4-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4fda13ed-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4fa114fe-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4f60c935-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4d80f58f-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4b4d0a02-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4e6e4cb3-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f483b4a4a-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f5d15c64b-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe735f4a20474d-SLC",
+          "value": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4"
+        }
+      ],
+      "clientAfterReload": "5ede8c2b-f2e1-4e49-83d7-d3e0a594bfe4",
+      "stale": 0
+    },
+    {
+      "reference": true,
+      "run": 1,
+      "id": "1c8803ee-c466-43ac-af10-50e944045f2e",
+      "before": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645f470a02-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736459c8a28a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645f1ea42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645cb558b0-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645c5313ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645d58af95-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645a770d15-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736459958a29-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645ae5e888-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645e3b38e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645dd8474d-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736458b1c64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645f717bf5-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645c4e13ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736459dd28f4-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645c4f13ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645b9514fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645a7ac935-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645973f58f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645f4a0a02-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645a1b4cb3-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645ad54a4a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736458b2c64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73645dd9474d-SLC",
+          "value": "initial"
+        }
+      ],
+      "after": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671e030a02-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671832a28a-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671e81a42a-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671b5f58b0-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671c0413ed-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671cb7af95-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7367187a0d15-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7367180a8a29-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671932e888-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671bfe38e9-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671bd7474d-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671ebac64b-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671d6a7bf5-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671c0513ed-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671fa328f4-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671c0313ed-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736719da14fe-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736718dbc935-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671841f58f-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671e0a0a02-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7367190f4cb3-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7367192c4a4a-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671ebbc64b-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73671bda474d-SLC",
+          "value": "1c8803ee-c466-43ac-af10-50e944045f2e"
+        }
+      ],
+      "clientAfterReload": "1c8803ee-c466-43ac-af10-50e944045f2e",
+      "stale": 0
+    },
+    {
+      "reference": true,
+      "run": 2,
+      "id": "452f3238-3d61-437c-8067-107bede27698",
+      "before": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b28950a02-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3a22a28a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b389ca42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3c0058b0-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b382313ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3f3faf95-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3aad0d15-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3a648a29-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3ac3e888-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3d3b38e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3da2474d-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3871c64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3e827bf5-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b382613ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3b5428f4-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b382413ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3bd514fe-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3bd9c935-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3a20f58f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b389a0a02-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3a5e4cb3-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3ac24a4a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3872c64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736b3da4474d-SLC",
+          "value": "initial"
+        }
+      ],
+      "after": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736def4a0a02-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736de8c0a28a-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736defd7a42a-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736de9f558b0-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736def7f13ed-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736dedd0af95-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736de9950d15-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736de8b68a29-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736de8d2e888-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736dec4138e9-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736dec2e474d-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736dee6ec64b-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736dec747bf5-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736def7e13ed-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736dea1a28f4-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736def8013ed-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736dea7c14fe-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736dea96c935-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736de872f58f-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736def550a02-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736de89a4cb3-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736de9354a4a-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736dfe76c64b-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe736dfc2f474d-SLC",
+          "value": "452f3238-3d61-437c-8067-107bede27698"
+        }
+      ],
+      "clientAfterReload": "452f3238-3d61-437c-8067-107bede27698",
+      "stale": 0
+    },
+    {
+      "reference": false,
+      "run": 0,
+      "id": "7e01effb-965c-4e6a-88ec-1b8dd38d3462",
+      "before": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373d82ca28a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373df3e4cb3-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373de83a42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373db0e5305-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373ded70d15-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373ecd8af95-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373ddaaf58f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373d8e45306-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373e914b73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373efa513ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373e8ec2269-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373ee7f0337-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373ee363203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373ef614cb3-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373ec405304-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373f89da9e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373ed463b8a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373edd4f58f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373fe94f374-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373ed080a02-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373fd2d5303-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373ef694cb3-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373ee43c64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7373ff418a29-SLC",
+          "value": "initial"
+        }
+      ],
+      "after": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377a932a28a-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377af824cb3-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377afdaa42a-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377afa55305-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377afb00d15-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377ace6af95-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377aec8f58f-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377add95306-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377aa3eb73f-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377aa4d13ed-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377aa0e2269-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377aff50337-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377ae573203-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377af834cb3-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377a8bd5304-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377a923a9e9-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377ad7e3b8a-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377aeccf58f-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377afeff374-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377aecf0a02-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377a9fd5303-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377af844cb3-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377a897c64b-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7377a9018a29-SLC",
+          "value": "7e01effb-965c-4e6a-88ec-1b8dd38d3462"
+        }
+      ],
+      "clientAfterReload": "7e01effb-965c-4e6a-88ec-1b8dd38d3462",
+      "stale": 0
+    },
+    {
+      "reference": false,
+      "run": 1,
+      "id": "06764814-6517-4124-a255-62b6b87fbceb",
+      "before": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4d09a28a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c499c4cb3-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4b60a42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4ce85305-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4af70d15-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c485faf95-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c494bf58f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4c215306-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4d60b73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4ecc13ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4d422269-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4b640337-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c48dc3203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c499b4cb3-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4ed85304-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4b86a9e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4f913b8a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c494cf58f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c49f6f374-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4acd0a02-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4fa85303-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c499d4cb3-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4ccfc64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737c4c148a29-SLC",
+          "value": "initial"
+        }
+      ],
+      "after": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fde2ca28a-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fd99f4cb3-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fdc8ea42a-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fda575305-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fdbd60d15-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fd946af95-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fd9d9f58f-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fd8e35306-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fddbbb73f-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fdf7613ed-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fddf92269-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fdc0e0337-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fd8cc3203-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fd9a04cb3-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fdb775304-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fdc76a9e9-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fdef83b8a-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fd9ddf58f-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fdb55f374-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fdcc00a02-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fdbab5303-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fd9a14cb3-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fdd06c64b-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe737fdc238a29-SLC",
+          "value": "06764814-6517-4124-a255-62b6b87fbceb"
+        }
+      ],
+      "clientAfterReload": "06764814-6517-4124-a255-62b6b87fbceb",
+      "stale": 0
+    },
+    {
+      "reference": false,
+      "run": 2,
+      "id": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5",
+      "before": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384da58a28a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384dda44cb3-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384dff4a42a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384d8a15305-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384dfb70d15-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384de0aaf95-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384de79f58f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384df5d5306-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384d98cb73f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384dc1813ed-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384d9872269-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384d8bd0337-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384dc853203-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384dda54cb3-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384d9bb5304-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384d910a9e9-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384da833b8a-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384de7af58f-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384de46f374-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384da8b0a02-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384da725303-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384dda64cb3-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384d873c64b-SLC",
+          "value": "initial"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe7384d89c8a29-SLC",
+          "value": "initial"
+        }
+      ],
+      "after": [
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73871f8da28a-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73871b5b4cb3-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73871d07a42a-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73872b2a5305-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73871cfa0d15-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73872b9caf95-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73871b73f58f-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73871a685306-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73871eccb73f-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73871a7e13ed-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73872e512269-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73872e430337-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe738729bd3203-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73872b624cb3-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73872cbe5304-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73871e4fa9e9-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe738718253b8a-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73872b77f58f-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73871bfef374-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe738718110a02-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73872d445303-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73872b5d4cb3-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73872d97c64b-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        },
+        {
+          "status": 200,
+          "cache": null,
+          "ray": "a4fe73871e4c8a29-SLC",
+          "value": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5"
+        }
+      ],
+      "clientAfterReload": "0e0c7c60-b551-4af4-ad10-e9d1ee801bd5",
+      "stale": 0
+    }
+  ],
+  "summary": {
+    "beforeStaleResponses": 62,
+    "beforeReads": 144,
+    "afterStaleResponses": 0,
+    "afterReads": 144
+  }
+}
