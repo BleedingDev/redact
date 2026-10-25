@@ -46,7 +46,7 @@ node benchmarks/upstream/cloudflare-dev-eval.mjs /path/to/fixed-consumer
 node benchmarks/upstream/cloudflare-dev-eval.mjs /path/to/fixed-consumer --production --expect-unsupported
 ```
 
-[Upstream PR #16466](https://github.com/cloudflare/workers-sdk/pull/16466) was submitted, then automatically closed by Cloudflare's contributor gate. A maintainer added the account to the contributor list on October 25 while reopening the separate security fix below, but #16466 still needs a maintainer to reopen it. The author's reopen request was rejected by GitHub. [Contribution text](./cloudflare-dev-eval-pr.md). This fix is not applied by Redact or by the release consumer.
+[Upstream PR #16466](https://github.com/cloudflare/workers-sdk/pull/16466) was automatically closed by Cloudflare's contributor gate, then reopened by a maintainer on October 25 after the account was added to the contributor list. It is awaiting review and publication. [Contribution text](./cloudflare-dev-eval-pr.md). This fix is not applied by Redact or by the release consumer.
 
 ## React Flight development profiler
 
@@ -91,8 +91,8 @@ Wrangler `4.152.0` and Cloudflare Vite plugin `1.65.0` remain the latest publish
 
 ### Tested Cloudflare dependency fix
 
-[Workers SDK PR #16476](https://github.com/cloudflare/workers-sdk/pull/16476) updates the shared Undici and Undici-types catalog to 7.30.1, regenerates the lockfile, and includes Changesets for the bundled consumers. A maintainer reopened it after the automatic contributor-gate closure. [Patch](./cloudflare-undici.patch), [contribution text](./cloudflare-undici-pr.md).
+[Workers SDK PR #16476](https://github.com/cloudflare/workers-sdk/pull/16476) updates the shared Undici and Undici-types catalog to 7.30.1, regenerates the lockfile, and includes Changesets for the bundled consumers. A maintainer reopened, approved, and merged it on October 25, 2026. [Patch](./cloudflare-undici.patch), [contribution text](./cloudflare-undici-pr.md).
 
 The regression sends excessive content encodings and closes the response early. The untouched published Miniflare exits with an unhandled Readable error. Source-built Miniflare with Undici 7.30.1 rejects the fetch and exits cleanly, with no stderr. [Before and after output](../results/cloudflare-undici-regression.json).
 
-All 75 Miniflare HTTP tests across five files pass, along with the nine dependency build tasks, Miniflare type checking, catalog and pinned-dependency checks, and formatting and lint for the changed test. The full Workers SDK matrix was not run locally. The advisory remains open in the Redact dependency gate until patched tooling is published and the unmodified consumer is reverified.
+All 75 Miniflare HTTP tests across five files pass, along with the nine dependency build tasks, Miniflare type checking, catalog and pinned-dependency checks, and formatting and lint for the changed test. The full Workers SDK matrix was not run locally. The latest six upstream platform test jobs pass on Linux, macOS, and Windows. The advisory remains open in the Redact dependency gate until patched tooling is published and the unmodified consumer is reverified.
