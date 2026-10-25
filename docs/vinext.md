@@ -46,17 +46,18 @@ For a Pages-only app, set `viteEnvironment: { name: 'ssr' }`.
 
 Install `@cloudflare/vite-plugin@1.65.0` and `wrangler@4.152.0`. The Redact entry supplies an owned copy of that plugin with its development evaluator correction. It uses the installed plugin's dependencies and preserves production evaluation behavior. Its source, license, and reproducible file hashes ship with Redact. This adds Node tooling to the package download, not to either client bundle.
 
-Miniflare in this toolchain pins an affected Undici release. Use the published security fix through your package manager. For npm, add this to the application's `package.json`:
+Miniflare pins an affected Undici release, and Satori pins an affected fflate release. Use the published security fix through your package manager. For npm, add this to the application's `package.json`:
 
 ```json
 {
   "overrides": {
-    "miniflare": { "undici": "7.30.1" }
+    "miniflare": { "undici": "7.30.1" },
+    "satori": { "fflate": "0.7.5" }
   }
 }
 ```
 
-For pnpm, use `"pnpm": { "overrides": { "miniflare>undici": "7.30.1" } }` in the workspace root. Commit the updated lockfile. This upgrades the dependency without editing installed packages or suppressing its advisory.
+For pnpm, use `"pnpm": { "overrides": { "miniflare>undici": "7.30.1", "satori>fflate": "0.7.5" } }` in the workspace root. Commit the updated lockfile. This upgrades the dependency without editing installed packages or suppressing its advisory.
 
 ## Client size and performance
 
@@ -70,7 +71,7 @@ The browser resolver replaces React, React DOM, the JSX and compiler runtimes, a
 
 Vite's alias table is shared across environments. The adapter uses environment-specific resolution hooks so native server React and Flight remain intact. It uses the full Redact renderer. The separate Vite plugin's feature presets do not apply.
 
-The adapter also keeps Vinext's Next shims out of server and App Router dependency prebundling, so router state has one module identity. Pages-only clients retain their prebundled pipeline, with shared instrumentation state. A version-scoped transform prevents Pages JSON requests from receiving document trailing-slash redirects. These corrections run through Vite's normal plugin hooks, including its separate optimizer, and leave installed Vinext files intact.
+The adapter also keeps Vinext's Next shims out of server and App Router dependency prebundling, so router state has one module identity. Pages-only clients retain their prebundled pipeline, with shared instrumentation state. A version-scoped transform prevents Pages JSON requests from receiving document trailing-slash redirects. The development Flight profiler also validates end times and track indices for errors and cancellations, matching React's completed-component track. Valid measurements and application errors remain intact. These corrections run through Vite's normal plugin hooks, including its separate optimizer, and leave installed Vinext files intact.
 
 Use `redact({ renderer: 'react' })` to compare native React on the same corrected platform. It retains the framework corrections and leaves all React browser entries native. The release gate uses this mode for its React controls.
 

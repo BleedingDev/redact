@@ -7,7 +7,9 @@ The current release candidate carries these corrections in Redact, so publicatio
 - Next 16.2 uses a browser development loader that requires decoded body bytes before treating a zero transfer size as a cache hit. Debug-channel replay remains intact. All 222 targeted development scenarios pass with published Next 16.2.12, both bundlers, both cache modes, and three browsers.
 - The Vinext adapter corrects shim optimizer identity, shares Pages instrumentation state, and preserves Pages data URLs during trailing-slash canonicalization. Node and Worker request handlers use the same transform path. Both native React and Redact controls use these shipped corrections.
 - `@tanstack/redact/cloudflare` supplies a reproducible owned copy of Cloudflare Vite plugin 1.65.0 with the development evaluator fix. The four installed-package checks cover the original and owned distributions in development and production. Production results match the original plugin.
-- Standard npm and pnpm overrides resolve Miniflare's Undici dependency to the published 7.30.1 security fix. The malformed-response negative control still crashes on 7.29.1; the upgraded dependency rejects safely. Miniflare's JavaScript is byte-identical. The fresh consumer audit reports zero vulnerabilities.
+- Standard npm and pnpm overrides resolve Miniflare's Undici dependency to the published 7.30.1 security fix. The malformed-response negative control still crashes on 7.29.1; the upgraded dependency rejects safely. Miniflare's JavaScript is byte-identical. The Cloudflare-only consumer audit reports zero vulnerabilities. The full Vinext graph also needs the published fflate 0.7.5 fix through a Satori dependency override.
+
+The Vinext development transform also applies the React Flight timing guards from PR 37572. Tests execute both real compiled error and cancellation tracks with the captured negative timestamp, preserve valid measurements, and require real measurement errors to propagate.
 
 The complete release matrix remains required. These targeted results do not replace it. See [configuration and maintenance details](../../docs/vinext.md).
 
@@ -112,3 +114,9 @@ Wrangler `4.152.0` and Cloudflare Vite plugin `1.65.0` remain the latest publish
 The regression sends excessive content encodings and closes the response early. The untouched published Miniflare exits with an unhandled Readable error. Source-built Miniflare with Undici 7.30.1 rejects the fetch and exits cleanly, with no stderr. [Before and after output](../results/cloudflare-undici-regression.json).
 
 All 75 Miniflare HTTP tests across five files pass, along with the nine dependency build tasks, Miniflare type checking, catalog and pinned-dependency checks, and formatting and lint for the changed test. The full Workers SDK matrix was not run locally. The latest six upstream platform test jobs pass on Linux, macOS, and Windows. The advisory remains open in the Redact dependency gate until patched tooling is published and the unmodified consumer is reverified.
+
+## Vinext compression dependency advisory
+
+The full Vinext consumer audit also finds [GHSA-px8p-9vwx-vf98](https://github.com/advisories/GHSA-px8p-9vwx-vf98) in Satori's pinned fflate 0.7.3. The published 0.7.5 patch fixes an infinite loop when a ZIP64 entry omits its required extra field. The release fixture uses a standard scoped override. `scripts/test-framework-dependencies.mjs` checks malformed input rejection and valid ZIP and zlib round trips, with an optional original-package negative control.
+
+Both original dependency failures reproduce in the frozen published consumer. With Undici 7.30.1 and fflate 0.7.5, the same checks exit successfully and the full consumer audit reports zero vulnerabilities. [Recorded negative controls and fixed results](../results/framework-owned-security.json).

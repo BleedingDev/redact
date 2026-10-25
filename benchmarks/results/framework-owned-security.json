@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "recordedAt": "2026-10-25T10:57:58.793Z",
+  "node": "v24.22.0",
+  "results": [
+    {
+      "dependency": "undici",
+      "version": "7.29.1",
+      "fixed": false,
+      "exitCode": 1
+    },
+    {
+      "dependency": "fflate",
+      "version": "0.7.3",
+      "fixed": false,
+      "exitCode": null,
+      "timedOut": true
+    },
+    {
+      "dependency": "undici",
+      "version": "7.30.1",
+      "fixed": true,
+      "exitCode": 0
+    },
+    {
+      "dependency": "fflate",
+      "version": "0.7.5",
+      "fixed": true,
+      "exitCode": 0,
+      "timedOut": false
+    }
+  ],
+  "audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "advisories": [
+    "https://github.com/advisories/GHSA-xjj6-f33q-929c",
+    "https://github.com/advisories/GHSA-px8p-9vwx-vf98"
+  ]
+}

@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 import { createRequire, findPackageJSON } from 'node:module'
 import { dirname, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
+import { correctFlightTimings } from './flight-timing'
 
 const shimPackages = ['next', 'vinext', 'server-only', 'client-only', 'private-next-instrumentation-client']
 const requestHandlers = ['vinext/server/app-rsc-handler', 'vinext/server/app-rsc-combined-handler']
@@ -44,11 +45,12 @@ function isShimInclude(id: string, excludes: string[]) {
 
 export function vinextCompatibility() {
   let directory = '', hasApp = false, excludes: string[] = [], externalRequire: any
-  const transform = (code: string, id: string) => {
-    const corrected = directory && correctVinextModule(code, id, directory)
+  const transform = function(this: any, code: string, id: string) {
+    const corrected = directory && (correctVinextModule(code, id, directory) || correctFlightTimings(code, id, source => this.parse(source)))
     return corrected ? { code: corrected, map: null } : null
   }
   const modulePlugin = { name: 'redact:vinext-modules', transform }
+  const requirePlugins = new WeakSet<object>()
   function configure(name: string, config: any) {
     if (!directory) return
     const client = name === 'client' || config.consumer === 'client'
@@ -61,6 +63,7 @@ export function vinextCompatibility() {
       }
     }
     const optimizer = config.optimizeDeps ||= {}
+    const optimizerActive = !optimizer.noDiscovery || !!optimizer.include?.length
     const options = optimizer.rolldownOptions ||= {}
     let plugins = [options.plugins || []].flat(Infinity)
     plugins = plugins.filter((plugin: any) => plugin?.name !== modulePlugin.name)
@@ -68,10 +71,14 @@ export function vinextCompatibility() {
       optimizer.exclude = [...new Set([...(optimizer.exclude || []), ...excludes])]
       optimizer.include = optimizer.include?.filter((id: string) => !isShimInclude(id, excludes))
       plugins = plugins.filter((plugin: any) => plugin?.name !== 'vinext:dep-optimize-alias')
-      if (!client && !plugins.some((plugin: any) => plugin?.name === 'redact:vinext-shim-require')) {
-        plugins.push({ ...externalRequire({ external: excludes }), name: 'redact:vinext-shim-require' })
+      if (!client && !plugins.some((plugin: any) => plugin && typeof plugin === 'object' && requirePlugins.has(plugin))) {
+        // Rolldown's built-in plugins are class instances. Preserve the instance
+        // so its native implementation and options reach the optimizer.
+        const plugin = externalRequire({ external: excludes })
+        requirePlugins.add(plugin)
+        plugins.push(plugin)
       }
-      if (client && (!optimizer.noDiscovery || optimizer.include?.length)) {
+      if (client && optimizerActive) {
         optimizer.include = [...new Set([...(optimizer.include || []), ...clientDependencies.filter(id => !isShimInclude(id, optimizer.exclude.filter((entry: string) => !shimPackages.includes(entry))))])]
       }
     }
@@ -91,7 +98,9 @@ export function vinextCompatibility() {
         if (pkg.version !== '1.3.0') throw new Error(`Redact Vinext integration supports vinext 1.3.0; found ${pkg.version}.`)
         hasApp = !!config.environments?.rsc
         const aliases = Array.isArray(config.resolve?.alias) ? config.resolve.alias : Object.entries(config.resolve?.alias || {}).map(([find, replacement]) => ({ find, replacement }))
-        excludes = [...new Set([...shimPackages, ...aliases.filter((alias: any) => typeof alias.find === 'string' && (alias.find.startsWith('next/') || alias.replacement?.replace(/\\/g, '/').startsWith(directory.replace(/\\/g, '/') + '/'))).map((alias: any) => alias.find)])] as string[]
+        const publicShims = Object.keys((await import(pathToFileURL(resolve(directory, 'shims/public-shim-map.json.js')).href)).default)
+        const shimEntries = [...publicShims, 'next/dist/client/components/navigation'].flatMap(id => [id, id + '.js'])
+        excludes = [...new Set([...shimPackages, ...shimEntries, ...aliases.filter((alias: any) => typeof alias.find === 'string' && (alias.find.startsWith('next/') || alias.replacement?.replace(/\\/g, '/').startsWith(directory.replace(/\\/g, '/') + '/'))).map((alias: any) => alias.find)])] as string[]
         const vite = await import(pathToFileURL(require.resolve('vite')).href)
         externalRequire = vite.esmExternalRequirePlugin
         if (typeof externalRequire !== 'function') throw new Error('Redact Vinext integration requires Vite 8 with esmExternalRequirePlugin support.')

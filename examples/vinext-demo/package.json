@@ -24,6 +24,9 @@
   "overrides": {
     "miniflare": {
       "undici": "7.30.1"
+    },
+    "satori": {
+      "fflate": "0.7.5"
     }
   }
 }

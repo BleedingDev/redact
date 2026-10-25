@@ -44,7 +44,7 @@ export async function vinextEvidence(fixture, packageRoot = process.env.VINEXT_T
   const consumer = process.env.VINEXT_TEST_CONSUMER
   const installation = consumer || join(root, 'examples/vinext-demo')
   const dependencyFiles = consumer ? [['npm-lockfile', join(consumer, 'package-lock.json')], ['tarball', join(consumer, 'package-evidence.json')]] : [['framework-patches', join(root, 'patches'), true], ['lockfile', join(root, 'pnpm-lock.yaml')]]
-  const scripts = ['test-cloudflare', 'browser-reload', 'prepare-vinext-consumer', 'test-vinext-consumer', 'test-vinext', 'test-vinext-static', 'prepare-vinext-fixture', 'vinext-test-gate', 'vinext-results', 'vinext-edge-checks', 'vinext-static-checks', 'vinext-browser-errors', 'next-browser-checks', 'next-extended-checks', 'next-browser-errors']
+  const scripts = ['test-framework-dependencies', 'test-cloudflare', 'browser-reload', 'prepare-vinext-consumer', 'test-vinext-consumer', 'test-vinext', 'test-vinext-static', 'prepare-vinext-fixture', 'vinext-test-gate', 'vinext-results', 'vinext-edge-checks', 'vinext-static-checks', 'vinext-browser-errors', 'next-browser-checks', 'next-extended-checks', 'next-browser-errors']
   return {
     suiteSha256: await hashFiles([
       ...scripts.map(name => [name, join(root, 'scripts', `${name}.mjs`)]),
