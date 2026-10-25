@@ -1,4 +1,4 @@
-import { REACT_ELEMENT_TYPE, type ReactElement } from '../core'
+import { REACT_ELEMENT_TYPE, type Key, type ReactElement, type Ref } from '../core'
 import { rememberDevToolsElement } from '../core/devtools'
 
 export { Fragment } from './element'
@@ -36,6 +36,8 @@ export const jsxDEV = process.env.NODE_ENV !== 'production'
 export namespace JSX {
   export type Element = ReactElement
   export type ElementType = any
+  export interface IntrinsicAttributes { key?: Key }
+  export interface IntrinsicClassAttributes<T> { ref?: Ref<T> | undefined }
   export interface IntrinsicElements {
     [elemName: string]: any
   }

@@ -1,0 +1,22 @@
+{
+  "recordedAt": "2026-10-25T03:13:02.864019+00:00",
+  "pullRequests": [
+    {
+      "repository": "cloudflare/vinext",
+      "number": 4299,
+      "url": "https://github.com/cloudflare/vinext/pull/4299",
+      "state": "open",
+      "head": "2fc4598626b9dbaf427784b5b932f28785c1f4a9",
+      "checks": "No checks reported at publication verification"
+    },
+    {
+      "repository": "cloudflare/workers-sdk",
+      "number": 16466,
+      "url": "https://github.com/cloudflare/workers-sdk/pull/16466",
+      "state": "closed",
+      "head": "3ce496ce8233bebeb5a4fdd924c47a4aa315253d",
+      "reason": "Automatically closed because the contributing account is not a registered vouched collaborator",
+      "gateComment": "https://github.com/cloudflare/workers-sdk/pull/16466#issuecomment-6392824361"
+    }
+  ]
+}

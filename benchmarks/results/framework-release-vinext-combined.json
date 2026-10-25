@@ -1,0 +1,29 @@
+{
+  "recordedAt": "2026-10-25T02:03:41.346Z",
+  "passed": false,
+  "complete": false,
+  "samePackage": true,
+  "mixed": {
+    "expectedConfigurations": 66,
+    "attemptedConfigurations": 66,
+    "completeConfigurations": 54,
+    "passedConfigurations": 41,
+    "expectedScenarios": 1260,
+    "executedScenarios": 1002,
+    "passedScenarios": 989,
+    "failedScenarios": 13,
+    "missingScenarios": 258,
+    "concurrencyDifferences": 0,
+    "nativeReactFailures": 7,
+    "alsoFailsWithNativeReact": 6,
+    "redactFailures": 0
+  },
+  "pages": {
+    "expectedConfigurations": 36,
+    "completeConfigurations": 36,
+    "passedConfigurations": 36,
+    "expectedScenarios": 150,
+    "passedScenarios": 150,
+    "missingScenarios": 0
+  }
+}

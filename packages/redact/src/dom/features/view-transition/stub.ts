@@ -1,7 +1,8 @@
+export const m = undefined, d = undefined, c = undefined, l = undefined, p = undefined
 import type { FiberRoot } from '../../../core'
 
 export function markTransitionUpdate(_root: FiberRoot): void {}
-export function deferTransition(_root: FiberRoot, _commit: () => void, _flush: () => void): boolean { return false }
+export const deferTransition: (_root: FiberRoot, _commit: () => void, _flush: () => void) => boolean = () => false
 export function cancelTransitions(): void {}
-export function deferTransitionLayout(_work: () => void): boolean { return false }
-export function deferTransitionPassive(_work: () => void): boolean { return false }
+export const deferTransitionLayout: (_work: () => void) => boolean = () => false
+export const deferTransitionPassive: (_work: () => void) => boolean = () => false

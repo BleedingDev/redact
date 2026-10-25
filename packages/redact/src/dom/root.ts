@@ -1,10 +1,17 @@
-import type { ReactNode, RecoverableErrorHandler } from '../core'
 import { renderRoot, scheduleRootRender, flushSyncWork, batchedUpdates } from './reconcile'
-import { hydrateRootImpl } from './features/hydration'
+
 import { createFiberRoot } from './root-internal'
+
 import { queueMutation } from './commit'
+import { clearHostContainer } from './document-metadata'
+
+import { hydrateRootImpl } from './features/hydration'
+
+import type { ReactNode, RecoverableErrorHandler } from '../core'
 
 export interface RootOptions {
+  formState?: unknown[] | null
+  identifierStrategy?: 'react'
   identifierPrefix?: string
   onRecoverableError?: RecoverableErrorHandler
   onCaughtError?: RecoverableErrorHandler
@@ -16,7 +23,7 @@ export interface Root {
   unmount(): void
 }
 
-export function createRoot(container: Element | DocumentFragment, options: RootOptions = {}): Root {
+export function createRoot(container: Element | DocumentFragment | Document, options: RootOptions = {}): Root {
   const root = createFiberRoot(container, options)
 
   let firstRender = true
@@ -26,7 +33,7 @@ export function createRoot(container: Element | DocumentFragment, options: RootO
         if (firstRender) {
           queueMutation(() => {
             firstRender = false
-            if ((container as Node).nodeType === 1) container.textContent = ''
+            if (container.nodeType === 1 || container.nodeType === 9) clearHostContainer(container)
           })
         }
         renderRoot(root, children)

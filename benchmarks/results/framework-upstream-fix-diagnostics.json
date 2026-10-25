@@ -1,0 +1,3465 @@
+{
+  "recordedAt": "2026-10-25T02:37:45.411602+00:00",
+  "purpose": "upstream-fix-diagnostic",
+  "patches": true,
+  "releaseEvidence": false,
+  "configurations": 24,
+  "passedConfigurations": 24,
+  "scenarios": 504,
+  "passedScenarios": 504,
+  "dependencyChanges": [
+    {
+      "package": "vinext",
+      "version": "1.3.0",
+      "change": "Keep verified Pages data requests out of document trailing-slash redirects",
+      "sourcePatch": "../upstream/vinext-pages-data.patch"
+    },
+    {
+      "package": "vinext",
+      "version": "1.3.0",
+      "change": "Exclude Next shims from RSC dependency optimization",
+      "upstream": "https://github.com/cloudflare/vinext/pull/4268"
+    },
+    {
+      "package": "@cloudflare/vite-plugin",
+      "version": "1.65.0",
+      "change": "Connect indirect eval to the development runner evaluator",
+      "sourcePatch": "../upstream/cloudflare-dev-eval.patch"
+    }
+  ],
+  "scope": "Standalone and Workers development cases use a separate consumer with three dependency fixes. These results do not satisfy the unpatched release gate.",
+  "suites": [
+    {
+      "framework": "vinext",
+      "version": "1.3.0",
+      "recordedAt": "2026-10-25T02:36:07.693Z",
+      "node": "v24.22.0",
+      "durationMs": 81420,
+      "evidence": {
+        "suiteSha256": "a9af979b8821ca59251e48a86668d0f90d28d05f1e50358300ca29c5067a9546",
+        "installation": "modified-consumer",
+        "sourceSha256": "05155eb8297d246c16ebd79e992c5d7f47eed44e9587a60de2dcf3b0d535f440",
+        "buildSha256": "8ebcee93565375ef8e17a82ceaf75fd8759255323e85484c32d2fe550784bb4f",
+        "fixtureSha256": "c88600805a2ab037ebaab51eec0700e194141711f4ca84490c054b79c6722856"
+      },
+      "results": [
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "cache-components",
+          "mode": "production",
+          "deployment": "standalone",
+          "browser": "chromium",
+          "reference": true,
+          "basePath": "/coverage",
+          "browserVersion": "156.0.8078.4",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 759
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1087
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 883
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 857
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1705
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2515
+            },
+            {
+              "name": "cache-components",
+              "passed": true,
+              "durationMs": 538
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1145
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 822
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 2336
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 675
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 714
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1498
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 2295
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 918
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1248
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1161
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 551
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 570
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 574
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 936
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 24505
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "cache-components",
+          "mode": "production",
+          "deployment": "standalone",
+          "browser": "firefox",
+          "reference": true,
+          "basePath": "/coverage",
+          "browserVersion": "157.0",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 895
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1156
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 882
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 888
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1793
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2518
+            },
+            {
+              "name": "cache-components",
+              "passed": true,
+              "durationMs": 537
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1270
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 976
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 2562
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 737
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 774
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1575
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1830
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 557
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1377
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1260
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 569
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 568
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 579
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 903
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 26919
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "cache-components",
+          "mode": "production",
+          "deployment": "standalone",
+          "browser": "webkit",
+          "reference": true,
+          "basePath": "/coverage",
+          "browserVersion": "27.2",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 734
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1170
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 876
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 856
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1766
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2536
+            },
+            {
+              "name": "cache-components",
+              "passed": true,
+              "durationMs": 544
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1222
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 861
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 2671
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 683
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 723
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1511
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1661
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 558
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1320
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1254
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 561
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 562
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 562
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 909
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 26159
+        }
+      ],
+      "complete": true,
+      "passed": true
+    },
+    {
+      "framework": "vinext",
+      "version": "1.3.0",
+      "recordedAt": "2026-10-25T02:36:06.642Z",
+      "node": "v24.22.0",
+      "durationMs": 80369,
+      "evidence": {
+        "suiteSha256": "a9af979b8821ca59251e48a86668d0f90d28d05f1e50358300ca29c5067a9546",
+        "installation": "modified-consumer",
+        "sourceSha256": "05155eb8297d246c16ebd79e992c5d7f47eed44e9587a60de2dcf3b0d535f440",
+        "buildSha256": "8ebcee93565375ef8e17a82ceaf75fd8759255323e85484c32d2fe550784bb4f",
+        "fixtureSha256": "3cb029b3b1a131be2b251b8485522208f08c2ddd7fb84ba11eda7da307572f5f"
+      },
+      "results": [
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "standard",
+          "mode": "production",
+          "deployment": "standalone",
+          "browser": "chromium",
+          "reference": true,
+          "basePath": "/coverage",
+          "browserVersion": "156.0.8078.4",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 752
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1093
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 890
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 857
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1698
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2519
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1145
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 826
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 2355
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 673
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 715
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1497
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 2348
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 917
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1263
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1161
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 548
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 571
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 567
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 939
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 24051
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "standard",
+          "mode": "production",
+          "deployment": "standalone",
+          "browser": "firefox",
+          "reference": true,
+          "basePath": "/coverage",
+          "browserVersion": "157.0",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 925
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1150
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 879
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 884
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1780
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2513
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1257
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 950
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 2580
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 729
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 813
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1600
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1789
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 974
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1352
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1234
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 558
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 608
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 569
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 919
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 26666
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "standard",
+          "mode": "production",
+          "deployment": "standalone",
+          "browser": "webkit",
+          "reference": true,
+          "basePath": "/coverage",
+          "browserVersion": "27.2",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 730
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1164
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 876
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 855
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1766
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2542
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1232
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 860
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 2659
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 680
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 719
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1512
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1678
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 919
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1318
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1251
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 560
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 560
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 566
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 910
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 25848
+        }
+      ],
+      "complete": true,
+      "passed": true
+    },
+    {
+      "framework": "vinext",
+      "version": "1.3.0",
+      "recordedAt": "2026-10-25T02:37:26.374Z",
+      "node": "v24.22.0",
+      "durationMs": 78468,
+      "evidence": {
+        "suiteSha256": "a9af979b8821ca59251e48a86668d0f90d28d05f1e50358300ca29c5067a9546",
+        "installation": "modified-consumer",
+        "sourceSha256": "05155eb8297d246c16ebd79e992c5d7f47eed44e9587a60de2dcf3b0d535f440",
+        "buildSha256": "8ebcee93565375ef8e17a82ceaf75fd8759255323e85484c32d2fe550784bb4f",
+        "fixtureSha256": "02637fbfe3a5808359780eeb4e44a7d227ffe192aa981d946abf8cabc86e0de5"
+      },
+      "results": [
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "cache-components",
+          "mode": "production",
+          "deployment": "standalone",
+          "browser": "chromium",
+          "reference": false,
+          "basePath": "/coverage",
+          "browserVersion": "156.0.8078.4",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 693
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1100
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 882
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 859
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1738
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2517
+            },
+            {
+              "name": "cache-components",
+              "passed": true,
+              "durationMs": 539
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1145
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 827
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 2402
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 673
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 697
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1246
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1996
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 546
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1246
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1167
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 540
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 550
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 550
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 908
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 23661
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "cache-components",
+          "mode": "production",
+          "deployment": "standalone",
+          "browser": "firefox",
+          "reference": false,
+          "basePath": "/coverage",
+          "browserVersion": "157.0",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 921
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1190
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 889
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 885
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1826
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2532
+            },
+            {
+              "name": "cache-components",
+              "passed": true,
+              "durationMs": 537
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1251
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 949
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 2602
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 735
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 775
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1356
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1777
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 548
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1348
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1251
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 588
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 578
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 576
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 932
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 26654
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "cache-components",
+          "mode": "production",
+          "deployment": "standalone",
+          "browser": "webkit",
+          "reference": false,
+          "basePath": "/coverage",
+          "browserVersion": "27.2",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 732
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1177
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 846
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 843
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1757
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2541
+            },
+            {
+              "name": "cache-components",
+              "passed": true,
+              "durationMs": 545
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1221
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 820
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 2604
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 663
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 688
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1248
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1358
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 562
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1305
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1238
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 548
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 557
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 556
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 890
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 25299
+        }
+      ],
+      "complete": true,
+      "passed": true
+    },
+    {
+      "framework": "vinext",
+      "version": "1.3.0",
+      "recordedAt": "2026-10-25T02:37:23.066Z",
+      "node": "v24.22.0",
+      "durationMs": 76217,
+      "evidence": {
+        "suiteSha256": "a9af979b8821ca59251e48a86668d0f90d28d05f1e50358300ca29c5067a9546",
+        "installation": "modified-consumer",
+        "sourceSha256": "05155eb8297d246c16ebd79e992c5d7f47eed44e9587a60de2dcf3b0d535f440",
+        "buildSha256": "8ebcee93565375ef8e17a82ceaf75fd8759255323e85484c32d2fe550784bb4f",
+        "fixtureSha256": "dda2509395fe66a66bed190a04010fb30882c57f2c380bcc3b9bf1150f199b2c"
+      },
+      "results": [
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "standard",
+          "mode": "production",
+          "deployment": "standalone",
+          "browser": "chromium",
+          "reference": false,
+          "basePath": "/coverage",
+          "browserVersion": "156.0.8078.4",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 752
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1077
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 885
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 859
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1706
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2515
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1152
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 823
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 2340
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 653
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 700
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1239
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1723
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 548
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1246
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1138
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 534
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 548
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 545
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 906
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 22628
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "standard",
+          "mode": "production",
+          "deployment": "standalone",
+          "browser": "firefox",
+          "reference": false,
+          "basePath": "/coverage",
+          "browserVersion": "157.0",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 890
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1153
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 889
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 886
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1793
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2518
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1273
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 956
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 2588
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 735
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 789
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1330
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1493
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 548
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1354
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1212
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 544
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 563
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 562
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 923
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 25533
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "standard",
+          "mode": "production",
+          "deployment": "standalone",
+          "browser": "webkit",
+          "reference": false,
+          "basePath": "/coverage",
+          "browserVersion": "27.2",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 740
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1171
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 859
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 862
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1754
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2539
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1219
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 836
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 3136
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 655
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 703
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1215
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1340
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 550
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1303
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1251
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 556
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 556
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 556
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 885
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 25245
+        }
+      ],
+      "complete": true,
+      "passed": true
+    },
+    {
+      "framework": "vinext",
+      "version": "1.3.0",
+      "recordedAt": "2026-10-25T02:32:06.709Z",
+      "node": "v24.22.0",
+      "durationMs": 110127,
+      "evidence": {
+        "suiteSha256": "a9af979b8821ca59251e48a86668d0f90d28d05f1e50358300ca29c5067a9546",
+        "installation": "modified-consumer",
+        "sourceSha256": "05155eb8297d246c16ebd79e992c5d7f47eed44e9587a60de2dcf3b0d535f440",
+        "buildSha256": "8ebcee93565375ef8e17a82ceaf75fd8759255323e85484c32d2fe550784bb4f",
+        "fixtureSha256": "c875bb37f2eaa9d746ea69c4e39fa5b7180b76c0d8c7f0f5f9a9afe4424a63eb"
+      },
+      "results": [
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "cache-components",
+          "mode": "development",
+          "deployment": "workers",
+          "browser": "chromium",
+          "reference": true,
+          "basePath": "",
+          "browserVersion": "156.0.8078.4",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 1305
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1258
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 1046
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 1012
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1879
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2532
+            },
+            {
+              "name": "cache-components",
+              "passed": true,
+              "durationMs": 670
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1241
+            },
+            {
+              "name": "fast-refresh",
+              "passed": true,
+              "durationMs": 831
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 2981
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 2951
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 1707
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 1598
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 2450
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 2236
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 1160
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1371
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1737
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 642
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 680
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 683
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 1112
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 36670
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "cache-components",
+          "mode": "development",
+          "deployment": "workers",
+          "browser": "firefox",
+          "reference": true,
+          "basePath": "",
+          "browserVersion": "157.0",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 1365
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1264
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 1035
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 987
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1992
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2528
+            },
+            {
+              "name": "cache-components",
+              "passed": true,
+              "durationMs": 665
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1325
+            },
+            {
+              "name": "fast-refresh",
+              "passed": true,
+              "durationMs": 964
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 2369
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 3927
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 1048
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 936
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1802
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 2230
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 1252
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1522
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1944
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 649
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 689
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 677
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 1013
+            }
+          ],
+          "expectedNavigationCancellations": 1,
+          "durationMs": 37816
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "cache-components",
+          "mode": "development",
+          "deployment": "workers",
+          "browser": "webkit",
+          "reference": true,
+          "basePath": "",
+          "browserVersion": "27.2",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 1326
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1290
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 1014
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 1006
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1952
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2650
+            },
+            {
+              "name": "cache-components",
+              "passed": true,
+              "durationMs": 706
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1313
+            },
+            {
+              "name": "fast-refresh",
+              "passed": true,
+              "durationMs": 840
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 1334
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 3159
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 973
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 891
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1749
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1893
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 1199
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1443
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1915
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 657
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 684
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 677
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 1095
+            }
+          ],
+          "expectedNavigationCancellations": 1,
+          "durationMs": 35340
+        }
+      ],
+      "complete": true,
+      "passed": true
+    },
+    {
+      "framework": "vinext",
+      "version": "1.3.0",
+      "recordedAt": "2026-10-25T02:32:04.783Z",
+      "node": "v24.22.0",
+      "durationMs": 108201,
+      "evidence": {
+        "suiteSha256": "a9af979b8821ca59251e48a86668d0f90d28d05f1e50358300ca29c5067a9546",
+        "installation": "modified-consumer",
+        "sourceSha256": "05155eb8297d246c16ebd79e992c5d7f47eed44e9587a60de2dcf3b0d535f440",
+        "buildSha256": "8ebcee93565375ef8e17a82ceaf75fd8759255323e85484c32d2fe550784bb4f",
+        "fixtureSha256": "f5baa57657db07207bf7821b0e02f60540d212629658c08940f2fd8f533ef58c"
+      },
+      "results": [
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "standard",
+          "mode": "development",
+          "deployment": "workers",
+          "browser": "chromium",
+          "reference": true,
+          "basePath": "",
+          "browserVersion": "156.0.8078.4",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 1305
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1250
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 1046
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 1013
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1883
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2530
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1243
+            },
+            {
+              "name": "fast-refresh",
+              "passed": true,
+              "durationMs": 821
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 2947
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 2835
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 1690
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 1595
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 2467
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 2215
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 1152
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1415
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1741
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 668
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 678
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 670
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 1107
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 35835
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "standard",
+          "mode": "development",
+          "deployment": "workers",
+          "browser": "firefox",
+          "reference": true,
+          "basePath": "",
+          "browserVersion": "157.0",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 1374
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1265
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 1002
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 1024
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 2008
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2533
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1296
+            },
+            {
+              "name": "fast-refresh",
+              "passed": true,
+              "durationMs": 987
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 1370
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 4622
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 1054
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 953
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1835
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 2043
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 832
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1454
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1974
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 659
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 690
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 680
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 1016
+            }
+          ],
+          "expectedNavigationCancellations": 1,
+          "durationMs": 35896
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "standard",
+          "mode": "development",
+          "deployment": "workers",
+          "browser": "webkit",
+          "reference": true,
+          "basePath": "",
+          "browserVersion": "27.2",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 1260
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1318
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 1067
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 988
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1918
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2658
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1327
+            },
+            {
+              "name": "fast-refresh",
+              "passed": true,
+              "durationMs": 1008
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 2103
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 3209
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 974
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 1653
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1798
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1918
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 1237
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1450
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1932
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 680
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 681
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 666
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 1111
+            }
+          ],
+          "expectedNavigationCancellations": 1,
+          "durationMs": 36154
+        }
+      ],
+      "complete": true,
+      "passed": true
+    },
+    {
+      "framework": "vinext",
+      "version": "1.3.0",
+      "recordedAt": "2026-10-25T02:33:48.617Z",
+      "node": "v24.22.0",
+      "durationMs": 101691,
+      "evidence": {
+        "suiteSha256": "a9af979b8821ca59251e48a86668d0f90d28d05f1e50358300ca29c5067a9546",
+        "installation": "modified-consumer",
+        "sourceSha256": "05155eb8297d246c16ebd79e992c5d7f47eed44e9587a60de2dcf3b0d535f440",
+        "buildSha256": "8ebcee93565375ef8e17a82ceaf75fd8759255323e85484c32d2fe550784bb4f",
+        "fixtureSha256": "861bf482f52c107ac20bc7c1cd769c3b247fa2b454be42623f7ebac3fc84db2b"
+      },
+      "results": [
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "cache-components",
+          "mode": "development",
+          "deployment": "workers",
+          "browser": "chromium",
+          "reference": false,
+          "basePath": "",
+          "browserVersion": "156.0.8078.4",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 1158
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1195
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 971
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 1010
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1809
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2528
+            },
+            {
+              "name": "cache-components",
+              "passed": true,
+              "durationMs": 675
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1223
+            },
+            {
+              "name": "fast-refresh",
+              "passed": true,
+              "durationMs": 1017
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 1346
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 3007
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 1019
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 882
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1503
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 2018
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 810
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1356
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1589
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 663
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 639
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 630
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 1018
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 31424
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "cache-components",
+          "mode": "development",
+          "deployment": "workers",
+          "browser": "firefox",
+          "reference": false,
+          "basePath": "",
+          "browserVersion": "157.0",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 1340
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1298
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 1034
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 1033
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1977
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2552
+            },
+            {
+              "name": "cache-components",
+              "passed": true,
+              "durationMs": 731
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1344
+            },
+            {
+              "name": "fast-refresh",
+              "passed": true,
+              "durationMs": 962
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 1433
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 3236
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 989
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 949
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1647
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 2085
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 865
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1504
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1925
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 695
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 702
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 707
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 1063
+            }
+          ],
+          "expectedNavigationCancellations": 1,
+          "durationMs": 35815
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "cache-components",
+          "mode": "development",
+          "deployment": "workers",
+          "browser": "webkit",
+          "reference": false,
+          "basePath": "",
+          "browserVersion": "27.2",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 1148
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1288
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 1038
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 984
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1911
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2663
+            },
+            {
+              "name": "cache-components",
+              "passed": true,
+              "durationMs": 689
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1336
+            },
+            {
+              "name": "fast-refresh",
+              "passed": true,
+              "durationMs": 1037
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 1067
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 3226
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 962
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 869
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1557
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1678
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 961
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1465
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1747
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 670
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 675
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 673
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 1085
+            }
+          ],
+          "expectedNavigationCancellations": 1,
+          "durationMs": 34128
+        }
+      ],
+      "complete": true,
+      "passed": true
+    },
+    {
+      "framework": "vinext",
+      "version": "1.3.0",
+      "recordedAt": "2026-10-25T02:33:44.540Z",
+      "node": "v24.22.0",
+      "durationMs": 99533,
+      "evidence": {
+        "suiteSha256": "a9af979b8821ca59251e48a86668d0f90d28d05f1e50358300ca29c5067a9546",
+        "installation": "modified-consumer",
+        "sourceSha256": "05155eb8297d246c16ebd79e992c5d7f47eed44e9587a60de2dcf3b0d535f440",
+        "buildSha256": "8ebcee93565375ef8e17a82ceaf75fd8759255323e85484c32d2fe550784bb4f",
+        "fixtureSha256": "47544dd758444f113f70d17478ff3801a02fc7fb4a04586cfcabd289d5ee6e84"
+      },
+      "results": [
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "standard",
+          "mode": "development",
+          "deployment": "workers",
+          "browser": "chromium",
+          "reference": false,
+          "basePath": "",
+          "browserVersion": "156.0.8078.4",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 1138
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1224
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 997
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 952
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1892
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2531
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1225
+            },
+            {
+              "name": "fast-refresh",
+              "passed": true,
+              "durationMs": 789
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 1302
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 2967
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 1076
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 857
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1605
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1996
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 854
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1399
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1586
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 631
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 633
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 630
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 1012
+            }
+          ],
+          "expectedNavigationCancellations": 0,
+          "durationMs": 30660
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "standard",
+          "mode": "development",
+          "deployment": "workers",
+          "browser": "firefox",
+          "reference": false,
+          "basePath": "",
+          "browserVersion": "157.0",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 1384
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1335
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 1072
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 1024
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1951
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2530
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1345
+            },
+            {
+              "name": "fast-refresh",
+              "passed": true,
+              "durationMs": 952
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 1391
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 3270
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 1097
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 940
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1624
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1799
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 866
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1479
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1859
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 706
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 718
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 753
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 1118
+            }
+          ],
+          "expectedNavigationCancellations": 1,
+          "durationMs": 34897
+        },
+        {
+          "framework": "vinext",
+          "version": "1.3.0",
+          "reactVersion": "19.3.1",
+          "viteVersion": "8.3.5",
+          "rendering": "standard",
+          "mode": "development",
+          "deployment": "workers",
+          "browser": "webkit",
+          "reference": false,
+          "basePath": "",
+          "browserVersion": "27.2",
+          "passed": true,
+          "scenarios": [
+            {
+              "name": "hydration",
+              "passed": true,
+              "durationMs": 1197
+            },
+            {
+              "name": "ids",
+              "passed": true,
+              "durationMs": 1308
+            },
+            {
+              "name": "actions",
+              "passed": true,
+              "durationMs": 1024
+            },
+            {
+              "name": "direct-actions",
+              "passed": true,
+              "durationMs": 1002
+            },
+            {
+              "name": "progressive-actions",
+              "passed": true,
+              "durationMs": 1951
+            },
+            {
+              "name": "streaming",
+              "passed": true,
+              "durationMs": 2643
+            },
+            {
+              "name": "pages-router",
+              "passed": true,
+              "durationMs": 1302
+            },
+            {
+              "name": "fast-refresh",
+              "passed": true,
+              "durationMs": 1003
+            },
+            {
+              "name": "routing",
+              "passed": true,
+              "durationMs": 1082
+            },
+            {
+              "name": "boundaries",
+              "passed": true,
+              "durationMs": 3262
+            },
+            {
+              "name": "loading-cancellation",
+              "passed": true,
+              "durationMs": 977
+            },
+            {
+              "name": "navigation-cancellation",
+              "passed": true,
+              "durationMs": 866
+            },
+            {
+              "name": "parallel-routes",
+              "passed": true,
+              "durationMs": 1558
+            },
+            {
+              "name": "mutations",
+              "passed": true,
+              "durationMs": 1678
+            },
+            {
+              "name": "components",
+              "passed": true,
+              "durationMs": 824
+            },
+            {
+              "name": "pages-data",
+              "passed": true,
+              "durationMs": 1436
+            },
+            {
+              "name": "error-boundaries",
+              "passed": true,
+              "durationMs": 1775
+            },
+            {
+              "name": "server-runtime",
+              "passed": true,
+              "durationMs": 712
+            },
+            {
+              "name": "transition-retains-visible-content",
+              "passed": true,
+              "observed": {
+                "pending": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 683
+            },
+            {
+              "name": "deferred-search-retains-stale-results",
+              "passed": true,
+              "observed": {
+                "query": "beta",
+                "stale": "true",
+                "retained": true,
+                "fallback": false
+              },
+              "durationMs": 686
+            },
+            {
+              "name": "uncontrolled-select-action-reset",
+              "passed": true,
+              "observed": {
+                "selected": "In progress"
+              },
+              "durationMs": 1099
+            }
+          ],
+          "expectedNavigationCancellations": 1,
+          "durationMs": 33655
+        }
+      ],
+      "complete": true,
+      "passed": true
+    }
+  ]
+}

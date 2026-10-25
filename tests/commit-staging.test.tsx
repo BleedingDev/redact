@@ -9,8 +9,8 @@ import {
 function root() { return createFiberRoot(document.createElement('div'), { onUncaughtError: () => {} }) }
 function child(root: FiberRoot) {
   const fiber = createFiber(FiberTag.Function, () => null, null)
-  fiber.root = root
-  fiber.parent = root.r
+  fiber.r = root
+  fiber.p = root.r
   return fiber
 }
 

@@ -18,6 +18,9 @@ export interface Dispatcher {
   useDebugValue<T>(value: T, formatter?: (v: T) => any): void
   useId(): string
   useTransition(): [boolean, (fn: () => void) => void]
+  useActionState<S, P>(action: (state: Awaited<S>, payload: P) => S | Promise<S>, initial: Awaited<S>, permalink?: string): [Awaited<S>, (payload: P) => void, boolean]
+  useOptimistic<S, A = S>(state: S, updateFn?: (state: S, action: A) => S): [S, (action: A) => void]
+  useFormStatus(): import('./form-state').FormStatus
   useDeferredValue<T>(v: T): T
   useSyncExternalStore<T>(
     subscribe: (cb: () => void) => () => void,
@@ -28,11 +31,15 @@ export interface Dispatcher {
   useCacheRefresh(): () => void
 }
 
-interface SharedInternals {
+export interface SharedInternals {
+  B?: import('./action-scope').ActionScope | null | undefined // Shared across renderer copies.
+  A?: Array<() => void> | null
+
   H: Dispatcher | null
   F: Fiber | null
   I: number
   T?: Set<string> | null | undefined
+  X?: (action: () => unknown) => PromiseLike<unknown> | void
 }
 
 // Stash the singleton on `globalThis` under a registered symbol. Module-scoped

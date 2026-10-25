@@ -1,0 +1,647 @@
+{
+  "recordedAt": "2026-10-25T02:19:21.736Z",
+  "complete": true,
+  "passed": false,
+  "matrix": {
+    "expected": 162,
+    "executed": 162,
+    "passed": 158
+  },
+  "scenarios": {
+    "executed": 2694,
+    "passed": 2690
+  },
+  "problems": [],
+  "failures": [
+    {
+      "version": "16.2.12",
+      "rendering": "cache-components",
+      "bundler": "turbopack",
+      "mode": "development",
+      "deployment": "node",
+      "browser": "firefox",
+      "reference": false,
+      "basePath": "",
+      "browserVersion": "157.0",
+      "passed": false,
+      "scenarios": [
+        {
+          "name": "streaming",
+          "passed": false,
+          "error": "locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'Stream complete' }) to be visible\u001b[22m\n\u001b[2m    3 × waiting for \"http://localhost:5101/stream\" navigation to finish...\u001b[22m\n\u001b[2m      - navigated to \"http://localhost:5101/stream\"\u001b[22m\n\u001b[2m    - waiting for navigation to finish...\u001b[22m\n\u001b[2m    2 × navigated to \"http://localhost:5101/stream\"\u001b[22m\n\u001b[2m      - waiting for \"http://localhost:5101/stream\" navigation to finish...\u001b[22m\n\u001b[2m    - navigated to \"http://localhost:5101/stream\"\u001b[22m\n\n    at /Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-checks.mjs:164:66\n    at async scenario (/Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-checks.mjs:44:11)\n    at async checkNext (/Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-checks.mjs:160:3)\n    at async file:///Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/test-next.mjs:92:22",
+          "durationMs": 15147
+        }
+      ],
+      "expectedNavigationCancellations": 0,
+      "durationMs": 43236
+    },
+    {
+      "version": "16.2.12",
+      "rendering": "cache-components",
+      "bundler": "webpack",
+      "mode": "development",
+      "deployment": "node",
+      "browser": "firefox",
+      "reference": false,
+      "basePath": "",
+      "browserVersion": "157.0",
+      "passed": false,
+      "scenarios": [
+        {
+          "name": "streaming",
+          "passed": false,
+          "error": "locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'Stream complete' }) to be visible\u001b[22m\n\u001b[2m    3 × waiting for \"http://localhost:5101/stream\" navigation to finish...\u001b[22m\n\u001b[2m      - navigated to \"http://localhost:5101/stream\"\u001b[22m\n\n    at /Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-checks.mjs:164:66\n    at async scenario (/Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-checks.mjs:44:11)\n    at async checkNext (/Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-checks.mjs:160:3)\n    at async file:///Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/test-next.mjs:92:22",
+          "durationMs": 15441
+        }
+      ],
+      "expectedNavigationCancellations": 0,
+      "durationMs": 53487
+    },
+    {
+      "version": "16.2.12",
+      "rendering": "standard",
+      "bundler": "turbopack",
+      "mode": "development",
+      "deployment": "node",
+      "browser": "firefox",
+      "reference": false,
+      "basePath": "",
+      "browserVersion": "157.0",
+      "passed": false,
+      "scenarios": [
+        {
+          "name": "streaming",
+          "passed": false,
+          "error": "locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'Stream complete' }) to be visible\u001b[22m\n\u001b[2m    5 × waiting for \"http://localhost:5101/stream\" navigation to finish...\u001b[22m\n\u001b[2m      - navigated to \"http://localhost:5101/stream\"\u001b[22m\n\n    at /Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-checks.mjs:164:66\n    at async scenario (/Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-checks.mjs:44:11)\n    at async checkNext (/Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-checks.mjs:160:3)\n    at async file:///Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/test-next.mjs:92:22",
+          "durationMs": 15157
+        }
+      ],
+      "expectedNavigationCancellations": 0,
+      "durationMs": 41791
+    },
+    {
+      "version": "16.2.12",
+      "rendering": "standard",
+      "bundler": "webpack",
+      "mode": "development",
+      "deployment": "node",
+      "browser": "firefox",
+      "reference": false,
+      "basePath": "",
+      "browserVersion": "157.0",
+      "passed": false,
+      "scenarios": [
+        {
+          "name": "streaming",
+          "passed": false,
+          "error": "locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'Stream complete' }) to be visible\u001b[22m\n\u001b[2m    - waiting for \"http://localhost:5101/stream\" navigation to finish...\u001b[22m\n\u001b[2m    - navigated to \"http://localhost:5101/stream\"\u001b[22m\n\n    at /Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-checks.mjs:164:66\n    at async scenario (/Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-checks.mjs:44:11)\n    at async checkNext (/Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-checks.mjs:160:3)\n    at async file:///Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/test-next.mjs:92:22",
+          "durationMs": 15421
+        }
+      ],
+      "expectedNavigationCancellations": 0,
+      "durationMs": 50145
+    }
+  ],
+  "evidence": [
+    {
+      "file": "15.5.28-standard-turbopack-development.json",
+      "recordedAt": "2026-10-25T01:38:08.798Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "9febb70a62e872c9b4feb9244c07632482d0a7584d8ee9bdd76dbe3734d3d205"
+    },
+    {
+      "file": "15.5.28-standard-turbopack-production.json",
+      "recordedAt": "2026-10-25T01:41:10.395Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "9febb70a62e872c9b4feb9244c07632482d0a7584d8ee9bdd76dbe3734d3d205"
+    },
+    {
+      "file": "15.5.28-standard-turbopack-standalone.json",
+      "recordedAt": "2026-10-25T01:43:39.135Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "9febb70a62e872c9b4feb9244c07632482d0a7584d8ee9bdd76dbe3734d3d205"
+    },
+    {
+      "file": "15.5.28-standard-turbopack-static-export.json",
+      "recordedAt": "2026-10-25T01:45:05.559Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "8fabac868a28e7f47fcf6d5fd412249875611569e4aa456b7b321d3bc774f553"
+    },
+    {
+      "file": "15.5.28-standard-webpack-development.json",
+      "recordedAt": "2026-10-25T01:39:59.971Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "9febb70a62e872c9b4feb9244c07632482d0a7584d8ee9bdd76dbe3734d3d205"
+    },
+    {
+      "file": "15.5.28-standard-webpack-production.json",
+      "recordedAt": "2026-10-25T01:42:21.115Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "9febb70a62e872c9b4feb9244c07632482d0a7584d8ee9bdd76dbe3734d3d205"
+    },
+    {
+      "file": "15.5.28-standard-webpack-standalone.json",
+      "recordedAt": "2026-10-25T01:44:54.964Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "9febb70a62e872c9b4feb9244c07632482d0a7584d8ee9bdd76dbe3734d3d205"
+    },
+    {
+      "file": "15.5.28-standard-webpack-static-export.json",
+      "recordedAt": "2026-10-25T01:45:11.808Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "8fabac868a28e7f47fcf6d5fd412249875611569e4aa456b7b321d3bc774f553"
+    },
+    {
+      "file": "16.0.11-cache-components-turbopack-development.json",
+      "recordedAt": "2026-10-25T01:43:49.812Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "fae9fad3cdf62aed1d3b25ef6e4f01266199b706073d8b2462ce4c2f46c1251d"
+    },
+    {
+      "file": "16.0.11-cache-components-turbopack-production.json",
+      "recordedAt": "2026-10-25T01:47:01.374Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "fae9fad3cdf62aed1d3b25ef6e4f01266199b706073d8b2462ce4c2f46c1251d"
+    },
+    {
+      "file": "16.0.11-cache-components-webpack-development.json",
+      "recordedAt": "2026-10-25T01:45:48.165Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "fae9fad3cdf62aed1d3b25ef6e4f01266199b706073d8b2462ce4c2f46c1251d"
+    },
+    {
+      "file": "16.0.11-cache-components-webpack-production.json",
+      "recordedAt": "2026-10-25T01:48:16.835Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "fae9fad3cdf62aed1d3b25ef6e4f01266199b706073d8b2462ce4c2f46c1251d"
+    },
+    {
+      "file": "16.0.11-standard-turbopack-development.json",
+      "recordedAt": "2026-10-25T01:37:59.118Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "1fe691b1f000830d4231a2d0c4fdec33157f23e9bf5358904bfd545470ca0feb"
+    },
+    {
+      "file": "16.0.11-standard-turbopack-production.json",
+      "recordedAt": "2026-10-25T01:41:02.892Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "1fe691b1f000830d4231a2d0c4fdec33157f23e9bf5358904bfd545470ca0feb"
+    },
+    {
+      "file": "16.0.11-standard-webpack-development.json",
+      "recordedAt": "2026-10-25T01:39:52.772Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "1fe691b1f000830d4231a2d0c4fdec33157f23e9bf5358904bfd545470ca0feb"
+    },
+    {
+      "file": "16.0.11-standard-webpack-production.json",
+      "recordedAt": "2026-10-25T01:42:15.665Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "1fe691b1f000830d4231a2d0c4fdec33157f23e9bf5358904bfd545470ca0feb"
+    },
+    {
+      "file": "16.1.7-cache-components-turbopack-development.json",
+      "recordedAt": "2026-10-25T01:52:20.641Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "2966fe4a9940557fb02bac675647bc9a855763ddb1d143f79e07e44d474b471a"
+    },
+    {
+      "file": "16.1.7-cache-components-turbopack-production.json",
+      "recordedAt": "2026-10-25T01:55:24.620Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "2966fe4a9940557fb02bac675647bc9a855763ddb1d143f79e07e44d474b471a"
+    },
+    {
+      "file": "16.1.7-cache-components-webpack-development.json",
+      "recordedAt": "2026-10-25T01:54:12.708Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "2966fe4a9940557fb02bac675647bc9a855763ddb1d143f79e07e44d474b471a"
+    },
+    {
+      "file": "16.1.7-cache-components-webpack-production.json",
+      "recordedAt": "2026-10-25T01:56:40.412Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "2966fe4a9940557fb02bac675647bc9a855763ddb1d143f79e07e44d474b471a"
+    },
+    {
+      "file": "16.1.7-standard-turbopack-development.json",
+      "recordedAt": "2026-10-25T01:46:40.368Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "aa8746b3ba16b60cf7d92a5665db63f3422646184d15a495d1e4ed54b3dcf618"
+    },
+    {
+      "file": "16.1.7-standard-turbopack-production.json",
+      "recordedAt": "2026-10-25T01:49:37.227Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "aa8746b3ba16b60cf7d92a5665db63f3422646184d15a495d1e4ed54b3dcf618"
+    },
+    {
+      "file": "16.1.7-standard-webpack-development.json",
+      "recordedAt": "2026-10-25T01:48:28.466Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "aa8746b3ba16b60cf7d92a5665db63f3422646184d15a495d1e4ed54b3dcf618"
+    },
+    {
+      "file": "16.1.7-standard-webpack-production.json",
+      "recordedAt": "2026-10-25T01:50:48.805Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "aa8746b3ba16b60cf7d92a5665db63f3422646184d15a495d1e4ed54b3dcf618"
+    },
+    {
+      "file": "16.2.12-cache-components-turbopack-development.json",
+      "recordedAt": "2026-10-25T01:56:03.733Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "1c0d4b77984b859f39808335e14d256e1761d4617da70c50bc5fd5f38f05f963"
+    },
+    {
+      "file": "16.2.12-cache-components-turbopack-production.json",
+      "recordedAt": "2026-10-25T01:59:26.005Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "1c0d4b77984b859f39808335e14d256e1761d4617da70c50bc5fd5f38f05f963"
+    },
+    {
+      "file": "16.2.12-cache-components-webpack-development.json",
+      "recordedAt": "2026-10-25T01:58:14.066Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "1c0d4b77984b859f39808335e14d256e1761d4617da70c50bc5fd5f38f05f963"
+    },
+    {
+      "file": "16.2.12-cache-components-webpack-production.json",
+      "recordedAt": "2026-10-25T02:00:41.820Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "1c0d4b77984b859f39808335e14d256e1761d4617da70c50bc5fd5f38f05f963"
+    },
+    {
+      "file": "16.2.12-standard-turbopack-development.json",
+      "recordedAt": "2026-10-25T01:49:58.276Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "a94cf1d12ad18a1887289a835aad1fdf29d50c786154c0bd2e6ae0704dce6753"
+    },
+    {
+      "file": "16.2.12-standard-turbopack-production.json",
+      "recordedAt": "2026-10-25T01:53:09.016Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "a94cf1d12ad18a1887289a835aad1fdf29d50c786154c0bd2e6ae0704dce6753"
+    },
+    {
+      "file": "16.2.12-standard-webpack-development.json",
+      "recordedAt": "2026-10-25T01:52:00.646Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "a94cf1d12ad18a1887289a835aad1fdf29d50c786154c0bd2e6ae0704dce6753"
+    },
+    {
+      "file": "16.2.12-standard-webpack-production.json",
+      "recordedAt": "2026-10-25T01:54:19.767Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "a94cf1d12ad18a1887289a835aad1fdf29d50c786154c0bd2e6ae0704dce6753"
+    },
+    {
+      "file": "16.3.8-cache-components-turbopack-development.json",
+      "recordedAt": "2026-10-25T02:04:00.571Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "63dabc69a02f7a67b15adc76c85b7b70be486675451f345ee24cc368d77813d1"
+    },
+    {
+      "file": "16.3.8-cache-components-turbopack-production.json",
+      "recordedAt": "2026-10-25T02:07:11.435Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "63dabc69a02f7a67b15adc76c85b7b70be486675451f345ee24cc368d77813d1"
+    },
+    {
+      "file": "16.3.8-cache-components-webpack-development.json",
+      "recordedAt": "2026-10-25T02:05:59.237Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "63dabc69a02f7a67b15adc76c85b7b70be486675451f345ee24cc368d77813d1"
+    },
+    {
+      "file": "16.3.8-cache-components-webpack-production.json",
+      "recordedAt": "2026-10-25T02:08:25.794Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "63dabc69a02f7a67b15adc76c85b7b70be486675451f345ee24cc368d77813d1"
+    },
+    {
+      "file": "16.3.8-standard-turbopack-development.json",
+      "recordedAt": "2026-10-25T01:58:10.905Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "26079612dddc2492a965e9813196465085ee2100bd5ebfc40dc934653852f5dd"
+    },
+    {
+      "file": "16.3.8-standard-turbopack-production.json",
+      "recordedAt": "2026-10-25T02:01:13.781Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "26079612dddc2492a965e9813196465085ee2100bd5ebfc40dc934653852f5dd"
+    },
+    {
+      "file": "16.3.8-standard-webpack-development.json",
+      "recordedAt": "2026-10-25T02:00:05.169Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "26079612dddc2492a965e9813196465085ee2100bd5ebfc40dc934653852f5dd"
+    },
+    {
+      "file": "16.3.8-standard-webpack-production.json",
+      "recordedAt": "2026-10-25T02:02:27.421Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "26079612dddc2492a965e9813196465085ee2100bd5ebfc40dc934653852f5dd"
+    },
+    {
+      "file": "16.4.3-cache-components-turbopack-development.json",
+      "recordedAt": "2026-10-25T02:08:46.592Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "3de19f43039f4a5717b35c6a2c091588399db4f3a989b3b1bbcba601e31efc96"
+    },
+    {
+      "file": "16.4.3-cache-components-turbopack-production.json",
+      "recordedAt": "2026-10-25T02:12:46.952Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "3de19f43039f4a5717b35c6a2c091588399db4f3a989b3b1bbcba601e31efc96"
+    },
+    {
+      "file": "16.4.3-cache-components-turbopack-standalone.json",
+      "recordedAt": "2026-10-25T02:17:47.902Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "3de19f43039f4a5717b35c6a2c091588399db4f3a989b3b1bbcba601e31efc96"
+    },
+    {
+      "file": "16.4.3-cache-components-webpack-development.json",
+      "recordedAt": "2026-10-25T02:11:35.002Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "3de19f43039f4a5717b35c6a2c091588399db4f3a989b3b1bbcba601e31efc96"
+    },
+    {
+      "file": "16.4.3-cache-components-webpack-production.json",
+      "recordedAt": "2026-10-25T02:14:02.749Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "3de19f43039f4a5717b35c6a2c091588399db4f3a989b3b1bbcba601e31efc96"
+    },
+    {
+      "file": "16.4.3-cache-components-webpack-standalone.json",
+      "recordedAt": "2026-10-25T02:19:05.887Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "3de19f43039f4a5717b35c6a2c091588399db4f3a989b3b1bbcba601e31efc96"
+    },
+    {
+      "file": "16.4.3-standard-turbopack-development.json",
+      "recordedAt": "2026-10-25T02:02:13.193Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "1d47ef865cee662be70c443ca243cee09d36be926153a1594ac3aada163b0242"
+    },
+    {
+      "file": "16.4.3-standard-turbopack-production.json",
+      "recordedAt": "2026-10-25T02:06:05.516Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "1d47ef865cee662be70c443ca243cee09d36be926153a1594ac3aada163b0242"
+    },
+    {
+      "file": "16.4.3-standard-turbopack-standalone.json",
+      "recordedAt": "2026-10-25T02:15:16.209Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "1d47ef865cee662be70c443ca243cee09d36be926153a1594ac3aada163b0242"
+    },
+    {
+      "file": "16.4.3-standard-turbopack-static-export.json",
+      "recordedAt": "2026-10-25T02:19:14.624Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "f243f04c6be652cbe5f5ba221db8a50d59e6624e8761f9249144eb6528fe1f20"
+    },
+    {
+      "file": "16.4.3-standard-webpack-development.json",
+      "recordedAt": "2026-10-25T02:04:57.279Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "1d47ef865cee662be70c443ca243cee09d36be926153a1594ac3aada163b0242"
+    },
+    {
+      "file": "16.4.3-standard-webpack-production.json",
+      "recordedAt": "2026-10-25T02:07:16.489Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "1d47ef865cee662be70c443ca243cee09d36be926153a1594ac3aada163b0242"
+    },
+    {
+      "file": "16.4.3-standard-webpack-standalone.json",
+      "recordedAt": "2026-10-25T02:16:30.844Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "1d47ef865cee662be70c443ca243cee09d36be926153a1594ac3aada163b0242"
+    },
+    {
+      "file": "16.4.3-standard-webpack-static-export.json",
+      "recordedAt": "2026-10-25T02:19:21.172Z",
+      "node": "v24.22.0",
+      "platform": "darwin",
+      "playwright": "1.64.1",
+      "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+      "suiteSha256": "100476bba4269535ffbd8adf76023aec5f8f59b418d5e6e1ceed4a04e170aa6e",
+      "fixtureSha256": "f243f04c6be652cbe5f5ba221db8a50d59e6624e8761f9249144eb6528fe1f20"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { clientReactId } from '../../react-ids'
 import type { Fiber, FiberRoot } from '../../../core'
 
 // Stub: Hydration feature disabled. Every adoption attempt returns "no match",
@@ -26,65 +27,59 @@ export class HydrationCursor {
 
 export type BoundaryInfo = [0 | 1 | 2 | 3, number, Comment, Comment]
 
-export function beginHydration(_root: FiberRoot): void {
+export function beginHydration(_root: FiberRoot): never {
   throw new Error(
-    '`hydrateRoot` requires the `hydration` feature. ' +
+    process.env.NODE_ENV !== 'production' ? '`hydrateRoot` requires the `hydration` feature. ' +
       'Enable it via @tanstack/redact/vite `features.hydration = true`, ' +
-      'or use `createRoot` for a SPA (no SSR hydration).',
+      'or use `createRoot` for a SPA (no SSR hydration).' : '',
   )
 }
 
 export function endHydration(_root: FiberRoot): void {}
 
-export function tryConsumeBoundary(_parent: Fiber): BoundaryInfo | null {
-  return null
-}
+export const tryConsumeBoundary = (_parent: Fiber): BoundaryInfo | null => (null)
 
 export function advanceCursorPast(_parent: Fiber, _node: Node): void {}
 
-export function getHydrationCursor(_hostFiber: Fiber): HydrationCursor | undefined {
-  return undefined
-}
+export const getHydrationCursor = (_hostFiber: Fiber): HydrationCursor | undefined => (undefined)
 
 export function setHydrationCursor(_hostFiber: Fiber, _cursor: HydrationCursor): void {}
 
 export function clearHydrationCursor(_hostFiber: Fiber): void {}
 
-export function adoptHostDom(_fiber: Fiber, _parent: Fiber): boolean {
-  return false
-}
+export function resumeHydration(_f: Fiber, _root: FiberRoot): (() => void) | undefined { return undefined }
 
-export function adoptTextDom(_fiber: Fiber, _parent: Fiber, _text: string): boolean {
-  return false
-}
+export const adoptHostDom: (_f: Fiber, _parent: Fiber) => boolean = () => false
 
-export function findHostParent(fiber: Fiber): Fiber {
-  return fiber
-}
+export const adoptTextDom: (_f: Fiber, _parent: Fiber, _text: string) => boolean = () => false
 
-export function installHydrationScrollGuard(): void {}
+export const findHostParent = (fiber: Fiber): Fiber => (fiber)
 
 export function drainReplayQueue(): void {}
+
+export function installHydrationScrollGuard(): void {}
 
 export interface HydrationBailoutError extends Error {
   f: Fiber | null
 }
 
-export function isHydrationBailout(_error: unknown): _error is HydrationBailoutError {
-  return false
+export function isHydrationBailout(_error: unknown): _error is HydrationBailoutError
+export function isHydrationBailout(): boolean { return false }
+
+export const recoverHydration: (_root: FiberRoot, _error: unknown) => boolean = () => false
+
+// No hydration recovery exists in this preset, so preserve the original error.
+export function abortHydration(cause: unknown, _fiber?: Fiber | null): never {
+  throw cause
 }
 
-export function recoverHydration(_root: FiberRoot, _error: unknown): boolean {
-  return false
-}
+export const hydrateRootImpl = beginHydration
 
-export function abortHydration(cause: unknown, fiber: Fiber | null = null): never {
-  const error = (cause instanceof Error ? cause : new Error('Hydration mismatch.')) as HydrationBailoutError
-  ;(error as any).f = fiber
-  throw error
-}
+export const reactId = (_f: Fiber, root: FiberRoot): string => (clientReactId(root))
+export const forkId: (base: bigint, _count: number, _index: number) => bigint = base => base
 
-export function hydrateRootImpl(): never {
-  beginHydration(null as any)
-  throw new Error('`hydrateRoot` requires the `hydration` feature.')
-}
+export function assignReactIds(_parent: Fiber, _children: object): void {}
+
+export const deferHydration: (_f: Fiber, _thenable: Promise<any>, _restartInitial?: boolean) => boolean = () => false
+
+export function finishHydration(_f: Fiber, _isTextarea: boolean): void {}

@@ -32,6 +32,7 @@ export const sizeEntries = [
 function featureSwapPlugin(features, extension) {
   const disabled = new Set(Object.entries(featureDirectories)
     .filter(([feature]) => features[feature] === false).map(([, directory]) => directory))
+  if (features.suspense === false) disabled.add('suspense-runtime')
   return {
     name: 'size-feature-swap',
     setup(builder) {
@@ -39,7 +40,7 @@ function featureSwapPlugin(features, extension) {
         if (!args.importer) return null
         const registration = /[/\\]features[/\\]index\.[jt]s$/.test(args.importer)
           ? args.path.match(/^\.\/([a-z-]+)(?:\/index\.js)?$/)?.[1] : undefined
-        const peer = args.path.match(/[/\\](context|hydration|fragment-refs|view-transition)(?:\/index\.js)?$/)?.[1]
+        const peer = args.path.match(/[/\\](class|context|hydration|fragment-refs|view-transition|suspense-runtime)(?:\/index\.js)?$/)?.[1]
         const directory = registration || peer
         if (!directory || !disabled.has(directory)) return null
         const stub = resolve(dirname(args.importer), args.path.replace(/\/index\.js$/, ''), `stub.${extension}`)
@@ -81,6 +82,7 @@ export async function measureSizes(tree = 'dist') {
     for (const [feature, enabled] of Object.entries(entry.features || {})) {
       if (!enabled) assert(!inputs.some(path => path.endsWith(`/features/${featureDirectories[feature]}/full.${extension}`)), `${entry.name}: disabled ${feature} remains bundled`)
     }
+    if (entry.features?.suspense === false) assert(!inputs.some(path => path.endsWith(`/dom/transitions.${extension}`)), 'Disabled Suspense retains its transition runtime')
     const bytes = result.outputFiles[0].contents
     rows.push({ name: entry.name, tree, min: bytes.length, gz: gzipSync(bytes).length, br: brotliCompressSync(bytes).length })
   }

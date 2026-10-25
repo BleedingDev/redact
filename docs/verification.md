@@ -6,6 +6,12 @@ Run your app's test suite and production build with the default Vite preset firs
 
 Disabling hydration makes `hydrateRoot` throw. Disabling class components also removes class error boundaries and lifecycle methods. Read the feature-flag behavior before changing presets.
 
+## Framework release checks
+
+The [Next.js gate](../benchmarks/NEXT_COVERAGE.md) tests 162 configurations and 2,694 scenario groups. The [Vinext gate](../benchmarks/VINEXT_COVERAGE.md) tests 102 configurations and 1,410 scenario groups across mixed-router and Pages-only apps. Both use packed packages, verify complete results, retain framework failures reproduced with native React, and block publication when checks fail.
+
+Run with Node 24.22.0 from `.nvmrc`. `pnpm test:ci` passes 1,832 runtime and tooling tests, type checks, built-package verification, and all 38 source/dist bundle limits. The 91 ordinary-suite skips remain separate from passing tests. `pnpm test:next` and `pnpm test:vinext` run the browser matrices. The release evidence records remaining blockers separately from passing checks.
+
 ## Published verification
 
 The following evidence describes the 0.1.0 release, it is not coverage of every application or later version.

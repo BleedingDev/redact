@@ -10,7 +10,7 @@ The [compatibility guide](./compatibility.md) explains the API differences, incl
 
 ## Get started
 
-[Install Redact](./installation.md), then [add the Vite plugin](./quick-start.md). Start with the default preset and only disable features after checking what your app uses.
+[Install Redact](./installation.md), then [add the Vite plugin](./quick-start.md). Start with the default preset and only disable features after checking what your app uses. Framework apps have separate [Next.js](./next.md) and [Vinext](./vinext.md) adapters that keep native React on the server.
 
 The [feature flags guide](./feature-flags.md) explains the behavior each flag removes. The [Vite plugin reference](./vite-plugin.md) covers monorepos and manual package resolution.
 

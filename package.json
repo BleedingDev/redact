@@ -19,7 +19,20 @@
     "changeset:version": "changeset version && pnpm install --no-frozen-lockfile",
     "changeset:publish": "changeset publish",
     "test:ci": "pnpm test && pnpm test:types && pnpm build && pnpm size:check",
-    "test:pr": "pnpm test:ci"
+    "test:pr": "pnpm test:ci",
+    "example:next": "pnpm --filter next-demo dev",
+    "example:next:journey": "pnpm build && node scripts/next-journey.mjs",
+    "test:next:journey": "node scripts/test-next-journey.mjs",
+    "test:browser:actions": "vitest run --config scripts/actions-browser.config.mjs",
+    "test:next": "pnpm build && node scripts/test-next-coverage.mjs",
+    "test:next:matrix": "node scripts/test-next-matrix.mjs",
+    "test:next:deployments": "node scripts/test-next-deployments.mjs",
+    "test:next:dev": "pnpm build && node scripts/test-next.mjs",
+    "example:vinext": "pnpm --filter vinext-demo dev",
+    "test:vinext": "pnpm build && node scripts/test-vinext-consumer.mjs",
+    "test:vinext:dev": "pnpm build && node scripts/test-vinext.mjs",
+    "test:vinext:report": "node scripts/report-vinext-coverage.mjs",
+    "test:vinext:workspace": "pnpm build && node scripts/test-vinext-coverage.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.31.0",
@@ -27,13 +40,14 @@
     "devtools-react": "npm:react@0.0.0-experimental-a6b912fb-20261023",
     "devtools-react-dom": "npm:react-dom@0.0.0-experimental-a6b912fb-20261023",
     "esbuild": "^0.28.0",
-    "playwright": "^1.59.1",
+    "playwright": "^1.64.1",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-is": "19.3.1",
     "typescript": "~5.9.3",
     "vite": "^5.4.11",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.8",
+    "next": "16.4.3"
   },
   "packageManager": "pnpm@9.15.0"
 }

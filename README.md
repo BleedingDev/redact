@@ -4,7 +4,7 @@
 
 React's APIs and component model are the reason this project exists. Redact explores a different set of runtime tradeoffs within that ecosystem, not a new direction for React or a replacement for the project. Synchronous rendering keeps the runtime small, while React's concurrent scheduling supports behavior Redact doesn't provide. The [compatibility table](#compatibility) explains those differences.
 
-These APIs are included in Redact 0.1.0. Comparisons use pinned React 19.3.0 and were recorded September 11, 2026. The benchmark reports retain the exact measured source snapshots and build inputs.
+The historical performance comparisons below use Redact 0.1.0 and pinned React 19.3.0, recorded September 11, 2026. The benchmark reports retain the measured source snapshots and build inputs. Current framework release checks are recorded separately.
 
 [Documentation](https://tanstack.com/redact/latest/docs/overview) · [Website](https://tanstack.com/redact/latest)
 
@@ -32,6 +32,31 @@ import { createRoot, hydrateRoot } from 'react-dom/client'
 ```
 
 The plugin handles client and SSR builds. It leaves the RSC environment on real React so `@vitejs/plugin-rsc` can keep owning Server Component serialization.
+
+## Next.js
+
+```js
+// next.config.mjs
+import { withRedact } from '@tanstack/redact/next'
+
+export default withRedact({})
+```
+
+Next.js integration for Turbopack and Webpack, with App Router and Pages Router coverage. Redact runs in the browser; React handles server rendering and Server Components. [Setup and version range](./docs/next.md), [release checks and remaining blockers](./benchmarks/NEXT_COVERAGE.md).
+
+Run `pnpm example:next:journey` for an interactive React and Redact comparison with the same app, server actions, streaming, and navigation. [Demo and browser checks](./examples/next-journey/README.md).
+
+## Vinext
+
+```js
+// vite.config.mjs
+import vinext from 'vinext'
+import { redact } from '@tanstack/redact/vinext'
+
+export default { plugins: [vinext(), redact()] }
+```
+
+Vinext integration with native React on the server and Redact in the browser. The release gate checks both routers against native React from an unpatched npm install, across Node, standalone output, static export, and local Workers. [Setup](./docs/vinext.md), [release checks and remaining blockers](./benchmarks/VINEXT_COVERAGE.md).
 
 ## Bundle size
 
@@ -125,9 +150,9 @@ This is the default Vite configuration. API availability is not a promise of eve
 | Suspense and hydration | Fallbacks, retained primary DOM, retries, streaming boundaries, and event replay. No priority scheduling. |
 | `Activity` | Retains hidden DOM/state and disconnects effects, refs, and subscriptions. Insertion effects stay connected. Hidden work is synchronous, not background priority. |
 | Fragment refs | Stable DOM instances with events, focus, geometry, observers, scrolling, and portal/visibility tracking. |
-| Transitions | `useTransition` / `startTransition` run work synchronously. Pending stays false; `useDeferredValue` returns its input. No time slicing or interruptible renders. |
-| `useActionState` | Returns the initial state, a no-op dispatch, and `false`. It does not run the action. |
-| `useOptimistic`, `useFormStatus` | No optimistic overlay; the optimistic setter is a no-op. Form status stays idle. |
+| Transitions | `useTransition` retains committed content and pending state while work suspends. `useDeferredValue` retains stale results. Rendering passes stay synchronous, without time slicing or interruptible component renders. |
+| `useActionState` | Queues actions against the previous result, tracks pending actions, and sends failures to error boundaries. |
+| `useOptimistic`, `useFormStatus` | Optimistic updates rebase on current state and roll back when their action finishes. Form descendants receive pending status and submitted data. |
 | View transitions | `ViewTransition` preserves state; `addTransitionType` does not animate by default. Native snapshots/styles/callbacks are experimental and opt-in. Animated commits wait for the browser snapshot callback, without a concurrent scheduler. |
 | Browser-only rendering | `browser()` requests a server-to-client Suspense fallback; `onBrowserBailout` reports it separately from errors. `use(browser())` returns `undefined` on the client. |
 | Resource APIs | Preload/preinit/preconnect/DNS hints and declarative styles/scripts, with document/ShadowRoot ownership and streamed stylesheet coverage. |
@@ -172,9 +197,9 @@ redact({ preset: 'nano', features: { context: true } })
 
 ## Verification
 
-`pnpm test:ci` passes 1,569 tests, type checking, the built-package verifier, and all 19 source/dist size budgets. The 91 ordinary-suite skips are not passes. Native Node import order, NodeNext declarations, development/production behavior, and actual Vite feature selection are checked.
+`pnpm test:ci` covers 1,832 passing tests, type checking, built-package verification, and all 38 source/dist size budgets. The 91 ordinary-suite skips are not passes. The built full runtime used by Next.js and Vinext is 27,921 bytes gzip, and the default Vite runtime is 23,304. Both fit their pre-integration limits of 28,183 and 23,335 bytes. [Current size measurements](./benchmarks/results/framework-release-sizes.json).
 
-The separate Chrome gate passes 1,266 case executions across Redact and React, including repeated suites/motion modes, not 1,266 unique behaviors. Seven declared exclusions remain: six Node-only stream executions and one known React Activity hydration failure. [Chrome ledger](./benchmarks/SHIP_CHROME_FINAL.md).
+Next.js has a 162-configuration gate covering six pinned releases, both bundlers, three browser engines, development and production, standalone output, and static export. Results preserve individual scenario failures and require complete coverage of the configured matrix. [Coverage, measurements, and reproduction commands](./benchmarks/NEXT_COVERAGE.md). [Earlier release Chrome ledger](./benchmarks/SHIP_CHROME_FINAL.md).
 
 | Real app | Published Redact 0.1.0 result |
 |---|---|

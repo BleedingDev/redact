@@ -1,0 +1,66 @@
+{
+  "recordedAt": "2026-10-25T02:22:10.783Z",
+  "node": "v24.22.0",
+  "zlib": "1.3.2.1-motley-285e94b",
+  "sourceSha256": "05155eb8297d246c16ebd79e992c5d7f47eed44e9587a60de2dcf3b0d535f440",
+  "buildSha256": "8ebcee93565375ef8e17a82ceaf75fd8759255323e85484c32d2fe550784bb4f",
+  "runtime": {
+    "passed": 1832,
+    "skipped": 91
+  },
+  "types": "passed",
+  "builtPackage": "passed",
+  "sizeGates": {
+    "passed": 38,
+    "totalLimits": {
+      "fullClient": 28183,
+      "defaultViteClient": 23335
+    }
+  },
+  "browserRegressions": {
+    "renderer": "redact",
+    "testsPerEngine": 61,
+    "engines": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "executions": 183,
+    "passed": 183
+  },
+  "activityRegressionControls": {
+    "renderer": "native-react",
+    "testsPerEngine": 6,
+    "engines": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "executions": 18,
+    "passed": 18
+  },
+  "workflows": {
+    "tool": "actionlint 1.7.12",
+    "passed": [
+      "pr.yml",
+      "next.yml",
+      "vinext.yml",
+      "release.yml"
+    ]
+  },
+  "upstreamPagesFix": {
+    "source": "cloudflare/vinext",
+    "base": "5c2c5b76abff857bfcf9e0dc266cf750ad56b4a6",
+    "newCases": 16,
+    "failingBefore": 4,
+    "handlerTestsPassingAfter": 442,
+    "sourceChecks": "format, lint, and types passed"
+  },
+  "consumerChecks": {
+    "ownership": "passed",
+    "tarballIntegrity": "passed",
+    "patchedConsumerRejection": "passed",
+    "freshReinstallRemovesPatches": "passed",
+    "existingReportsRevalidated": "passed"
+  }
+}

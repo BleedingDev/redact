@@ -1,3 +1,6 @@
+import { isFunction } from '../core/functions'
+import { readThenable } from '../react/thenable'
+import { idleFormStatus } from '../react/form-state'
 import { ReactSharedInternals, REACT_CONTEXT_TYPE } from '../react'
 import { isBrowserToken, browserError } from '../core/browser'
 import { resourceHintDispatcher } from '../core/resource-hints'
@@ -50,7 +53,7 @@ export function endSSR(previous?: ReturnType<typeof beginSSR>): void {
 }
 
 export function pushContext(context: any, value: any): void {
-  if (!frame) throw new Error('pushContext called outside SSR')
+  if (!frame) throw new Error(process.env.NODE_ENV !== 'production' ? 'pushContext called outside SSR' : '')
   frame.contextStack.push({ context, prev: context._currentValue })
   context._currentValue = value
 }
@@ -89,7 +92,7 @@ export const ssrDispatcher = {
     return () => { throw new Error('Refreshing the cache is not supported during server rendering.') }
   },
   useState<S>(initial: S | (() => S)) {
-    const v = typeof initial === 'function' ? (initial as () => S)() : initial
+    const v = isFunction(initial) ? (initial as () => S)() : initial
     return [v, (() => {}) as any] as [S, any]
   },
   useReducer<S, A>(_reducer: (s: S, a: A) => S, initialArg: any, init?: (a: any) => S) {
@@ -130,6 +133,13 @@ export const ssrDispatcher = {
   useTransition(): [boolean, (fn: () => void) => void] {
     return [false, (fn) => fn()]
   },
+  useActionState<S, P>(_action: (state: Awaited<S>, payload: P) => S | Promise<S>, initial: Awaited<S>): [Awaited<S>, (payload: P) => void, boolean] {
+    return [initial, () => {}, false]
+  },
+  useOptimistic<S, A>(state: S): [S, (action: A) => void] {
+    return [state, () => {}]
+  },
+  useFormStatus() { return idleFormStatus },
   useDeferredValue<T>(v: T): T {
     return v
   },
@@ -146,34 +156,8 @@ export const ssrDispatcher = {
     if (resource.$$typeof === REACT_CONTEXT_TYPE) {
       return resource._currentValue
     }
-    if (typeof resource.then === 'function') {
-      const thenable = resource
-      switch (thenable.status) {
-        case 'fulfilled':
-          return thenable.value
-        case 'rejected':
-          throw thenable.reason
-        default: {
-          if (thenable.status === undefined) {
-            thenable.status = 'pending'
-            thenable.then(
-              (v: any) => {
-                if (thenable.status === 'pending') {
-                  thenable.status = 'fulfilled'
-                  thenable.value = v
-                }
-              },
-              (e: any) => {
-                if (thenable.status === 'pending') {
-                  thenable.status = 'rejected'
-                  thenable.reason = e
-                }
-              },
-            )
-          }
-          throw thenable
-        }
-      }
+    if (isFunction(resource.then)) {
+      return readThenable(resource) as T
     }
     throw new Error('use() expected a Promise or Context')
   },

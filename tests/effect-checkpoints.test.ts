@@ -7,8 +7,8 @@ import { discardPendingEffects, enqueueEffect, flushFiberCommits, handleErrorInR
 function root() { return createFiberRoot(document.createElement('div'), { onUncaughtError() {} }) }
 function child(root: FiberRoot, parent = root.r, fragment = false) {
   const fiber = createFiber(fragment ? FiberTag.Fragment : FiberTag.Function, fragment ? REACT_FRAGMENT_TYPE : () => null, null)
-  fiber.root = root
-  fiber.parent = parent
+  fiber.r = root
+  fiber.p = parent
   return fiber
 }
 function layout(fiber: Fiber, label: string, events: string[], complete = true) {
@@ -124,4 +124,32 @@ it('keeps successful work after an inner rewind but removes it when its outer at
   })
   commitMutation(plan)
   expect(events).toEqual(['final fragment', 'retained descendant'])
+})
+
+it('restores removed and recreated staged entries through nested root discards', () => {
+  const first = root(), second = root(), events: string[] = []
+  const a = child(first), b = child(second), c = child(first)
+  const plan = prepareCommit(() => {
+    layout(a, 'a before', events, false)
+    layout(b, 'b before', events, false)
+    layout(c, 'c before', events, false)
+    const outer = checkpointCommit()
+    flushFiberCommits(b)
+    layout(b, 'b recreated', events, false)
+    layout(a, 'a appended', events, false)
+    const inner = checkpointCommit()
+    discardPendingEffects(first)
+    layout(a, 'a recreated', events, false)
+    flushFiberCommits(b)
+    rewindCommit(inner)
+    flushFiberCommits(c)
+    flushFiberCommits(b)
+    rewindCommit(outer)
+    flushFiberCommits(a)
+    flushFiberCommits(b)
+    flushFiberCommits(c)
+    runEffects(first)
+  })
+  commitMutation(plan)
+  expect(events).toEqual(['a before', 'b before', 'c before'])
 })

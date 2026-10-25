@@ -1,3 +1,4 @@
+import { readThenable } from './thenable'
 import type { ReactElement, ReactNode, Ref } from '../core'
 
 export const REACT_MEMO_TYPE = Symbol.for('react.memo')
@@ -32,30 +33,10 @@ export function forwardRef<R, P = {}>(
 export function lazy<T extends { default: any }>(ctor: () => Promise<T>): ExoticComponent<
   T['default'] extends (props: infer P) => any ? P : {}
 > {
-  const payload = {
-    status: -1 as -1 | 0 | 1 | 2,
-    result: undefined as any,
-  }
+  const payload: { p?: Promise<T> } = {}
   return {
     $$typeof: REACT_LAZY_TYPE,
     _payload: payload,
-    _init: (p: typeof payload): any => {
-      if (p.status === 1) return p.result
-      if (p.status === 2) throw p.result
-      if (p.status === 0) throw p.result // pending promise
-      const thenable = ctor().then(
-        (mod) => {
-          p.status = 1
-          p.result = mod.default
-        },
-        (err) => {
-          p.status = 2
-          p.result = err
-        },
-      )
-      p.status = 0
-      p.result = thenable
-      throw thenable
-    },
+    _init: (p: typeof payload): any => readThenable(p.p ||= ctor(), p).default,
   } as unknown as ExoticComponent<T['default'] extends (props: infer P) => any ? P : {}>
 }

@@ -1,3 +1,4 @@
+import { isFunction } from './functions'
 export const REACT_RECOVERABLE_TYPE = Symbol.for('react.recoverable')
 
 export interface BrowserToken {
@@ -15,7 +16,7 @@ export function isBrowserToken(value: any): value is BrowserToken {
 
 export function browserError(token: BrowserToken): Error {
   let cause: unknown = token._reason
-  if (typeof cause === 'function') {
+  if (isFunction(cause)) {
     try {
       cause = cause()
     } catch {

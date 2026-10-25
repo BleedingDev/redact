@@ -25,3 +25,9 @@ jobs:
         uses: TanStack/config/.github/setup@e4b48f16568324f76f467aa4c2aac2f05db632c3
       - name: Run Checks
         run: pnpm run test:pr
+
+  next-compatibility:
+    uses: ./.github/workflows/next.yml
+
+  vinext-compatibility:
+    uses: ./.github/workflows/vinext.yml

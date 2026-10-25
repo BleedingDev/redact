@@ -25,6 +25,58 @@ describe.each(runtimes)('$name with the official DevTools backend', ({ R, dom, c
     return result
   }
 
+  it('keeps async action state working while DevTools observes the renderer', async () => {
+    const container = document.createElement('div')
+    let release!: () => void, dispatch!: (value: number) => void
+    const gate = new Promise<void>(resolve => { release = resolve })
+    function Action() {
+      const [value, send, pending] = R.useActionState(async (previous: number, amount: number) => { await gate; return previous + amount }, 0)
+      dispatch = send
+      return R.createElement('button', null, `${pending}:${value}`)
+    }
+    const root = client.createRoot(container)
+    try {
+      dom.flushSync(() => root.render(R.createElement(Action)))
+      const api = backend(), id = api.getElementIDForHostInstance(container.firstChild)
+      R.startTransition(() => dispatch(2))
+      await expect.poll(() => container.textContent).toBe('true:0')
+      expect(api.inspectElement(1, id, null, true).type).toBe('full-data')
+      release()
+      await expect.poll(() => container.textContent).toBe('false:2')
+      expect(api.inspectElement(2, id, null, true).type).toBe('full-data')
+    } finally { release(); dom.flushSync(() => root.unmount()) }
+  })
+
+  it('keeps optimistic updates working while DevTools observes the renderer', async () => {
+    const container = document.createElement('div')
+    let release!: () => void, update!: () => void
+    const gate = new Promise<void>(resolve => { release = resolve })
+    function Optimistic() {
+      const [value, setValue] = R.useState('saved')
+      const [optimistic, setOptimistic] = R.useOptimistic(value)
+      const [pending, transition] = R.useTransition()
+      update = () => transition(async () => { setOptimistic('saving'); await gate; setValue('done') })
+      return R.createElement('button', null, `${pending}:${optimistic}`)
+    }
+    const root = client.createRoot(container)
+    try {
+      dom.flushSync(() => root.render(R.createElement(Optimistic)))
+      const api = backend(), id = api.getElementIDForHostInstance(container.firstChild)
+      update()
+      await expect.poll(() => container.textContent).toBe('true:saving')
+      expect(api.inspectElement(1, id, null, true).value.hooks.data).toEqual(expect.arrayContaining([
+        expect.objectContaining({ name: 'Transition', value: true }),
+      ]))
+      release()
+      await expect.poll(() => container.textContent).toBe('false:done')
+      const inspected = api.inspectElement(2, id, null, true).value.hooks.data.find((item: any) => item.name === 'Transition')
+      expect(inspected).toBeDefined()
+      // React can expose the completed async scope as a dehydrated thenable.
+      if (typeof inspected.value === 'object') expect(inspected.value).toMatchObject({ type: 'thenable', value: false })
+      else expect(inspected.value).toBe(false)
+    } finally { release(); dom.flushSync(() => root.unmount()) }
+  })
+
   it('records separate commits, effects, hook changes, and update attribution', async () => {
     const container = document.createElement('div')
     let update!: (value: number) => void

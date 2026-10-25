@@ -1,3 +1,4 @@
+import { isThenable, isFunction } from '../core/functions'
 import type {
   Dispatch,
   SetStateAction,
@@ -6,6 +7,7 @@ import type {
 } from '../core'
 import type { Context } from './context'
 import { getDispatcher, ReactSharedInternals } from './shared-internals'
+
 import type { BrowserToken } from '../core/browser'
 
 export function useState<S>(initial: S | (() => S)): [S, Dispatch<SetStateAction<S>>]
@@ -95,21 +97,40 @@ export function unstable_useCacheRefresh(): () => void {
   return getDispatcher().useCacheRefresh()
 }
 
-export function startTransition(fn: () => void): void {
+export function transitionScope<T>(fn: () => T): T {
   const previous = ReactSharedInternals.T
   ReactSharedInternals.T = previous || new Set()
-  try { fn() } finally { ReactSharedInternals.T = previous }
+  try { return fn() } finally { ReactSharedInternals.T = previous }
 }
 
-export function useActionState<S, P>(
-  _action: (state: Awaited<S>, payload: P) => S | Promise<S>,
+export function reportActionError(error: unknown): void {
+  if (isFunction(globalThis.reportError)) globalThis.reportError(error)
+  else setTimeout(() => { throw error })
+}
+
+export function startTransition(fn: () => void): void {
+  try {
+    const result = transitionScope(() => ReactSharedInternals.X ? ReactSharedInternals.X(fn) : fn())
+    if (isThenable(result)) result.then(undefined, reportActionError)
+  } catch (error) { reportActionError(error) }
+}
+
+export function useActionState<S>(
+  action: (state: Awaited<S>) => S | Promise<S>,
   initial: Awaited<S>,
+  permalink?: string,
+): [Awaited<S>, () => void, boolean]
+export function useActionState<S, P>(
+  action: (state: Awaited<S>, payload: P) => S | Promise<S>,
+  initial: Awaited<S>,
+  permalink?: string,
+): [Awaited<S>, (payload: P) => void, boolean]
+export function useActionState<S, P>(
+  action: (state: Awaited<S>, payload: P) => S | Promise<S>,
+  initial: Awaited<S>,
+  _permalink?: string,
 ): [Awaited<S>, (payload: P) => void, boolean] {
-  if (process.env.NODE_ENV !== 'production') {
-    const debug = (ReactSharedInternals.H as any)?.useActionState
-    if (debug) return debug(_action, initial)
-  }
-  return [initial, () => {}, false]
+  return getDispatcher().useActionState(action, initial, _permalink)
 }
 
 export function useFormStatus() {
@@ -117,18 +138,14 @@ export function useFormStatus() {
     const debug = (ReactSharedInternals.H as any)?.useHostTransitionStatus
     if (debug) return debug()
   }
-  return { pending: false, data: null, method: null, action: null }
+  return getDispatcher().useFormStatus()
 }
 
 export function useOptimistic<S, A = S>(
   state: S,
-  _updateFn?: (s: S, a: A) => S,
+  updateFn?: (s: S, a: A) => S,
 ): [S, (action: A) => void] {
-  if (process.env.NODE_ENV !== 'production') {
-    const debug = (ReactSharedInternals.H as any)?.useOptimistic
-    if (debug) return debug(state, _updateFn)
-  }
-  return [state, () => {}]
+  return getDispatcher().useOptimistic(state, updateFn)
 }
 
 // Composed hook — returns a stable callback that always invokes the latest
@@ -166,52 +183,30 @@ export function useSyncExternalStoreWithSelector<Snapshot, Selection>(
   selector: (snapshot: Snapshot) => Selection,
   isEqual?: (a: Selection, b: Selection) => boolean,
 ): Selection {
-  const instRef = useRef<{ hasValue: boolean; value: Selection | null } | null>(null)
-  let inst: { hasValue: boolean; value: Selection | null }
-  if (instRef.current === null) {
-    inst = { hasValue: false, value: null }
-    instRef.current = inst
-  } else {
-    inst = instRef.current
-  }
-
+  const committed = useRef<{ value: Selection } | null>(null)
   const [getSelection, getServerSelection] = useMemo(() => {
-    let hasMemo = false
-    let memoizedSnapshot: Snapshot
-    let memoizedSelection: Selection
-    const memoizedSelector = (nextSnapshot: Snapshot): Selection => {
-      if (!hasMemo) {
-        hasMemo = true
-        memoizedSnapshot = nextSnapshot
-        const nextSelection = selector(nextSnapshot)
-        if (isEqual !== undefined && inst.hasValue) {
-          const currentSelection = inst.value as Selection
-          if (isEqual(currentSelection, nextSelection)) {
-            memoizedSelection = currentSelection
-            return currentSelection
-          }
-        }
-        memoizedSelection = nextSelection
-        return nextSelection
+    let ready = false
+    let snapshot: Snapshot
+    let selection: Selection
+    const select = (next: Snapshot): Selection => {
+      if (ready && Object.is(snapshot, next)) return selection
+      let value = selector(next)
+      if ((ready || committed.current) && isEqual?.(ready ? selection : committed.current!.value, value)) {
+        value = ready ? selection : committed.current!.value
       }
-      const prevSnapshot: Snapshot = memoizedSnapshot
-      const prevSelection: Selection = memoizedSelection
-      if (Object.is(prevSnapshot, nextSnapshot)) return prevSelection
-      const nextSelection = selector(nextSnapshot)
-      if (isEqual !== undefined && isEqual(prevSelection, nextSelection)) return prevSelection
-      memoizedSnapshot = nextSnapshot
-      memoizedSelection = nextSelection
-      return nextSelection
+      ready = true
+      snapshot = next
+      return selection = value
     }
-    const get = () => memoizedSelector(getSnapshot())
-    const getServer =
-      getServerSnapshot === undefined ? undefined : () => memoizedSelector(getServerSnapshot())
-    return [get, getServer] as const
+    return [
+      () => select(getSnapshot()),
+      getServerSnapshot && (() => select(getServerSnapshot())),
+    ] as const
   }, [getSnapshot, getServerSnapshot, selector, isEqual])
 
   const value = useSyncExternalStore(subscribe, getSelection, getServerSelection)
   useDebugValue(value)
-  inst.hasValue = true
-  inst.value = value
+  if (committed.current) committed.current.value = value
+  else committed.current = { value }
   return value
 }

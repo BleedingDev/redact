@@ -143,10 +143,10 @@ describe('client — event handler types', () => {
         <button onClick={'alert(1)' as any}>x</button>,
       )
       const btn = container.querySelector('button')!
-      // Our event system stores handlers in `__handlers`; if it had attached
+      // Our event system stores handlers in `__h`; if it had attached
       // a string, it would crash on dispatch. We assert no string handler
       // shows up there.
-      const handlers = (btn as any).__handlers
+      const handlers = (btn as any).__h
       const stored = handlers ? Object.values(handlers).filter((h) => h !== null) : []
       expect(stored.every((h: any) => typeof h?.current === 'function')).toBe(true)
     } finally {

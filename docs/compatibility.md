@@ -11,9 +11,9 @@ React's APIs and behavior are the reference for Redact. The default Vite configu
 | Suspense and hydration | Fallbacks, retained primary DOM, retries, streaming boundaries, and event replay. No priority scheduling. |
 | `Activity` | Retains hidden DOM/state and disconnects effects, refs, and subscriptions. Insertion effects stay connected. Hidden work is synchronous, not background priority. |
 | Fragment refs | Stable DOM instances with events, focus, geometry, observers, scrolling, and portal/visibility tracking. |
-| Transitions | `useTransition` / `startTransition` run work synchronously. Pending stays false; `useDeferredValue` returns its input. No time slicing or interruptible renders. |
-| `useActionState` | Returns the initial state, a no-op dispatch, and `false`. It does not run the action. |
-| `useOptimistic`, `useFormStatus` | No optimistic overlay; the optimistic setter is a no-op. Form status stays idle. |
+| Transitions | `useTransition` retains committed content and pending state while work suspends. `useDeferredValue` retains stale results. Rendering passes stay synchronous, without time slicing or interruptible component renders. |
+| `useActionState` | Queues actions against the previous result, tracks pending actions, and sends failures to error boundaries. |
+| `useOptimistic`, `useFormStatus` | Optimistic updates rebase on current state and roll back when their action finishes. Form descendants receive pending status and submitted data. |
 | View transitions | `ViewTransition` preserves state; `addTransitionType` does not animate by default. Native snapshots/styles/callbacks are experimental and opt-in. Animated commits wait for the browser snapshot callback, without a concurrent scheduler. |
 | Browser-only rendering | `browser()` requests a server-to-client Suspense fallback; `onBrowserBailout` reports it separately from errors. `use(browser())` returns `undefined` on the client. |
 | Resource APIs | Preload/preinit/preconnect/DNS hints and declarative styles/scripts, with document/ShadowRoot ownership and streamed stylesheet coverage. |

@@ -1,3 +1,4 @@
+import { isFunction, isThenable } from '../core/functions'
 import type { ReactNode } from '../core'
 import {
   beginSSR,
@@ -244,10 +245,6 @@ async function drain(state: OrchestratorState): Promise<void> {
   while (state.pending.size > 0) {
     await Promise.race(state.pending)
   }
-}
-
-function isThenable(value: unknown): value is Promise<unknown> {
-  return !!value && typeof (value as { then?: unknown }).then === 'function'
 }
 
 function scriptNonce(options: StreamOptions): string | undefined {

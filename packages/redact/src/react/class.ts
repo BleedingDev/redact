@@ -18,9 +18,9 @@ export class Component<P = {}, S = {}> {
   refs: Record<string, any> = {}
 
   // Injected by reconciler
-  _fiber: any = null
-  _enqueueUpdate: ((updater: SetStateCallback<S, P>, cb?: () => void) => void) | null = null
-  _forceUpdate: ((cb?: () => void) => void) | null = null
+  _f: any = null
+  _q: ((updater: SetStateCallback<S, P>, cb?: () => void) => void) | null = null
+  _u: ((cb?: () => void) => void) | null = null
 
   constructor(props: P, context?: any) {
     this.props = props
@@ -28,18 +28,18 @@ export class Component<P = {}, S = {}> {
   }
 
   setState(updater: SetStateCallback<S, P>, callback?: () => void): void {
-    if (!this._enqueueUpdate) {
+    if (!this._q) {
       if (process.env.NODE_ENV !== 'production') {
         throw new Error('Cannot call setState on an um component.')
       }
       throw new Error()
     }
-    this._enqueueUpdate(updater, callback)
+    this._q(updater, callback)
   }
 
   forceUpdate(callback?: () => void): void {
-    if (!this._forceUpdate) return
-    this._forceUpdate(callback)
+    if (!this._u) return
+    this._u(callback)
   }
 
   render(): ReactNode {

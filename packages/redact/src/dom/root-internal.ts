@@ -1,42 +1,38 @@
-import { FiberTag, createFiber, type Fiber, type FiberRoot, type RecoverableErrorHandler } from '../core'
-
+import { FiberTag, createFiber, type Fiber, type FiberRoot, type RecoverableErrorHandler } from '../core';
 export interface RootOptionsInternal {
-  identifierPrefix?: string
-  onRecoverableError?: RecoverableErrorHandler
-  onCaughtError?: RecoverableErrorHandler
-  onUncaughtError?: RecoverableErrorHandler
+    identifierStrategy?: 'react';
+    identifierPrefix?: string;
+    onRecoverableError?: RecoverableErrorHandler;
+    onCaughtError?: RecoverableErrorHandler;
+    onUncaughtError?: RecoverableErrorHandler;
 }
-
-export function createFiberRoot(
-  container: Element | Document | DocumentFragment,
-  options: RootOptionsInternal,
-): FiberRoot {
-  const rootFiber = createFiber(FiberTag.Root, null, null)
-  const root: FiberRoot = {
-    c: container as any,
-    r: rootFiber,
-    p: new Set(),
-    s: false,
-    re: options.onRecoverableError,
-    ce: options.onCaughtError,
-    ue: options.onUncaughtError,
-    i: options.identifierPrefix,
-    ic: 0,
-    h: false,
-  }
-  rootFiber.root = root
-  rootFiber.sn = container
-  return root
+export function createFiberRoot(container: Element | Document | DocumentFragment, options: RootOptionsInternal): FiberRoot {
+    const root = {
+        p: new Set(),
+        s: false,
+        re: options.onRecoverableError,
+        ce: options.onCaughtError,
+        ue: options.onUncaughtError,
+        i: options.identifierPrefix,
+        h: false,
+    } as FiberRoot;
+    if (options.identifierStrategy === 'react')
+        root.ri = true;
+    attachRootFiber(root, container);
+    return root;
 }
-
-export function attachRootFiber(
-  root: FiberRoot,
-  container: Element | Document | DocumentFragment,
-): void {
-  const rootFiber = createFiber(FiberTag.Root, null, null)
-  root.c = container as any
-  root.ic = 0
-  rootFiber.root = root
-  rootFiber.sn = container
-  root.r = rootFiber
+export function attachRootFiber(root: FiberRoot, container: Element | Document | DocumentFragment): void {
+    const rootFiber = createFiber(FiberTag.Root, null, null);
+    root.c = container as any;
+    root.ic = 0;
+    rootFiber.r = root;
+    rootFiber.i = container;
+    root.r = rootFiber;
+}
+export function getRootContainer(fiber: Fiber, fallback: Node = fiber.r!.c): Node {
+    for (let parent = fiber.p; parent; parent = parent.p) {
+        if (parent.t === FiberTag.Portal)
+            return parent.v.container;
+    }
+    return fiber.r?.c || fallback;
 }
