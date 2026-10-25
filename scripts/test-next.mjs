@@ -84,7 +84,7 @@ try {
     if (!production) {
       // Fast Refresh edits source. Each browser gets its own compiler state so
       // a preceding browser's HMR hash cannot invalidate its streamed document.
-      server = run([next, 'dev', ...bundler, '--port', port], { env: { ...env, NEXT_TEST_DIST_DIR: `.next/${engine}` } })
+      server = run([next, 'dev', ...bundler, '--port', port], { env: { ...env, NEXT_TEST_DIST_DIR: `.next/${process.env.NEXT_TEST_REFERENCE ? 'react-' : ''}${engine}` } })
       await ready()
     }
     browser = await browsers[engine].launch({ ...(engine === 'chromium' && process.env.PLAYWRIGHT_CHANNEL && process.env.PLAYWRIGHT_CHANNEL !== 'chromium' ? { channel: process.env.PLAYWRIGHT_CHANNEL } : {}), headless: true })

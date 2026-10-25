@@ -125,3 +125,18 @@ it('preserves observer setup failures without an unhandled rejection before tear
   await new Promise(resolve => setTimeout(resolve, 10))
   await expect(observed.flush()).rejects.toBe(failure)
 })
+
+
+it('correlates a wrapped Vinext manifest error only with its canceled request or discarded document', () => {
+  const url = 'https://preview.example/_next/static/chunks/manifest.js'
+  const message = '[vinext] Failed to load the App Router route manifest: JSHandle@object\nerror loading dynamically imported module: ' + url
+  expect(matchesCanceledRequest(message, url)).toBe(true)
+  expect(matchesCanceledRequest(message, url + '-other')).toBe(false)
+  expect(matchesCanceledRequest(message.replace('[vinext]', '[application]'), url)).toBe(false)
+  const document = { url: 'https://preview.example/route', discarded: true, finished: true, scripts: [], requests: [], canceledModules: [url] }
+  expect(matchesUnloadedDocument(message, document)).toBe(true)
+  expect(matchesUnloadedDocument(message, { ...document, discarded: false })).toBe(false)
+  expect(matchesUnloadedDocument(message, { ...document, finished: false })).toBe(false)
+  expect(matchesUnloadedDocument(message, { ...document, canceledModules: [] })).toBe(false)
+  expect(matchesUnloadedDocument(message.replace('preview.example', 'another.example'), document)).toBe(false)
+})

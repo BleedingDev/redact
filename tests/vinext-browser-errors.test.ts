@@ -29,3 +29,14 @@ describe('Vinext deliberate boundary diagnostics', () => {
     expect(isExpectedVinextBoundaryLog('Failed to load resource: the server responded with a status of 500 ()')).toBe(true)
   })
 })
+
+
+it('accepts hosted Firefox stacks only from the explicitly verified application origin', () => {
+  const origin = 'https://redact-preview.example'
+  const message = `The above error occurred in a React component:\n\nPage@${origin}/_next/static/chunks/page.js:1:40\nbody@unknown:0:0`
+  expect(isExpectedVinextBoundaryLog(message, origin)).toBe(true)
+  expect(isExpectedVinextBoundaryLog(message)).toBe(false)
+  expect(isExpectedVinextBoundaryLog(message, 'https://another.example')).toBe(false)
+  expect(isExpectedVinextBoundaryLog(message.replace('https:', 'http:'), origin)).toBe(false)
+  expect(isExpectedVinextBoundaryLog(message + '\nUnexpected renderer error', origin)).toBe(false)
+})

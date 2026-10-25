@@ -56,6 +56,18 @@ export async function checkNext({ browser, origin, production, cwd, cacheCompone
       result.passed = false
       result.error = error.stack || String(error)
       if (typeof error.actual === 'string') result.actual = error.actual
+      if (process.env.NEXT_TEST_TRACE) {
+        // Keep the original failure. A second development navigation can abort
+        // Playwright's wait, so record the resulting document before teardown.
+        await page.waitForLoadState('load', { timeout: 5000 }).catch(() => {})
+        result.failureDocument = await page.evaluate(() => ({
+          url: location.href, readyState: document.readyState,
+          title: document.title, text: document.body?.innerText.slice(0, 2000),
+          navigation: performance.getEntriesByType('navigation').map(entry => ({
+            type: entry.type, url: entry.name, duration: entry.duration,
+          })),
+        })).catch(diagnosticError => ({ error: String(diagnosticError) }))
+      }
     }
     try { await closePage() }
     catch (error) { result.passed = false; result.error ||= error.stack || String(error) }

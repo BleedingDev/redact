@@ -5,6 +5,9 @@ const normalizeURL = (value, base) => {
 }
 
 function transportURL(message, base) {
+  // Playwright's Firefox console text wraps this transport error in a handle.
+  // Keep the exact URL available for the existing cancellation correlation.
+  message = message.replace(/^\[vinext\] Failed to load the App Router route manifest: JSHandle@object\n/, '')
   const text = message.replace(/^(?:Error|ChunkLoadError):\s*/, '')
   const address = text.match(/^Failed to fetch RSC payload for (\S+)\. Falling back/)?.[1] ||
     text.match(/^Failed to load chunk (\S+) from module /)?.[1] ||
@@ -114,7 +117,11 @@ export function watchBrowserErrors(page, errors) {
       if (normalizeURL(canceled[i]) === normalizeURL(request.url())) canceled.splice(i, 1)
     }
   })
-  page.on('framenavigated', frame => { if (frame === page.mainFrame()) beforeCommit = false })
+  page.on('framenavigated', frame => {
+    if (frame !== page.mainFrame()) return
+    beforeCommit = false
+    if (process.env.NEXT_TEST_TRACE) console.error('[document committed]', frame.url())
+  })
   page.on('requestfinished', request => pending.delete(request))
   page.on('requestfailed', request => {
     pending.delete(request)

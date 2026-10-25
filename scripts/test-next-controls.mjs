@@ -18,7 +18,7 @@ if (failed.length) {
   const scenarios = [...new Set(failed.flatMap(result => result.scenarios?.filter(scenario => !scenario.passed).map(scenario => scenario.name) || []))]
   const child = spawn(process.execPath, [fileURLToPath(new URL('./test-next.mjs', import.meta.url)), ...process.argv.slice(2)], {
     stdio: 'inherit',
-    env: { ...process.env, NEXT_TEST_REFERENCE: '1', NEXT_TEST_BROWSERS: [...new Set(failed.map(result => result.browser))].join(','), NEXT_TEST_SCENARIOS: scenarios.join(','), NEXT_TEST_RESULT: path + '.native.json' },
+    env: { ...process.env, NEXT_TEST_TRACE: '1', NEXT_TEST_REFERENCE: '1', NEXT_TEST_BROWSERS: [...new Set(failed.map(result => result.browser))].join(','), NEXT_TEST_SCENARIOS: scenarios.join(','), NEXT_TEST_RESULT: path + '.native.json' },
   })
   const [code, signal] = await once(child, 'exit')
   if (code !== 0 || signal) process.exitCode = 1
