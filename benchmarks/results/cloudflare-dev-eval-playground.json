@@ -1,0 +1,34 @@
+{
+  "recordedAt": "2026-10-25T08:54:36.913440+00:00",
+  "sourceRepository": "https://github.com/cloudflare/workers-sdk",
+  "pullRequest": 16466,
+  "sourceCommit": "6ae1ed8343b15b34c9b6928acae589f3e18908ac",
+  "baseCommit": "ac79539606c583de8b7cb52c1c4857855d385961",
+  "node": "v24.22.0",
+  "vite": "8.3.4",
+  "playwright": "1.60.0",
+  "patchSha256": "28d4e3a3958db0f9c6a401870dcf7ab010bd4a1d6370bfc765880c2a5c0688c1",
+  "development": {
+    "passed": 13
+  },
+  "production": {
+    "passed": 12,
+    "existingHmrSkip": 1
+  },
+  "helperTests": {
+    "passed": 3
+  },
+  "negativeControl": {
+    "expectedFailure": true,
+    "onlyNewRegressionSelected": true,
+    "failure": "EvalError before runner installation"
+  },
+  "logs": {
+    "development": "(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:\n  - import \"../../../vitest.shared\" without a file extension (vitest.config.e2e.ts:3:26). Add the file extension\n  - ESM syntax in a file loaded as CommonJS (../../../vitest.shared.ts:1:1). Use a `.mjs` extension or set `\"type\": \"module\"` in the closest package.json\nSet `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.\n\n RUN  v5.0.4 /private/tmp/redact-workers-sdk-upstream/packages/vite-plugin-cloudflare/playground\n\nTesting with Vite 8.3.4\nThe tests are running locally but there is no docker instance running on the system, skipping containers tests\n\n\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\n\n Test Files  1 passed (1)\n      Tests  13 passed (13)\n   Start at  02:49:13\n   Duration  5.70s (tests 96%, setup 4%, import 1%)\n\n",
+    "production": "(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:\n  - import \"../../../vitest.shared\" without a file extension (vitest.config.e2e.ts:3:26). Add the file extension\n  - ESM syntax in a file loaded as CommonJS (../../../vitest.shared.ts:1:1). Use a `.mjs` extension or set `\"type\": \"module\"` in the closest package.json\nSet `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.\n\n RUN  v5.0.4 /private/tmp/redact-workers-sdk-upstream/packages/vite-plugin-cloudflare/playground\n\nTesting with Vite 8.3.4\nThe tests are running locally but there is no docker instance running on the system, skipping containers tests\n\n\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7-\n\n Test Files  1 passed (1)\n      Tests  12 passed | 1 skipped (13)\n   Start at  02:49:19\n   Duration  948ms (tests 72%, setup 22%, transform 3%, import 3%)\n\n",
+    "negativeControl": "(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:\n  - import \"../../../vitest.shared\" without a file extension (vitest.config.e2e.ts:3:26). Add the file extension\n  - ESM syntax in a file loaded as CommonJS (../../../vitest.shared.ts:1:1). Use a `.mjs` extension or set `\"type\": \"module\"` in the closest package.json\nSet `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.\n\n RUN  v5.0.4 /private/tmp/redact-workers-sdk-upstream/packages/vite-plugin-cloudflare/playground\n\nTesting with Vite 8.3.4\nThe tests are running locally but there is no docker instance running on the system, skipping containers tests\n\n-x-----------\n\n\u23af\u23af\u23af\u23af\u23af\u23af\u23af Failed Tests 1 \u23af\u23af\u23af\u23af\u23af\u23af\u23af\n\n FAIL  worker-\u266b/__tests__/worker.spec.ts > enables indirect eval only in the development runner\n FAIL  worker-\u266b/__tests__/worker.spec.ts > enables indirect eval only in the development runner\nAssertionError: expected { error: 'EvalError' } to deeply equal { value: 42, \u2026(3) }\n\n- Expected\n+ Received\n\n  {\n-   \"errors\": [\n-     {\n-       \"message\": Any<String>,\n-       \"name\": \"SyntaxError\",\n-     },\n-     {\n-       \"message\": \"development error\",\n-       \"name\": \"Error\",\n-     },\n-   ],\n-   \"functionName\": \"FlightStack\",\n-   \"nonStringIdentity\": true,\n-   \"value\": 42,\n+   \"error\": \"EvalError\",\n  }\n\n \u276f worker-\u266b/__tests__/worker.spec.ts:25:17\n     23| }) => {\n     24|  const result = await getJsonResponse(\"/indirect-eval\");\n     25|  expect(result).toEqual(\n       |                 ^\n     26|   isBuild\n     27|    ? { error: \"EvalError\" }\n\n\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af[1/2]\u23af\n\n\n Test Files  1 failed (1)\n      Tests  1 failed | 12 skipped (13)\n   Start at  02:51:05\n   Duration  939ms (tests 73%, setup 23%, import 3%, transform 1%)\n\nundefined\n/private/tmp/redact-workers-sdk-upstream/packages/vite-plugin-cloudflare/playground:\n\u2009ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL\u2009 Command failed with exit code 1: vitest run -c vitest.config.e2e.ts worker-\u266b/__tests__/worker.spec.ts -t enables indirect eval\n",
+    "helperTests": "(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:\n  - import \"../../vitest.shared\" without a file extension (vitest.config.ts:2:26). Add the file extension\n  - ESM syntax in a file loaded as CommonJS (../../vitest.shared.ts:1:1). Use a `.mjs` extension or set `\"type\": \"module\"` in the closest package.json\nSet `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.\n\n RUN  v5.0.4 /private/tmp/redact-workers-sdk-upstream/packages/vite-plugin-cloudflare\n\n \u2713 src/workers/runner-worker/__tests__/eval-binding.spec.ts (3 tests) 2ms\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at  02:49:10\n   Duration  71ms (transform 56%, import 23%, tests 10%, worker 10%)\n\n",
+    "types": "\n> @playground/worker@ check:type /private/tmp/redact-workers-sdk-upstream/packages/vite-plugin-cloudflare/playground/worker-\u266b\n> tsc --build\n\n",
+    "lint": "Found 0 warnings and 0 errors.\nFinished in 1.1s on 2 files with 140 rules using 18 threads.\n"
+  }
+}

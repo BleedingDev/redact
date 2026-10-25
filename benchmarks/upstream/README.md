@@ -38,7 +38,9 @@ All 12 Workers development configurations and all 258 scenarios pass after the o
 
 The cached content and counter assertions complete before the unsupported-eval console error fails the strict gate. This is a confirmed development debugging incompatibility; no production rendering failure was demonstrated. The proposed change enables indirect eval throughout the development runner, and that scope needs upstream design review.
 
-Three helper tests and strict TypeScript checks pass. The [framework-free Worker reproduction](./cloudflare-dev-eval.mjs) verifies the original development failure, the corrected behavior, and the unchanged production restriction. The changed files pass formatting with the upstream configuration. The full workers-sdk package suite has not been run.
+Three helper tests and strict TypeScript checks pass. The [framework-free Worker reproduction](./cloudflare-dev-eval.mjs) verifies the original development failure, the corrected behavior, and the unchanged production restriction. The changed files pass formatting with the upstream configuration. The full workers-sdk package suite has not been run locally.
+
+The upstream PR now includes a permanent real-Worker playground regression, commit `6ae1ed8343b15b34c9b6928acae589f3e18908ac`. It captures and calls indirect eval while application modules initialize, checks values, function names, non-string identity, and thrown errors, and requires production to keep rejecting string evaluation. All 13 development tests and 12 production tests pass, with the existing production HMR skip unchanged. Removing the runner installation makes the same regression fail with `EvalError`. All 16 dependency build tasks, fixture types, formatting, and type-aware lint pass. [Recorded results and negative control](../results/cloudflare-dev-eval-playground.json).
 
 ```sh
 node benchmarks/upstream/cloudflare-dev-eval.mjs /path/to/unmodified-consumer --expect-unsupported
