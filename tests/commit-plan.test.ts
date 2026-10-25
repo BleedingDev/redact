@@ -23,13 +23,13 @@ it('separates snapshots, mutations and effects without repeating preparation', (
 it('rewinds prepared subtree metadata and work while preserving hook identity', () => {
   const fiber = createFiber(FiberTag.Function, null, null)
   const hook = { s: 1, d: [1], c: null, q: { r: (value: number) => value } }
-  fiber.hooks = [hook]
+  fiber.h = [hook]
   const log: string[] = []
   const plan = prepareCommit(() => {
     queueMutation(() => log.push('before'))
     const checkpoint = checkpointCommit(fiber)
     hook.s = 2
-    fiber.child = createFiber(FiberTag.Host, 'div', null)
+    fiber.c = createFiber(FiberTag.Host, 'div', null)
     onCommitRollback(() => log.push('rollback'))
     queueMutation(() => log.push('discarded'))
     queueBeforeMutation(() => log.push('discarded snapshot'))
@@ -37,8 +37,8 @@ it('rewinds prepared subtree metadata and work while preserving hook identity', 
     rewindCommit(checkpoint)
     queueMutation(() => log.push('after'))
   })
-  expect(fiber.child).toBeNull()
-  expect(fiber.hooks?.[0]).toBe(hook)
+  expect(fiber.c).toBeNull()
+  expect(fiber.h?.[0]).toBe(hook)
   expect(hook.s).toBe(1)
   expect(plan.q[1]).toHaveLength(2)
   commitBeforeMutation(plan)
@@ -54,4 +54,31 @@ it('restores the outer preparation scope when nested preparation throws', () => 
   })
   expect(currentCommit).toBeNull()
   commitMutation(outer)
+})
+
+it('interleaves rollback callbacks with nested fiber restoration and reuses a rewound checkpoint', () => {
+  const fiber = createFiber(FiberTag.Function, null, null)
+  const hook = { s: 0, d: undefined, c: undefined, q: undefined }
+  fiber.h = [hook]
+  const seen: number[] = []
+  const plan = prepareCommit(() => {
+    const outer = checkpointCommit(fiber)
+    hook.s = 1
+    onCommitRollback(() => seen.push(hook.s))
+    const inner = checkpointCommit(fiber)
+    hook.s = 2
+    onCommitRollback(() => seen.push(hook.s))
+    rewindCommit(inner)
+    expect(hook.s).toBe(1)
+    const retry = checkpointCommit(fiber)
+    hook.s = 3
+    onCommitRollback(() => seen.push(hook.s))
+    rewindCommit(retry)
+    expect(hook.s).toBe(1)
+    rewindCommit(outer)
+    expect(hook.s).toBe(0)
+  })
+  expect(seen).toEqual([2, 3, 1])
+  commitMutation(plan)
+  expect(plan.q.every(queue => queue.length === 0)).toBe(true)
 })

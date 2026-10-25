@@ -2,7 +2,15 @@
 title: Quick Start
 ---
 
-Add Redact to your existing Vite configuration. Keep your React or framework plugin in place.
+Choose the integration that owns your build:
+
+| Build | Integration | Server rendering |
+| --- | --- | --- |
+| [Next.js](./next.md) | `withRedact` from `@tanstack/redact/next` | Native React |
+| [Vinext](./vinext.md) | `redact` from `@tanstack/redact/vinext` | Native React |
+| Vite | `redact` from `@tanstack/redact/vite` | Redact, with native React in the RSC environment |
+
+The Next.js and Vinext guides record the stable release blockers and version coverage. For Vite, add Redact to your existing configuration and keep your React or framework plugin in place.
 
 ```ts
 import { defineConfig } from 'vite'
@@ -36,6 +44,6 @@ The plugin handles client and SSR builds. The RSC environment stays on upstream 
 
 ## Check your app
 
-Run your tests and production build. Check hydration, forms, portals, navigation, and third-party components. Pay particular attention to pending transitions, actions, and optimistic state, their behavior differs from React.
+Run your tests and production build. Check hydration, forms, portals, navigation, and third-party components. Check pending transitions, actions, and optimistic state in your own journeys. Redact keeps rendering passes synchronous, without React's time slicing or interruptible component renders.
 
 Read [Compatibility](./compatibility.md) before shipping. Keep hydration enabled in apps that use `hydrateRoot`.

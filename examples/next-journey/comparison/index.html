@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>React and Redact · A Next.js journey</title>
+  <link rel="stylesheet" href="/comparison.css">
+  <script type="module" src="/comparison.js"></script>
+</head>
+<body>
+  <main>
+    <header class="comparison-header">
+      <div><h1>A Next.js user journey</h1><p>Next.js 16.4.3 <span>·</span> Production <span>·</span> Turbopack</p></div>
+      <div class="controls"><button id="reset" class="reset" disabled>Reset</button><button id="play" class="play" disabled><span aria-hidden="true">▶</span> Play journey</button></div>
+    </header>
+    <div class="journey-bar">
+      <ol id="steps" aria-label="Journey steps">
+        <li data-step="0"><span>1</span>Find a task</li>
+        <li data-step="1"><span>2</span>Open it</li>
+        <li data-step="2"><span>3</span>Update status</li>
+        <li data-step="3"><span>4</span>Validate</li>
+        <li data-step="4"><span>5</span>Comment</li>
+        <li data-step="5"><span>6</span>Return</li>
+      </ol>
+      <p id="narration" role="status" aria-live="polite">Connecting to both apps…</p>
+      <p id="observations" role="status" hidden></p>
+    </div>
+    <div class="comparison-grid">
+      <section class="runtime" aria-labelledby="react-title">
+        <header class="runtime-header"><h2 id="react-title"><span class="runtime-dot react"></span>React</h2><span class="runtime-state" id="react-state">Connecting</span><a id="react-link" target="_blank" rel="noopener" aria-label="Open the React app in a new tab">Open app ↗</a></header>
+        <div class="browser-address"><span aria-hidden="true">↳</span><span id="react-route">/</span></div>
+        <iframe title="Fieldwork running on React" id="react-frame"></iframe>
+      </section>
+      <section class="runtime" aria-labelledby="redact-title">
+        <header class="runtime-header"><h2 id="redact-title"><span class="runtime-dot redact"></span>Redact</h2><span class="runtime-state" id="redact-state">Connecting</span><a id="redact-link" target="_blank" rel="noopener" aria-label="Open the Redact app in a new tab">Open app ↗</a></header>
+        <div class="browser-address"><span aria-hidden="true">↳</span><span id="redact-route">/</span></div>
+        <iframe title="Fieldwork running on Redact" id="redact-frame"></iframe>
+      </section>
+    </div>
+    <footer class="comparison-footer"><p>Same source, separate sessions. Server rendering uses React on both sides.</p><p>Equal simulated server work: actions 750ms, activity 900ms. This view compares behavior.</p></footer>
+  </main>
+</body>
+</html>

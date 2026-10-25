@@ -1,0 +1,84 @@
+//#region package.json
+var package_default = {
+	name: "@cloudflare/vite-plugin",
+	version: "1.65.0",
+	description: "Cloudflare plugin for Vite",
+	keywords: [
+		"cloudflare",
+		"cloudflare-workers",
+		"vite",
+		"vite-plugin",
+		"workers"
+	],
+	homepage: "https://github.com/cloudflare/workers-sdk/tree/vite-plugin-v1/packages/vite-plugin-cloudflare#readme",
+	bugs: { "url": "https://github.com/cloudflare/workers-sdk/issues" },
+	license: "MIT",
+	repository: {
+		"type": "git",
+		"url": "https://github.com/cloudflare/workers-sdk.git",
+		"directory": "packages/vite-plugin-cloudflare"
+	},
+	files: ["dist"],
+	type: "module",
+	sideEffects: false,
+	main: "./dist/index.mjs",
+	types: "./dist/index.d.mts",
+	exports: { ".": {
+		"types": "./dist/index.d.mts",
+		"import": "./dist/index.mjs"
+	} },
+	publishConfig: { "access": "public" },
+	scripts: {
+		"build": "tsdown",
+		"check:type": "tsc --build",
+		"dev": "tsdown --watch",
+		"test": "vitest run",
+		"test:ci": "pnpm test",
+		"test:e2e": "vitest run -c e2e/vitest.config.ts",
+		"test:watch": "vitest"
+	},
+	dependencies: {
+		"@cloudflare/unenv-preset": "2.16.2",
+		"miniflare": "5.20261019.2-beta",
+		"unenv": "2.0.0-rc.24",
+		"wrangler": "4.152.0",
+		"ws": "8.22.0"
+	},
+	devDependencies: {
+		"@cloudflare/containers-shared": "0.23.2",
+		"@cloudflare/mock-npm-registry": "workspace:*",
+		"@cloudflare/remote-bindings": "workspace:*",
+		"@cloudflare/workers-shared": "workspace:*",
+		"@cloudflare/workers-tsconfig": "workspace:*",
+		"@cloudflare/workers-types": "5.20261019.1",
+		"@cloudflare/workers-utils": "0.48.0",
+		"@remix-run/node-fetch-server": "0.8.1",
+		"@types/node": "22.15.17",
+		"@types/semver": "7.8.0",
+		"@types/ws": "8.18.2",
+		"am-i-vibing": "0.5.0",
+		"defu": "6.1.7",
+		"get-port": "7.2.0",
+		"magic-string": "0.30.21",
+		"mlly": "1.8.2",
+		"open": "11.0.0",
+		"picocolors": "1.1.1",
+		"qr": "0.6.0",
+		"semver": "7.8.5",
+		"tinyglobby": "0.2.16",
+		"tree-kill": "1.2.2",
+		"tsdown": "0.16.3",
+		"typescript": "5.8.3",
+		"vite": "catalog:default",
+		"vite-legacy": "npm:vite@7.1.12",
+		"vitest": "5.0.4"
+	},
+	peerDependencies: {
+		"vite": "^6.1.0 || ^7.0.0 || ^8.0.0",
+		"wrangler": "^4.152.0"
+	},
+	"workers-sdk": { "prerelease": true }
+};
+
+//#endregion
+export { package_default as default };

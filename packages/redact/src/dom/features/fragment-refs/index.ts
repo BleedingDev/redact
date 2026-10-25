@@ -1,1 +1,1 @@
-export { createFragmentInstance, updateFragmentHost, refreshFragmentInstances } from '../../fragment-instance'
+export { createFragmentInstance, updateFragmentHost, refreshFragmentInstances, commitFragmentRef, placeFragmentCommits } from '../../fragment-instance'

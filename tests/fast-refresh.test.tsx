@@ -313,3 +313,32 @@ it('refreshes hydrated roots and multiple mounted roots', () => {
   expect(hydrated.container.textContent).toBe('after:1')
   expect(mounted.container.textContent).toBe('after:0')
 })
+
+it('refreshes fulfilled Flight lazy components while preserving their hook state', () => {
+  const Before = counter('before'), update = family(Before, 'state')
+  const Flight: any = { $$typeof: Symbol.for('react.lazy'), _payload: { status: 'fulfilled', value: Before }, _init: (payload: any) => payload.value }
+  const { container } = setup(<Flight />)
+  click(container)
+  const button = container.firstChild
+  update(counter('after'))
+  Refresh.performReactRefresh()
+  expect(container.textContent).toBe('after:1')
+  expect(container.firstChild).toBe(button)
+})
+
+it.each([false, true])('preserves refreshed state when Flight replaces its lazy wrapper, keyed=%s', keyed => {
+  const Before = counter('before'), update = family(Before, 'state')
+  const flight = (type: any): any => ({ $$typeof: Symbol.for('react.lazy'), _payload: { status: 'fulfilled', value: type }, _init: (payload: any) => payload.value })
+  const First = flight(Before)
+  const { container, root } = setup(<First key={keyed ? 'counter' : undefined} />)
+  click(container)
+  const button = container.firstChild
+  for (const label of ['after', 'reversed']) {
+    const Next = counter(label), Wrapper = flight(Next)
+    update(Next)
+    Refresh.performReactRefresh()
+    flushSync(() => root.render(<Wrapper key={keyed ? 'counter' : undefined} />))
+    expect(container.textContent).toBe(label + ':1')
+    expect(container.firstChild).toBe(button)
+  }
+})

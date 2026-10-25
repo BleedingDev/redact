@@ -1,0 +1,333 @@
+From 6ebceaf5becb273501452938baf8d85b0298c36c Mon Sep 17 00:00:00 2001
+From: Tanner Linsley <tannerlinsley@gmail.com>
+Date: Sun, 25 Oct 2026 02:19:46 -0600
+Subject: [PATCH] fix: backport development document cache handling to 16.2
+
+Backport the no-store policy and removal of debug-channel cache replay from #97505 and #97510. Keep the 16.2 stream API, preserve static asset revalidation, and cover Firefox streaming and history navigation.
+---
+ packages/next/src/build/templates/app-page.ts |   2 +-
+ packages/next/src/client/dev/debug-channel.ts | 125 +-----------------
+ packages/next/src/server/base-server.ts       |   2 +-
+ .../route-modules/pages/pages-handler.ts      |   2 +-
+ .../app/streaming/counter.tsx                 |  15 +++
+ .../app/streaming/page.tsx                    |  18 +++
+ .../dev-cache-control-no-cache.test.ts        |  57 +++++++-
+ 7 files changed, 94 insertions(+), 127 deletions(-)
+ create mode 100644 test/development/dev-cache-control-no-cache/app/streaming/counter.tsx
+ create mode 100644 test/development/dev-cache-control-no-cache/app/streaming/page.tsx
+
+diff --git a/packages/next/src/build/templates/app-page.ts b/packages/next/src/build/templates/app-page.ts
+index 2e3083ff..23d11730 100644
+--- a/packages/next/src/build/templates/app-page.ts
++++ b/packages/next/src/build/templates/app-page.ts
+@@ -1467,7 +1467,7 @@ export async function handler(
+ 
+       // In dev, we should not cache pages for any reason.
+       if (routeModule.isDev) {
+-        res.setHeader('Cache-Control', 'no-cache, must-revalidate')
++        res.setHeader('Cache-Control', 'no-store')
+       }
+ 
+       if (!cacheEntry) {
+diff --git a/packages/next/src/client/dev/debug-channel.ts b/packages/next/src/client/dev/debug-channel.ts
+index f3ccbd7f..fe101cc4 100644
+--- a/packages/next/src/client/dev/debug-channel.ts
++++ b/packages/next/src/client/dev/debug-channel.ts
+@@ -8,118 +8,21 @@ export interface DebugChannelReadableWriterPair {
+ 
+ const pairs = new Map<string, DebugChannelReadableWriterPair>()
+ 
+-const DEBUG_CHANNEL_STORAGE_KEY_PREFIX = '__next_debug_channel:'
+-
+-// Buffer for the initial document's debug channel data. Written to
+-// sessionStorage once complete so it can be restored when the browser serves
+-// the page from HTTP cache (back-forward navigation, tab duplication, etc.).
+-let initialDocumentDebugChunks: Uint8Array[] = []
+-
+-function persistDebugChannelToSessionStorage(requestId: string): void {
+-  const key = DEBUG_CHANNEL_STORAGE_KEY_PREFIX + requestId
+-  const value = JSON.stringify(
+-    initialDocumentDebugChunks.map((chunk) => {
+-      let binary = ''
+-      for (let i = 0; i < chunk.byteLength; i++) {
+-        binary += String.fromCharCode(chunk[i])
+-      }
+-      return btoa(binary)
+-    })
+-  )
+-
+-  try {
+-    sessionStorage.setItem(key, value)
+-  } catch {
+-    // Likely a quota error. Drop entries from previous documents in this tab
+-    // (we only need to restore the current one's entry on cache restore) and
+-    // retry once. If it still fails, skip silently — the location.reload()
+-    // fallback in createDebugChannel handles this case.
+-    for (let i = sessionStorage.length - 1; i >= 0; i--) {
+-      const k = sessionStorage.key(i)
+-      if (k?.startsWith(DEBUG_CHANNEL_STORAGE_KEY_PREFIX) && k !== key) {
+-        sessionStorage.removeItem(k)
+-      }
+-    }
+-    try {
+-      sessionStorage.setItem(key, value)
+-    } catch {}
+-  }
+-}
+-
+-function wasServedFromCache(): boolean {
+-  try {
+-    // There is exactly one PerformanceNavigationTiming entry per page load.
+-    const entry = performance.getEntriesByType('navigation')[0]
+-
+-    return entry?.transferSize === 0
+-  } catch {
+-    return false
+-  }
+-}
+-
+-function restoreDebugChannelFromSessionStorage(
+-  requestId: string
+-): ReadableStream<Uint8Array> | undefined {
+-  try {
+-    const serializedData = sessionStorage.getItem(
+-      DEBUG_CHANNEL_STORAGE_KEY_PREFIX + requestId
+-    )
+-
+-    if (!serializedData) {
+-      return undefined
+-    }
+-
+-    const chunks = (JSON.parse(serializedData) as string[]).map((base64) => {
+-      const binary = atob(base64)
+-      const bytes = new Uint8Array(binary.length)
+-      for (let i = 0; i < binary.length; i++) {
+-        bytes[i] = binary.charCodeAt(i)
+-      }
+-      return bytes
+-    })
+-
+-    return new ReadableStream<Uint8Array>({
+-      start(controller) {
+-        for (const chunk of chunks) {
+-          controller.enqueue(chunk)
+-        }
+-        controller.close()
+-      },
+-    })
+-  } catch {
+-    return undefined
+-  }
+-}
+-
+ export function getOrCreateDebugChannelReadableWriterPair(
+   requestId: string
+ ): DebugChannelReadableWriterPair {
+   let pair = pairs.get(requestId)
+ 
+   if (!pair) {
+-    // Only buffer chunks for the initial document's debug channel, not for
+-    // client-side navigation requests.
+-    const shouldBuffer = requestId === self.__next_r
+-
+-    const { readable, writable } = new TransformStream<Uint8Array, Uint8Array>({
+-      transform(chunk, controller) {
+-        if (shouldBuffer) {
+-          initialDocumentDebugChunks.push(chunk.slice())
+-        }
+-        controller.enqueue(chunk)
+-      },
+-    })
++    const { readable, writable } = new TransformStream<Uint8Array, Uint8Array>()
+ 
+     pair = { readable, writer: writable.getWriter() }
+     pairs.set(requestId, pair)
+ 
+-    pair.writer.closed
+-      .then(() => {
+-        if (shouldBuffer) {
+-          persistDebugChannelToSessionStorage(requestId)
+-        }
+-      })
+-      .finally(() => pairs.delete(requestId))
++    // Observe both completion and cancellation without leaving a rejected
++    // promise when the debug stream closes with an error.
++    const cleanup = () => pairs.delete(requestId)
++    pair.writer.closed.then(cleanup, cleanup)
+   }
+ 
+   return pair
+@@ -151,24 +54,6 @@ export function createDebugChannel(
+     }
+   }
+ 
+-  // Only attempt to restore the sessionStorage debug channel entry for the
+-  // initial document load (no request headers). Client-side navigations pass
+-  // request headers and should always use the WebSocket-backed debug channel.
+-  if (!requestHeaders && wasServedFromCache()) {
+-    const readable = restoreDebugChannelFromSessionStorage(requestId)
+-
+-    if (readable) {
+-      return { readable }
+-    }
+-
+-    // Debug channel can't be restored — debug deps would block hydration.
+-    // Force a fresh page load from the server. Return a never-closing stream
+-    // so the Flight client stays parked until the reload tears the document
+-    // down, instead of synchronously erroring with "Connection closed.".
+-    location.reload()
+-    return { readable: new ReadableStream() }
+-  }
+-
+   const { readable } = getOrCreateDebugChannelReadableWriterPair(requestId)
+ 
+   return { readable }
+diff --git a/packages/next/src/server/base-server.ts b/packages/next/src/server/base-server.ts
+index 0b4bad63..b4d8f612 100644
+--- a/packages/next/src/server/base-server.ts
++++ b/packages/next/src/server/base-server.ts
+@@ -1807,7 +1807,7 @@ export default abstract class Server<
+ 
+       // In dev, we should not cache pages for any reason.
+       if (this.dev) {
+-        res.setHeader('Cache-Control', 'no-cache, must-revalidate')
++        res.setHeader('Cache-Control', 'no-store')
+         cacheControl = undefined
+       }
+ 
+diff --git a/packages/next/src/server/route-modules/pages/pages-handler.ts b/packages/next/src/server/route-modules/pages/pages-handler.ts
+index c4d5f36e..52afbd60 100644
+--- a/packages/next/src/server/route-modules/pages/pages-handler.ts
++++ b/packages/next/src/server/route-modules/pages/pages-handler.ts
+@@ -706,7 +706,7 @@ export const getHandler = ({
+ 
+         // In dev, we should not cache pages for any reason.
+         if (routeModule.isDev) {
+-          res.setHeader('Cache-Control', 'no-cache, must-revalidate')
++          res.setHeader('Cache-Control', 'no-store')
+         }
+ 
+         // Draft mode should never be cached
+diff --git a/test/development/dev-cache-control-no-cache/app/streaming/counter.tsx b/test/development/dev-cache-control-no-cache/app/streaming/counter.tsx
+new file mode 100644
+index 00000000..62454fb3
+--- /dev/null
++++ b/test/development/dev-cache-control-no-cache/app/streaming/counter.tsx
+@@ -0,0 +1,15 @@
++'use client'
++
++import { useState } from 'react'
++
++export default function Counter() {
++  const [count, setCount] = useState(0)
++  return (
++    <>
++      <p id="count">Count: {count}</p>
++      <button id="increment" onClick={() => setCount((value) => value + 1)}>
++        Increment
++      </button>
++    </>
++  )
++}
+diff --git a/test/development/dev-cache-control-no-cache/app/streaming/page.tsx b/test/development/dev-cache-control-no-cache/app/streaming/page.tsx
+new file mode 100644
+index 00000000..912171f7
+--- /dev/null
++++ b/test/development/dev-cache-control-no-cache/app/streaming/page.tsx
+@@ -0,0 +1,18 @@
++import { Suspense } from 'react'
++import Counter from './counter'
++
++async function Content() {
++  await new Promise((resolve) => setTimeout(resolve, 1000))
++  return <p id="streamed">Stream complete</p>
++}
++
++export default function Page() {
++  return (
++    <>
++      <Counter />
++      <Suspense fallback={<p>Loading stream</p>}>
++        <Content />
++      </Suspense>
++    </>
++  )
++}
+diff --git a/test/development/dev-cache-control-no-cache/dev-cache-control-no-cache.test.ts b/test/development/dev-cache-control-no-cache/dev-cache-control-no-cache.test.ts
+index 2a38178d..a58f39ac 100644
+--- a/test/development/dev-cache-control-no-cache/dev-cache-control-no-cache.test.ts
++++ b/test/development/dev-cache-control-no-cache/dev-cache-control-no-cache.test.ts
+@@ -1,17 +1,66 @@
+ import { nextTestSetup } from 'e2e-utils'
++import { retry } from 'next-test-utils'
+ 
+ describe('dev Cache-Control header', () => {
+   const { next } = nextTestSetup({
+     files: __dirname,
+   })
+ 
+-  it('should use no-cache for pages router', async () => {
++  it('should use no-store for pages router', async () => {
+     const res = await next.fetch('/pages-route')
+-    expect(res.headers.get('Cache-Control')).toBe('no-cache, must-revalidate')
++    expect(res.headers.get('Cache-Control')).toBe('no-store')
+   })
+ 
+-  it('should use no-cache for app router', async () => {
++  it('should use no-store for app router', async () => {
+     const res = await next.fetch('/app-route')
+-    expect(res.headers.get('Cache-Control')).toBe('no-cache, must-revalidate')
++    expect(res.headers.get('Cache-Control')).toBe('no-store')
++  })
++
++  it('should still revalidate unchanged static assets', async () => {
++    const $ = await next.render$('/app-route')
++    const asset = $('script[src]')
++      .map((_, element) => $(element).attr('src'))
++      .get()
++      .find((src) => src.startsWith('/_next/static/'))
++    expect(asset).toBeDefined()
++
++    const response = await next.fetch(asset)
++    expect(response.status).toBe(200)
++    expect(response.headers.get('Cache-Control')).toBe(
++      'no-cache, must-revalidate'
++    )
++    const etag = response.headers.get('ETag')
++    expect(etag).toBeTruthy()
++
++    const cached = await next.fetch(asset, {
++      headers: { 'If-None-Match': etag },
++    })
++    expect(cached.status).toBe(304)
++  })
++
++  it('should finish a streamed document without reloading it', async () => {
++    let navigations = 0
++    const browser = await next.browser('/streaming', {
++      beforePageLoad(page) {
++        page.on('request', (request) => {
++          if (
++            request.isNavigationRequest() &&
++            request.url().endsWith('/streaming')
++          ) {
++            navigations++
++          }
++        })
++      },
++    })
++    await retry(async () => {
++      expect(await browser.elementById('streamed').text()).toBe(
++        'Stream complete'
++      )
++    })
++    await browser.elementById('increment').click()
++    await retry(async () => {
++      expect(await browser.elementById('count').text()).toBe('Count: 1')
++    })
++    expect(navigations).toBe(1)
+   })
+ })
+-- 
+2.54.0
+

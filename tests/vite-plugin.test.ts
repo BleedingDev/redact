@@ -42,7 +42,7 @@ describe('redact vite plugin', () => {
   it.each(['ts', 'js'])('keeps peer imports on the same disabled implementation in %s modules', async (extension) => {
     const plugin = findPlugin(redact({ preset: 'nano' }), 'redact')
     const importer = `/package/${extension === 'ts' ? 'src' : 'dist'}/dom/features/suspense/full.${extension}`
-    for (const feature of ['context', 'hydration', 'fragment-refs', 'view-transition']) {
+    for (const feature of ['context', 'hydration', 'fragment-refs', 'view-transition', 'class']) {
       for (const base of [`../${feature}`, `../../features/${feature}`]) {
         const specifier = base + (extension === 'js' ? '/index.js' : '')
         const context = {

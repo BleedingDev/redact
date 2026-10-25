@@ -1,3 +1,4 @@
+import { isFunction } from '../core/functions'
 import { resourceKind, resourceURL, type ResourceHintKind, type ResourceHintOptions } from '../core/resource-hints'
 import { attrToHtml, escapeAttr } from './escape'
 import { attributeName } from '../core/attributes'
@@ -25,7 +26,7 @@ function styleText(props: any): string {
     return html.__html == null ? '' : '' + html.__html
   }
   const child = Array.isArray(props.children) ? props.children.length < 2 ? props.children[0] : null : props.children
-  return child == null || typeof child === 'function' || typeof child === 'symbol' ? ''
+  return child == null || isFunction(child) || typeof child === 'symbol' ? ''
     : ('' + child).replace(/(<\/?)(s)(tyle)/gi, (_, prefix: string, s: string, suffix: string) => prefix + '\\' + s.charCodeAt(0).toString(16) + ' ' + suffix)
 }
 
@@ -103,7 +104,7 @@ export function createResourceHints(shellFlushed = false, styleNonce?: string) {
         for (const name in resource.options) {
           if (name === 'href' || name === 'rel' || name === 'precedence' || name === 'data-precedence' || name === 'children' || name === 'dangerouslySetInnerHTML' || name === 'innerHTML' || name === 'style' || name === 'suppressHydrationWarning' || name === 'suppressContentEditableWarning' || name === 'ref' || name === 'key' || /^on/i.test(name) || !/^[a-zA-Z_:][a-zA-Z0-9:_.-]*$/.test(name)) continue
           const value = resource.options[name]
-          if (value == null || typeof value === 'function' || typeof value === 'symbol' || name === 'hidden' && value === false) continue
+          if (value == null || isFunction(value) || typeof value === 'symbol' || name === 'hidden' && value === false) continue
           descriptor.push(attributeName(name), name === 'hidden' ? '' : name === 'src' ? resourceURL('' + value) : '' + value)
         }
         ;(scope ? scope.stylesheets ||= new Map() : dependencies).set(resource.href, descriptor)

@@ -48,6 +48,24 @@ for (const file of readdirSync(resolve(packageRoot, 'dist'), { recursive: true }
   visit(source)
 }
 assert(explicitImports > 0, 'No emitted module specifiers were checked')
+const extensionAPI = await import(pathToFileURL(resolve(packageRoot, 'dist/dom/_all.js')).href)
+assert.equal(extensionAPI.FiberTag.Host, 0, 'Feature extensions lost the runtime FiberTag enum')
+assert.equal(extensionAPI.FiberTag[0], 'Host', 'Feature extensions lost reverse enum lookup')
+
+// Const enums must be inlined before the per-module library build. Check the
+// emitted runtime as well as the source map so shrinking dist does not lose
+// the original TypeScript debugging locations.
+const publishedReconciler = ts.createSourceFile('reconcile.js', readFileSync(resolve(packageRoot, 'dist/dom/reconcile.js'), 'utf8'), ts.ScriptTarget.Latest, true)
+function verifyInlinedEnums(node) {
+  assert(!((ts.isPropertyAccessExpression(node) || ts.isElementAccessExpression(node)) &&
+    ts.isIdentifier(node.expression) && node.expression.text === 'FiberTag'), 'Published reconciler retained const enum lookups')
+  ts.forEachChild(node, verifyInlinedEnums)
+}
+verifyInlinedEnums(publishedReconciler)
+const reconcileMap = JSON.parse(readFileSync(resolve(packageRoot, 'dist/dom/reconcile.js.map'), 'utf8'))
+assert(reconcileMap.sources.some(source => source.endsWith('/src/dom/reconcile.ts')), 'Build lost original TypeScript source mappings')
+assert(reconcileMap.sourcesContent.some(source => source.includes('FiberTag')), 'Source map lost the original TypeScript content')
+
 
 // A virtual consumer checks real package exports under NodeNext, with no
 // workspace paths or skipLibCheck masking declaration resolution failures.
@@ -260,6 +278,12 @@ for (const mode of ['development', 'production']) {
       bundles.push({ code, api })
       if (mode === 'production') sizes.push({ entry, tree, gzip: gzipSync(code).length })
       if (entry === 'react/index') {
+        if (mode === 'production') {
+          let called = false
+          assert.throws(() => api.act(() => { called = true }), error => error.message === '')
+          assert.equal(called, false, 'Production act executed test work')
+          assert(!code.includes('MessageChannel'), 'Production act retained its development task scheduler')
+        }
         assert.throws(() => api.useState(0), error => mode === 'production'
           ? error.message === ''
           : error.message.startsWith(diagnostics[0]))

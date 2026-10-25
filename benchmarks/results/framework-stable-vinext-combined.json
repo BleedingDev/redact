@@ -1,0 +1,33 @@
+{
+  "recordedAt": "2026-10-25T11:23:37.495Z",
+  "prerequisites": {
+    "test-framework-dependencies.mjs": true,
+    "test-cloudflare.mjs": true
+  },
+  "passed": true,
+  "complete": true,
+  "samePackage": true,
+  "mixed": {
+    "expectedConfigurations": 66,
+    "attemptedConfigurations": 66,
+    "completeConfigurations": 66,
+    "passedConfigurations": 66,
+    "expectedScenarios": 1260,
+    "executedScenarios": 1260,
+    "passedScenarios": 1260,
+    "failedScenarios": 0,
+    "missingScenarios": 0,
+    "concurrencyDifferences": 0,
+    "nativeReactFailures": 0,
+    "alsoFailsWithNativeReact": 0,
+    "redactFailures": 0
+  },
+  "pages": {
+    "expectedConfigurations": 36,
+    "completeConfigurations": 36,
+    "passedConfigurations": 36,
+    "expectedScenarios": 150,
+    "passedScenarios": 150,
+    "missingScenarios": 0
+  }
+}

@@ -1,0 +1,205 @@
+diff --git a/.changeset/fix-vite-flight-eval.md b/.changeset/fix-vite-flight-eval.md
+new file mode 100644
+index 0000000..b60d46f
+--- /dev/null
++++ b/.changeset/fix-vite-flight-eval.md
+@@ -0,0 +1,7 @@
++---
++"@cloudflare/vite-plugin": patch
++---
++
++Support React development stack reconstruction in the Vite module runner
++
++Use the runner's existing local code evaluation binding for indirect eval. This prevents React Flight from reporting unsupported eval during development, including cached Server Component rendering. Deployed Workers keep their existing eval restrictions.
+diff --git "a/packages/vite-plugin-cloudflare/playground/worker-\342\231\253/__tests__/worker.spec.ts" "b/packages/vite-plugin-cloudflare/playground/worker-\342\231\253/__tests__/worker.spec.ts"
+index b68e250..a16abca 100644
+--- "a/packages/vite-plugin-cloudflare/playground/worker-\342\231\253/__tests__/worker.spec.ts"
++++ "b/packages/vite-plugin-cloudflare/playground/worker-\342\231\253/__tests__/worker.spec.ts"
+@@ -2,6 +2,7 @@ import * as fs from "node:fs";
+ import * as path from "node:path";
+ import { test, vi } from "vitest";
+ import {
++	getJsonResponse,
+ 	getTextResponse,
+ 	isBuild,
+ 	rootDir,
+@@ -17,6 +18,25 @@ test("basic hello-world functionality", async ({ expect }) => {
+ 	);
+ });
+ 
++test("enables indirect eval only in the development runner", async ({
++	expect,
++}) => {
++	const result = await getJsonResponse("/indirect-eval");
++	expect(result).toEqual(
++		isBuild
++			? { error: "EvalError" }
++			: {
++					value: 42,
++					functionName: "FlightStack",
++					nonStringIdentity: true,
++					errors: [
++						{ name: "SyntaxError", message: expect.any(String) },
++						{ name: "Error", message: "development error" },
++					],
++				}
++	);
++});
++
+ test("provides the configured Access identity", async ({ expect }) => {
+ 	expect(await getTextResponse("/access")).toBe(
+ 		JSON.stringify({
+diff --git "a/packages/vite-plugin-cloudflare/playground/worker-\342\231\253/src/index.ts" "b/packages/vite-plugin-cloudflare/playground/worker-\342\231\253/src/index.ts"
+index a776810..8e9ca2c 100644
+--- "a/packages/vite-plugin-cloudflare/playground/worker-\342\231\253/src/index.ts"
++++ "b/packages/vite-plugin-cloudflare/playground/worker-\342\231\253/src/index.ts"
+@@ -1,8 +1,16 @@
+ import { a } from "./a";
+ 
++// Capture and use eval while application modules initialize, as React Flight
++// does when reconstructing development call stacks.
++const indirectEval = globalThis.eval;
++const evaluationAtStartup = evaluateDevelopmentStack();
++
+ export default {
+ 	async fetch(request, _env, ctx) {
+ 		const url = new URL(request.url);
++		if (url.pathname === "/indirect-eval") {
++			return Response.json(evaluationAtStartup);
++		}
+ 		if (url.pathname === "/access") {
+ 			return Response.json({
+ 				aud: ctx.access?.aud,
+@@ -45,6 +53,35 @@ export default {
+ 	},
+ } satisfies ExportedHandler;
+ 
++function evaluateDevelopmentStack() {
++	try {
++		const value: unknown = indirectEval("40 + 2");
++		const stackFrame: unknown = indirectEval("(function FlightStack() {})");
++		const errors = ["(", 'throw new Error("development error")'].map(
++			(source) => {
++				try {
++					indirectEval(source);
++					return undefined;
++				} catch (error) {
++					return error instanceof Error
++						? { name: error.name, message: error.message }
++						: { name: typeof error, message: String(error) };
++				}
++			}
++		);
++		return {
++			value,
++			functionName: typeof stackFrame === "function" ? stackFrame.name : null,
++			nonStringIdentity: [undefined, null, 1, true, {}].every(
++				(input) => Reflect.apply(indirectEval, undefined, [input]) === input
++			),
++			errors,
++		};
++	} catch (error) {
++		return { error: error instanceof Error ? error.name : String(error) };
++	}
++}
++
+ addEventListener("unhandledrejection", () => {
+ 	console.error("__unhandled rejection__");
+ });
+diff --git a/packages/vite-plugin-cloudflare/src/workers/runner-worker/__tests__/eval-binding.spec.ts b/packages/vite-plugin-cloudflare/src/workers/runner-worker/__tests__/eval-binding.spec.ts
+new file mode 100644
+index 0000000..d289252
+--- /dev/null
++++ b/packages/vite-plugin-cloudflare/src/workers/runner-worker/__tests__/eval-binding.spec.ts
+@@ -0,0 +1,52 @@
++import { test } from "vitest";
++import { installIndirectEval } from "../eval-binding";
++
++test("delegates strings to the local development evaluator", ({ expect }) => {
++	const original = globalThis.eval;
++	const calls: string[] = [];
++	try {
++		installIndirectEval((source) => {
++			calls.push(source);
++			return original(source);
++		});
++		expect(globalThis.eval("40 + 2")).toBe(42);
++		expect(globalThis.eval("(function FlightStack() {})").name).toBe(
++			"FlightStack"
++		);
++		expect(calls).toEqual(["40 + 2", "(function FlightStack() {})"]);
++	} finally {
++		globalThis.eval = original;
++	}
++});
++
++test("returns non-string inputs unchanged without evaluating them", ({
++	expect,
++}) => {
++	const original = globalThis.eval;
++	let calls = 0;
++	try {
++		installIndirectEval(() => {
++			calls++;
++		});
++		const evaluate = globalThis.eval as (value: unknown) => unknown;
++		for (const value of [undefined, null, 1, true, {}, new String("40 + 2")]) {
++			expect(evaluate(value)).toBe(value);
++		}
++		expect(calls).toBe(0);
++	} finally {
++		globalThis.eval = original;
++	}
++});
++
++test("preserves syntax and runtime errors from the evaluator", ({ expect }) => {
++	const original = globalThis.eval;
++	try {
++		installIndirectEval((source) => original(source));
++		expect(() => globalThis.eval("(")).toThrow(SyntaxError);
++		expect(() =>
++			globalThis.eval('throw new Error("development error")')
++		).toThrow("development error");
++	} finally {
++		globalThis.eval = original;
++	}
++});
+diff --git a/packages/vite-plugin-cloudflare/src/workers/runner-worker/eval-binding.ts b/packages/vite-plugin-cloudflare/src/workers/runner-worker/eval-binding.ts
+new file mode 100644
+index 0000000..f90c3e9
+--- /dev/null
++++ b/packages/vite-plugin-cloudflare/src/workers/runner-worker/eval-binding.ts
+@@ -0,0 +1,10 @@
++/**
++ * Provide indirect eval for development stack reconstruction in the module runner.
++ * @param evaluate - The runner's existing local code evaluation binding.
++ */
++export function installIndirectEval(
++	evaluate: (source: string) => unknown
++): void {
++	globalThis.eval = (source) =>
++		typeof source === "string" ? evaluate(source) : source;
++}
+diff --git a/packages/vite-plugin-cloudflare/src/workers/runner-worker/module-runner.ts b/packages/vite-plugin-cloudflare/src/workers/runner-worker/module-runner.ts
+index 11a59be..e43ac32 100644
+--- a/packages/vite-plugin-cloudflare/src/workers/runner-worker/module-runner.ts
++++ b/packages/vite-plugin-cloudflare/src/workers/runner-worker/module-runner.ts
+@@ -13,6 +13,7 @@ import {
+ 	VIRTUAL_WORKER_ENTRY,
+ } from "../../shared";
+ import { stripInternalEnv } from "./env";
++import { installIndirectEval } from "./eval-binding";
+ import type { WrapperEnv } from "./env";
+ 
+ declare global {
+@@ -176,6 +177,10 @@ async function createModuleRunner(
+ 	webSocket: WebSocket,
+ 	environmentName: string
+ ) {
++	installIndirectEval((source) =>
++		env.__VITE_UNSAFE_EVAL__.eval(source, "eval")
++	);
++
+ 	return new ModuleRunner(
+ 		{
+ 			sourcemapInterceptor: "prepareStackTrace",

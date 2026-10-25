@@ -14,8 +14,19 @@ permissions:
   pull-requests: write
 
 jobs:
+  next-compatibility:
+    uses: ./.github/workflows/next.yml
+    permissions:
+      contents: read
+
+  vinext-compatibility:
+    uses: ./.github/workflows/vinext.yml
+    permissions:
+      contents: read
+
   release:
     name: Release
+    needs: [next-compatibility, vinext-compatibility]
     if: github.repository_owner == 'TanStack'
     runs-on: ubuntu-latest
     steps:

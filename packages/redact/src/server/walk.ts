@@ -1,3 +1,4 @@
+import { isFunction, isThenable } from '../core/functions'
 import {
   REACT_ELEMENT_TYPE,
   REACT_LEGACY_ELEMENT_TYPE,
@@ -63,17 +64,10 @@ export interface WalkOptions {
   nextBoundaryId: () => number
   bootstrapped?: boolean | undefined
   isBoundaryResolution?: boolean | undefined
-  isSvg?: boolean | undefined
   resourceScope?: ResourceScope | undefined
-  /**
-   * Tracks whether the most recent emission within the *current text flow*
-   * ended with a text node. When the next emission is also text, we emit a
-   * `<!-- -->` separator so the browser's HTML parser doesn't merge them
-   * into a single text node — required for hydration to line up text
-   * boundaries with the React tree. Reset to `false` whenever we enter a
-   * new host element (`<tag>` opens a fresh text flow).
-   */
-  textState?: { lastWasText: boolean }
+  // Shared traversal flags: SVG = 1, adjacent text = 2.
+  // Host children restore previous flags on return or throw.
+  textState?: { bits: number }
 }
 
 /**
@@ -84,7 +78,7 @@ export interface WalkOptions {
 export function walk(node: ReactNode, opts: WalkOptions): void {
   // Seed a text state if the caller didn't provide one so the separator logic
   // is active for the whole tree.
-  if (!opts.textState) opts = { ...opts, textState: { lastWasText: false } }
+  if (!opts.textState) opts = { ...opts, textState: { bits: 0 } }
   walkNode(node, opts)
 }
 
@@ -117,9 +111,9 @@ function emitText(text: string, opts: WalkOptions): void {
   // Empty string renders no text node and doesn't start/extend a text flow —
   // skip entirely so sibling text isn't separated by a stray `<!-- -->`.
   if (text === '') return
-  if (opts.textState?.lastWasText) opts.emit('<!-- -->')
+  if (opts.textState!.bits & 2) opts.emit('<!-- -->')
   opts.emit(escapeText(text))
-  if (opts.textState) opts.textState.lastWasText = true
+  opts.textState!.bits |= 2
 }
 
 function walkNode(node: ReactNode, opts: WalkOptions): void {
@@ -137,7 +131,7 @@ function walkNode(node: ReactNode, opts: WalkOptions): void {
     for (const c of node) walkNode(c, opts)
     return
   }
-  if (typeof (node as any)[Symbol.iterator] === 'function') {
+  if (isFunction((node as any)[Symbol.iterator])) {
     for (const item of node as Iterable<ReactNode>) walkNode(item, opts)
     return
   }
@@ -214,7 +208,7 @@ function walkElement(el: ReactElement, opts: WalkOptions): void {
 
   if (marker === REACT_CONSUMER_TYPE) {
     const render = props.children
-    if (typeof render === 'function') {
+    if (isFunction(render)) {
       walkNode(render((type as any)._context._currentValue), opts)
     }
     return
@@ -241,7 +235,7 @@ function walkElement(el: ReactElement, opts: WalkOptions): void {
     return
   }
 
-  if (typeof type === 'function') {
+  if (isFunction(type)) {
     walkComponent(type, props, opts)
     return
   }
@@ -252,7 +246,7 @@ function walkHost(
   props: Record<string, any>,
   opts: WalkOptions,
 ): void {
-  const isSvg = opts.isSvg || tag === 'svg'
+  const isSvg = !!(opts.textState!.bits & 1) || tag === 'svg'
   if (!isSvg && resourceKind(tag, props) && recordHostResource(tag, props, opts.resourceScope)) return
   // <textarea value="..."> serializes its value as a TEXT CHILD, not an
   // attribute. `defaultValue` is the fallback when `value` is absent. This
@@ -329,7 +323,7 @@ function walkHost(
 
   if (VOID_ELEMENTS.has(tag)) {
     opts.emit('/>')
-    if (opts.textState) opts.textState.lastWasText = false
+    opts.textState!.bits &= 1
     return
   }
   opts.emit('>')
@@ -337,11 +331,6 @@ function walkHost(
   // Opening a host element starts a fresh text flow context for its children.
   // Children's text separator tracking is independent of the outer context.
   const parentTextState = opts.textState
-  const childOpts: WalkOptions = {
-    ...opts,
-    isSvg: isSvg && tag !== 'foreignObject',
-    textState: { lastWasText: false },
-  }
 
   if (tag === 'html' && !hasHeadChild(props.children)) {
     opts.emit('<head>')
@@ -354,7 +343,7 @@ function walkHost(
   if (isTextarea && textareaValue != null) {
     opts.emit(escapeText(String(textareaValue)))
     opts.emit(`</${tag}>`)
-    if (parentTextState) parentTextState.lastWasText = false
+    parentTextState!.bits &= 1
     return
   }
 
@@ -372,18 +361,24 @@ function walkHost(
       }
     }
     opts.emit(`</${tag}>`)
-    if (parentTextState) parentTextState.lastWasText = false
+    parentTextState!.bits &= 1
     return
   }
 
   if (dangerouslyHtml != null) {
     opts.emit(String(dangerouslyHtml))
   } else {
-    walkNode(props.children, childOpts)
+    const previousState = parentTextState!.bits
+    parentTextState!.bits = +(isSvg && tag !== 'foreignObject')
+    try {
+      walkNode(props.children, opts)
+    } finally {
+      parentTextState!.bits = previousState
+    }
   }
   opts.emit(`</${tag}>`)
   // Host element closing resets outer flow — next sibling text starts fresh.
-  if (parentTextState) parentTextState.lastWasText = false
+  parentTextState!.bits &= 1
   } finally {
     if (isSelect) popSelectContext()
   }
@@ -412,7 +407,7 @@ function isElementOfType(value: unknown, type: string): value is ReactElement {
 }
 
 function isIterable(value: unknown): value is Iterable<unknown> {
-  return !!value && typeof (value as { [Symbol.iterator]?: unknown })[Symbol.iterator] === 'function'
+  return !!value && isFunction((value as { [Symbol.iterator]?: unknown })[Symbol.iterator])
 }
 
 function walkComponent(
@@ -530,8 +525,4 @@ function emitBoundary(opts: WalkOptions, id: number, fallbackHTML: string): void
   opts.emit(`<!--$?${id}--><div id="B:${id}">`)
   opts.emit(fallbackHTML)
   opts.emit(`</div><!--/$-->`)
-}
-
-function isThenable(x: any): x is Promise<any> {
-  return x != null && typeof x.then === 'function'
 }

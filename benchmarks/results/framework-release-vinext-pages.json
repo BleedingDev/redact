@@ -1,0 +1,1268 @@
+{
+  "recordedAt": "2026-10-25T02:22:10.753Z",
+  "framework": "vinext",
+  "router": "pages-only",
+  "complete": true,
+  "passed": true,
+  "issues": [],
+  "fingerprints": {
+    "sourceSha256": [
+      "05155eb8297d246c16ebd79e992c5d7f47eed44e9587a60de2dcf3b0d535f440"
+    ],
+    "buildSha256": [
+      "8ebcee93565375ef8e17a82ceaf75fd8759255323e85484c32d2fe550784bb4f"
+    ],
+    "suiteSha256": [
+      "d523db81411dc341e93bbf7de2f912e3c5e59538ed86ea57b26bc1cd35f5a41f"
+    ],
+    "fixtureSha256": [
+      "31b655cb051311163dd858042f7b4e3ab41552f746a40e3b2c9543f367de3baa"
+    ]
+  },
+  "summary": {
+    "expectedConfigurations": 36,
+    "completeConfigurations": 36,
+    "passedConfigurations": 36,
+    "expectedScenarios": 150,
+    "passedScenarios": 150,
+    "missingScenarios": 0
+  },
+  "rows": [
+    {
+      "name": "react-development-node",
+      "router": "pages-only",
+      "deployment": "node",
+      "reference": true,
+      "mode": "development",
+      "basePath": "",
+      "browser": "chromium",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1213
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1331
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 593
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-fast-refresh",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 5
+    },
+    {
+      "name": "react-development-node",
+      "router": "pages-only",
+      "deployment": "node",
+      "reference": true,
+      "mode": "development",
+      "basePath": "",
+      "browser": "firefox",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1350
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1444
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 594
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-fast-refresh",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 5
+    },
+    {
+      "name": "react-development-node",
+      "router": "pages-only",
+      "deployment": "node",
+      "reference": true,
+      "mode": "development",
+      "basePath": "",
+      "browser": "webkit",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1310
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1395
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 573
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-fast-refresh",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 5
+    },
+    {
+      "name": "react-production-node",
+      "router": "pages-only",
+      "deployment": "node",
+      "reference": true,
+      "mode": "production",
+      "basePath": "",
+      "browser": "chromium",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1067
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1208
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 531
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "react-production-node",
+      "router": "pages-only",
+      "deployment": "node",
+      "reference": true,
+      "mode": "production",
+      "basePath": "",
+      "browser": "firefox",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1198
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1341
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 546
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "react-production-node",
+      "router": "pages-only",
+      "deployment": "node",
+      "reference": true,
+      "mode": "production",
+      "basePath": "",
+      "browser": "webkit",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1234
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1285
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 648
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "redact-development-node",
+      "router": "pages-only",
+      "deployment": "node",
+      "reference": false,
+      "mode": "development",
+      "basePath": "",
+      "browser": "chromium",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1221
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1286
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 579
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-fast-refresh",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 5
+    },
+    {
+      "name": "redact-development-node",
+      "router": "pages-only",
+      "deployment": "node",
+      "reference": false,
+      "mode": "development",
+      "basePath": "",
+      "browser": "firefox",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1463
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1526
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 607
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-fast-refresh",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 5
+    },
+    {
+      "name": "redact-development-node",
+      "router": "pages-only",
+      "deployment": "node",
+      "reference": false,
+      "mode": "development",
+      "basePath": "",
+      "browser": "webkit",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1343
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1455
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 597
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-fast-refresh",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 5
+    },
+    {
+      "name": "redact-production-node",
+      "router": "pages-only",
+      "deployment": "node",
+      "reference": false,
+      "mode": "production",
+      "basePath": "",
+      "browser": "chromium",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1070
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1198
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 532
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "redact-production-node",
+      "router": "pages-only",
+      "deployment": "node",
+      "reference": false,
+      "mode": "production",
+      "basePath": "",
+      "browser": "firefox",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1216
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1353
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 553
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "redact-production-node",
+      "router": "pages-only",
+      "deployment": "node",
+      "reference": false,
+      "mode": "production",
+      "basePath": "",
+      "browser": "webkit",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1229
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1272
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 640
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "react-production-standalone",
+      "router": "pages-only",
+      "deployment": "standalone",
+      "reference": true,
+      "mode": "production",
+      "basePath": "/coverage",
+      "browser": "chromium",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1073
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1207
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 548
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "react-production-standalone",
+      "router": "pages-only",
+      "deployment": "standalone",
+      "reference": true,
+      "mode": "production",
+      "basePath": "/coverage",
+      "browser": "firefox",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1217
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1386
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 550
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "react-production-standalone",
+      "router": "pages-only",
+      "deployment": "standalone",
+      "reference": true,
+      "mode": "production",
+      "basePath": "/coverage",
+      "browser": "webkit",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1244
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1293
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 650
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "redact-production-standalone",
+      "router": "pages-only",
+      "deployment": "standalone",
+      "reference": false,
+      "mode": "production",
+      "basePath": "/coverage",
+      "browser": "chromium",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1064
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1200
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 533
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "redact-production-standalone",
+      "router": "pages-only",
+      "deployment": "standalone",
+      "reference": false,
+      "mode": "production",
+      "basePath": "/coverage",
+      "browser": "firefox",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1194
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1335
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 549
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "redact-production-standalone",
+      "router": "pages-only",
+      "deployment": "standalone",
+      "reference": false,
+      "mode": "production",
+      "basePath": "/coverage",
+      "browser": "webkit",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1226
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1276
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 639
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "react-production-static-export",
+      "router": "pages-only",
+      "deployment": "static-export",
+      "reference": true,
+      "mode": "production",
+      "basePath": "/coverage",
+      "browser": "chromium",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1067
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-static-props",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 3
+    },
+    {
+      "name": "react-production-static-export",
+      "router": "pages-only",
+      "deployment": "static-export",
+      "reference": true,
+      "mode": "production",
+      "basePath": "/coverage",
+      "browser": "firefox",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1178
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-static-props",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 3
+    },
+    {
+      "name": "react-production-static-export",
+      "router": "pages-only",
+      "deployment": "static-export",
+      "reference": true,
+      "mode": "production",
+      "basePath": "/coverage",
+      "browser": "webkit",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1236
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-static-props",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 3
+    },
+    {
+      "name": "redact-production-static-export",
+      "router": "pages-only",
+      "deployment": "static-export",
+      "reference": false,
+      "mode": "production",
+      "basePath": "/coverage",
+      "browser": "chromium",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1063
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-static-props",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 3
+    },
+    {
+      "name": "redact-production-static-export",
+      "router": "pages-only",
+      "deployment": "static-export",
+      "reference": false,
+      "mode": "production",
+      "basePath": "/coverage",
+      "browser": "firefox",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1188
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-static-props",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 3
+    },
+    {
+      "name": "redact-production-static-export",
+      "router": "pages-only",
+      "deployment": "static-export",
+      "reference": false,
+      "mode": "production",
+      "basePath": "/coverage",
+      "browser": "webkit",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1226
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-static-props",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 3
+    },
+    {
+      "name": "react-development-workers",
+      "router": "pages-only",
+      "deployment": "workers",
+      "reference": true,
+      "mode": "development",
+      "basePath": "",
+      "browser": "chromium",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1435
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1335
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 586
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-fast-refresh",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 5
+    },
+    {
+      "name": "react-development-workers",
+      "router": "pages-only",
+      "deployment": "workers",
+      "reference": true,
+      "mode": "development",
+      "basePath": "",
+      "browser": "firefox",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1498
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1504
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 617
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-fast-refresh",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 5
+    },
+    {
+      "name": "react-development-workers",
+      "router": "pages-only",
+      "deployment": "workers",
+      "reference": true,
+      "mode": "development",
+      "basePath": "",
+      "browser": "webkit",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1498
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1527
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 651
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-fast-refresh",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 5
+    },
+    {
+      "name": "react-production-workers",
+      "router": "pages-only",
+      "deployment": "workers",
+      "reference": true,
+      "mode": "production",
+      "basePath": "",
+      "browser": "chromium",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1087
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1224
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 550
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "react-production-workers",
+      "router": "pages-only",
+      "deployment": "workers",
+      "reference": true,
+      "mode": "production",
+      "basePath": "",
+      "browser": "firefox",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1194
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1368
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 558
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "react-production-workers",
+      "router": "pages-only",
+      "deployment": "workers",
+      "reference": true,
+      "mode": "production",
+      "basePath": "",
+      "browser": "webkit",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1256
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1291
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 657
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "redact-development-workers",
+      "router": "pages-only",
+      "deployment": "workers",
+      "reference": false,
+      "mode": "development",
+      "basePath": "",
+      "browser": "chromium",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1266
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1298
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 563
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-fast-refresh",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 5
+    },
+    {
+      "name": "redact-development-workers",
+      "router": "pages-only",
+      "deployment": "workers",
+      "reference": false,
+      "mode": "development",
+      "basePath": "",
+      "browser": "firefox",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1377
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1433
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 582
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-fast-refresh",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 5
+    },
+    {
+      "name": "redact-development-workers",
+      "router": "pages-only",
+      "deployment": "workers",
+      "reference": false,
+      "mode": "development",
+      "basePath": "",
+      "browser": "webkit",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1354
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1414
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 589
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        },
+        {
+          "name": "pages-fast-refresh",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 5
+    },
+    {
+      "name": "redact-production-workers",
+      "router": "pages-only",
+      "deployment": "workers",
+      "reference": false,
+      "mode": "production",
+      "basePath": "",
+      "browser": "chromium",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1130
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1200
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 537
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "redact-production-workers",
+      "router": "pages-only",
+      "deployment": "workers",
+      "reference": false,
+      "mode": "production",
+      "basePath": "",
+      "browser": "firefox",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1191
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1339
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 562
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    },
+    {
+      "name": "redact-production-workers",
+      "router": "pages-only",
+      "deployment": "workers",
+      "reference": false,
+      "mode": "production",
+      "basePath": "",
+      "browser": "webkit",
+      "complete": true,
+      "passed": true,
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1237
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1288
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 642
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "missing": [],
+      "expected": 4
+    }
+  ]
+}

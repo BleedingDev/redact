@@ -1,0 +1,32 @@
+{
+  "name": "vinext-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node ../../scripts/prepare-vinext-fixture.mjs && vite dev",
+    "build": "node ../../scripts/prepare-vinext-fixture.mjs && vite build",
+    "start": "cd .fixture && vinext start"
+  },
+  "dependencies": {
+    "@tanstack/redact": "workspace:*",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-server-dom-webpack": "19.3.1",
+    "vinext": "1.3.0"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "1.65.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "@vitejs/plugin-rsc": "0.5.38",
+    "vite": "8.3.5",
+    "wrangler": "4.152.0"
+  },
+  "overrides": {
+    "miniflare": {
+      "undici": "7.30.1"
+    },
+    "satori": {
+      "fflate": "0.7.5"
+    }
+  }
+}

@@ -1,0 +1,2800 @@
+{
+  "recordedAt": "2026-10-25T08:18:15.245Z",
+  "sourceBackport": true,
+  "releaseEvidence": false,
+  "node": "v24.22.0",
+  "nextVersion": "16.2.12",
+  "nextPackageSha256": "b3f2bbbd68c35642257aabe76acfef2393a4163ae0233e3732bfa37ba0e38ad6",
+  "redactPackageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+  "results": [
+    {
+      "id": "standard-redact-turbopack",
+      "exitCode": 0,
+      "signal": null,
+      "log": "/private/tmp/redact-next162-backport-consumers/standard-redact-turbopack.log",
+      "evidence": {
+        "version": "16.2.12",
+        "evidence": {
+          "recordedAt": "2026-10-25T08:19:51.167Z",
+          "node": "v24.22.0",
+          "platform": "darwin",
+          "playwright": "1.64.1",
+          "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+          "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+          "fixtureSha256": "436cacba5f737caea1fae03755695e861f4f11ae8a29ebf6c2e5d7beecc76da2"
+        },
+        "results": [
+          {
+            "version": "16.2.12",
+            "rendering": "standard",
+            "bundler": "turbopack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "chromium",
+            "reference": false,
+            "basePath": "",
+            "browserVersion": "156.0.8078.4",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1482
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1267
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1026
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1044
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 1828
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2625
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 1542
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 598
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1174
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 2645
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 999
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 861
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 1903
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2193
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 1380
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 1558
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 1674
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 605
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 30892
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "standard",
+            "bundler": "turbopack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "firefox",
+            "reference": false,
+            "basePath": "",
+            "browserVersion": "157.0",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1054
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1318
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1035
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1019
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 1878
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2674
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 1738
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 605
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1372
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 2756
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1041
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 954
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 2025
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2037
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 770
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 1660
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 1732
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 594
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 30062
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "standard",
+            "bundler": "turbopack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "webkit",
+            "reference": false,
+            "basePath": "",
+            "browserVersion": "27.2",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 892
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1356
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1028
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1012
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 1860
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2705
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 1712
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 601
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1180
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 2905
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 986
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 886
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 1905
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 1657
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 780
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 1604
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 1711
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 607
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 30107
+          }
+        ],
+        "complete": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "standard-redact-webpack",
+      "exitCode": 0,
+      "signal": null,
+      "log": "/private/tmp/redact-next162-backport-consumers/standard-redact-webpack.log",
+      "evidence": {
+        "version": "16.2.12",
+        "evidence": {
+          "recordedAt": "2026-10-25T08:21:45.888Z",
+          "node": "v24.22.0",
+          "platform": "darwin",
+          "playwright": "1.64.1",
+          "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+          "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+          "fixtureSha256": "436cacba5f737caea1fae03755695e861f4f11ae8a29ebf6c2e5d7beecc76da2"
+        },
+        "results": [
+          {
+            "version": "16.2.12",
+            "rendering": "standard",
+            "bundler": "webpack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "chromium",
+            "reference": false,
+            "basePath": "",
+            "browserVersion": "156.0.8078.4",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1551
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1334
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1204
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1241
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 2010
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2888
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 1988
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 1166
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1443
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 3144
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1365
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 1664
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 2891
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2454
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 1313
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 2195
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 2292
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 1043
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 36469
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "standard",
+            "bundler": "webpack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "firefox",
+            "reference": false,
+            "basePath": "",
+            "browserVersion": "157.0",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1307
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1394
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1244
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1262
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 2052
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2884
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 2129
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 1222
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1608
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 3250
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1468
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 1599
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 3003
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2656
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 1319
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 2285
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 2283
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 1006
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 38449
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "standard",
+            "bundler": "webpack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "webkit",
+            "reference": false,
+            "basePath": "",
+            "browserVersion": "27.2",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1407
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1505
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1202
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1183
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 1991
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2993
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 2053
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 1136
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1429
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 3737
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1377
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 1285
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 3366
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2395
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 1290
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 2491
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 2156
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 971
+              }
+            ],
+            "expectedNavigationCancellations": 1,
+            "durationMs": 39304
+          }
+        ],
+        "complete": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "standard-react-turbopack",
+      "exitCode": 0,
+      "signal": null,
+      "log": "/private/tmp/redact-next162-backport-consumers/standard-react-turbopack.log",
+      "evidence": {
+        "version": "16.2.12",
+        "evidence": {
+          "recordedAt": "2026-10-25T08:23:14.794Z",
+          "node": "v24.22.0",
+          "platform": "darwin",
+          "playwright": "1.64.1",
+          "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+          "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+          "fixtureSha256": "436cacba5f737caea1fae03755695e861f4f11ae8a29ebf6c2e5d7beecc76da2"
+        },
+        "results": [
+          {
+            "version": "16.2.12",
+            "rendering": "standard",
+            "bundler": "turbopack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "chromium",
+            "reference": true,
+            "basePath": "",
+            "browserVersion": "156.0.8078.4",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1522
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1257
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1034
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1038
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 1793
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2630
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 1618
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 609
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1210
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 2653
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1009
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 890
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 1908
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2419
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 832
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 1595
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 1696
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 612
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 28624
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "standard",
+            "bundler": "turbopack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "firefox",
+            "reference": true,
+            "basePath": "",
+            "browserVersion": "157.0",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1018
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1303
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1051
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1046
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 1872
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2629
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 1690
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 590
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1352
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 2785
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1034
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 956
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 2027
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2347
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 747
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 1695
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 1755
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 597
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 29996
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "standard",
+            "bundler": "turbopack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "webkit",
+            "reference": true,
+            "basePath": "",
+            "browserVersion": "27.2",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1117
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1355
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1058
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1031
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 1849
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2713
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 1648
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 598
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1197
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 2875
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 982
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 897
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 1904
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 1956
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 826
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 1608
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 1732
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 596
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 29814
+          }
+        ],
+        "complete": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "standard-react-webpack",
+      "exitCode": 0,
+      "signal": null,
+      "log": "/private/tmp/redact-next162-backport-consumers/standard-react-webpack.log",
+      "evidence": {
+        "version": "16.2.12",
+        "evidence": {
+          "recordedAt": "2026-10-25T08:25:12.373Z",
+          "node": "v24.22.0",
+          "platform": "darwin",
+          "playwright": "1.64.1",
+          "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+          "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+          "fixtureSha256": "436cacba5f737caea1fae03755695e861f4f11ae8a29ebf6c2e5d7beecc76da2"
+        },
+        "results": [
+          {
+            "version": "16.2.12",
+            "rendering": "standard",
+            "bundler": "webpack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "chromium",
+            "reference": true,
+            "basePath": "",
+            "browserVersion": "156.0.8078.4",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1721
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1352
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1258
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1296
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 2003
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2903
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 2062
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 1264
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1512
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 3349
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1468
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 1320
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 3008
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2735
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 1491
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 2249
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 2458
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 1107
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 37880
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "standard",
+            "bundler": "webpack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "firefox",
+            "reference": true,
+            "basePath": "",
+            "browserVersion": "157.0",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1316
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1479
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1324
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1338
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 2249
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2935
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 2240
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 1212
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1632
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 3463
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1558
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 1443
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 2591
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2868
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 1394
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 2360
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 2509
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 1082
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 39702
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "standard",
+            "bundler": "webpack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "webkit",
+            "reference": true,
+            "basePath": "",
+            "browserVersion": "27.2",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1424
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1523
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1220
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1211
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 2042
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2982
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 2142
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 1210
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1474
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 3897
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1451
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 1318
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 3238
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2581
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 1273
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 2607
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 2246
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 1027
+              }
+            ],
+            "expectedNavigationCancellations": 1,
+            "durationMs": 39452
+          }
+        ],
+        "complete": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "cache-redact-turbopack",
+      "exitCode": 0,
+      "signal": null,
+      "log": "/private/tmp/redact-next162-backport-consumers/cache-redact-turbopack.log",
+      "evidence": {
+        "version": "16.2.12",
+        "evidence": {
+          "recordedAt": "2026-10-25T08:26:48.670Z",
+          "node": "v24.22.0",
+          "platform": "darwin",
+          "playwright": "1.64.1",
+          "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+          "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+          "fixtureSha256": "b2d703961ad7ad7c669edf58ed4ddfacbfe441d577a3fe8c31e550cecafe814a"
+        },
+        "results": [
+          {
+            "version": "16.2.12",
+            "rendering": "cache-components",
+            "bundler": "turbopack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "chromium",
+            "reference": false,
+            "basePath": "",
+            "browserVersion": "156.0.8078.4",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 916
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1283
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1042
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1044
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 1800
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2631
+              },
+              {
+                "name": "cache-components",
+                "passed": true,
+                "durationMs": 758
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 1538
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 624
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1176
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 2796
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1016
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 891
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 1957
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 1706
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 1397
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 1583
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 1742
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 631
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 29519
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "cache-components",
+            "bundler": "turbopack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "firefox",
+            "reference": false,
+            "basePath": "",
+            "browserVersion": "157.0",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1041
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1346
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1063
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1053
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 1897
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2624
+              },
+              {
+                "name": "cache-components",
+                "passed": true,
+                "durationMs": 761
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 1676
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 615
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1289
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 2991
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1063
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 970
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 2060
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 1814
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 776
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 1639
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 1802
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 659
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 30846
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "cache-components",
+            "bundler": "turbopack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "webkit",
+            "reference": false,
+            "basePath": "",
+            "browserVersion": "27.2",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 894
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1358
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1047
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1156
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 1908
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2799
+              },
+              {
+                "name": "cache-components",
+                "passed": true,
+                "durationMs": 776
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 1697
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 625
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1293
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 3040
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1062
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 962
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 2098
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 1767
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 828
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 1635
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 1762
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 609
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 31259
+          }
+        ],
+        "complete": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "cache-redact-webpack",
+      "exitCode": 0,
+      "signal": null,
+      "log": "/private/tmp/redact-next162-backport-consumers/cache-redact-webpack.log",
+      "evidence": {
+        "version": "16.2.12",
+        "evidence": {
+          "recordedAt": "2026-10-25T08:28:46.670Z",
+          "node": "v24.22.0",
+          "platform": "darwin",
+          "playwright": "1.64.1",
+          "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+          "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+          "fixtureSha256": "b2d703961ad7ad7c669edf58ed4ddfacbfe441d577a3fe8c31e550cecafe814a"
+        },
+        "results": [
+          {
+            "version": "16.2.12",
+            "rendering": "cache-components",
+            "bundler": "webpack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "chromium",
+            "reference": false,
+            "basePath": "",
+            "browserVersion": "156.0.8078.4",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1189
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1782
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1235
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1220
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 1967
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2869
+              },
+              {
+                "name": "cache-components",
+                "passed": true,
+                "durationMs": 1015
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 2045
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 1214
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1455
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 3737
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1412
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 1273
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 3156
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2756
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 1276
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 2504
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 2201
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 1051
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 38032
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "cache-components",
+            "bundler": "webpack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "firefox",
+            "reference": false,
+            "basePath": "",
+            "browserVersion": "157.0",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1319
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1533
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1235
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1247
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 2121
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2892
+              },
+              {
+                "name": "cache-components",
+                "passed": true,
+                "durationMs": 1016
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 2100
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 1361
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1633
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 3914
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1434
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 1430
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 2672
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2911
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 1268
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 2562
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 2301
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 1048
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 40496
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "cache-components",
+            "bundler": "webpack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "webkit",
+            "reference": false,
+            "basePath": "",
+            "browserVersion": "27.2",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1132
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1583
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1180
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1189
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 2025
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2979
+              },
+              {
+                "name": "cache-components",
+                "passed": true,
+                "durationMs": 964
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 2048
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 1174
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1399
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 3728
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1390
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 1245
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 3029
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2582
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 1211
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 2508
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 2145
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 1023
+              }
+            ],
+            "expectedNavigationCancellations": 1,
+            "durationMs": 38985
+          }
+        ],
+        "complete": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "cache-react-turbopack",
+      "exitCode": 0,
+      "signal": null,
+      "log": "/private/tmp/redact-next162-backport-consumers/cache-react-turbopack.log",
+      "evidence": {
+        "version": "16.2.12",
+        "evidence": {
+          "recordedAt": "2026-10-25T08:30:16.429Z",
+          "node": "v24.22.0",
+          "platform": "darwin",
+          "playwright": "1.64.1",
+          "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+          "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+          "fixtureSha256": "b2d703961ad7ad7c669edf58ed4ddfacbfe441d577a3fe8c31e550cecafe814a"
+        },
+        "results": [
+          {
+            "version": "16.2.12",
+            "rendering": "cache-components",
+            "bundler": "turbopack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "chromium",
+            "reference": true,
+            "basePath": "",
+            "browserVersion": "156.0.8078.4",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 908
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1302
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1037
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1050
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 1828
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2636
+              },
+              {
+                "name": "cache-components",
+                "passed": true,
+                "durationMs": 765
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 1578
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 637
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1191
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 2812
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1039
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 916
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 1977
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2002
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 791
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 1571
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 1726
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 635
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 28131
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "cache-components",
+            "bundler": "turbopack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "firefox",
+            "reference": true,
+            "basePath": "",
+            "browserVersion": "157.0",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1047
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1343
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1064
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1070
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 1936
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2630
+              },
+              {
+                "name": "cache-components",
+                "passed": true,
+                "durationMs": 750
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 1742
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 617
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1392
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 2976
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1077
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 997
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 2088
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2118
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 799
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 1680
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 1765
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 605
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 31101
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "cache-components",
+            "bundler": "turbopack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "webkit",
+            "reference": true,
+            "basePath": "",
+            "browserVersion": "27.2",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 915
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1344
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1049
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1021
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 1899
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2709
+              },
+              {
+                "name": "cache-components",
+                "passed": true,
+                "durationMs": 728
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 1661
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 599
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1151
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 2939
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1005
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 883
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 1948
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 1944
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 787
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 1620
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 1756
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 607
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 30093
+          }
+        ],
+        "complete": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "cache-react-webpack",
+      "exitCode": 0,
+      "signal": null,
+      "log": "/private/tmp/redact-next162-backport-consumers/cache-react-webpack.log",
+      "evidence": {
+        "version": "16.2.12",
+        "evidence": {
+          "recordedAt": "2026-10-25T08:32:19.598Z",
+          "node": "v24.22.0",
+          "platform": "darwin",
+          "playwright": "1.64.1",
+          "packageSha256": "8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97",
+          "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+          "fixtureSha256": "b2d703961ad7ad7c669edf58ed4ddfacbfe441d577a3fe8c31e550cecafe814a"
+        },
+        "results": [
+          {
+            "version": "16.2.12",
+            "rendering": "cache-components",
+            "bundler": "webpack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "chromium",
+            "reference": true,
+            "basePath": "",
+            "browserVersion": "156.0.8078.4",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1181
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1802
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1259
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1262
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 2048
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2869
+              },
+              {
+                "name": "cache-components",
+                "passed": true,
+                "durationMs": 1045
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 2066
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 1457
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1536
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 4002
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1446
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 1393
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 3418
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2787
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 1311
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 2576
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 2308
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 1075
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 39573
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "cache-components",
+            "bundler": "webpack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "firefox",
+            "reference": true,
+            "basePath": "",
+            "browserVersion": "157.0",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1327
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1547
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1326
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1289
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 2191
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2862
+              },
+              {
+                "name": "cache-components",
+                "passed": true,
+                "durationMs": 1036
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 2152
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 1425
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1727
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 4157
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1517
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 1423
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 2839
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 3260
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 1312
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 2574
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 2681
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 1117
+              }
+            ],
+            "expectedNavigationCancellations": 0,
+            "durationMs": 42088
+          },
+          {
+            "version": "16.2.12",
+            "rendering": "cache-components",
+            "bundler": "webpack",
+            "mode": "development",
+            "deployment": "node",
+            "browser": "webkit",
+            "reference": true,
+            "basePath": "",
+            "browserVersion": "27.2",
+            "passed": true,
+            "scenarios": [
+              {
+                "name": "hydration",
+                "passed": true,
+                "durationMs": 1619
+              },
+              {
+                "name": "ids",
+                "passed": true,
+                "durationMs": 1536
+              },
+              {
+                "name": "actions",
+                "passed": true,
+                "durationMs": 1261
+              },
+              {
+                "name": "direct-actions",
+                "passed": true,
+                "durationMs": 1225
+              },
+              {
+                "name": "progressive-actions",
+                "passed": true,
+                "durationMs": 2066
+              },
+              {
+                "name": "streaming",
+                "passed": true,
+                "durationMs": 2982
+              },
+              {
+                "name": "cache-components",
+                "passed": true,
+                "durationMs": 1035
+              },
+              {
+                "name": "pages-router",
+                "passed": true,
+                "durationMs": 2147
+              },
+              {
+                "name": "fast-refresh",
+                "passed": true,
+                "durationMs": 1353
+              },
+              {
+                "name": "routing",
+                "passed": true,
+                "durationMs": 1549
+              },
+              {
+                "name": "boundaries",
+                "passed": true,
+                "durationMs": 3945
+              },
+              {
+                "name": "loading-cancellation",
+                "passed": true,
+                "durationMs": 1382
+              },
+              {
+                "name": "navigation-cancellation",
+                "passed": true,
+                "durationMs": 1586
+              },
+              {
+                "name": "parallel-routes",
+                "passed": true,
+                "durationMs": 3134
+              },
+              {
+                "name": "mutations",
+                "passed": true,
+                "durationMs": 2743
+              },
+              {
+                "name": "components",
+                "passed": true,
+                "durationMs": 1317
+              },
+              {
+                "name": "pages-data",
+                "passed": true,
+                "durationMs": 2295
+              },
+              {
+                "name": "error-boundaries",
+                "passed": true,
+                "durationMs": 2264
+              },
+              {
+                "name": "server-runtime",
+                "passed": true,
+                "durationMs": 1090
+              }
+            ],
+            "expectedNavigationCancellations": 1,
+            "durationMs": 41011
+          }
+        ],
+        "complete": true,
+        "passed": true
+      }
+    }
+  ],
+  "sourceCommit": "6ebceaf5becb273501452938baf8d85b0298c36c",
+  "sourceBase": "v16.2.12",
+  "sourceRepository": "https://github.com/tannerlinsley/next.js",
+  "suiteRepository": "https://github.com/TanStack/redact",
+  "suiteCommit": "dc40878a18362caf3ca03756b63d74e32645a127",
+  "complete": true,
+  "passed": true,
+  "browserConfigurations": 24,
+  "scenarioGroups": 444
+}

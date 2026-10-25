@@ -1,0 +1,48 @@
+{
+  "recordedAt": "2026-10-25T11:25:19.938312+00:00",
+  "sourceCommit": "0e879521fbd4ae7637bfcadae1841c2ef0f44c97",
+  "package": {
+    "tarball": "redact-6f8592d92061ab38.tgz",
+    "sha256": "6f8592d92061ab3845b11a5635a2853ec5ba61b600f7ca213cfa42b510ec1099",
+    "patches": false,
+    "overrides": {
+      "miniflare": {
+        "undici": "7.30.1"
+      },
+      "satori": {
+        "fflate": "0.7.5"
+      }
+    }
+  },
+  "localValidation": {
+    "command": "pnpm test:ci",
+    "passed": true,
+    "testsPassed": 1859,
+    "existingTestsSkipped": 91,
+    "typesPassed": true,
+    "packageImportAndDeclarationChecksPassed": true,
+    "sizeGatesPassed": 38,
+    "fullClientGzipBytes": 27921,
+    "fullClientLimit": 28183,
+    "defaultViteClientGzipBytes": 23304,
+    "defaultViteClientLimit": 23335
+  },
+  "auditVulnerabilities": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "vinext": "framework-stable-vinext-combined.json",
+  "hosted": "framework-stable-vinext-hosted.json",
+  "next": {
+    "report": "framework-stable-next.json",
+    "workflowRun": "https://github.com/TanStack/redact/actions/runs/40188021674",
+    "passed": true,
+    "configurations": 162,
+    "scenarios": 2694
+  },
+  "benchmark": "vinext-final-2026-10-25.json"
+}

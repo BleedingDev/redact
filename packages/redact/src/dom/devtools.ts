@@ -1,14 +1,21 @@
 import { FiberTag, type Fiber, type FiberRoot } from '../core'
-import { ReactSharedInternals } from '../react/shared-internals'
-import { REACT_VIEW_TRANSITION_TYPE } from '../react/view-transition'
-import { REACT_PROFILER_TYPE, REACT_STRICT_MODE_TYPE } from '../react/suspense'
-import { scheduleUpdate, flushSyncWork } from './reconcile'
-import { onCommitRollback } from './commit'
 import { devToolsMetadata } from '../core/devtools'
 import { notifyDevToolsCommit, hasPendingDevToolsEffects } from './devtools-effects'
 
 // React DevTools consumes React's private fiber layout. Keep that layout in a
 // separate, development-only tree instead of expanding Redact's runtime fibers.
+// The renderer supplies its development hooks at attachment time. Keeping
+// this module independent avoids pulling renderer cycles into production builds.
+interface DevToolsRuntime {
+  shared: typeof import('../react/shared-internals').ReactSharedInternals
+  scheduleUpdate: typeof import('./reconcile').scheduleUpdate
+  flushSyncWork: typeof import('./reconcile').flushSyncWork
+  onCommitRollback: typeof import('./commit').onCommitRollback
+}
+let runtime: DevToolsRuntime
+const REACT_VIEW_TRANSITION_TYPE = /* @__PURE__ */ Symbol.for('react.view_transition')
+const REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for('react.profiler')
+const REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for('react.strict_mode')
 type DebugFiber = Record<string, any>
 type HookDescription = { name: string; index: number; value: any; args: any[] }
 const fibers = /* @__PURE__ */ new WeakMap<object, DebugFiber>()
@@ -60,9 +67,9 @@ export function markDevToolsError(fiber: Fiber): void {
 }
 
 export function markDevToolsUpdate(fiber: Fiber): void {
-  if (!enabled || !fiber.root) return
-  let pending = updaters.get(fiber.root)
-  if (!pending) updaters.set(fiber.root, pending = new Set())
+  if (!enabled || !fiber.r) return
+  let pending = updaters.get(fiber.r)
+  if (!pending) updaters.set(fiber.r, pending = new Set())
   pending.add(fiber)
 }
 
@@ -102,23 +109,23 @@ export function devToolsSuspension(fiber: Fiber): Promise<void> | undefined {
 
 function scheduleDevToolsUpdate(view: DebugFiber): void {
   const fiber = nativeFibers.get(view)
-  if (!fiber || fiber.um) return
-  if (fiber.tag === FiberTag.Suspense && fiber.ms) fiber.ms.u = true
-  flushSyncWork(() => scheduleUpdate(fiber))
+  if (!fiber || fiber.u) return
+  if (fiber.t === FiberTag.Suspense && fiber.b) fiber.b.u = true
+  runtime.flushSyncWork(() => runtime.scheduleUpdate(fiber))
 }
 
 export function beginDevToolsRender(fiber: Fiber): Timing | undefined {
   if (!enabled) return
-  for (let current: Fiber | null = fiber; current && !changedTrees.has(current); current = current.parent) changedTrees.add(current)
-  if (fiber.tag !== FiberTag.Memo && fiber.tag !== FiberTag.Lazy) {
-    resolvedTypes.set(fiber, { type: fiber.type, tag: fiber.tag })
+  for (let current: Fiber | null = fiber; current && !changedTrees.has(current); current = current.p) changedTrees.add(current)
+  if (fiber.t !== FiberTag.Memo && fiber.t !== FiberTag.Lazy) {
+    resolvedTypes.set(fiber, { type: fiber.type, tag: fiber.t })
   }
   if (!fibers.has(fiber)) {
     const view = mountingFibers.get(fiber) || {}
     Object.assign(view, {
-      tag: tags[fiber.tag], type: fiber.type, elementType: fiber.type,
-      memoizedProps: fiber.pp, pendingProps: fiber.pp, alternate: null,
-      return: fiber.parent ? fibers.get(fiber.parent) || mountingFibers.get(fiber.parent) || null : null,
+      tag: tags[fiber.t], type: fiber.type, elementType: fiber.type,
+      memoizedProps: fiber.v, pendingProps: fiber.v, alternate: null,
+      return: fiber.p ? fibers.get(fiber.p) || mountingFibers.get(fiber.p) || null : null,
       _debugOwner: null, _debugInfo: null,
     })
     mountingFibers.set(fiber, view)
@@ -147,7 +154,8 @@ export function endDevToolsRender(frame: Timing | undefined): void {
   devToolsMetadata.owner = timing?.fiber || null
 }
 
-export function enableDevTools(hook: any): void {
+export function enableDevTools(hook: any, dependencies: DevToolsRuntime): void {
+  runtime = dependencies
   // Embedded DevTools may install the hook from the parent window's realm.
   enabled = typeof hook.rendererInterfaces?.get === 'function'
   devToolsMetadata.enabled = enabled
@@ -158,7 +166,7 @@ export function rememberDevToolsFiber(fiber: Fiber, element: object): void {
   const metadata = devToolsMetadata.elements.get(element)
   if (!metadata) return
   const previous = devToolsMetadata.fibers.get(fiber)
-  onCommitRollback(() => {
+  runtime.onCommitRollback(() => {
     if (previous) devToolsMetadata.fibers.set(fiber, previous)
     else devToolsMetadata.fibers.delete(fiber)
   })
@@ -169,7 +177,7 @@ export const devToolsDispatcher = process.env.NODE_ENV === 'production' ? undefi
   if (!enabled) return dispatcher
   const previous = hooks.get(fiber)
   const wasRendered = rendered.has(fiber)
-  onCommitRollback(() => {
+  runtime.onCommitRollback(() => {
     if (previous) hooks.set(fiber, previous)
     else hooks.delete(fiber)
     if (!wasRendered) rendered.delete(fiber)
@@ -181,9 +189,7 @@ export const devToolsDispatcher = process.env.NODE_ENV === 'production' ? undefi
     wrapped = {}
     const methods = {
       ...dispatcher,
-      useActionState: (_action: any, initial: any) => [initial, () => {}, false],
-      useOptimistic: (state: any) => [state, () => {}],
-      useHostTransitionStatus: () => ({ pending: false, data: null, method: null, action: null }),
+      useHostTransitionStatus: () => dispatcher.useFormStatus(),
       useEffectEvent: (fn: any) => {
         const ref = dispatcher.useRef(fn)
         dispatcher.useInsertionEffect(() => { ref.current = fn })
@@ -192,8 +198,8 @@ export const devToolsDispatcher = process.env.NODE_ENV === 'production' ? undefi
     }
     for (const name of Object.keys(methods)) {
       wrapped[name] = (...args: any[]) => {
-        const current = ReactSharedInternals.F!
-        const index = ReactSharedInternals.I
+        const current = runtime.shared.F!
+        const index = runtime.shared.I
         const value = methods[name].apply(dispatcher, args)
         hooks.get(current)!.push({ name, index, value, args })
         return value
@@ -219,10 +225,10 @@ function debugHooks(fiber: Fiber): { state: any; types: string[] | null; depende
   }
   for (const item of descriptions) {
     types.push(item.name)
-    const hook = fiber.hooks?.[item.index]
+    const hook = fiber.h?.[item.index]
     switch (item.name) {
       case 'useDebugValue': break
-      case 'useActionState': append(item.value[0], -1); append(false, -1); append(null, -1); break
+      case 'useActionState': append(item.value[0], -1); append(item.value[2], -1); append(null, -1); break
       case 'useOptimistic': append(item.value[0], -1); break
       case 'useEffectEvent': append({ impl: item.args[0] }, -1); break
       case 'useHostTransitionStatus': {
@@ -246,7 +252,7 @@ function debugHooks(fiber: Fiber): { state: any; types: string[] | null; depende
       }
       case 'useMemo':
       case 'useCallback': append([hook?.s, hook?.d], item.index); break
-      case 'useTransition': append(false, -1); append(item.value[1], -1); break
+      case 'useTransition': append(item.value[0], -1); append(item.value[1], -1); break
       case 'useDeferredValue': append(item.value, -1); break
       case 'useSyncExternalStore': append(hook?.s, item.index); append(null, -1); break
       case 'useEffect':
@@ -278,17 +284,17 @@ function project(fiber: Fiber, parent: DebugFiber | null, index: number, seen: S
   const hookData = debugHooks(fiber)
   const resolved = resolvedTypes.get(fiber)
   const type = resolved?.type ?? fiber.type
-  const tag = resolved?.tag ?? fiber.tag
+  const tag = resolved?.tag ?? fiber.t
   const metadata = devToolsMetadata.fibers.get(fiber)
   Object.assign(view, {
     _redactKey: fiber, _redactFiber: fiber, _redactOwner: metadata?.owner,
-    tag: type === REACT_VIEW_TRANSITION_TYPE ? 30 : type === REACT_PROFILER_TYPE ? 12 : type === REACT_STRICT_MODE_TYPE ? 8 : fiber.tag === FiberTag.Memo && tag === FiberTag.Function ? 15 : tags[tag], type, elementType: fiber.type, key: fiber.key,
-    stateNode: fiber.dom || fiber.sn, return: parent, child: null, sibling: null,
-    index, ref: fiber.ref, pendingProps: fiber.pp, memoizedProps: fiber.mp,
-    memoizedState: fiber.tag === FiberTag.Root ? { element: fiber.mp?.children ?? null }
-      : tag === FiberTag.Class ? fiber.sn?.state ?? null : hookData.state,
+    tag: type === REACT_VIEW_TRANSITION_TYPE ? 30 : type === REACT_PROFILER_TYPE ? 12 : type === REACT_STRICT_MODE_TYPE ? 8 : fiber.t === FiberTag.Memo && tag === FiberTag.Function ? 15 : tags[tag], type, elementType: fiber.type, key: fiber.key,
+    stateNode: fiber.n || fiber.i, return: parent, child: null, sibling: null,
+    index, ref: fiber.ref, pendingProps: fiber.v, memoizedProps: fiber.m,
+    memoizedState: fiber.t === FiberTag.Root ? { element: fiber.m?.children ?? null }
+      : tag === FiberTag.Class ? fiber.i?.state ?? null : hookData.state,
     dependencies: hookData.dependencies, alternate: null,
-    flags: (!previous || previous.memoizedProps !== fiber.mp || rendered.has(fiber) ? 1 : 0) | (forcedErrors.has(fiber) ? 128 : 0),
+    flags: (!previous || previous.memoizedProps !== fiber.m || rendered.has(fiber) ? 1 : 0) | (forcedErrors.has(fiber) ? 128 : 0),
     subtreeFlags: 0, mode: 0, _debugHookTypes: hookData.types,
     _debugOwner: metadata?.owner ? fibers.get(metadata.owner) || null : null,
     _debugSource: metadata?.source || null, _debugStack: metadata?.stack || null, _debugInfo: null,
@@ -297,11 +303,11 @@ function project(fiber: Fiber, parent: DebugFiber | null, index: number, seen: S
   if (!deferred) connectView(view, previous, fiber, fiber)
   let last: DebugFiber | null = null, childIndex = 0
   let lastChanged: Fiber | null = null
-  if (!deferred) for (let child = fiber.child; child; child = child.sibling) {
+  if (!deferred) for (let child = fiber.c; child; child = child.s) {
     if (changedTrees.has(child) || !fibers.has(child)) lastChanged = child
   }
   let reuseTail = !lastChanged
-  for (let child = fiber.child; child; child = child.sibling) {
+  for (let child = fiber.c; child; child = child.s) {
     const next = project(child, view, childIndex++, seen, deferred, reuseTail)
     if (child === lastChanged) reuseTail = true
     if (last) last.sibling = next
@@ -313,7 +319,7 @@ function project(fiber: Fiber, parent: DebugFiber | null, index: number, seen: S
     offscreens.set(fiber, key)
     const old = fibers.get(key)
     const offscreen: DebugFiber = deferred ? {} : old?.alternate || {}
-    const hidden = tag === FiberTag.Suspense ? !!fiber.ms?.p : fiber.mp?.mode === 'hidden'
+    const hidden = tag === FiberTag.Suspense ? !!fiber.b?.p : fiber.m?.mode === 'hidden'
     Object.assign(offscreen, {
       _redactKey: key,
       tag: 22, type: null, elementType: null, key: null, index: 0, ref: null,
@@ -325,7 +331,7 @@ function project(fiber: Fiber, parent: DebugFiber | null, index: number, seen: S
     })
     if (tag === FiberTag.Suspense && hidden) {
       view.memoizedState = { dehydrated: null }
-      if (fiber.ms?.f) offscreen.sibling = project(fiber.ms.f, view, 1, seen, deferred)
+      if (fiber.b?.f) offscreen.sibling = project(fiber.b.f, view, 1, seen, deferred)
       else {
         // Hydrated fallback children can live directly under the boundary.
         offscreen.sibling = view.child
@@ -370,8 +376,8 @@ function connectView(view: DebugFiber, previous: DebugFiber | undefined, key: ob
     if (view.stateNode?.nodeType) hosts.set(view.stateNode, fiber)
     if (view.tag === 1) Object.defineProperty(view, 'pendingProps', {
       configurable: true, enumerable: true,
-      get: () => fiber.pp,
-      set: value => { fiber.pp = value },
+      get: () => fiber.v,
+      set: value => { fiber.v = value },
     })
   }
   view._debugOwner = view._redactOwner ? fibers.get(view._redactOwner) || null : null
@@ -417,7 +423,7 @@ export function commitDevTools(root: FiberRoot, adapter: any, hook: any, id: num
     for (const old of members.get(adapter) || []) {
       if (!seen.has(old)) {
         try { hook.onCommitFiberUnmount?.(id, fibers.get(old)) } catch {}
-        if (old.dom && hosts.get(old.dom) === old) hosts.delete(old.dom)
+        if (old.n && hosts.get(old.n) === old) hosts.delete(old.n)
         fibers.delete(old)
         hooks.delete(old)
         forcedSuspensions.get(old)?.resolve()
@@ -447,24 +453,24 @@ function edit(value: any, path: (string | number)[], next: any, remove = false):
 
 function updateProps(view: DebugFiber, transform: (props: any) => any): void {
   const fiber = nativeFibers.get(view)
-  if (!fiber || fiber.um) return
-  fiber.pp = transform(fiber.pp)
-  flushSyncWork(() => scheduleUpdate(fiber))
+  if (!fiber || fiber.u) return
+  fiber.v = transform(fiber.v)
+  runtime.flushSyncWork(() => runtime.scheduleUpdate(fiber))
 }
 
 function updateHook(view: DebugFiber, id: number, transform: (state: any) => any): void {
   const fiber = nativeFibers.get(view)
-  if (!fiber || fiber.um) return
+  if (!fiber || fiber.u) return
   // DevTools IDs count visible primitive hooks, not React's internal slots.
   const item = hooks.get(fiber)?.filter(item => !['useContext', 'use', 'useDebugValue', 'useHostTransitionStatus'].includes(item.name))[id]
   if (!item || (item.name !== 'useState' && item.name !== 'useReducer')) return
-  const hook = fiber.hooks?.[item.index]
+  const hook = fiber.h?.[item.index]
   if (!hook) return
   hook.s = hook.d = transform(hook.s)
   hook.c = null
   // A DevTools edit is an explicit render, not an eager-state bailout.
-  fiber.pp = { ...fiber.pp }
-  flushSyncWork(() => scheduleUpdate(fiber))
+  fiber.v = { ...fiber.v }
+  runtime.flushSyncWork(() => runtime.scheduleUpdate(fiber))
 }
 
 function renamed(value: any, oldPath: (string | number)[], newPath: (string | number)[]): any {
@@ -475,9 +481,9 @@ function renamed(value: any, oldPath: (string | number)[], newPath: (string | nu
 export function devToolsRenderer(): Record<string, any> {
   return {
     version: '19.2.3', reconcilerVersion: '19.2.3',
-    currentDispatcherRef: ReactSharedInternals,
+    currentDispatcherRef: runtime.shared,
     getCurrentFiber: () => {
-      const fiber = callbackFiber || timing?.fiber || ReactSharedInternals.F
+      const fiber = callbackFiber || timing?.fiber || runtime.shared.F
       return fiber ? fibers.get(fiber) || mountingFibers.get(fiber) || null : null
     },
     findFiberByHostInstance(node: Node) {
@@ -498,4 +504,14 @@ export function devToolsRenderer(): Record<string, any> {
     overrideHookStateDeletePath: (view: DebugFiber, id: number, path: any[]) => updateHook(view, id, state => edit(state, path, undefined, true)),
     overrideHookStateRenamePath: (view: DebugFiber, id: number, oldPath: any[], newPath: any[]) => updateHook(view, id, state => renamed(state, oldPath, newPath)),
   }
+}
+
+export function invokeDevToolsCallback<T>(fiber: Fiber, callback: () => T): T {
+  const previous = beginDevToolsCallback(fiber)
+  try { return callback() } finally { endDevToolsCallback(previous) }
+}
+
+export function renderWithDevTools(fiber: Fiber, render?: (fiber: Fiber) => void): void {
+  const timing = beginDevToolsRender(fiber)
+  try { render?.(fiber) } finally { endDevToolsRender(timing) }
 }

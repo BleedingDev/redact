@@ -1,0 +1,6202 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-25T11:28:42.990Z",
+  "title": "Vinext upstream benchmark suite: native React and Redact",
+  "provenance": {
+    "createdAt": "2026-10-25T11:20:21.117Z",
+    "machine": {
+      "platform": "darwin",
+      "arch": "arm64",
+      "cpu": "Apple M5 Pro",
+      "logicalCpus": 18,
+      "totalMemory": 68719476736,
+      "osRelease": "25.6.0"
+    },
+    "node": "v24.22.0",
+    "zlib": "1.3.2.1-motley-285e94b",
+    "upstreamHarnessCommit": "5c2c5b76abff857bfcf9e0dc266cf750ad56b4a6",
+    "packages": {
+      "vinext": {
+        "name": "vinext",
+        "version": "1.3.0"
+      },
+      "vite": {
+        "name": "@voidzero-dev/vite-plus-core",
+        "version": "1.3.0"
+      },
+      "vite-plus": {
+        "name": "vite-plus",
+        "version": "1.3.0"
+      },
+      "@vitejs/plugin-react": {
+        "name": "@vitejs/plugin-react",
+        "version": "6.1.2"
+      },
+      "@vitejs/plugin-rsc": {
+        "name": "@vitejs/plugin-rsc",
+        "version": "0.5.38"
+      },
+      "react": {
+        "name": "react",
+        "version": "19.3.1"
+      },
+      "react-dom": {
+        "name": "react-dom",
+        "version": "19.3.1"
+      },
+      "react-server-dom-webpack": {
+        "name": "react-server-dom-webpack",
+        "version": "19.3.1"
+      },
+      "@tanstack/redact": {
+        "name": "@tanstack/redact",
+        "version": "0.1.5"
+      }
+    },
+    "nextPackages": {
+      "next": "16.2.7",
+      "react": "19.2.7",
+      "react-dom": "19.2.7",
+      "typescript": "5.9.3"
+    },
+    "redactTarballSha256": "6f8592d92061ab3845b11a5635a2853ec5ba61b600f7ca213cfa42b510ec1099",
+    "lockSha256": "cb8241ced2d1b75aae2a02f168861f196e5c23b7d75c7c25b964dcdf7f87f37a",
+    "nextLockSha256": "a50893cca9806eedbdbed93eb88f67776870c3e9c9ea9c405d0e2aa26886eefe",
+    "workloadHashes": {
+      "react": {
+        "app": "cb9cbe4c54be820672c314122b985e80b98e2e4e4d2f27231c7504b447698414",
+        "pages": "974fd053c88ecad9833e66b42a8da4d8e3f9852e8003f690c372603946f13b29",
+        "packages": "fc28964e54ab6f26f46316a8997ea28354e8dc4e81646a11494705826ebba251"
+      },
+      "redact": {
+        "app": "cb9cbe4c54be820672c314122b985e80b98e2e4e4d2f27231c7504b447698414",
+        "pages": "974fd053c88ecad9833e66b42a8da4d8e3f9852e8003f690c372603946f13b29",
+        "packages": "fc28964e54ab6f26f46316a8997ea28354e8dc4e81646a11494705826ebba251"
+      },
+      "next": {
+        "app": "cb9cbe4c54be820672c314122b985e80b98e2e4e4d2f27231c7504b447698414",
+        "pages": "974fd053c88ecad9833e66b42a8da4d8e3f9852e8003f690c372603946f13b29",
+        "packages": "fc28964e54ab6f26f46316a8997ea28354e8dc4e81646a11494705826ebba251"
+      }
+    },
+    "harnessFiles": {
+      "generate-app.mjs": "1a411b13c789a142fefc01e973514fceb366a208ef41003c93b9d9fbc1dc603a",
+      "perf/build-time.mjs": "7eaa5300f6b41f782589a78b4e0ed0cf6fd4d7208202ad48343fc47d6aba25d7",
+      "perf/bundle-size.mjs": "44636e56f2782c3f86649e66be5e7481354756a9fef18c7e87dc35e1522e5120",
+      "perf/cold-start.mjs": "377701e572dae267f2d60cc7dfbb18e88c3db292cf0375ebeeb37855cfaa0045",
+      "perf/format-pr-comment.mjs": "a40caca726d3c7367037fee4c3715585ab7d593c2e50010a31895b2f887007a6",
+      "perf/generate-pages-app.mjs": "baf3f9dd1a5e441b927a9b92895d42b440ce92f4632056bb5f16b64e28937d47",
+      "perf/normalize-results.mjs": "ed19240b23c61d1fc9434415d32ec93a3599c5aea8dddccc83e8dd80756a94e8",
+      "perf/report-sample.mjs": "b313f8c9b930d56d84dcbe6f6ec4a0a682745e6b76caeebdd52b0c6a16b31236",
+      "perf/run-scenarios.mjs": "7095126cc2455a4e2d0a5a76e78bc5384dca0bec292dae123f6e55093e96e747",
+      "perf/scenarios.json": "721d923dd7111e22c5e982632ae89a91400fcf00d488af9e82b9b267595dc50c",
+      "perf/scenarios.mjs": "fa97b7cc91c724709dc89deb780ee834d02cb62ff525c2176a49a9d8b97de348",
+      "perf/upload-results.mjs": "e7973ab1124d1ac62cc7b888501304f6632f5ec3a4c155df5ac8deca6b6493ea",
+      "perf/validate-profile-traces.mjs": "fb6aa69c0f755fba112a490345417b5a9df0b511d3c40353c199023ec8afc320",
+      "perf/validate-results.mjs": "cf7a98a58a09e59aa2468a63f6f40c8960a5570d7eae459624b7fb7f8ac48b41"
+    },
+    "method": {
+      "measurementAdapters": "Unmodified upstream adapters",
+      "framework": "Published vinext@1.3.0 with Redact maintained Vite compatibility transforms applied equally to both Vinext configurations; installed files unchanged",
+      "rounds": 6,
+      "warmup": "One untimed preflight per scenario and implementation",
+      "order": "All six permutations of the three implementations, sequential; no concurrent benchmark builds or servers",
+      "bundleSizes": "Measured from each of the six production builds",
+      "compression": "Upstream gzipSync defaults; KB = 1000 bytes",
+      "profiling": "Disabled; direct wall-clock timing",
+      "redact": "Both configurations use redact() after vinext(); renderer is react for the native control and redact for the candidate",
+      "environment": "Local workstation, not an isolated CI runner. Measured rounds run after the local compatibility and hosted verification processes finish. Per-sample load averages and free memory are retained.",
+      "security": "Scoped Satori override to published fflate 0.7.5 in both Vinext configurations"
+    },
+    "nodeExecutable": "/private/tmp/redact-vinext-node-runtime/node-v24.22.0-darwin-arm64/bin/node",
+    "workloadHashMethod": "Sorted relative paths and file contents, separated by NUL bytes, SHA-256"
+  },
+  "completeness": {
+    "scenarios": 7,
+    "measuredSamples": 108,
+    "roundsPerImplementation": 6,
+    "workloadVerificationPassed": 6
+  },
+  "statisticalMethod": "Medians of six rounds. For timings, paired percentile bootstrap confidence intervals enumerate all 46,656 resamples of the six paired rounds. Local workstation noise and a small sample count limit generalization. No measurements are discarded.",
+  "limitations": [
+    "This suite measures development cold starts, clean build time, and emitted compressed output. It does not benchmark browser render speed, hydration time, interaction responsiveness, production SSR throughput, LCP, or INP.",
+    "The client total sums all emitted JavaScript and CSS, including lazy routes. It is not the amount a browser downloads for one page. The client entry metric includes the browser entry and its eager static JavaScript imports.",
+    "Both Vinext configurations use native React on the server. Tiny server size changes can come from changed client chunk references and content hashes; they are not evidence of a server runtime optimization.",
+    "Next.js uses the upstream fixture pins, Next.js 16.2.7 and React 19.2.7. Vinext uses React 19.3.1. The direct Redact comparison uses identical Vinext dependencies and workloads.",
+    "The suite runs directly without CodSpeed profiling on a shared macOS workstation. Local compatibility and hosted verification finished before the measured rounds. Per-sample load averages and free memory are retained.",
+    "The Redact candidate is identified by the frozen tarball hash, not just its package.json version."
+  ],
+  "scenarios": [
+    {
+      "id": "dev-cold-start-root",
+      "label": "Dev server cold start",
+      "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+      "unit": "ms",
+      "implementations": {
+        "next": {
+          "samples": [
+            744.737875,
+            731.943792,
+            741.3940839999999,
+            730.8971250000001,
+            761.887125,
+            712.512208
+          ],
+          "median": 736.668938,
+          "min": 712.512208,
+          "max": 761.887125
+        },
+        "react": {
+          "samples": [
+            897.47475,
+            917.570708,
+            919.205709,
+            924.9751669999999,
+            920.8975409999999,
+            951.7480840000001
+          ],
+          "median": 920.051625,
+          "min": 897.47475,
+          "max": 951.7480840000001
+        },
+        "redact": {
+          "samples": [
+            907.7512079999999,
+            902.0549169999999,
+            894.636375,
+            897.831375,
+            892.312166,
+            901.473083
+          ],
+          "median": 899.652229,
+          "min": 892.312166,
+          "max": 907.7512079999999
+        }
+      },
+      "redactVsReact": {
+        "absoluteChange": -20.39939599999991,
+        "percentChange": -2.21720123585456,
+        "pairedBootstrap95PercentChange": [
+          -3.9311648619842265,
+          -0.288661255116629
+        ],
+        "interpretation": "lower measured time"
+      }
+    },
+    {
+      "id": "dev-cold-start-pages-large",
+      "label": "Dev server cold start (large Pages Router app)",
+      "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+      "unit": "ms",
+      "implementations": {
+        "next": {
+          "samples": [
+            8725.827666000001,
+            8922.736665999999,
+            8895.762959,
+            8739.214875000001,
+            8896.091083000001,
+            8660.343459
+          ],
+          "median": 8817.488917,
+          "min": 8660.343459,
+          "max": 8922.736665999999
+        },
+        "react": {
+          "samples": [
+            6687.646875,
+            6634.027417,
+            6555.362583,
+            6580.316958,
+            6495.229208,
+            6546.59275
+          ],
+          "median": 6567.839770500001,
+          "min": 6495.229208,
+          "max": 6687.646875
+        },
+        "redact": {
+          "samples": [
+            6319.948292,
+            6236.512792,
+            6290.31125,
+            6259.139,
+            6197.6632500000005,
+            6186.055333
+          ],
+          "median": 6247.825896,
+          "min": 6186.055333,
+          "max": 6319.948292
+        }
+      },
+      "redactVsReact": {
+        "absoluteChange": -320.0138745000004,
+        "percentChange": -4.87243729570519,
+        "pairedBootstrap95PercentChange": [
+          -5.992055805819407,
+          -4.043274946947362
+        ],
+        "interpretation": "lower measured time"
+      }
+    },
+    {
+      "id": "production-build",
+      "label": "Production build time",
+      "description": "Time to complete a clean production build with previous output removed.",
+      "unit": "ms",
+      "implementations": {
+        "next": {
+          "samples": [
+            1303.421292,
+            1273.719959,
+            1234.4323749999999,
+            1228.0595,
+            1242.772833,
+            1237.429958
+          ],
+          "median": 1240.1013954999999,
+          "min": 1228.0595,
+          "max": 1303.421292
+        },
+        "react": {
+          "samples": [
+            941.026375,
+            940.0544590000001,
+            926.803,
+            932.8823749999999,
+            939.810834,
+            954.7262910000001
+          ],
+          "median": 939.9326465,
+          "min": 926.803,
+          "max": 954.7262910000001
+        },
+        "redact": {
+          "samples": [
+            921.863166,
+            936.106375,
+            933.693625,
+            953.627125,
+            947.4829579999999,
+            943.493959
+          ],
+          "median": 939.800167,
+          "min": 921.863166,
+          "max": 953.627125
+        }
+      },
+      "redactVsReact": {
+        "absoluteChange": -0.13247950000004494,
+        "percentChange": -0.014094573743483885,
+        "pairedBootstrap95PercentChange": [
+          -1.3568817744915695,
+          1.6806156295963826
+        ],
+        "interpretation": "no clear timing difference"
+      }
+    },
+    {
+      "id": "client-bundle-gzip",
+      "label": "Client bundle size (gzip)",
+      "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+      "unit": "bytes",
+      "implementations": {
+        "next": {
+          "samples": [
+            190048,
+            190048,
+            190048,
+            190048,
+            190048,
+            190048
+          ],
+          "median": 190048,
+          "min": 190048,
+          "max": 190048
+        },
+        "react": {
+          "samples": [
+            154862,
+            154862,
+            154862,
+            154862,
+            154862,
+            154862
+          ],
+          "median": 154862,
+          "min": 154862,
+          "max": 154862
+        },
+        "redact": {
+          "samples": [
+            115508,
+            115508,
+            115508,
+            115508,
+            115508,
+            115508
+          ],
+          "median": 115508,
+          "min": 115508,
+          "max": 115508
+        }
+      },
+      "redactVsReact": {
+        "absoluteChange": -39354,
+        "percentChange": -25.412302566155674,
+        "pairedBootstrap95PercentChange": null,
+        "interpretation": "emitted gzip bytes"
+      }
+    },
+    {
+      "id": "client-entry-gzip",
+      "label": "Client entry size (gzip)",
+      "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+      "unit": "bytes",
+      "implementations": {
+        "react": {
+          "samples": [
+            144196,
+            144196,
+            144196,
+            144196,
+            144196,
+            144196
+          ],
+          "median": 144196,
+          "min": 144196,
+          "max": 144196
+        },
+        "redact": {
+          "samples": [
+            105030,
+            105030,
+            105030,
+            105030,
+            105030,
+            105030
+          ],
+          "median": 105030,
+          "min": 105030,
+          "max": 105030
+        }
+      },
+      "redactVsReact": {
+        "absoluteChange": -39166,
+        "percentChange": -27.161641099614407,
+        "pairedBootstrap95PercentChange": null,
+        "interpretation": "emitted gzip bytes"
+      }
+    },
+    {
+      "id": "rsc-entry-gzip",
+      "label": "RSC entry closure size (gzip)",
+      "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+      "unit": "bytes",
+      "implementations": {
+        "react": {
+          "samples": [
+            145707,
+            145693,
+            145697,
+            145711,
+            145705,
+            145704
+          ],
+          "median": 145704.5,
+          "min": 145693,
+          "max": 145711
+        },
+        "redact": {
+          "samples": [
+            145686,
+            145687,
+            145687,
+            145682,
+            145685,
+            145688
+          ],
+          "median": 145686.5,
+          "min": 145682,
+          "max": 145688
+        }
+      },
+      "redactVsReact": {
+        "absoluteChange": -18,
+        "percentChange": -0.012353770816964094,
+        "pairedBootstrap95PercentChange": null,
+        "interpretation": "emitted gzip bytes"
+      }
+    },
+    {
+      "id": "server-bundle-gzip",
+      "label": "Server bundle size (gzip)",
+      "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+      "unit": "bytes",
+      "implementations": {
+        "react": {
+          "samples": [
+            253110,
+            253096,
+            253091,
+            253111,
+            253104,
+            253106
+          ],
+          "median": 253105,
+          "min": 253091,
+          "max": 253111
+        },
+        "redact": {
+          "samples": [
+            253017,
+            253017,
+            253027,
+            253023,
+            253023,
+            253022
+          ],
+          "median": 253022.5,
+          "min": 253017,
+          "max": 253027
+        }
+      },
+      "redactVsReact": {
+        "absoluteChange": -82.5,
+        "percentChange": -0.03259516801327189,
+        "pairedBootstrap95PercentChange": null,
+        "interpretation": "emitted gzip bytes"
+      }
+    }
+  ],
+  "verification": [
+    {
+      "workload": "app-production",
+      "variant": "react",
+      "passed": true,
+      "redactLoaded": false,
+      "pageErrors": []
+    },
+    {
+      "workload": "app-production",
+      "variant": "redact",
+      "passed": true,
+      "redactLoaded": true,
+      "pageErrors": []
+    },
+    {
+      "workload": "app-production",
+      "variant": "next",
+      "passed": true,
+      "redactLoaded": false,
+      "pageErrors": []
+    },
+    {
+      "workload": "pages-development",
+      "variant": "react",
+      "passed": true,
+      "redactLoaded": false,
+      "pageErrors": []
+    },
+    {
+      "workload": "pages-development",
+      "variant": "redact",
+      "passed": true,
+      "redactLoaded": true,
+      "pageErrors": []
+    },
+    {
+      "workload": "pages-development",
+      "variant": "next",
+      "passed": true,
+      "redactLoaded": false,
+      "pageErrors": []
+    }
+  ],
+  "rawMeasurements": [
+    {
+      "id": "measured-dev-cold-start-root-react-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "react",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:04.696Z",
+        "loadAverage": [
+          3.21435546875,
+          5.42578125,
+          5.51220703125
+        ],
+        "freeMemory": 10380771328
+      },
+      "after": {
+        "at": "2026-10-25T11:24:07.635Z",
+        "loadAverage": [
+          3.19677734375,
+          5.38525390625,
+          5.4970703125
+        ],
+        "freeMemory": 10414178304
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/react",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 897.47475,
+          "measuredAt": "2026-10-25T11:24:05.622Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-redact-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "redact",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:07.636Z",
+        "loadAverage": [
+          3.19677734375,
+          5.38525390625,
+          5.4970703125
+        ],
+        "freeMemory": 10414194688
+      },
+      "after": {
+        "at": "2026-10-25T11:24:10.599Z",
+        "loadAverage": [
+          3.19677734375,
+          5.38525390625,
+          5.4970703125
+        ],
+        "freeMemory": 10431365120
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/redact",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 907.7512079999999,
+          "measuredAt": "2026-10-25T11:24:08.588Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-next-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "next",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:10.600Z",
+        "loadAverage": [
+          3.19677734375,
+          5.38525390625,
+          5.4970703125
+        ],
+        "freeMemory": 10431365120
+      },
+      "after": {
+        "at": "2026-10-25T11:24:13.422Z",
+        "loadAverage": [
+          3.5009765625,
+          5.41162109375,
+          5.505859375
+        ],
+        "freeMemory": 10458464256
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/next",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 744.737875,
+          "measuredAt": "2026-10-25T11:24:11.409Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-next-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "next",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:13.423Z",
+        "loadAverage": [
+          3.5009765625,
+          5.41162109375,
+          5.505859375
+        ],
+        "freeMemory": 10458464256
+      },
+      "after": {
+        "at": "2026-10-25T11:24:16.209Z",
+        "loadAverage": [
+          3.62060546875,
+          5.40478515625,
+          5.50244140625
+        ],
+        "freeMemory": 10459103232
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/next",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 731.943792,
+          "measuredAt": "2026-10-25T11:24:14.198Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-redact-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "redact",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:16.209Z",
+        "loadAverage": [
+          3.62060546875,
+          5.40478515625,
+          5.50244140625
+        ],
+        "freeMemory": 10459103232
+      },
+      "after": {
+        "at": "2026-10-25T11:24:19.159Z",
+        "loadAverage": [
+          3.62060546875,
+          5.40478515625,
+          5.50244140625
+        ],
+        "freeMemory": 10494902272
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/redact",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 902.0549169999999,
+          "measuredAt": "2026-10-25T11:24:17.150Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-react-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "react",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:19.159Z",
+        "loadAverage": [
+          3.62060546875,
+          5.40478515625,
+          5.50244140625
+        ],
+        "freeMemory": 10494902272
+      },
+      "after": {
+        "at": "2026-10-25T11:24:22.124Z",
+        "loadAverage": [
+          3.65087890625,
+          5.38134765625,
+          5.4931640625
+        ],
+        "freeMemory": 10485612544
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/react",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 917.570708,
+          "measuredAt": "2026-10-25T11:24:20.117Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-redact-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "redact",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:22.125Z",
+        "loadAverage": [
+          3.65087890625,
+          5.38134765625,
+          5.4931640625
+        ],
+        "freeMemory": 10485612544
+      },
+      "after": {
+        "at": "2026-10-25T11:24:25.068Z",
+        "loadAverage": [
+          3.65087890625,
+          5.38134765625,
+          5.4931640625
+        ],
+        "freeMemory": 10479435776
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/redact",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 894.636375,
+          "measuredAt": "2026-10-25T11:24:23.058Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-next-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "next",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:25.068Z",
+        "loadAverage": [
+          3.65087890625,
+          5.38134765625,
+          5.4931640625
+        ],
+        "freeMemory": 10479435776
+      },
+      "after": {
+        "at": "2026-10-25T11:24:27.868Z",
+        "loadAverage": [
+          3.5185546875,
+          5.3251953125,
+          5.47265625
+        ],
+        "freeMemory": 10531586048
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/next",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 741.3940839999999,
+          "measuredAt": "2026-10-25T11:24:25.857Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-react-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "react",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:27.869Z",
+        "loadAverage": [
+          3.5185546875,
+          5.3251953125,
+          5.47265625
+        ],
+        "freeMemory": 10531586048
+      },
+      "after": {
+        "at": "2026-10-25T11:24:30.842Z",
+        "loadAverage": [
+          3.5185546875,
+          5.3251953125,
+          5.47265625
+        ],
+        "freeMemory": 10619863040
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/react",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 919.205709,
+          "measuredAt": "2026-10-25T11:24:28.830Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-react-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "react",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:30.842Z",
+        "loadAverage": [
+          3.5185546875,
+          5.3251953125,
+          5.47265625
+        ],
+        "freeMemory": 10619863040
+      },
+      "after": {
+        "at": "2026-10-25T11:24:33.824Z",
+        "loadAverage": [
+          3.716796875,
+          5.3359375,
+          5.4755859375
+        ],
+        "freeMemory": 10586128384
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/react",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 924.9751669999999,
+          "measuredAt": "2026-10-25T11:24:31.812Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-next-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "next",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:33.824Z",
+        "loadAverage": [
+          3.716796875,
+          5.3359375,
+          5.4755859375
+        ],
+        "freeMemory": 10586128384
+      },
+      "after": {
+        "at": "2026-10-25T11:24:36.613Z",
+        "loadAverage": [
+          3.7392578125,
+          5.3134765625,
+          5.466796875
+        ],
+        "freeMemory": 10599448576
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/next",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 730.8971250000001,
+          "measuredAt": "2026-10-25T11:24:34.601Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-redact-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "redact",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:36.614Z",
+        "loadAverage": [
+          3.7392578125,
+          5.3134765625,
+          5.466796875
+        ],
+        "freeMemory": 10599448576
+      },
+      "after": {
+        "at": "2026-10-25T11:24:39.562Z",
+        "loadAverage": [
+          3.7392578125,
+          5.3134765625,
+          5.466796875
+        ],
+        "freeMemory": 10630283264
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/redact",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 897.831375,
+          "measuredAt": "2026-10-25T11:24:37.552Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-next-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "next",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:39.563Z",
+        "loadAverage": [
+          3.7392578125,
+          5.3134765625,
+          5.466796875
+        ],
+        "freeMemory": 10630283264
+      },
+      "after": {
+        "at": "2026-10-25T11:24:42.383Z",
+        "loadAverage": [
+          3.599609375,
+          5.25830078125,
+          5.4462890625
+        ],
+        "freeMemory": 10620551168
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/next",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 761.887125,
+          "measuredAt": "2026-10-25T11:24:40.370Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-react-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "react",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:42.383Z",
+        "loadAverage": [
+          3.599609375,
+          5.25830078125,
+          5.4462890625
+        ],
+        "freeMemory": 10620551168
+      },
+      "after": {
+        "at": "2026-10-25T11:24:45.358Z",
+        "loadAverage": [
+          3.599609375,
+          5.25830078125,
+          5.4462890625
+        ],
+        "freeMemory": 10602545152
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/react",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 920.8975409999999,
+          "measuredAt": "2026-10-25T11:24:43.347Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-redact-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "redact",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:45.358Z",
+        "loadAverage": [
+          3.599609375,
+          5.25830078125,
+          5.4462890625
+        ],
+        "freeMemory": 10600513536
+      },
+      "after": {
+        "at": "2026-10-25T11:24:48.303Z",
+        "loadAverage": [
+          3.71142578125,
+          5.25390625,
+          5.443359375
+        ],
+        "freeMemory": 10596564992
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/redact",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 892.312166,
+          "measuredAt": "2026-10-25T11:24:46.295Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-redact-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "redact",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:48.304Z",
+        "loadAverage": [
+          3.71142578125,
+          5.25390625,
+          5.443359375
+        ],
+        "freeMemory": 10596564992
+      },
+      "after": {
+        "at": "2026-10-25T11:24:51.256Z",
+        "loadAverage": [
+          3.57421875,
+          5.19970703125,
+          5.4228515625
+        ],
+        "freeMemory": 10631561216
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/redact",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 901.473083,
+          "measuredAt": "2026-10-25T11:24:49.247Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-react-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "react",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:51.256Z",
+        "loadAverage": [
+          3.57421875,
+          5.19970703125,
+          5.4228515625
+        ],
+        "freeMemory": 10631561216
+      },
+      "after": {
+        "at": "2026-10-25T11:24:54.260Z",
+        "loadAverage": [
+          3.57421875,
+          5.19970703125,
+          5.4228515625
+        ],
+        "freeMemory": 10588684288
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/react",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 951.7480840000001,
+          "measuredAt": "2026-10-25T11:24:52.249Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-root-next-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "next",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:24:54.260Z",
+        "loadAverage": [
+          3.57421875,
+          5.19970703125,
+          5.4228515625
+        ],
+        "freeMemory": 10588684288
+      },
+      "after": {
+        "at": "2026-10-25T11:24:57.027Z",
+        "loadAverage": [
+          3.60791015625,
+          5.1796875,
+          5.4140625
+        ],
+        "freeMemory": 10612555776
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/next",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 712.512208,
+          "measuredAt": "2026-10-25T11:24:55.017Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-react-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "react",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:24:57.028Z",
+        "loadAverage": [
+          3.60791015625,
+          5.1796875,
+          5.4140625
+        ],
+        "freeMemory": 10612555776
+      },
+      "after": {
+        "at": "2026-10-25T11:25:05.767Z",
+        "loadAverage": [
+          3.95947265625,
+          5.22607421875,
+          5.42919921875
+        ],
+        "freeMemory": 10559717376
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/react",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 6687.646875,
+          "measuredAt": "2026-10-25T11:25:03.756Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-redact-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "redact",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:25:05.767Z",
+        "loadAverage": [
+          3.95947265625,
+          5.22607421875,
+          5.42919921875
+        ],
+        "freeMemory": 10559733760
+      },
+      "after": {
+        "at": "2026-10-25T11:25:14.134Z",
+        "loadAverage": [
+          4.12548828125,
+          5.21875,
+          5.42333984375
+        ],
+        "freeMemory": 10596745216
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/redact",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 6319.948292,
+          "measuredAt": "2026-10-25T11:25:12.127Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-next-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "next",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:25:14.134Z",
+        "loadAverage": [
+          4.12548828125,
+          5.21875,
+          5.42333984375
+        ],
+        "freeMemory": 10596745216
+      },
+      "after": {
+        "at": "2026-10-25T11:25:24.962Z",
+        "loadAverage": [
+          3.9521484375,
+          5.14501953125,
+          5.39453125
+        ],
+        "freeMemory": 10590699520
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/next",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 8725.827666000001,
+          "measuredAt": "2026-10-25T11:25:22.947Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-next-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "next",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:25:24.962Z",
+        "loadAverage": [
+          3.9521484375,
+          5.14501953125,
+          5.39453125
+        ],
+        "freeMemory": 10590699520
+      },
+      "after": {
+        "at": "2026-10-25T11:25:35.985Z",
+        "loadAverage": [
+          5.3779296875,
+          5.41796875,
+          5.48876953125
+        ],
+        "freeMemory": 10504372224
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/next",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 8922.736665999999,
+          "measuredAt": "2026-10-25T11:25:33.975Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-redact-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "redact",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:25:35.985Z",
+        "loadAverage": [
+          5.3779296875,
+          5.41796875,
+          5.48876953125
+        ],
+        "freeMemory": 10504372224
+      },
+      "after": {
+        "at": "2026-10-25T11:25:44.268Z",
+        "loadAverage": [
+          5.4794921875,
+          5.43701171875,
+          5.49462890625
+        ],
+        "freeMemory": 10486562816
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/redact",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 6236.512792,
+          "measuredAt": "2026-10-25T11:25:42.260Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-react-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "react",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:25:44.269Z",
+        "loadAverage": [
+          5.4794921875,
+          5.43701171875,
+          5.49462890625
+        ],
+        "freeMemory": 10486562816
+      },
+      "after": {
+        "at": "2026-10-25T11:25:52.949Z",
+        "loadAverage": [
+          5.017578125,
+          5.33984375,
+          5.45947265625
+        ],
+        "freeMemory": 10526605312
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/react",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 6634.027417,
+          "measuredAt": "2026-10-25T11:25:50.936Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-redact-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "redact",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:25:52.949Z",
+        "loadAverage": [
+          5.017578125,
+          5.33984375,
+          5.45947265625
+        ],
+        "freeMemory": 10526605312
+      },
+      "after": {
+        "at": "2026-10-25T11:26:01.287Z",
+        "loadAverage": [
+          4.93603515625,
+          5.3173828125,
+          5.45068359375
+        ],
+        "freeMemory": 10402578432
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/redact",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 6290.31125,
+          "measuredAt": "2026-10-25T11:25:59.280Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-next-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "next",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:26:01.287Z",
+        "loadAverage": [
+          4.93603515625,
+          5.3173828125,
+          5.45068359375
+        ],
+        "freeMemory": 10402578432
+      },
+      "after": {
+        "at": "2026-10-25T11:26:12.281Z",
+        "loadAverage": [
+          6.62158203125,
+          5.68896484375,
+          5.5810546875
+        ],
+        "freeMemory": 10500390912
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/next",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 8895.762959,
+          "measuredAt": "2026-10-25T11:26:10.270Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-react-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "react",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:26:12.282Z",
+        "loadAverage": [
+          6.62158203125,
+          5.68896484375,
+          5.5810546875
+        ],
+        "freeMemory": 10500390912
+      },
+      "after": {
+        "at": "2026-10-25T11:26:20.890Z",
+        "loadAverage": [
+          6.33154296875,
+          5.64404296875,
+          5.56591796875
+        ],
+        "freeMemory": 10486005760
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/react",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 6555.362583,
+          "measuredAt": "2026-10-25T11:26:18.878Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-react-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "react",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:26:20.891Z",
+        "loadAverage": [
+          6.33154296875,
+          5.64404296875,
+          5.56591796875
+        ],
+        "freeMemory": 10486005760
+      },
+      "after": {
+        "at": "2026-10-25T11:26:29.525Z",
+        "loadAverage": [
+          6.1201171875,
+          5.6220703125,
+          5.55908203125
+        ],
+        "freeMemory": 10487037952
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/react",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 6580.316958,
+          "measuredAt": "2026-10-25T11:26:27.514Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-next-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "next",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:26:29.526Z",
+        "loadAverage": [
+          6.1201171875,
+          5.6220703125,
+          5.55908203125
+        ],
+        "freeMemory": 10487037952
+      },
+      "after": {
+        "at": "2026-10-25T11:26:40.371Z",
+        "loadAverage": [
+          8.333984375,
+          6.111328125,
+          5.7333984375
+        ],
+        "freeMemory": 10392895488
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/next",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 8739.214875000001,
+          "measuredAt": "2026-10-25T11:26:38.359Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-redact-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "redact",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:26:40.371Z",
+        "loadAverage": [
+          8.333984375,
+          6.111328125,
+          5.7333984375
+        ],
+        "freeMemory": 10392895488
+      },
+      "after": {
+        "at": "2026-10-25T11:26:48.679Z",
+        "loadAverage": [
+          7.814453125,
+          6.07421875,
+          5.724609375
+        ],
+        "freeMemory": 10417815552
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/redact",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 6259.139,
+          "measuredAt": "2026-10-25T11:26:46.670Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-next-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "next",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:26:48.679Z",
+        "loadAverage": [
+          7.814453125,
+          6.07421875,
+          5.724609375
+        ],
+        "freeMemory": 10417815552
+      },
+      "after": {
+        "at": "2026-10-25T11:26:59.688Z",
+        "loadAverage": [
+          8.03125,
+          6.1845703125,
+          5.76806640625
+        ],
+        "freeMemory": 10448502784
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/next",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 8896.091083000001,
+          "measuredAt": "2026-10-25T11:26:57.675Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-react-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "react",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:26:59.688Z",
+        "loadAverage": [
+          8.03125,
+          6.1845703125,
+          5.76806640625
+        ],
+        "freeMemory": 10448502784
+      },
+      "after": {
+        "at": "2026-10-25T11:27:08.231Z",
+        "loadAverage": [
+          7.33740234375,
+          6.095703125,
+          5.74072265625
+        ],
+        "freeMemory": 10457088000
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/react",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 6495.229208,
+          "measuredAt": "2026-10-25T11:27:06.222Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-redact-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "redact",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:27:08.231Z",
+        "loadAverage": [
+          7.33740234375,
+          6.095703125,
+          5.74072265625
+        ],
+        "freeMemory": 10457088000
+      },
+      "after": {
+        "at": "2026-10-25T11:27:16.481Z",
+        "loadAverage": [
+          6.58984375,
+          5.9765625,
+          5.70263671875
+        ],
+        "freeMemory": 10444898304
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/redact",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 6197.6632500000005,
+          "measuredAt": "2026-10-25T11:27:14.471Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-redact-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "redact",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:27:16.482Z",
+        "loadAverage": [
+          6.58984375,
+          5.9765625,
+          5.70263671875
+        ],
+        "freeMemory": 10444898304
+      },
+      "after": {
+        "at": "2026-10-25T11:27:24.720Z",
+        "loadAverage": [
+          6.46240234375,
+          5.9599609375,
+          5.6982421875
+        ],
+        "freeMemory": 10443522048
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/redact",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 6186.055333,
+          "measuredAt": "2026-10-25T11:27:22.709Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-react-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "react",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:27:24.720Z",
+        "loadAverage": [
+          6.46240234375,
+          5.9599609375,
+          5.6982421875
+        ],
+        "freeMemory": 10443538432
+      },
+      "after": {
+        "at": "2026-10-25T11:27:33.319Z",
+        "loadAverage": [
+          5.9296875,
+          5.8623046875,
+          5.666015625
+        ],
+        "freeMemory": 10426351616
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/react",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 6546.59275,
+          "measuredAt": "2026-10-25T11:27:31.309Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-dev-cold-start-pages-large-next-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "next",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:27:33.320Z",
+        "loadAverage": [
+          5.9296875,
+          5.8623046875,
+          5.666015625
+        ],
+        "freeMemory": 10426351616
+      },
+      "after": {
+        "at": "2026-10-25T11:27:44.085Z",
+        "loadAverage": [
+          6.8046875,
+          6.0615234375,
+          5.7392578125
+        ],
+        "freeMemory": 10458726400
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/next",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 8660.343459,
+          "measuredAt": "2026-10-25T11:27:42.072Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-react-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "react",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:27:44.085Z",
+        "loadAverage": [
+          6.8046875,
+          6.0615234375,
+          5.7392578125
+        ],
+        "freeMemory": 10458726400
+      },
+      "after": {
+        "at": "2026-10-25T11:27:47.076Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10455449600
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/react",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 941.026375,
+          "measuredAt": "2026-10-25T11:27:45.068Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-react-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "react",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:27:47.077Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10455449600
+      },
+      "after": {
+        "at": "2026-10-25T11:27:47.129Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10456154112
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/react",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 154862,
+          "measuredAt": "2026-10-25T11:27:47.125Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-entry-gzip-react-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "react",
+      "scenario": "client-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:27:47.130Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10456154112
+      },
+      "after": {
+        "at": "2026-10-25T11:27:47.164Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10455678976
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-entry-gzip/react",
+          "scenarioId": "client-entry-gzip",
+          "suite": "Build",
+          "label": "Client entry size (gzip)",
+          "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 144196,
+          "measuredAt": "2026-10-25T11:27:47.160Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-rsc-entry-gzip-react-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "react",
+      "scenario": "rsc-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:27:47.164Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10455678976
+      },
+      "after": {
+        "at": "2026-10-25T11:27:47.292Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10455678976
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "rsc-entry-gzip/react",
+          "scenarioId": "rsc-entry-gzip",
+          "suite": "Build",
+          "label": "RSC entry closure size (gzip)",
+          "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 145707,
+          "measuredAt": "2026-10-25T11:27:47.286Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-server-bundle-gzip-react-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "react",
+      "scenario": "server-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:27:47.292Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10455678976
+      },
+      "after": {
+        "at": "2026-10-25T11:27:47.331Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10455678976
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "server-bundle-gzip/react",
+          "scenarioId": "server-bundle-gzip",
+          "suite": "Build",
+          "label": "Server bundle size (gzip)",
+          "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 253110,
+          "measuredAt": "2026-10-25T11:27:47.328Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-redact-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "redact",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:27:47.331Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10455678976
+      },
+      "after": {
+        "at": "2026-10-25T11:27:50.282Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10474504192
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/redact",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 921.863166,
+          "measuredAt": "2026-10-25T11:27:48.276Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-redact-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "redact",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:27:50.283Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10474504192
+      },
+      "after": {
+        "at": "2026-10-25T11:27:50.319Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10474504192
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/redact",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 115508,
+          "measuredAt": "2026-10-25T11:27:50.315Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-entry-gzip-redact-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "redact",
+      "scenario": "client-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:27:50.319Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10474504192
+      },
+      "after": {
+        "at": "2026-10-25T11:27:50.350Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10474504192
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-entry-gzip/redact",
+          "scenarioId": "client-entry-gzip",
+          "suite": "Build",
+          "label": "Client entry size (gzip)",
+          "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 105030,
+          "measuredAt": "2026-10-25T11:27:50.347Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-rsc-entry-gzip-redact-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "redact",
+      "scenario": "rsc-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:27:50.351Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10474504192
+      },
+      "after": {
+        "at": "2026-10-25T11:27:50.482Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10455384064
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "rsc-entry-gzip/redact",
+          "scenarioId": "rsc-entry-gzip",
+          "suite": "Build",
+          "label": "RSC entry closure size (gzip)",
+          "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 145686,
+          "measuredAt": "2026-10-25T11:27:50.476Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-server-bundle-gzip-redact-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "redact",
+      "scenario": "server-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:27:50.482Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10455875584
+      },
+      "after": {
+        "at": "2026-10-25T11:27:50.521Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10458005504
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "server-bundle-gzip/redact",
+          "scenarioId": "server-bundle-gzip",
+          "suite": "Build",
+          "label": "Server bundle size (gzip)",
+          "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 253017,
+          "measuredAt": "2026-10-25T11:27:50.517Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-next-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "next",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:27:50.521Z",
+        "loadAverage": [
+          6.740234375,
+          6.06005859375,
+          5.74072265625
+        ],
+        "freeMemory": 10458005504
+      },
+      "after": {
+        "at": "2026-10-25T11:27:53.856Z",
+        "loadAverage": [
+          6.9208984375,
+          6.1083984375,
+          5.759765625
+        ],
+        "freeMemory": 10445029376
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/next",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 1303.421292,
+          "measuredAt": "2026-10-25T11:27:51.848Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-next-1",
+      "phase": "measured",
+      "round": 1,
+      "variant": "next",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:27:53.856Z",
+        "loadAverage": [
+          6.9208984375,
+          6.1083984375,
+          5.759765625
+        ],
+        "freeMemory": 10445029376
+      },
+      "after": {
+        "at": "2026-10-25T11:27:53.909Z",
+        "loadAverage": [
+          6.9208984375,
+          6.1083984375,
+          5.759765625
+        ],
+        "freeMemory": 10444062720
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/next",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 190048,
+          "measuredAt": "2026-10-25T11:27:53.905Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-next-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "next",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:27:53.909Z",
+        "loadAverage": [
+          6.9208984375,
+          6.1083984375,
+          5.759765625
+        ],
+        "freeMemory": 10444062720
+      },
+      "after": {
+        "at": "2026-10-25T11:27:57.237Z",
+        "loadAverage": [
+          6.6865234375,
+          6.0732421875,
+          5.7490234375
+        ],
+        "freeMemory": 10439835648
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/next",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 1273.719959,
+          "measuredAt": "2026-10-25T11:27:55.228Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-next-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "next",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:27:57.238Z",
+        "loadAverage": [
+          6.6865234375,
+          6.0732421875,
+          5.7490234375
+        ],
+        "freeMemory": 10439835648
+      },
+      "after": {
+        "at": "2026-10-25T11:27:57.291Z",
+        "loadAverage": [
+          6.6865234375,
+          6.0732421875,
+          5.7490234375
+        ],
+        "freeMemory": 10439557120
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/next",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 190048,
+          "measuredAt": "2026-10-25T11:27:57.287Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-redact-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "redact",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:27:57.291Z",
+        "loadAverage": [
+          6.6865234375,
+          6.0732421875,
+          5.7490234375
+        ],
+        "freeMemory": 10439557120
+      },
+      "after": {
+        "at": "2026-10-25T11:28:00.262Z",
+        "loadAverage": [
+          6.6865234375,
+          6.0732421875,
+          5.7490234375
+        ],
+        "freeMemory": 10326360064
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/redact",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 936.106375,
+          "measuredAt": "2026-10-25T11:27:58.253Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-redact-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "redact",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:00.262Z",
+        "loadAverage": [
+          6.6865234375,
+          6.0732421875,
+          5.7490234375
+        ],
+        "freeMemory": 10326360064
+      },
+      "after": {
+        "at": "2026-10-25T11:28:00.311Z",
+        "loadAverage": [
+          6.6865234375,
+          6.0732421875,
+          5.7490234375
+        ],
+        "freeMemory": 10325164032
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/redact",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 115508,
+          "measuredAt": "2026-10-25T11:28:00.307Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-entry-gzip-redact-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "redact",
+      "scenario": "client-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:00.311Z",
+        "loadAverage": [
+          6.6865234375,
+          6.0732421875,
+          5.7490234375
+        ],
+        "freeMemory": 10325164032
+      },
+      "after": {
+        "at": "2026-10-25T11:28:00.343Z",
+        "loadAverage": [
+          6.6865234375,
+          6.0732421875,
+          5.7490234375
+        ],
+        "freeMemory": 10327965696
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-entry-gzip/redact",
+          "scenarioId": "client-entry-gzip",
+          "suite": "Build",
+          "label": "Client entry size (gzip)",
+          "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 105030,
+          "measuredAt": "2026-10-25T11:28:00.340Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-rsc-entry-gzip-redact-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "redact",
+      "scenario": "rsc-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:00.344Z",
+        "loadAverage": [
+          6.6865234375,
+          6.0732421875,
+          5.7490234375
+        ],
+        "freeMemory": 10327982080
+      },
+      "after": {
+        "at": "2026-10-25T11:28:00.472Z",
+        "loadAverage": [
+          6.6865234375,
+          6.0732421875,
+          5.7490234375
+        ],
+        "freeMemory": 10321510400
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "rsc-entry-gzip/redact",
+          "scenarioId": "rsc-entry-gzip",
+          "suite": "Build",
+          "label": "RSC entry closure size (gzip)",
+          "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 145687,
+          "measuredAt": "2026-10-25T11:28:00.467Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-server-bundle-gzip-redact-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "redact",
+      "scenario": "server-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:00.472Z",
+        "loadAverage": [
+          6.6865234375,
+          6.0732421875,
+          5.7490234375
+        ],
+        "freeMemory": 10321952768
+      },
+      "after": {
+        "at": "2026-10-25T11:28:00.511Z",
+        "loadAverage": [
+          6.6865234375,
+          6.0732421875,
+          5.7490234375
+        ],
+        "freeMemory": 10325229568
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "server-bundle-gzip/redact",
+          "scenarioId": "server-bundle-gzip",
+          "suite": "Build",
+          "label": "Server bundle size (gzip)",
+          "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 253017,
+          "measuredAt": "2026-10-25T11:28:00.508Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-react-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "react",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:28:00.511Z",
+        "loadAverage": [
+          6.6865234375,
+          6.0732421875,
+          5.7490234375
+        ],
+        "freeMemory": 10325229568
+      },
+      "after": {
+        "at": "2026-10-25T11:28:03.484Z",
+        "loadAverage": [
+          6.31103515625,
+          6.00537109375,
+          5.72705078125
+        ],
+        "freeMemory": 10362109952
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/react",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 940.0544590000001,
+          "measuredAt": "2026-10-25T11:28:01.474Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-react-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "react",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:03.484Z",
+        "loadAverage": [
+          6.31103515625,
+          6.00537109375,
+          5.72705078125
+        ],
+        "freeMemory": 10362109952
+      },
+      "after": {
+        "at": "2026-10-25T11:28:03.538Z",
+        "loadAverage": [
+          6.31103515625,
+          6.00537109375,
+          5.72705078125
+        ],
+        "freeMemory": 10362290176
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/react",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 154862,
+          "measuredAt": "2026-10-25T11:28:03.534Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-entry-gzip-react-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "react",
+      "scenario": "client-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:03.538Z",
+        "loadAverage": [
+          6.31103515625,
+          6.00537109375,
+          5.72705078125
+        ],
+        "freeMemory": 10362290176
+      },
+      "after": {
+        "at": "2026-10-25T11:28:03.572Z",
+        "loadAverage": [
+          6.31103515625,
+          6.00537109375,
+          5.72705078125
+        ],
+        "freeMemory": 10362290176
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-entry-gzip/react",
+          "scenarioId": "client-entry-gzip",
+          "suite": "Build",
+          "label": "Client entry size (gzip)",
+          "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 144196,
+          "measuredAt": "2026-10-25T11:28:03.569Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-rsc-entry-gzip-react-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "react",
+      "scenario": "rsc-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:03.572Z",
+        "loadAverage": [
+          6.31103515625,
+          6.00537109375,
+          5.72705078125
+        ],
+        "freeMemory": 10362290176
+      },
+      "after": {
+        "at": "2026-10-25T11:28:03.699Z",
+        "loadAverage": [
+          6.31103515625,
+          6.00537109375,
+          5.72705078125
+        ],
+        "freeMemory": 10362290176
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "rsc-entry-gzip/react",
+          "scenarioId": "rsc-entry-gzip",
+          "suite": "Build",
+          "label": "RSC entry closure size (gzip)",
+          "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 145693,
+          "measuredAt": "2026-10-25T11:28:03.693Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-server-bundle-gzip-react-2",
+      "phase": "measured",
+      "round": 2,
+      "variant": "react",
+      "scenario": "server-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:03.699Z",
+        "loadAverage": [
+          6.31103515625,
+          6.00537109375,
+          5.72705078125
+        ],
+        "freeMemory": 10362290176
+      },
+      "after": {
+        "at": "2026-10-25T11:28:03.739Z",
+        "loadAverage": [
+          6.31103515625,
+          6.00537109375,
+          5.72705078125
+        ],
+        "freeMemory": 10362290176
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "server-bundle-gzip/react",
+          "scenarioId": "server-bundle-gzip",
+          "suite": "Build",
+          "label": "Server bundle size (gzip)",
+          "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 253096,
+          "measuredAt": "2026-10-25T11:28:03.735Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-redact-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "redact",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:28:03.739Z",
+        "loadAverage": [
+          6.31103515625,
+          6.00537109375,
+          5.72705078125
+        ],
+        "freeMemory": 10362290176
+      },
+      "after": {
+        "at": "2026-10-25T11:28:06.706Z",
+        "loadAverage": [
+          6.04541015625,
+          5.955078125,
+          5.7109375
+        ],
+        "freeMemory": 10396893184
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/redact",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 933.693625,
+          "measuredAt": "2026-10-25T11:28:04.698Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-redact-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "redact",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:06.707Z",
+        "loadAverage": [
+          6.04541015625,
+          5.955078125,
+          5.7109375
+        ],
+        "freeMemory": 10396893184
+      },
+      "after": {
+        "at": "2026-10-25T11:28:06.757Z",
+        "loadAverage": [
+          6.04541015625,
+          5.955078125,
+          5.7109375
+        ],
+        "freeMemory": 10394206208
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/redact",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 115508,
+          "measuredAt": "2026-10-25T11:28:06.753Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-entry-gzip-redact-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "redact",
+      "scenario": "client-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:06.757Z",
+        "loadAverage": [
+          6.04541015625,
+          5.955078125,
+          5.7109375
+        ],
+        "freeMemory": 10394206208
+      },
+      "after": {
+        "at": "2026-10-25T11:28:06.789Z",
+        "loadAverage": [
+          6.04541015625,
+          5.955078125,
+          5.7109375
+        ],
+        "freeMemory": 10394206208
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-entry-gzip/redact",
+          "scenarioId": "client-entry-gzip",
+          "suite": "Build",
+          "label": "Client entry size (gzip)",
+          "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 105030,
+          "measuredAt": "2026-10-25T11:28:06.786Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-rsc-entry-gzip-redact-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "redact",
+      "scenario": "rsc-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:06.790Z",
+        "loadAverage": [
+          6.04541015625,
+          5.955078125,
+          5.7109375
+        ],
+        "freeMemory": 10394206208
+      },
+      "after": {
+        "at": "2026-10-25T11:28:06.917Z",
+        "loadAverage": [
+          6.04541015625,
+          5.955078125,
+          5.7109375
+        ],
+        "freeMemory": 10394206208
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "rsc-entry-gzip/redact",
+          "scenarioId": "rsc-entry-gzip",
+          "suite": "Build",
+          "label": "RSC entry closure size (gzip)",
+          "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 145687,
+          "measuredAt": "2026-10-25T11:28:06.911Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-server-bundle-gzip-redact-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "redact",
+      "scenario": "server-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:06.917Z",
+        "loadAverage": [
+          6.04541015625,
+          5.955078125,
+          5.7109375
+        ],
+        "freeMemory": 10394206208
+      },
+      "after": {
+        "at": "2026-10-25T11:28:06.956Z",
+        "loadAverage": [
+          6.04541015625,
+          5.955078125,
+          5.7109375
+        ],
+        "freeMemory": 10394206208
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "server-bundle-gzip/redact",
+          "scenarioId": "server-bundle-gzip",
+          "suite": "Build",
+          "label": "Server bundle size (gzip)",
+          "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 253027,
+          "measuredAt": "2026-10-25T11:28:06.953Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-next-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "next",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:28:06.956Z",
+        "loadAverage": [
+          6.04541015625,
+          5.955078125,
+          5.7109375
+        ],
+        "freeMemory": 10394206208
+      },
+      "after": {
+        "at": "2026-10-25T11:28:10.242Z",
+        "loadAverage": [
+          6.04541015625,
+          5.955078125,
+          5.7109375
+        ],
+        "freeMemory": 10405494784
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/next",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 1234.4323749999999,
+          "measuredAt": "2026-10-25T11:28:08.233Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-next-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "next",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:10.242Z",
+        "loadAverage": [
+          6.04541015625,
+          5.955078125,
+          5.7109375
+        ],
+        "freeMemory": 10405511168
+      },
+      "after": {
+        "at": "2026-10-25T11:28:10.294Z",
+        "loadAverage": [
+          6.04541015625,
+          5.955078125,
+          5.7109375
+        ],
+        "freeMemory": 10400858112
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/next",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 190048,
+          "measuredAt": "2026-10-25T11:28:10.290Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-react-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "react",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:28:10.294Z",
+        "loadAverage": [
+          6.04541015625,
+          5.955078125,
+          5.7109375
+        ],
+        "freeMemory": 10400874496
+      },
+      "after": {
+        "at": "2026-10-25T11:28:13.258Z",
+        "loadAverage": [
+          5.80126953125,
+          5.90576171875,
+          5.69482421875
+        ],
+        "freeMemory": 10401742848
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/react",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 926.803,
+          "measuredAt": "2026-10-25T11:28:11.249Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-react-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "react",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:13.258Z",
+        "loadAverage": [
+          5.80126953125,
+          5.90576171875,
+          5.69482421875
+        ],
+        "freeMemory": 10401742848
+      },
+      "after": {
+        "at": "2026-10-25T11:28:13.314Z",
+        "loadAverage": [
+          5.80126953125,
+          5.90576171875,
+          5.69482421875
+        ],
+        "freeMemory": 10400104448
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/react",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 154862,
+          "measuredAt": "2026-10-25T11:28:13.310Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-entry-gzip-react-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "react",
+      "scenario": "client-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:13.314Z",
+        "loadAverage": [
+          5.80126953125,
+          5.90576171875,
+          5.69482421875
+        ],
+        "freeMemory": 10400104448
+      },
+      "after": {
+        "at": "2026-10-25T11:28:13.348Z",
+        "loadAverage": [
+          5.80126953125,
+          5.90576171875,
+          5.69482421875
+        ],
+        "freeMemory": 10401792000
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-entry-gzip/react",
+          "scenarioId": "client-entry-gzip",
+          "suite": "Build",
+          "label": "Client entry size (gzip)",
+          "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 144196,
+          "measuredAt": "2026-10-25T11:28:13.344Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-rsc-entry-gzip-react-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "react",
+      "scenario": "rsc-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:13.348Z",
+        "loadAverage": [
+          5.80126953125,
+          5.90576171875,
+          5.69482421875
+        ],
+        "freeMemory": 10401792000
+      },
+      "after": {
+        "at": "2026-10-25T11:28:13.475Z",
+        "loadAverage": [
+          5.80126953125,
+          5.90576171875,
+          5.69482421875
+        ],
+        "freeMemory": 10401792000
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "rsc-entry-gzip/react",
+          "scenarioId": "rsc-entry-gzip",
+          "suite": "Build",
+          "label": "RSC entry closure size (gzip)",
+          "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 145697,
+          "measuredAt": "2026-10-25T11:28:13.470Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-server-bundle-gzip-react-3",
+      "phase": "measured",
+      "round": 3,
+      "variant": "react",
+      "scenario": "server-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:13.475Z",
+        "loadAverage": [
+          5.80126953125,
+          5.90576171875,
+          5.69482421875
+        ],
+        "freeMemory": 10401792000
+      },
+      "after": {
+        "at": "2026-10-25T11:28:13.514Z",
+        "loadAverage": [
+          5.80126953125,
+          5.90576171875,
+          5.69482421875
+        ],
+        "freeMemory": 10401792000
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "server-bundle-gzip/react",
+          "scenarioId": "server-bundle-gzip",
+          "suite": "Build",
+          "label": "Server bundle size (gzip)",
+          "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 253091,
+          "measuredAt": "2026-10-25T11:28:13.511Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-react-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "react",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:28:13.515Z",
+        "loadAverage": [
+          5.80126953125,
+          5.90576171875,
+          5.69482421875
+        ],
+        "freeMemory": 10401792000
+      },
+      "after": {
+        "at": "2026-10-25T11:28:16.479Z",
+        "loadAverage": [
+          5.80126953125,
+          5.90576171875,
+          5.69482421875
+        ],
+        "freeMemory": 10424811520
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/react",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 932.8823749999999,
+          "measuredAt": "2026-10-25T11:28:14.470Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-react-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "react",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:16.479Z",
+        "loadAverage": [
+          5.80126953125,
+          5.90576171875,
+          5.69482421875
+        ],
+        "freeMemory": 10424811520
+      },
+      "after": {
+        "at": "2026-10-25T11:28:16.531Z",
+        "loadAverage": [
+          5.57666015625,
+          5.857421875,
+          5.6787109375
+        ],
+        "freeMemory": 10424565760
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/react",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 154862,
+          "measuredAt": "2026-10-25T11:28:16.528Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-entry-gzip-react-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "react",
+      "scenario": "client-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:16.532Z",
+        "loadAverage": [
+          5.57666015625,
+          5.857421875,
+          5.6787109375
+        ],
+        "freeMemory": 10424565760
+      },
+      "after": {
+        "at": "2026-10-25T11:28:16.568Z",
+        "loadAverage": [
+          5.57666015625,
+          5.857421875,
+          5.6787109375
+        ],
+        "freeMemory": 10422927360
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-entry-gzip/react",
+          "scenarioId": "client-entry-gzip",
+          "suite": "Build",
+          "label": "Client entry size (gzip)",
+          "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 144196,
+          "measuredAt": "2026-10-25T11:28:16.564Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-rsc-entry-gzip-react-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "react",
+      "scenario": "rsc-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:16.568Z",
+        "loadAverage": [
+          5.57666015625,
+          5.857421875,
+          5.6787109375
+        ],
+        "freeMemory": 10422927360
+      },
+      "after": {
+        "at": "2026-10-25T11:28:16.693Z",
+        "loadAverage": [
+          5.57666015625,
+          5.857421875,
+          5.6787109375
+        ],
+        "freeMemory": 10416324608
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "rsc-entry-gzip/react",
+          "scenarioId": "rsc-entry-gzip",
+          "suite": "Build",
+          "label": "RSC entry closure size (gzip)",
+          "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 145711,
+          "measuredAt": "2026-10-25T11:28:16.687Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-server-bundle-gzip-react-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "react",
+      "scenario": "server-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:16.693Z",
+        "loadAverage": [
+          5.57666015625,
+          5.857421875,
+          5.6787109375
+        ],
+        "freeMemory": 10416750592
+      },
+      "after": {
+        "at": "2026-10-25T11:28:16.731Z",
+        "loadAverage": [
+          5.57666015625,
+          5.857421875,
+          5.6787109375
+        ],
+        "freeMemory": 10418044928
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "server-bundle-gzip/react",
+          "scenarioId": "server-bundle-gzip",
+          "suite": "Build",
+          "label": "Server bundle size (gzip)",
+          "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 253111,
+          "measuredAt": "2026-10-25T11:28:16.728Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-next-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "next",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:28:16.731Z",
+        "loadAverage": [
+          5.57666015625,
+          5.857421875,
+          5.6787109375
+        ],
+        "freeMemory": 10418044928
+      },
+      "after": {
+        "at": "2026-10-25T11:28:20.009Z",
+        "loadAverage": [
+          5.57666015625,
+          5.857421875,
+          5.6787109375
+        ],
+        "freeMemory": 10449141760
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/next",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 1228.0595,
+          "measuredAt": "2026-10-25T11:28:18.001Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-next-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "next",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:20.009Z",
+        "loadAverage": [
+          5.57666015625,
+          5.857421875,
+          5.6787109375
+        ],
+        "freeMemory": 10449141760
+      },
+      "after": {
+        "at": "2026-10-25T11:28:20.063Z",
+        "loadAverage": [
+          5.57666015625,
+          5.857421875,
+          5.6787109375
+        ],
+        "freeMemory": 10446749696
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/next",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 190048,
+          "measuredAt": "2026-10-25T11:28:20.060Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-redact-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "redact",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:28:20.064Z",
+        "loadAverage": [
+          5.57666015625,
+          5.857421875,
+          5.6787109375
+        ],
+        "freeMemory": 10446749696
+      },
+      "after": {
+        "at": "2026-10-25T11:28:23.053Z",
+        "loadAverage": [
+          5.2900390625,
+          5.79296875,
+          5.65673828125
+        ],
+        "freeMemory": 10497015808
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/redact",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 953.627125,
+          "measuredAt": "2026-10-25T11:28:21.044Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-redact-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "redact",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:23.053Z",
+        "loadAverage": [
+          5.2900390625,
+          5.79296875,
+          5.65673828125
+        ],
+        "freeMemory": 10497015808
+      },
+      "after": {
+        "at": "2026-10-25T11:28:23.100Z",
+        "loadAverage": [
+          5.2900390625,
+          5.79296875,
+          5.65673828125
+        ],
+        "freeMemory": 10494197760
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/redact",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 115508,
+          "measuredAt": "2026-10-25T11:28:23.097Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-entry-gzip-redact-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "redact",
+      "scenario": "client-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:23.101Z",
+        "loadAverage": [
+          5.2900390625,
+          5.79296875,
+          5.65673828125
+        ],
+        "freeMemory": 10494197760
+      },
+      "after": {
+        "at": "2026-10-25T11:28:23.133Z",
+        "loadAverage": [
+          5.2900390625,
+          5.79296875,
+          5.65673828125
+        ],
+        "freeMemory": 10495852544
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-entry-gzip/redact",
+          "scenarioId": "client-entry-gzip",
+          "suite": "Build",
+          "label": "Client entry size (gzip)",
+          "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 105030,
+          "measuredAt": "2026-10-25T11:28:23.130Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-rsc-entry-gzip-redact-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "redact",
+      "scenario": "rsc-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:23.133Z",
+        "loadAverage": [
+          5.2900390625,
+          5.79296875,
+          5.65673828125
+        ],
+        "freeMemory": 10495852544
+      },
+      "after": {
+        "at": "2026-10-25T11:28:23.259Z",
+        "loadAverage": [
+          5.2900390625,
+          5.79296875,
+          5.65673828125
+        ],
+        "freeMemory": 10495852544
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "rsc-entry-gzip/redact",
+          "scenarioId": "rsc-entry-gzip",
+          "suite": "Build",
+          "label": "RSC entry closure size (gzip)",
+          "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 145682,
+          "measuredAt": "2026-10-25T11:28:23.253Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-server-bundle-gzip-redact-4",
+      "phase": "measured",
+      "round": 4,
+      "variant": "redact",
+      "scenario": "server-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:23.259Z",
+        "loadAverage": [
+          5.2900390625,
+          5.79296875,
+          5.65673828125
+        ],
+        "freeMemory": 10495852544
+      },
+      "after": {
+        "at": "2026-10-25T11:28:23.297Z",
+        "loadAverage": [
+          5.2900390625,
+          5.79296875,
+          5.65673828125
+        ],
+        "freeMemory": 10495852544
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "server-bundle-gzip/redact",
+          "scenarioId": "server-bundle-gzip",
+          "suite": "Build",
+          "label": "Server bundle size (gzip)",
+          "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 253023,
+          "measuredAt": "2026-10-25T11:28:23.294Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-next-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "next",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:28:23.297Z",
+        "loadAverage": [
+          5.2900390625,
+          5.79296875,
+          5.65673828125
+        ],
+        "freeMemory": 10495852544
+      },
+      "after": {
+        "at": "2026-10-25T11:28:26.588Z",
+        "loadAverage": [
+          5.0263671875,
+          5.72998046875,
+          5.63525390625
+        ],
+        "freeMemory": 10475028480
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/next",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 1242.772833,
+          "measuredAt": "2026-10-25T11:28:24.580Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-next-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "next",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:26.589Z",
+        "loadAverage": [
+          5.0263671875,
+          5.72998046875,
+          5.63525390625
+        ],
+        "freeMemory": 10475028480
+      },
+      "after": {
+        "at": "2026-10-25T11:28:26.641Z",
+        "loadAverage": [
+          5.0263671875,
+          5.72998046875,
+          5.63525390625
+        ],
+        "freeMemory": 10473472000
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/next",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 190048,
+          "measuredAt": "2026-10-25T11:28:26.637Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-react-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "react",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:28:26.642Z",
+        "loadAverage": [
+          5.0263671875,
+          5.72998046875,
+          5.63525390625
+        ],
+        "freeMemory": 10473472000
+      },
+      "after": {
+        "at": "2026-10-25T11:28:29.619Z",
+        "loadAverage": [
+          5.0263671875,
+          5.72998046875,
+          5.63525390625
+        ],
+        "freeMemory": 10496557056
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/react",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 939.810834,
+          "measuredAt": "2026-10-25T11:28:27.609Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-react-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "react",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:29.619Z",
+        "loadAverage": [
+          5.0263671875,
+          5.72998046875,
+          5.63525390625
+        ],
+        "freeMemory": 10496557056
+      },
+      "after": {
+        "at": "2026-10-25T11:28:29.668Z",
+        "loadAverage": [
+          5.0263671875,
+          5.72998046875,
+          5.63525390625
+        ],
+        "freeMemory": 10495803392
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/react",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 154862,
+          "measuredAt": "2026-10-25T11:28:29.664Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-entry-gzip-react-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "react",
+      "scenario": "client-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:29.668Z",
+        "loadAverage": [
+          5.0263671875,
+          5.72998046875,
+          5.63525390625
+        ],
+        "freeMemory": 10495803392
+      },
+      "after": {
+        "at": "2026-10-25T11:28:29.701Z",
+        "loadAverage": [
+          5.0263671875,
+          5.72998046875,
+          5.63525390625
+        ],
+        "freeMemory": 10496327680
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-entry-gzip/react",
+          "scenarioId": "client-entry-gzip",
+          "suite": "Build",
+          "label": "Client entry size (gzip)",
+          "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 144196,
+          "measuredAt": "2026-10-25T11:28:29.697Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-rsc-entry-gzip-react-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "react",
+      "scenario": "rsc-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:29.701Z",
+        "loadAverage": [
+          5.0263671875,
+          5.72998046875,
+          5.63525390625
+        ],
+        "freeMemory": 10496327680
+      },
+      "after": {
+        "at": "2026-10-25T11:28:29.829Z",
+        "loadAverage": [
+          5.0263671875,
+          5.72998046875,
+          5.63525390625
+        ],
+        "freeMemory": 10490396672
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "rsc-entry-gzip/react",
+          "scenarioId": "rsc-entry-gzip",
+          "suite": "Build",
+          "label": "RSC entry closure size (gzip)",
+          "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 145705,
+          "measuredAt": "2026-10-25T11:28:29.822Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-server-bundle-gzip-react-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "react",
+      "scenario": "server-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:29.830Z",
+        "loadAverage": [
+          5.0263671875,
+          5.72998046875,
+          5.63525390625
+        ],
+        "freeMemory": 10490789888
+      },
+      "after": {
+        "at": "2026-10-25T11:28:29.868Z",
+        "loadAverage": [
+          5.0263671875,
+          5.72998046875,
+          5.63525390625
+        ],
+        "freeMemory": 10490789888
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "server-bundle-gzip/react",
+          "scenarioId": "server-bundle-gzip",
+          "suite": "Build",
+          "label": "Server bundle size (gzip)",
+          "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 253104,
+          "measuredAt": "2026-10-25T11:28:29.865Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-redact-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "redact",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:28:29.868Z",
+        "loadAverage": [
+          5.0263671875,
+          5.72998046875,
+          5.63525390625
+        ],
+        "freeMemory": 10490789888
+      },
+      "after": {
+        "at": "2026-10-25T11:28:32.849Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10509713408
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/redact",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 947.4829579999999,
+          "measuredAt": "2026-10-25T11:28:30.840Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-redact-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "redact",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:32.850Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10509713408
+      },
+      "after": {
+        "at": "2026-10-25T11:28:32.900Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10509877248
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/redact",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 115508,
+          "measuredAt": "2026-10-25T11:28:32.896Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-entry-gzip-redact-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "redact",
+      "scenario": "client-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:32.900Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10509877248
+      },
+      "after": {
+        "at": "2026-10-25T11:28:32.932Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10509107200
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-entry-gzip/redact",
+          "scenarioId": "client-entry-gzip",
+          "suite": "Build",
+          "label": "Client entry size (gzip)",
+          "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 105030,
+          "measuredAt": "2026-10-25T11:28:32.929Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-rsc-entry-gzip-redact-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "redact",
+      "scenario": "rsc-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:32.932Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10509107200
+      },
+      "after": {
+        "at": "2026-10-25T11:28:33.058Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10505764864
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "rsc-entry-gzip/redact",
+          "scenarioId": "rsc-entry-gzip",
+          "suite": "Build",
+          "label": "RSC entry closure size (gzip)",
+          "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 145685,
+          "measuredAt": "2026-10-25T11:28:33.053Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-server-bundle-gzip-redact-5",
+      "phase": "measured",
+      "round": 5,
+      "variant": "redact",
+      "scenario": "server-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:33.059Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10506174464
+      },
+      "after": {
+        "at": "2026-10-25T11:28:33.097Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10506158080
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "server-bundle-gzip/redact",
+          "scenarioId": "server-bundle-gzip",
+          "suite": "Build",
+          "label": "Server bundle size (gzip)",
+          "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 253023,
+          "measuredAt": "2026-10-25T11:28:33.093Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-redact-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "redact",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:28:33.097Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10506158080
+      },
+      "after": {
+        "at": "2026-10-25T11:28:36.074Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10458595328
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/redact",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 943.493959,
+          "measuredAt": "2026-10-25T11:28:34.066Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-redact-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "redact",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:36.075Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10458595328
+      },
+      "after": {
+        "at": "2026-10-25T11:28:36.122Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10458595328
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/redact",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 115508,
+          "measuredAt": "2026-10-25T11:28:36.118Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-entry-gzip-redact-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "redact",
+      "scenario": "client-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:36.122Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10458595328
+      },
+      "after": {
+        "at": "2026-10-25T11:28:36.154Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10458595328
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-entry-gzip/redact",
+          "scenarioId": "client-entry-gzip",
+          "suite": "Build",
+          "label": "Client entry size (gzip)",
+          "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 105030,
+          "measuredAt": "2026-10-25T11:28:36.151Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-rsc-entry-gzip-redact-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "redact",
+      "scenario": "rsc-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:36.154Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10458595328
+      },
+      "after": {
+        "at": "2026-10-25T11:28:36.279Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10458595328
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "rsc-entry-gzip/redact",
+          "scenarioId": "rsc-entry-gzip",
+          "suite": "Build",
+          "label": "RSC entry closure size (gzip)",
+          "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 145688,
+          "measuredAt": "2026-10-25T11:28:36.273Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-server-bundle-gzip-redact-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "redact",
+      "scenario": "server-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:36.279Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10458595328
+      },
+      "after": {
+        "at": "2026-10-25T11:28:36.318Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10458595328
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "server-bundle-gzip/redact",
+          "scenarioId": "server-bundle-gzip",
+          "suite": "Build",
+          "label": "Server bundle size (gzip)",
+          "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 253022,
+          "measuredAt": "2026-10-25T11:28:36.315Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-react-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "react",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:28:36.318Z",
+        "loadAverage": [
+          4.78369140625,
+          5.66796875,
+          5.61376953125
+        ],
+        "freeMemory": 10458595328
+      },
+      "after": {
+        "at": "2026-10-25T11:28:39.303Z",
+        "loadAverage": [
+          4.640625,
+          5.62353515625,
+          5.59814453125
+        ],
+        "freeMemory": 10465640448
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/react",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 954.7262910000001,
+          "measuredAt": "2026-10-25T11:28:37.296Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-react-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "react",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:39.303Z",
+        "loadAverage": [
+          4.640625,
+          5.62353515625,
+          5.59814453125
+        ],
+        "freeMemory": 10465640448
+      },
+      "after": {
+        "at": "2026-10-25T11:28:39.357Z",
+        "loadAverage": [
+          4.640625,
+          5.62353515625,
+          5.59814453125
+        ],
+        "freeMemory": 10467115008
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/react",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 154862,
+          "measuredAt": "2026-10-25T11:28:39.353Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-entry-gzip-react-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "react",
+      "scenario": "client-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:39.357Z",
+        "loadAverage": [
+          4.640625,
+          5.62353515625,
+          5.59814453125
+        ],
+        "freeMemory": 10467131392
+      },
+      "after": {
+        "at": "2026-10-25T11:28:39.391Z",
+        "loadAverage": [
+          4.640625,
+          5.62353515625,
+          5.59814453125
+        ],
+        "freeMemory": 10468425728
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-entry-gzip/react",
+          "scenarioId": "client-entry-gzip",
+          "suite": "Build",
+          "label": "Client entry size (gzip)",
+          "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 144196,
+          "measuredAt": "2026-10-25T11:28:39.387Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-rsc-entry-gzip-react-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "react",
+      "scenario": "rsc-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:39.391Z",
+        "loadAverage": [
+          4.640625,
+          5.62353515625,
+          5.59814453125
+        ],
+        "freeMemory": 10468425728
+      },
+      "after": {
+        "at": "2026-10-25T11:28:39.516Z",
+        "loadAverage": [
+          4.640625,
+          5.62353515625,
+          5.59814453125
+        ],
+        "freeMemory": 10468425728
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "rsc-entry-gzip/react",
+          "scenarioId": "rsc-entry-gzip",
+          "suite": "Build",
+          "label": "RSC entry closure size (gzip)",
+          "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 145704,
+          "measuredAt": "2026-10-25T11:28:39.510Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-server-bundle-gzip-react-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "react",
+      "scenario": "server-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:39.516Z",
+        "loadAverage": [
+          4.640625,
+          5.62353515625,
+          5.59814453125
+        ],
+        "freeMemory": 10468425728
+      },
+      "after": {
+        "at": "2026-10-25T11:28:39.555Z",
+        "loadAverage": [
+          4.640625,
+          5.62353515625,
+          5.59814453125
+        ],
+        "freeMemory": 10468425728
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "server-bundle-gzip/react",
+          "scenarioId": "server-bundle-gzip",
+          "suite": "Build",
+          "label": "Server bundle size (gzip)",
+          "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 253106,
+          "measuredAt": "2026-10-25T11:28:39.551Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-production-build-next-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "next",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:28:39.555Z",
+        "loadAverage": [
+          4.640625,
+          5.62353515625,
+          5.59814453125
+        ],
+        "freeMemory": 10468425728
+      },
+      "after": {
+        "at": "2026-10-25T11:28:42.843Z",
+        "loadAverage": [
+          4.4287109375,
+          5.56298828125,
+          5.57666015625
+        ],
+        "freeMemory": 10430431232
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/next",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 1237.429958,
+          "measuredAt": "2026-10-25T11:28:40.833Z"
+        }
+      ]
+    },
+    {
+      "id": "measured-client-bundle-gzip-next-6",
+      "phase": "measured",
+      "round": 6,
+      "variant": "next",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:28:42.843Z",
+        "loadAverage": [
+          4.4287109375,
+          5.56298828125,
+          5.57666015625
+        ],
+        "freeMemory": 10430431232
+      },
+      "after": {
+        "at": "2026-10-25T11:28:42.894Z",
+        "loadAverage": [
+          4.4287109375,
+          5.56298828125,
+          5.57666015625
+        ],
+        "freeMemory": 10431184896
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/next",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 190048,
+          "measuredAt": "2026-10-25T11:28:42.891Z"
+        }
+      ]
+    }
+  ],
+  "preflightMeasurements": [
+    {
+      "id": "preflight-dev-cold-start-root-react-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "react",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:18:41.905Z",
+        "loadAverage": [
+          12.80810546875,
+          7.34716796875,
+          5.853515625
+        ],
+        "freeMemory": 8093384704
+      },
+      "after": {
+        "at": "2026-10-25T11:18:46.449Z",
+        "loadAverage": [
+          12.1826171875,
+          7.30810546875,
+          5.84814453125
+        ],
+        "freeMemory": 7845232640
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/react",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 2507.342333,
+          "measuredAt": "2026-10-25T11:18:44.440Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-dev-cold-start-root-redact-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "redact",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:18:46.449Z",
+        "loadAverage": [
+          12.1826171875,
+          7.30810546875,
+          5.84814453125
+        ],
+        "freeMemory": 7845249024
+      },
+      "after": {
+        "at": "2026-10-25T11:18:49.639Z",
+        "loadAverage": [
+          12.1826171875,
+          7.30810546875,
+          5.84814453125
+        ],
+        "freeMemory": 7730200576
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/redact",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 1153.333708,
+          "measuredAt": "2026-10-25T11:18:47.633Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-dev-cold-start-root-next-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "next",
+      "scenario": "dev-cold-start-root",
+      "before": {
+        "at": "2026-10-25T11:18:49.639Z",
+        "loadAverage": [
+          12.1826171875,
+          7.30810546875,
+          5.84814453125
+        ],
+        "freeMemory": 7730200576
+      },
+      "after": {
+        "at": "2026-10-25T11:18:55.312Z",
+        "loadAverage": [
+          11.447265625,
+          7.236328125,
+          5.8310546875
+        ],
+        "freeMemory": 7108984832
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-root/next",
+          "scenarioId": "dev-cold-start-root",
+          "suite": "Development",
+          "label": "Dev server cold start",
+          "description": "Time from launching a fresh dev-server process until the root route responds, with framework caches cleared before every round.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 3637.770459,
+          "measuredAt": "2026-10-25T11:18:53.303Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-dev-cold-start-pages-large-react-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "react",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:18:55.312Z",
+        "loadAverage": [
+          11.447265625,
+          7.236328125,
+          5.8310546875
+        ],
+        "freeMemory": 7108984832
+      },
+      "after": {
+        "at": "2026-10-25T11:19:06.185Z",
+        "loadAverage": [
+          10.12841796875,
+          7.15673828125,
+          5.8271484375
+        ],
+        "freeMemory": 7974699008
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/react",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 8839.777209,
+          "measuredAt": "2026-10-25T11:19:04.179Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-dev-cold-start-pages-large-redact-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "redact",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:19:06.186Z",
+        "loadAverage": [
+          10.12841796875,
+          7.15673828125,
+          5.8271484375
+        ],
+        "freeMemory": 7974748160
+      },
+      "after": {
+        "at": "2026-10-25T11:19:17.098Z",
+        "loadAverage": [
+          9.62109375,
+          7.14990234375,
+          5.84033203125
+        ],
+        "freeMemory": 6471761920
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/redact",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 8880.89475,
+          "measuredAt": "2026-10-25T11:19:15.091Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-dev-cold-start-pages-large-next-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "next",
+      "scenario": "dev-cold-start-pages-large",
+      "before": {
+        "at": "2026-10-25T11:19:17.098Z",
+        "loadAverage": [
+          9.62109375,
+          7.14990234375,
+          5.84033203125
+        ],
+        "freeMemory": 6471761920
+      },
+      "after": {
+        "at": "2026-10-25T11:19:31.018Z",
+        "loadAverage": [
+          11.0439453125,
+          7.609375,
+          6.02783203125
+        ],
+        "freeMemory": 6048317440
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "dev-cold-start-pages-large/next",
+          "scenarioId": "dev-cold-start-pages-large",
+          "suite": "Development",
+          "label": "Dev server cold start (large Pages Router app)",
+          "description": "Time from launching a fresh dev-server process until the root route of a generated Pages Router app responds. The app links 40 local packages through node_modules and imports them through barrel files (3,200 components). Framework caches are cleared before every round.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 11883.217792,
+          "measuredAt": "2026-10-25T11:19:29.009Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-production-build-react-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "react",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:19:31.018Z",
+        "loadAverage": [
+          11.0439453125,
+          7.609375,
+          6.02783203125
+        ],
+        "freeMemory": 6046269440
+      },
+      "after": {
+        "at": "2026-10-25T11:19:34.473Z",
+        "loadAverage": [
+          11.0439453125,
+          7.609375,
+          6.02783203125
+        ],
+        "freeMemory": 6794641408
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/react",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 1423.471333,
+          "measuredAt": "2026-10-25T11:19:32.468Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-client-bundle-gzip-react-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "react",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:19:34.474Z",
+        "loadAverage": [
+          11.0439453125,
+          7.609375,
+          6.02783203125
+        ],
+        "freeMemory": 6794641408
+      },
+      "after": {
+        "at": "2026-10-25T11:19:34.507Z",
+        "loadAverage": [
+          11.0439453125,
+          7.609375,
+          6.02783203125
+        ],
+        "freeMemory": 6794641408
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/react",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 154862,
+          "measuredAt": "2026-10-25T11:19:34.503Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-client-entry-gzip-react-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "react",
+      "scenario": "client-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:19:34.507Z",
+        "loadAverage": [
+          11.0439453125,
+          7.609375,
+          6.02783203125
+        ],
+        "freeMemory": 6794641408
+      },
+      "after": {
+        "at": "2026-10-25T11:19:34.549Z",
+        "loadAverage": [
+          11.0439453125,
+          7.609375,
+          6.02783203125
+        ],
+        "freeMemory": 6794641408
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-entry-gzip/react",
+          "scenarioId": "client-entry-gzip",
+          "suite": "Build",
+          "label": "Client entry size (gzip)",
+          "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 144196,
+          "measuredAt": "2026-10-25T11:19:34.544Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-rsc-entry-gzip-react-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "react",
+      "scenario": "rsc-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:19:34.549Z",
+        "loadAverage": [
+          11.0439453125,
+          7.609375,
+          6.02783203125
+        ],
+        "freeMemory": 6794641408
+      },
+      "after": {
+        "at": "2026-10-25T11:19:34.708Z",
+        "loadAverage": [
+          11.0439453125,
+          7.609375,
+          6.02783203125
+        ],
+        "freeMemory": 6794641408
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "rsc-entry-gzip/react",
+          "scenarioId": "rsc-entry-gzip",
+          "suite": "Build",
+          "label": "RSC entry closure size (gzip)",
+          "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 145703,
+          "measuredAt": "2026-10-25T11:19:34.701Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-server-bundle-gzip-react-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "react",
+      "scenario": "server-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:19:34.708Z",
+        "loadAverage": [
+          11.0439453125,
+          7.609375,
+          6.02783203125
+        ],
+        "freeMemory": 6794641408
+      },
+      "after": {
+        "at": "2026-10-25T11:19:34.764Z",
+        "loadAverage": [
+          11.0439453125,
+          7.609375,
+          6.02783203125
+        ],
+        "freeMemory": 6794641408
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "server-bundle-gzip/react",
+          "scenarioId": "server-bundle-gzip",
+          "suite": "Build",
+          "label": "Server bundle size (gzip)",
+          "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+          "implementationId": "react",
+          "implementationLabel": "Vinext + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 253106,
+          "measuredAt": "2026-10-25T11:19:34.759Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-production-build-redact-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "redact",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:19:34.765Z",
+        "loadAverage": [
+          11.0439453125,
+          7.609375,
+          6.02783203125
+        ],
+        "freeMemory": 6794641408
+      },
+      "after": {
+        "at": "2026-10-25T11:19:37.916Z",
+        "loadAverage": [
+          10.7998046875,
+          7.61572265625,
+          6.0390625
+        ],
+        "freeMemory": 8322039808
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/redact",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 1116.519334,
+          "measuredAt": "2026-10-25T11:19:35.907Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-client-bundle-gzip-redact-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "redact",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:19:37.916Z",
+        "loadAverage": [
+          10.7998046875,
+          7.61572265625,
+          6.0390625
+        ],
+        "freeMemory": 8322039808
+      },
+      "after": {
+        "at": "2026-10-25T11:19:37.956Z",
+        "loadAverage": [
+          10.7998046875,
+          7.61572265625,
+          6.0390625
+        ],
+        "freeMemory": 8322039808
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/redact",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 115508,
+          "measuredAt": "2026-10-25T11:19:37.951Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-client-entry-gzip-redact-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "redact",
+      "scenario": "client-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:19:37.956Z",
+        "loadAverage": [
+          10.7998046875,
+          7.61572265625,
+          6.0390625
+        ],
+        "freeMemory": 8322039808
+      },
+      "after": {
+        "at": "2026-10-25T11:19:37.988Z",
+        "loadAverage": [
+          10.7998046875,
+          7.61572265625,
+          6.0390625
+        ],
+        "freeMemory": 8322039808
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-entry-gzip/redact",
+          "scenarioId": "client-entry-gzip",
+          "suite": "Build",
+          "label": "Client entry size (gzip)",
+          "description": "Total gzip size of the production browser entry and its eager static JavaScript imports.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 105030,
+          "measuredAt": "2026-10-25T11:19:37.984Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-rsc-entry-gzip-redact-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "redact",
+      "scenario": "rsc-entry-gzip",
+      "before": {
+        "at": "2026-10-25T11:19:37.988Z",
+        "loadAverage": [
+          10.7998046875,
+          7.61572265625,
+          6.0390625
+        ],
+        "freeMemory": 8322039808
+      },
+      "after": {
+        "at": "2026-10-25T11:19:38.128Z",
+        "loadAverage": [
+          10.7998046875,
+          7.61572265625,
+          6.0390625
+        ],
+        "freeMemory": 8322039808
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "rsc-entry-gzip/redact",
+          "scenarioId": "rsc-entry-gzip",
+          "suite": "Build",
+          "label": "RSC entry closure size (gzip)",
+          "description": "Total gzip size of the vinext production RSC entry and its eager static JavaScript imports.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 145692,
+          "measuredAt": "2026-10-25T11:19:38.122Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-server-bundle-gzip-redact-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "redact",
+      "scenario": "server-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:19:38.128Z",
+        "loadAverage": [
+          10.7998046875,
+          7.61572265625,
+          6.0390625
+        ],
+        "freeMemory": 8322039808
+      },
+      "after": {
+        "at": "2026-10-25T11:19:38.168Z",
+        "loadAverage": [
+          10.7998046875,
+          7.61572265625,
+          6.0390625
+        ],
+        "freeMemory": 8322039808
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "server-bundle-gzip/redact",
+          "scenarioId": "server-bundle-gzip",
+          "suite": "Build",
+          "label": "Server bundle size (gzip)",
+          "description": "Total gzip size of production JavaScript and CSS emitted under vinext's dist/server directory, including the RSC entry, SSR entry, and shared chunks.",
+          "implementationId": "redact",
+          "implementationLabel": "Vinext + Redact",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "head",
+          "value": 253041,
+          "measuredAt": "2026-10-25T11:19:38.164Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-production-build-next-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "next",
+      "scenario": "production-build",
+      "before": {
+        "at": "2026-10-25T11:19:38.168Z",
+        "loadAverage": [
+          10.7998046875,
+          7.61572265625,
+          6.0390625
+        ],
+        "freeMemory": 8322039808
+      },
+      "after": {
+        "at": "2026-10-25T11:19:41.568Z",
+        "loadAverage": [
+          10.4150390625,
+          7.5888671875,
+          6.03857421875
+        ],
+        "freeMemory": 8364228608
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "production-build/next",
+          "scenarioId": "production-build",
+          "suite": "Build",
+          "label": "Production build time",
+          "description": "Time to complete a clean production build with previous output removed.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "ms",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 1369.886333,
+          "measuredAt": "2026-10-25T11:19:39.563Z"
+        }
+      ]
+    },
+    {
+      "id": "preflight-client-bundle-gzip-next-1",
+      "phase": "preflight",
+      "round": 1,
+      "variant": "next",
+      "scenario": "client-bundle-gzip",
+      "before": {
+        "at": "2026-10-25T11:19:41.568Z",
+        "loadAverage": [
+          10.4150390625,
+          7.5888671875,
+          6.03857421875
+        ],
+        "freeMemory": 8364228608
+      },
+      "after": {
+        "at": "2026-10-25T11:19:41.603Z",
+        "loadAverage": [
+          10.4150390625,
+          7.5888671875,
+          6.03857421875
+        ],
+        "freeMemory": 8341078016
+      },
+      "code": 0,
+      "signal": null,
+      "sample": [
+        {
+          "schemaVersion": 1,
+          "benchmarkId": "client-bundle-gzip/next",
+          "scenarioId": "client-bundle-gzip",
+          "suite": "Build",
+          "label": "Client bundle size (gzip)",
+          "description": "Total gzip size of production client JavaScript and CSS emitted by the clean build.",
+          "implementationId": "next",
+          "implementationLabel": "Next.js + React",
+          "profile": false,
+          "unit": "bytes",
+          "lowerIsBetter": true,
+          "revision": "base",
+          "value": 190048,
+          "measuredAt": "2026-10-25T11:19:41.600Z"
+        }
+      ]
+    }
+  ],
+  "sourceCommit": "0e879521fbd4ae7637bfcadae1841c2ef0f44c97",
+  "reproduction": {
+    "experimentDirectory": "/private/tmp/redact-vinext-final-benchmark-20261025",
+    "commands": [
+      "node record-provenance.mjs",
+      "node run-matrix.mjs --preflight",
+      "node verify-workloads.mjs",
+      "node run-matrix.mjs",
+      "node summarize.mjs"
+    ],
+    "note": "Use a fresh evidence directory. Install the pinned packages and frozen candidate described in provenance. The native React and Redact variants use identical maintained platform corrections, differing only in renderer mode."
+  }
+}

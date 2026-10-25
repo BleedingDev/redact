@@ -1,0 +1,167 @@
+name: Next compatibility
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  next:
+    name: Next ${{ matrix.version }} (${{ matrix.rendering }}, ${{ matrix.bundler }}, ${{ matrix.mode }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ['15.5.28', '16.0.11', '16.1.7', '16.2.12', '16.3.8', '16.4.3']
+        bundler: [turbopack, webpack]
+        mode: [development, production]
+        rendering: [standard, cache-components]
+        exclude:
+          - version: '15.5.28'
+            rendering: cache-components
+    env:
+      PLAYWRIGHT_CHANNEL: chromium
+      NEXT_TELEMETRY_DISABLED: '1'
+      NEXT_TEST_CACHE_COMPONENTS: ${{ matrix.rendering == 'cache-components' && '1' || '0' }}
+      NEXT_TEST_TRACE: ${{ matrix.mode == 'development' && matrix.bundler == 'webpack' && '1' || '' }}
+    steps:
+      - name: Set test paths
+        run: |
+          echo "NEXT_TEST_DIR=$RUNNER_TEMP/redact-next" >> "$GITHUB_ENV"
+          echo "NEXT_TEST_RESULT=$RUNNER_TEMP/next-results/${{ matrix.version }}-${{ matrix.rendering }}-${{ matrix.bundler }}-${{ matrix.mode }}.json" >> "$GITHUB_ENV"
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - name: Setup Tools
+        uses: TanStack/config/.github/setup@e4b48f16568324f76f467aa4c2aac2f05db632c3
+      - name: Build Redact
+        run: pnpm build
+      - name: Install browsers
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
+      - name: Prepare packed fixture
+        id: fixture
+        run: node scripts/prepare-next-fixture.mjs ${{ matrix.version }} "$NEXT_TEST_DIR" next-demo ${{ matrix.rendering }}
+      - name: Verify browser actions
+        if: matrix.version == '16.4.3' && matrix.bundler == 'turbopack' && matrix.mode == 'development' && matrix.rendering == 'cache-components'
+        run: |
+          status=0
+          for browser in chromium firefox webkit; do
+            PLAYWRIGHT_BROWSER=$browser pnpm test:browser:actions || status=1
+            PLAYWRIGHT_BROWSER=$browser node scripts/test-browser-lifecycle.mjs || status=1
+            PLAYWRIGHT_BROWSER=$browser node scripts/test-browser-reload.mjs || status=1
+          done
+          exit "$status"
+      - name: Verify Next.js
+        id: verify
+        if: ${{ !cancelled() && steps.fixture.outcome == 'success' }}
+        run: node scripts/test-next.mjs ${{ matrix.mode == 'production' && '--production' || '' }} ${{ matrix.bundler == 'webpack' && '--webpack' || '' }}
+      - name: Compare failing cases with native React
+        if: ${{ !cancelled() && steps.verify.outcome == 'failure' }}
+        run: node scripts/test-next-controls.mjs ${{ matrix.mode == 'production' && '--production' || '' }} ${{ matrix.bundler == 'webpack' && '--webpack' || '' }}
+      - name: Save native React diagnostics
+        if: ${{ !cancelled() && steps.verify.outcome == 'failure' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: native-next-${{ matrix.version }}-${{ matrix.rendering }}-${{ matrix.bundler }}-${{ matrix.mode }}
+          path: ${{ env.NEXT_TEST_RESULT }}.native.json
+          if-no-files-found: warn
+      - name: Save compatibility results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: next-${{ matrix.version }}-${{ matrix.rendering }}-${{ matrix.bundler }}-${{ matrix.mode }}
+          path: ${{ env.NEXT_TEST_RESULT }}
+          if-no-files-found: error
+
+  next-deployment:
+    name: Next ${{ matrix.version }} (${{ matrix.rendering }}, ${{ matrix.deployment }}, ${{ matrix.bundler }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ['15.5.28', '16.4.3']
+        bundler: [turbopack, webpack]
+        deployment: [standalone, static-export]
+        rendering: [standard, cache-components]
+        exclude:
+          - version: '15.5.28'
+            rendering: cache-components
+          - deployment: static-export
+            rendering: cache-components
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      NEXT_TEST_BASE_PATH: /coverage
+      NEXT_TEST_CACHE_COMPONENTS: ${{ matrix.rendering == 'cache-components' && '1' || '0' }}
+    steps:
+      - name: Set test paths
+        run: |
+          echo "NEXT_TEST_DIR=$RUNNER_TEMP/redact-next-deployment" >> "$GITHUB_ENV"
+          echo "NEXT_TEST_RESULT=$RUNNER_TEMP/next-results/${{ matrix.version }}-${{ matrix.rendering }}-${{ matrix.bundler }}-${{ matrix.deployment }}.json" >> "$GITHUB_ENV"
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+      - name: Setup Tools
+        uses: TanStack/config/.github/setup@e4b48f16568324f76f467aa4c2aac2f05db632c3
+      - name: Build Redact
+        run: pnpm build
+      - name: Install browsers
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
+      - name: Prepare packed fixture
+        run: node scripts/prepare-next-fixture.mjs ${{ matrix.version }} "$NEXT_TEST_DIR" ${{ matrix.deployment == 'static-export' && 'next-static' || 'next-demo' }} ${{ matrix.rendering }}
+      - name: Verify standalone output
+        id: verify
+        if: matrix.deployment == 'standalone'
+        run: node scripts/test-next.mjs --production --standalone ${{ matrix.bundler == 'webpack' && '--webpack' || '' }}
+      - name: Verify static output
+        if: matrix.deployment == 'static-export'
+        run: node scripts/test-next-static.mjs ${{ matrix.bundler == 'webpack' && '--webpack' || '' }}
+      - name: Compare failing cases with native React
+        if: ${{ !cancelled() && steps.verify.outcome == 'failure' }}
+        run: node scripts/test-next-controls.mjs --production --standalone ${{ matrix.bundler == 'webpack' && '--webpack' || '' }}
+      - name: Save native React diagnostics
+        if: ${{ !cancelled() && steps.verify.outcome == 'failure' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: native-next-${{ matrix.version }}-${{ matrix.rendering }}-${{ matrix.bundler }}-${{ matrix.deployment }}
+          path: ${{ env.NEXT_TEST_RESULT }}.native.json
+          if-no-files-found: warn
+      - name: Save compatibility results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: next-${{ matrix.version }}-${{ matrix.rendering }}-${{ matrix.bundler }}-${{ matrix.deployment }}
+          path: ${{ env.NEXT_TEST_RESULT }}
+          if-no-files-found: error
+
+  next-coverage:
+    name: Next coverage report
+    needs: [next, next-deployment]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+      - name: Download compatibility results
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: next-*
+          path: ${{ runner.temp }}/next-results
+          merge-multiple: true
+      - name: Require the complete matrix
+        run: node scripts/report-next-coverage.mjs "$RUNNER_TEMP/next-results"
+      - name: Save coverage report
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: next-coverage-report
+          path: ${{ runner.temp }}/next-results/coverage.json
+          if-no-files-found: error

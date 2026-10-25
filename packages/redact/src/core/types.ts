@@ -15,7 +15,7 @@ export interface ReactElement<P = any, T = any> {
   props: P
 }
 
-export type ReactNode =
+type ReactNodeValue =
   | ReactElement
   | string
   | number
@@ -23,6 +23,8 @@ export type ReactNode =
   | null
   | undefined
   | Iterable<ReactNode>
+
+export type ReactNode = ReactNodeValue | Promise<ReactNodeValue>
 
 export type RefObject<T> = { current: T | null }
 export type RefCallback<T> = (instance: T | null) => void | (() => void)

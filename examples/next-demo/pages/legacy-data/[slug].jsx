@@ -1,0 +1,4 @@
+import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
+export async function getServerSideProps({ params, query, req }) { return { props: { slug: params.slug, query: query.q || '', session: req.cookies['redact-session'] || 'none' } } }
+export default function Page({ slug, query, session }) { const router = useRouter(); const [count, setCount] = useState(0), [ready, setReady] = useState(false); useEffect(() => setReady(true), []); return <main data-ready={ready}><h1>Legacy {slug}</h1><p data-testid="legacy-server-query">{query}</p><p data-testid="legacy-router-query">{router.query.q || ''}</p><p data-testid="legacy-session">{session}</p><button onClick={() => setCount(count + 1)}>Legacy count: {count}</button><button onClick={() => router.push(`/legacy-data/${slug}?q=shallow`, undefined, { shallow: true })}>Shallow update</button><button onClick={() => router.push('/legacy-data/two?q=full')}>Full update</button></main> }

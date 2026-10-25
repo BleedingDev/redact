@@ -1,3 +1,4 @@
+import { isFunction } from './functions'
 export type ResourceHintKind =
   | 'dns-prefetch'
   | 'preconnect'
@@ -22,15 +23,17 @@ export const resourceHintDispatcher: {
 // out of sharing, but event ownership, disabled sheets and itemProp do.
 export function resourceKind(type: string, props: any): 'style' | 'stylesheet' | 'script' | undefined {
   if (props.itemProp != null) return
-  if (type === 'style') {
-    if (typeof props.precedence === 'string' && typeof props.href === 'string' && props.href) return 'style'
-  } else if (type === 'link') {
-    if (props.rel === 'stylesheet' && typeof props.href === 'string' && props.href && typeof props.precedence === 'string' && props.disabled == null && !props.onLoad && !props.onError) return 'stylesheet'
-  } else if (type === 'script' && props.async && typeof props.async !== 'function' && typeof props.async !== 'symbol' && typeof props.src === 'string' && props.src && !props.onLoad && !props.onError) return 'script'
+  if (type === 'style' || type === 'link') {
+    if (isString(props.precedence) && isString(props.href) && props.href &&
+      (type === 'style' || props.rel === 'stylesheet' && props.disabled == null && !props.onLoad && !props.onError)) {
+      return type === 'style' ? 'style' : 'stylesheet'
+    }
+  } else if (type === 'script' && props.async && !isFunction(props.async) && typeof props.async !== 'symbol' && isString(props.src) && props.src && !props.onLoad && !props.onError) return 'script'
+
 }
 
-export function resourceURL(value: string): string {
-  return /^[\u0000-\u0020]*j[\r\n\t]*a[\r\n\t]*v[\r\n\t]*a[\r\n\t]*s[\r\n\t]*c[\r\n\t]*r[\r\n\t]*i[\r\n\t]*p[\r\n\t]*t[\r\n\t]*:/i.test(value)
+export const resourceURL = (value: string): string => (/^[\u0000-\u0020]*javascript:/i.test(String(value).replace(/[\r\n\t]/g, ''))
     ? "javascript:throw new Error('React has blocked a javascript: URL as a security precaution.')"
-    : value
-}
+    : value)
+
+import { isString } from "./functions"

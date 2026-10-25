@@ -28,3 +28,7 @@ dist-ssr
 
 # Local tanstack.com test copy for shim iteration
 tanstack-com-test/
+
+# The licensed Cloudflare distribution is maintained source, not build output.
+!packages/redact/vendor/cloudflare-vite-plugin/dist/
+!packages/redact/vendor/cloudflare-vite-plugin/dist/**

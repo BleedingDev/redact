@@ -6,7 +6,7 @@ it('restores unknown own string and symbol fields, including deleted and undefin
   const fiber = createFiber(FiberTag.Function, null, null)
   const fields = fiber as unknown as Record<PropertyKey, unknown>
   const symbol = Symbol('future feature'), original = { value: 'before' }
-  fiber.depth = 0
+  fiber.d = 0
   fiber.ld = false
   fields.futureFeature = original
   fields.futureUndefined = undefined
@@ -14,7 +14,7 @@ it('restores unknown own string and symbol fields, including deleted and undefin
   Object.defineProperty(fiber, 'nonEnumerable', { value: 'before', writable: true })
   const plan = prepareCommit(() => {
     const checkpoint = checkpointCommit(fiber)
-    delete fiber.depth
+    delete fiber.d
     delete fiber.ld
     fields.futureFeature = { value: 'abandoned' }
     delete fields.futureUndefined
@@ -22,7 +22,7 @@ it('restores unknown own string and symbol fields, including deleted and undefin
     fields.nonEnumerable = 'not snapshotted'
     rewindCommit(checkpoint)
   })
-  expect(fiber.depth).toBe(0)
+  expect(fiber.d).toBe(0)
   expect(fiber.ld).toBe(false)
   expect(fields.futureFeature).toBe(original)
   expect(Object.hasOwn(fiber, 'futureUndefined')).toBe(true)
@@ -41,11 +41,11 @@ it('does not copy inherited enumerable properties from the snapshot prototype', 
     const fiber = createFiber(FiberTag.Function, null, null)
     const plan = prepareCommit(() => {
       const checkpoint = checkpointCommit(fiber)
-      fiber.pp = { abandoned: true }
+      fiber.v = { abandoned: true }
       rewindCommit(checkpoint)
     })
     expect(Object.hasOwn(fiber, key)).toBe(false)
-    expect(fiber.pp).toBeNull()
+    expect(fiber.v).toBeNull()
     commitMutation(plan)
   } finally {
     if (previous) Object.defineProperty(prototype, key, previous)

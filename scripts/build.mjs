@@ -26,6 +26,7 @@ import { fileURLToPath } from 'node:url'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = resolve(__dirname, '..')
 const pkgDir = realpathSync(resolve(root, process.env.BUILD_PACKAGE_ROOT || 'packages/redact'))
+await import('./vendor-cloudflare.mjs')
 const srcDir = resolve(pkgDir, 'src')
 const distDir = resolve(pkgDir, 'dist')
 
@@ -58,19 +59,23 @@ function explicitSpecifier(specifier, importer) {
   return path.startsWith('../') ? path : './' + path
 }
 
-// Each TS module emits its own dist file with relative imports left external.
-// This preserves boundaries the
-// `redact()` plugin needs to swap features/<name>/index.js → stub.js at
-// consumer-build time, and keeps single-instance state because each module
-// is emitted exactly once in dist/.
-const externalizeRelative = {
-  name: 'externalize-relative',
-  setup(b) {
-    b.onResolve({ filter: /^\.\.?(?:\/|$)/ }, (args) => {
-      if (args.kind === 'entry-point') return null
-      return { external: true, path: explicitSpecifier(args.path, args.importer) }
-    })
-  },
+// Resolve imports in TypeScript's emitter so esbuild can transform each module
+// without bundling it. Bundling rewrites top-level const to var, which prevents
+// consumer builds from propagating feature flags and removing disabled paths.
+const explicitImports = context => source => {
+  const visit = node => {
+    if (ts.isStringLiteral(node) && node.parent && (
+      ((ts.isImportDeclaration(node.parent) || ts.isExportDeclaration(node.parent)) && node.parent.moduleSpecifier === node) ||
+      (ts.isCallExpression(node.parent) && node.parent.expression.kind === ts.SyntaxKind.ImportKeyword)
+    )) {
+      const specifier = explicitSpecifier(node.text, source.fileName)
+      if (specifier !== node.text) {
+        return ts.setTextRange(ts.setOriginalNode(context.factory.createStringLiteral(specifier), node), node)
+      }
+    }
+    return ts.visitEachChild(node, visit, context)
+  }
+  return ts.visitNode(source, visit)
 }
 
 function emitDeclarationSpecifiers() {
@@ -112,29 +117,76 @@ async function buildPackage() {
   const tsFiles = listTsFiles(srcDir)
   console.log(`Building @tanstack/redact: ${tsFiles.length} entries...\n`)
 
+  // TypeScript resolves const enums across module boundaries before esbuild
+  // emits each module. Otherwise the published files retain enum objects and
+  // property lookups that a consumer cannot inline after the modules are split.
+  const emitted = new Map()
+  const program = ts.createProgram(tsFiles, {
+    target: ts.ScriptTarget.ES2022,
+    module: ts.ModuleKind.ESNext,
+    moduleResolution: ts.ModuleResolutionKind.Bundler,
+    sourceMap: true,
+    inlineSources: true,
+    preserveConstEnums: true,
+    outDir: distDir,
+    rootDir: srcDir,
+    skipLibCheck: true,
+  })
+  program.emit(undefined, (path, contents, _bom, _error, sources) => {
+    if (sources?.length === 1) {
+      const source = sources[0].fileName
+      const record = emitted.get(source) || {}
+      if (path.endsWith('.map')) {
+        const map = JSON.parse(contents)
+        map.sources = [source]
+        record.map = map
+      } else record.code = contents.replace(/\/\/# sourceMappingURL=.*$/, '')
+      emitted.set(source, record)
+    }
+  }, undefined, false, { before: [explicitImports] })
+  const compiledTypescript = {
+    name: 'compiled-typescript',
+    setup(builder) {
+      builder.onLoad({ filter: /\.ts$/ }, ({ path }) => {
+        // Keep enum definitions available to /_all consumers. esbuild emits
+        // their pure initializers so ordinary entries can still tree-shake them.
+        if (program.getSourceFile(path)?.statements.some(ts.isEnumDeclaration)) return null
+        const output = emitted.get(path)
+        if (!output?.code || !output.map) throw new Error(`Missing TypeScript output for ${path}`)
+        return {
+          contents: output.code + '\n//# sourceMappingURL=data:application/json;base64,' + Buffer.from(JSON.stringify(output.map)).toString('base64'),
+          loader: 'js',
+          resolveDir: dirname(path),
+        }
+      })
+    },
+  }
+
   for (const tsFile of tsFiles) {
     const relPath = relative(srcDir, tsFile).replace(/\.ts$/, '')
-    // The vite plugin runs in Node — uses fs/path/url. Browser/SSR code
-    // never imports from `vite/`, so the `node:` builtins it uses are
-    // safe to leave external in that one entry.
-    const isVite = relPath.startsWith('vite' + sep) || relPath === 'vite'
+    // Build adapters run in Node and can leave builtins external. The Next
+    // React bridge is browser code, so only its config entry uses Node.
+    const isNodeEntry = relPath.startsWith('vite' + sep) || relPath === 'next' + sep + 'index' || relPath.startsWith('vinext' + sep) || relPath.startsWith('cloudflare' + sep)
     await build({
       absWorkingDir: pkgDir,
       entryPoints: [{ in: tsFile, out: relPath }],
-      bundle: true,
+      bundle: false,
       format: 'esm',
-      platform: isVite ? 'node' : 'browser',
+      platform: isNodeEntry ? 'node' : 'browser',
       // This is a library build. The consuming app chooses its environment;
       // esbuild's browser default would otherwise bake in development mode.
       define: { 'process.env.NODE_ENV': 'process.env.NODE_ENV' },
       target: 'es2022',
       outdir: distDir,
-      external: isVite ? ['vite', 'node:*'] : [],
       sourcemap: true,
       splitting: false,
-      plugins: [externalizeRelative],
+      plugins: [compiledTypescript],
       logLevel: 'warning',
     })
+  }
+
+  for (const loader of ['loader.cjs', 'dev-cache-loader.cjs']) {
+    writeFileSync(resolve(distDir, 'next', loader), readFileSync(resolve(srcDir, 'next', loader)))
   }
 
   // Generate .d.ts files. tsc --emitDeclarationOnly.
@@ -174,6 +226,12 @@ declare module 'node:path' {
 }
 declare module 'node:url' {
   export const fileURLToPath: any
+  export const pathToFileURL: any
+}
+declare module 'node:module' {
+  export const findPackageJSON: any
+  export const createRequire: any
+  export const registerHooks: any
 }
 `)
   try {

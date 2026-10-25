@@ -1,7 +1,8 @@
+import { isFunction } from '../core/functions'
 import { FiberTag, type Fiber, type FiberRoot, type ReactNode } from '../core'
-import { REACT_FORWARD_REF_TYPE, REACT_MEMO_TYPE, REACT_LAZY_TYPE } from '../react'
+import { REACT_FORWARD_REF_TYPE, REACT_MEMO_TYPE, REACT_LAZY_TYPE, ReactSharedInternals } from '../react'
 import { flushSyncWork, renderRoot, scheduleRootRender, scheduleUpdate } from './reconcile'
-import { queueCommitEffects, onCommitFailure } from './commit'
+import { queueCommitEffects, onCommitFailure, onCommitRollback } from './commit'
 import { enableDevTools, devToolsRenderer, commitDevTools } from './devtools'
 
 // Only referenced inside development guards. The production renderer does not
@@ -35,7 +36,7 @@ function getRefreshRoot(root: FiberRoot): RefreshRoot | undefined {
     const candidate = (globalThis as { __REACT_DEVTOOLS_GLOBAL_HOOK__?: RefreshHook }).__REACT_DEVTOOLS_GLOBAL_HOOK__
     if (!candidate || candidate.isDisabled) return
     try {
-      enableDevTools(candidate)
+      enableDevTools(candidate, { shared: ReactSharedInternals, scheduleUpdate, flushSyncWork, onCommitRollback })
       rendererID = candidate.inject({
         ...devToolsRenderer(),
         rendererPackageName: '@tanstack/redact',
@@ -91,7 +92,7 @@ function notifyCommit(root: FiberRoot): void {
   adapter.failed = false
   if (commitDevTools(root, adapter, hook, rendererID, failed)) return
   adapter.current = {
-    memoizedState: { element: root.r.mp?.children ?? null },
+    memoizedState: { element: root.r.m?.children ?? null },
     alternate: { memoizedState: previous },
   }
   try { hook!.onCommitFiberRoot?.(rendererID, adapter, undefined, failed) } catch {}
@@ -133,7 +134,7 @@ export function needsRefreshRemount(fiber: Fiber): boolean {
 }
 
 function typeKind(type: any): any {
-  return typeof type === 'function' ? (type.prototype?.isReactComponent ? 'class' : 'function') : type?.$$typeof
+  return isFunction(type) ? (type.prototype?.isReactComponent ? 'class' : 'function') : type?.$$typeof
 }
 
 function scheduleRefresh(adapter: RefreshRoot, update: RefreshUpdate): void {
@@ -141,7 +142,7 @@ function scheduleRefresh(adapter: RefreshRoot, update: RefreshUpdate): void {
 }
 
 function visit(fiber: Fiber, update: RefreshUpdate): void {
-  if (fiber.um || fiber.pd) return
+  if (fiber.u || fiber.pd) return
   let remount = failedBoundaries.has(fiber), render = false
   let type = fiber.type
   while (type) {
@@ -155,8 +156,7 @@ function visit(fiber: Fiber, update: RefreshUpdate): void {
     }
     if (type.$$typeof === REACT_MEMO_TYPE) type = type.type
     else if (type.$$typeof === REACT_FORWARD_REF_TYPE) type = type.render
-    else if (type.$$typeof === REACT_LAZY_TYPE && type._payload?.status === 1) type = type._payload.result
-    else if (type.$$typeof === REACT_LAZY_TYPE && type._payload?._status === 1) type = type._payload._result.default
+    else if (type.$$typeof === REACT_LAZY_TYPE && (type._payload?.status === 'fulfilled' || type._payload?.status === 1 || type._payload?._status === 1)) type = type._init(type._payload)
     else break
   }
   if (remount) remounting.add(fiber)
@@ -165,7 +165,7 @@ function visit(fiber: Fiber, update: RefreshUpdate): void {
     scheduleUpdate(fiber)
   }
   if (!remount) {
-    for (let child = fiber.child; child; child = child.sibling) visit(child, update)
-    if (fiber.tag === FiberTag.Suspense && fiber.ms?.f) visit(fiber.ms.f, update)
+    for (let child = fiber.c; child; child = child.s) visit(child, update)
+    if (fiber.t === FiberTag.Suspense && fiber.b?.f) visit(fiber.b.f, update)
   }
 }

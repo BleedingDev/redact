@@ -16,6 +16,21 @@ function check(value: string) {
 }
 
 describe('server escaping', () => {
+  it('isolates nested serialization during attribute coercion', () => {
+    let nested = ''
+    const value = {
+      toString() {
+        nested = renderToString(createElement('span', { title: '"&' }, '<&>'))
+        return '<&"'
+      },
+    }
+    expect(renderToString(createElement('div', { title: value }, '&<>')))
+      .toBe('<div title="&lt;&amp;&quot;">&amp;&lt;&gt;</div>')
+    expect(nested).toBe('<span title="&quot;&amp;">&lt;&amp;&gt;</span>')
+    check('plain')
+    check('"&<>')
+  })
+
   it('coerces public attribute values once before the internal escape scan', () => {
     const hints: string[] = []
     const value = {

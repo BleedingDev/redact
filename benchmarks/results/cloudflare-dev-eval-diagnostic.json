@@ -1,0 +1,64 @@
+{
+  "recordedAt": "2026-10-25T02:37:29.120622+00:00",
+  "purpose": "upstream-fix-diagnostic",
+  "patches": true,
+  "releaseEvidence": false,
+  "package": "@cloudflare/vite-plugin",
+  "version": "1.65.0",
+  "sourceBlob": "11a59be48fd39d81646398b0cf5f801e47d0a836",
+  "patchSha256": "435c1a6ffc2d9000ba8f3a84a366b32e118437c35f4a07d7525af84f0933877c",
+  "unitTests": {
+    "passed": 3
+  },
+  "strictHelperAndTestTypes": "passed",
+  "patchApplies": "passed",
+  "format": {
+    "tool": "oxfmt 0.73.0",
+    "configuration": "cloudflare/workers-sdk .oxfmtrc.jsonc",
+    "result": "passed"
+  },
+  "fullWorkersSdkChecks": "not run",
+  "workerContracts": {
+    "unmodifiedDevelopment": {
+      "passed": true,
+      "mode": "development",
+      "result": {
+        "supported": false,
+        "error": "EvalError",
+        "message": "Code generation from strings disallowed for this context"
+      }
+    },
+    "fixedDevelopment": {
+      "passed": true,
+      "mode": "development",
+      "result": {
+        "supported": true,
+        "value": 42,
+        "identity": true,
+        "nullValue": null,
+        "functionName": "FlightStack",
+        "syntaxError": "SyntaxError"
+      }
+    },
+    "fixedProduction": {
+      "passed": true,
+      "mode": "production",
+      "result": {
+        "supported": false,
+        "error": "EvalError",
+        "message": "Code generation from strings disallowed for this context"
+      }
+    }
+  },
+  "browserConfigurations": 12,
+  "browserScenarios": 258,
+  "passed": true,
+  "observedBeforeFix": {
+    "environment": "development",
+    "cachedContentRendered": true,
+    "counterInteractionPassed": true,
+    "strictGateFailure": "React unsupported-eval console error",
+    "productionRenderingFailureDemonstrated": false
+  },
+  "proposalScope": "Enable indirect eval throughout the Vite development runner; upstream design review is required."
+}

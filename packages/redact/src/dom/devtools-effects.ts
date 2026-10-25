@@ -71,3 +71,8 @@ export function notifyDevToolsCommit(root: FiberRoot, notify: (layout: number, p
 function drain(): void {
   while (commits.length && commits[0]!.pending === 0) commits.shift()!.notify!()
 }
+
+export function measureDevToolsLayout(root: FiberRoot, work: () => void): void {
+  const start = startDevToolsEffect()
+  try { work() } finally { finishDevToolsLayout(root, start) }
+}

@@ -1,3 +1,4 @@
+import { isFunction } from '../core/functions'
 import { attributeName, STRING_BOOLEAN_ATTRS } from '../core/attributes'
 
 function escape(value: string, pattern: RegExp): string {
@@ -94,14 +95,14 @@ export function attrToHtml(name: string, value: unknown, isSvg = false): string 
   ) {
     return ''
   }
-  if (name[0] === 'o' && name[1] === 'n' && typeof value === 'function') return ''
+  if (name[0] === 'o' && name[1] === 'n' && isFunction(value)) return ''
   if (value == null) return ''
 
   const htmlName = attributeName(name, isSvg)
 
   // These attributes need explicit "false", not boolean-attribute absence.
   if (
-    STRING_BOOLEAN_ATTRS.has(htmlName) ||
+    STRING_BOOLEAN_ATTRS.test(htmlName) ||
     name.startsWith('aria-') ||
     name.startsWith('data-')
   ) {

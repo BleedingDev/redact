@@ -1,10 +1,10 @@
 import { isValidElement, cloneElement } from './element'
 import type { ReactNode, ReactElement } from '../core'
 
-function flatten(node: ReactNode, out: any[], prefix: string): void {
+function flatten(node: ReactNode, out: any[]): void {
   if (node == null || typeof node === 'boolean') return
   if (Array.isArray(node)) {
-    for (let i = 0; i < node.length; i++) flatten(node[i], out, prefix + '.' + i)
+    for (let i = 0; i < node.length; i++) flatten(node[i], out)
     return
   }
   out.push(node)
@@ -21,7 +21,7 @@ function mapChildren(
   prefix = '',
 ): any[] {
   const flat: any[] = []
-  flatten(children, flat, prefix)
+  flatten(children, flat)
   const out: any[] = []
   for (let i = 0; i < flat.length; i++) {
     const child = flat[i]
@@ -61,15 +61,13 @@ export const Children = {
     })
   },
   count(children: ReactNode): number {
-    let n = 0
     const flat: any[] = []
-    flatten(children, flat, '')
-    for (let i = 0; i < flat.length; i++) n++
-    return n
+    flatten(children, flat)
+    return flat.length
   },
   toArray(children: ReactNode): any[] {
     const flat: any[] = []
-    flatten(children, flat, '')
+    flatten(children, flat)
     return flat.map((c, i) =>
       isValidElement(c) && c.key == null
         ? cloneElement(c as ReactElement, { key: '' + i })

@@ -1,0 +1,61 @@
+{
+  "purpose": "Distinguish the browser document outcome from an interrupted Playwright navigation request",
+  "releaseEvidence": false,
+  "next": "16.4.3",
+  "renderer": "native-react",
+  "browser": "firefox",
+  "platform": "macOS",
+  "dependenciesModified": false,
+  "firstDocumentRequestDelayMs": 1500,
+  "before": {
+    "passed": false,
+    "scenarios": [
+      {
+        "name": "parallel-routes",
+        "passed": false,
+        "error": "page.reload: NS_BINDING_ABORTED; maybe frame was detached?\nCall log:\n\u001b[2m  - waiting for navigation until \"load\"\u001b[22m\n\n    at page.reload (/Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-reload-diagnostics.mjs:11:28)\n    at async Object.navigate (/Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-errors.mjs:150:20)\n    at async file:///Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-extended-checks.mjs:123:5\n    at async scenario (/Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-checks.mjs:54:11)\n    at async checkExtended (/Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-extended-checks.mjs:109:3)\n    at async checkNext (/Users/tannerlinsley/.codex/worktrees/stable-framework-support/redact/scripts/next-browser-checks.mjs:218:3)\n    at async file:///private/tmp/redact-native-next-reload.mjs:21:15",
+        "failureDocument": {
+          "url": "http://localhost:3297/gallery/photo/1",
+          "readyState": "complete",
+          "title": "",
+          "text": "Photo 1",
+          "navigation": [
+            {
+              "type": "reload",
+              "url": "http://localhost:3297/gallery/photo/1",
+              "duration": 892
+            }
+          ]
+        },
+        "durationMs": 4636
+      }
+    ],
+    "expectedNavigationCancellations": 0
+  },
+  "after": {
+    "passed": true,
+    "scenarios": [
+      {
+        "name": "parallel-routes",
+        "passed": true,
+        "durationMs": 3823
+      }
+    ],
+    "expectedNavigationCancellations": 0
+  },
+  "regressions": {
+    "engines": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "cases": [
+      "normal",
+      "interrupted",
+      "canceled",
+      "server-error",
+      "redirected"
+    ],
+    "passed": 15
+  }
+}

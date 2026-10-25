@@ -2,6 +2,7 @@ import { FiberTag } from '../../../core'
 import { REACT_SUSPENSE_TYPE } from '../../../react'
 import { registerTypeMatcher } from '../../reconcile'
 
+
 // Stub: Suspense feature disabled. `<Suspense>` elements render as Fragments
 // — children mount inline and `fallback` is ignored. Thrown thenables in
 // descendants fall through to the default `handleSuspended` capability

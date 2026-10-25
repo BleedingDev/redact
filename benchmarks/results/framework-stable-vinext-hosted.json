@@ -1,0 +1,2007 @@
+{
+  "recordedAt": "2026-10-25T11:15:22.592Z",
+  "node": "v24.22.0",
+  "deployment": "cloudflare-hosted",
+  "installation": "npm-tarball",
+  "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+  "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+  "packageLockSha256": "698d63fc9713cd9f986b69f1b49320cb88f6af163424a7b0af2803d223f956c7",
+  "verificationSha256": "e856942d66933807e5853ce868978b994230e582b4a9437d05b289d73376ce4b",
+  "prefix": "redact-vinext-stable-1025",
+  "deployments": [
+    {
+      "name": "redact-vinext-stable-1025-state",
+      "origin": "https://redact-vinext-stable-1025-state.thetanstack.workers.dev",
+      "versionId": "62359ba0-77fc-4a98-aa91-53449b227b8d"
+    },
+    {
+      "name": "redact-vinext-stable-1025-react-app",
+      "origin": "https://redact-vinext-stable-1025-react-app.thetanstack.workers.dev",
+      "versionId": "f43f1795-a164-42a4-a14e-a4b37f7cec63"
+    },
+    {
+      "name": "redact-vinext-stable-1025-redact-app",
+      "origin": "https://redact-vinext-stable-1025-redact-app.thetanstack.workers.dev",
+      "versionId": "f5bf890b-08a8-4f53-8acf-093ae5369d84"
+    },
+    {
+      "name": "redact-vinext-stable-1025-react-cache",
+      "origin": "https://redact-vinext-stable-1025-react-cache.thetanstack.workers.dev",
+      "versionId": "5efb2753-35c0-4c54-ad53-ada6f3a73457"
+    },
+    {
+      "name": "redact-vinext-stable-1025-redact-cache",
+      "origin": "https://redact-vinext-stable-1025-redact-cache.thetanstack.workers.dev",
+      "versionId": "6ba21290-afb8-435a-8b5e-ff0380b4552e"
+    },
+    {
+      "name": "redact-vinext-stable-1025-react-pages",
+      "origin": "https://redact-vinext-stable-1025-react-pages.thetanstack.workers.dev",
+      "versionId": "2f0334c0-b56e-4b29-8052-f33e9403c708"
+    },
+    {
+      "name": "redact-vinext-stable-1025-redact-pages",
+      "origin": "https://redact-vinext-stable-1025-redact-pages.thetanstack.workers.dev",
+      "versionId": "656366b3-5dd8-46e6-9953-01de1d517f0c"
+    }
+  ],
+  "results": [
+    {
+      "router": "mixed",
+      "reference": true,
+      "cacheComponents": false,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-react-app.thetanstack.workers.dev",
+      "browser": "chromium",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "3c38cc1ad2a435beee8a6a5d218058f793b15f13e793d4f3d69383b1417888d5"
+      },
+      "scenarios": [
+        {
+          "name": "hydration",
+          "passed": true,
+          "durationMs": 1034
+        },
+        {
+          "name": "ids",
+          "passed": true,
+          "durationMs": 1188
+        },
+        {
+          "name": "actions",
+          "passed": true,
+          "durationMs": 1005
+        },
+        {
+          "name": "direct-actions",
+          "passed": true,
+          "durationMs": 938
+        },
+        {
+          "name": "progressive-actions",
+          "passed": true,
+          "durationMs": 1820
+        },
+        {
+          "name": "streaming",
+          "passed": true,
+          "durationMs": 2550
+        },
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1349
+        },
+        {
+          "name": "routing",
+          "passed": true,
+          "durationMs": 929
+        },
+        {
+          "name": "boundaries",
+          "passed": true,
+          "durationMs": 2665
+        },
+        {
+          "name": "loading-cancellation",
+          "passed": true,
+          "durationMs": 805
+        },
+        {
+          "name": "navigation-cancellation",
+          "passed": true,
+          "durationMs": 876
+        },
+        {
+          "name": "parallel-routes",
+          "passed": true,
+          "durationMs": 1607
+        },
+        {
+          "name": "mutations",
+          "passed": true,
+          "durationMs": 2685
+        },
+        {
+          "name": "components",
+          "passed": true,
+          "durationMs": 1014
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1525
+        },
+        {
+          "name": "error-boundaries",
+          "passed": true,
+          "durationMs": 1315
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 626
+        },
+        {
+          "name": "transition-retains-visible-content",
+          "passed": true,
+          "observed": {
+            "pending": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 708
+        },
+        {
+          "name": "deferred-search-retains-stale-results",
+          "passed": true,
+          "observed": {
+            "query": "beta",
+            "stale": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 661
+        },
+        {
+          "name": "uncontrolled-select-action-reset",
+          "passed": true,
+          "observed": {
+            "selected": "In progress"
+          },
+          "durationMs": 1099
+        },
+        {
+          "name": "hosted-cache-invalidation",
+          "passed": true,
+          "concurrentReads": 12
+        }
+      ],
+      "browserVersion": "156.0.8078.4",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "mixed",
+      "reference": true,
+      "cacheComponents": false,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-react-app.thetanstack.workers.dev",
+      "browser": "firefox",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "3c38cc1ad2a435beee8a6a5d218058f793b15f13e793d4f3d69383b1417888d5"
+      },
+      "scenarios": [
+        {
+          "name": "hydration",
+          "passed": true,
+          "durationMs": 1052
+        },
+        {
+          "name": "ids",
+          "passed": true,
+          "durationMs": 1247
+        },
+        {
+          "name": "actions",
+          "passed": true,
+          "durationMs": 986
+        },
+        {
+          "name": "direct-actions",
+          "passed": true,
+          "durationMs": 975
+        },
+        {
+          "name": "progressive-actions",
+          "passed": true,
+          "durationMs": 1903
+        },
+        {
+          "name": "streaming",
+          "passed": true,
+          "durationMs": 2540
+        },
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1364
+        },
+        {
+          "name": "routing",
+          "passed": true,
+          "durationMs": 1039
+        },
+        {
+          "name": "boundaries",
+          "passed": true,
+          "durationMs": 3642
+        },
+        {
+          "name": "loading-cancellation",
+          "passed": true,
+          "durationMs": 931
+        },
+        {
+          "name": "navigation-cancellation",
+          "passed": true,
+          "durationMs": 962
+        },
+        {
+          "name": "parallel-routes",
+          "passed": true,
+          "durationMs": 1876
+        },
+        {
+          "name": "mutations",
+          "passed": true,
+          "durationMs": 2746
+        },
+        {
+          "name": "components",
+          "passed": true,
+          "durationMs": 675
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1639
+        },
+        {
+          "name": "error-boundaries",
+          "passed": true,
+          "durationMs": 1413
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 661
+        },
+        {
+          "name": "transition-retains-visible-content",
+          "passed": true,
+          "observed": {
+            "pending": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 677
+        },
+        {
+          "name": "deferred-search-retains-stale-results",
+          "passed": true,
+          "observed": {
+            "query": "beta",
+            "stale": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 685
+        },
+        {
+          "name": "uncontrolled-select-action-reset",
+          "passed": true,
+          "observed": {
+            "selected": "In progress"
+          },
+          "durationMs": 1061
+        },
+        {
+          "name": "hosted-cache-invalidation",
+          "passed": true,
+          "concurrentReads": 12
+        }
+      ],
+      "browserVersion": "157.0",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "mixed",
+      "reference": true,
+      "cacheComponents": false,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-react-app.thetanstack.workers.dev",
+      "browser": "webkit",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "3c38cc1ad2a435beee8a6a5d218058f793b15f13e793d4f3d69383b1417888d5"
+      },
+      "scenarios": [
+        {
+          "name": "hydration",
+          "passed": true,
+          "durationMs": 874
+        },
+        {
+          "name": "ids",
+          "passed": true,
+          "durationMs": 1253
+        },
+        {
+          "name": "actions",
+          "passed": true,
+          "durationMs": 978
+        },
+        {
+          "name": "direct-actions",
+          "passed": true,
+          "durationMs": 996
+        },
+        {
+          "name": "progressive-actions",
+          "passed": true,
+          "durationMs": 1893
+        },
+        {
+          "name": "streaming",
+          "passed": true,
+          "durationMs": 2671
+        },
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1341
+        },
+        {
+          "name": "routing",
+          "passed": true,
+          "durationMs": 985
+        },
+        {
+          "name": "boundaries",
+          "passed": true,
+          "durationMs": 2987
+        },
+        {
+          "name": "loading-cancellation",
+          "passed": true,
+          "durationMs": 839
+        },
+        {
+          "name": "navigation-cancellation",
+          "passed": true,
+          "durationMs": 876
+        },
+        {
+          "name": "parallel-routes",
+          "passed": true,
+          "durationMs": 1694
+        },
+        {
+          "name": "mutations",
+          "passed": true,
+          "durationMs": 2195
+        },
+        {
+          "name": "components",
+          "passed": true,
+          "durationMs": 1005
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1534
+        },
+        {
+          "name": "error-boundaries",
+          "passed": true,
+          "durationMs": 1457
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 649
+        },
+        {
+          "name": "transition-retains-visible-content",
+          "passed": true,
+          "observed": {
+            "pending": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 660
+        },
+        {
+          "name": "deferred-search-retains-stale-results",
+          "passed": true,
+          "observed": {
+            "query": "beta",
+            "stale": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 651
+        },
+        {
+          "name": "uncontrolled-select-action-reset",
+          "passed": true,
+          "observed": {
+            "selected": "In progress"
+          },
+          "durationMs": 1034
+        },
+        {
+          "name": "hosted-cache-invalidation",
+          "passed": true,
+          "concurrentReads": 12
+        }
+      ],
+      "browserVersion": "27.2",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "mixed",
+      "reference": false,
+      "cacheComponents": false,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-redact-app.thetanstack.workers.dev",
+      "browser": "chromium",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "a6778730e7641b0792de89401f96f0ac9e6613eed989f0d7d8bd9e7d16ad7979"
+      },
+      "scenarios": [
+        {
+          "name": "hydration",
+          "passed": true,
+          "durationMs": 1098
+        },
+        {
+          "name": "ids",
+          "passed": true,
+          "durationMs": 1174
+        },
+        {
+          "name": "actions",
+          "passed": true,
+          "durationMs": 979
+        },
+        {
+          "name": "direct-actions",
+          "passed": true,
+          "durationMs": 949
+        },
+        {
+          "name": "progressive-actions",
+          "passed": true,
+          "durationMs": 1807
+        },
+        {
+          "name": "streaming",
+          "passed": true,
+          "durationMs": 2543
+        },
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1345
+        },
+        {
+          "name": "routing",
+          "passed": true,
+          "durationMs": 954
+        },
+        {
+          "name": "boundaries",
+          "passed": true,
+          "durationMs": 2678
+        },
+        {
+          "name": "loading-cancellation",
+          "passed": true,
+          "durationMs": 826
+        },
+        {
+          "name": "navigation-cancellation",
+          "passed": true,
+          "durationMs": 852
+        },
+        {
+          "name": "parallel-routes",
+          "passed": true,
+          "durationMs": 1432
+        },
+        {
+          "name": "mutations",
+          "passed": true,
+          "durationMs": 2424
+        },
+        {
+          "name": "components",
+          "passed": true,
+          "durationMs": 697
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1545
+        },
+        {
+          "name": "error-boundaries",
+          "passed": true,
+          "durationMs": 1308
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 638
+        },
+        {
+          "name": "transition-retains-visible-content",
+          "passed": true,
+          "observed": {
+            "pending": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 658
+        },
+        {
+          "name": "deferred-search-retains-stale-results",
+          "passed": true,
+          "observed": {
+            "query": "beta",
+            "stale": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 637
+        },
+        {
+          "name": "uncontrolled-select-action-reset",
+          "passed": true,
+          "observed": {
+            "selected": "In progress"
+          },
+          "durationMs": 1160
+        },
+        {
+          "name": "hosted-cache-invalidation",
+          "passed": true,
+          "concurrentReads": 12
+        }
+      ],
+      "browserVersion": "156.0.8078.4",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "mixed",
+      "reference": false,
+      "cacheComponents": false,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-redact-app.thetanstack.workers.dev",
+      "browser": "firefox",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "a6778730e7641b0792de89401f96f0ac9e6613eed989f0d7d8bd9e7d16ad7979"
+      },
+      "scenarios": [
+        {
+          "name": "hydration",
+          "passed": true,
+          "durationMs": 1052
+        },
+        {
+          "name": "ids",
+          "passed": true,
+          "durationMs": 1273
+        },
+        {
+          "name": "actions",
+          "passed": true,
+          "durationMs": 995
+        },
+        {
+          "name": "direct-actions",
+          "passed": true,
+          "durationMs": 1007
+        },
+        {
+          "name": "progressive-actions",
+          "passed": true,
+          "durationMs": 1939
+        },
+        {
+          "name": "streaming",
+          "passed": true,
+          "durationMs": 2549
+        },
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1356
+        },
+        {
+          "name": "routing",
+          "passed": true,
+          "durationMs": 1120
+        },
+        {
+          "name": "boundaries",
+          "passed": true,
+          "durationMs": 3034
+        },
+        {
+          "name": "loading-cancellation",
+          "passed": true,
+          "durationMs": 903
+        },
+        {
+          "name": "navigation-cancellation",
+          "passed": true,
+          "durationMs": 997
+        },
+        {
+          "name": "parallel-routes",
+          "passed": true,
+          "durationMs": 1500
+        },
+        {
+          "name": "mutations",
+          "passed": true,
+          "durationMs": 2622
+        },
+        {
+          "name": "components",
+          "passed": true,
+          "durationMs": 643
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1651
+        },
+        {
+          "name": "error-boundaries",
+          "passed": true,
+          "durationMs": 1424
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 668
+        },
+        {
+          "name": "transition-retains-visible-content",
+          "passed": true,
+          "observed": {
+            "pending": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 674
+        },
+        {
+          "name": "deferred-search-retains-stale-results",
+          "passed": true,
+          "observed": {
+            "query": "beta",
+            "stale": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 675
+        },
+        {
+          "name": "uncontrolled-select-action-reset",
+          "passed": true,
+          "observed": {
+            "selected": "In progress"
+          },
+          "durationMs": 1043
+        },
+        {
+          "name": "hosted-cache-invalidation",
+          "passed": true,
+          "concurrentReads": 12
+        }
+      ],
+      "browserVersion": "157.0",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "mixed",
+      "reference": false,
+      "cacheComponents": false,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-redact-app.thetanstack.workers.dev",
+      "browser": "webkit",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "a6778730e7641b0792de89401f96f0ac9e6613eed989f0d7d8bd9e7d16ad7979"
+      },
+      "scenarios": [
+        {
+          "name": "hydration",
+          "passed": true,
+          "durationMs": 884
+        },
+        {
+          "name": "ids",
+          "passed": true,
+          "durationMs": 1261
+        },
+        {
+          "name": "actions",
+          "passed": true,
+          "durationMs": 1124
+        },
+        {
+          "name": "direct-actions",
+          "passed": true,
+          "durationMs": 952
+        },
+        {
+          "name": "progressive-actions",
+          "passed": true,
+          "durationMs": 1950
+        },
+        {
+          "name": "streaming",
+          "passed": true,
+          "durationMs": 2616
+        },
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1329
+        },
+        {
+          "name": "routing",
+          "passed": true,
+          "durationMs": 1011
+        },
+        {
+          "name": "boundaries",
+          "passed": true,
+          "durationMs": 2989
+        },
+        {
+          "name": "loading-cancellation",
+          "passed": true,
+          "durationMs": 847
+        },
+        {
+          "name": "navigation-cancellation",
+          "passed": true,
+          "durationMs": 925
+        },
+        {
+          "name": "parallel-routes",
+          "passed": true,
+          "durationMs": 1448
+        },
+        {
+          "name": "mutations",
+          "passed": true,
+          "durationMs": 2061
+        },
+        {
+          "name": "components",
+          "passed": true,
+          "durationMs": 644
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1609
+        },
+        {
+          "name": "error-boundaries",
+          "passed": true,
+          "durationMs": 1476
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 661
+        },
+        {
+          "name": "transition-retains-visible-content",
+          "passed": true,
+          "observed": {
+            "pending": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 667
+        },
+        {
+          "name": "deferred-search-retains-stale-results",
+          "passed": true,
+          "observed": {
+            "query": "beta",
+            "stale": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 707
+        },
+        {
+          "name": "uncontrolled-select-action-reset",
+          "passed": true,
+          "observed": {
+            "selected": "In progress"
+          },
+          "durationMs": 1014
+        },
+        {
+          "name": "hosted-cache-invalidation",
+          "passed": true,
+          "concurrentReads": 12
+        }
+      ],
+      "browserVersion": "27.2",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "mixed",
+      "reference": true,
+      "cacheComponents": true,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-react-cache.thetanstack.workers.dev",
+      "browser": "chromium",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "628d8850a30e07842f094d9d5169f1b3615af921a3f43f368ede678a6769fe26"
+      },
+      "scenarios": [
+        {
+          "name": "hydration",
+          "passed": true,
+          "durationMs": 989
+        },
+        {
+          "name": "ids",
+          "passed": true,
+          "durationMs": 1183
+        },
+        {
+          "name": "actions",
+          "passed": true,
+          "durationMs": 976
+        },
+        {
+          "name": "direct-actions",
+          "passed": true,
+          "durationMs": 944
+        },
+        {
+          "name": "progressive-actions",
+          "passed": true,
+          "durationMs": 1799
+        },
+        {
+          "name": "streaming",
+          "passed": true,
+          "durationMs": 2545
+        },
+        {
+          "name": "cache-components",
+          "passed": true,
+          "durationMs": 672
+        },
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1351
+        },
+        {
+          "name": "routing",
+          "passed": true,
+          "durationMs": 1101
+        },
+        {
+          "name": "boundaries",
+          "passed": true,
+          "durationMs": 2894
+        },
+        {
+          "name": "loading-cancellation",
+          "passed": true,
+          "durationMs": 916
+        },
+        {
+          "name": "navigation-cancellation",
+          "passed": true,
+          "durationMs": 945
+        },
+        {
+          "name": "parallel-routes",
+          "passed": true,
+          "durationMs": 1704
+        },
+        {
+          "name": "mutations",
+          "passed": true,
+          "durationMs": 3055
+        },
+        {
+          "name": "components",
+          "passed": true,
+          "durationMs": 1034
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1572
+        },
+        {
+          "name": "error-boundaries",
+          "passed": true,
+          "durationMs": 1312
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 665
+        },
+        {
+          "name": "transition-retains-visible-content",
+          "passed": true,
+          "observed": {
+            "pending": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 691
+        },
+        {
+          "name": "deferred-search-retains-stale-results",
+          "passed": true,
+          "observed": {
+            "query": "beta",
+            "stale": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 683
+        },
+        {
+          "name": "uncontrolled-select-action-reset",
+          "passed": true,
+          "observed": {
+            "selected": "In progress"
+          },
+          "durationMs": 1066
+        },
+        {
+          "name": "hosted-cache-invalidation",
+          "passed": true,
+          "concurrentReads": 12
+        }
+      ],
+      "browserVersion": "156.0.8078.4",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "mixed",
+      "reference": true,
+      "cacheComponents": true,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-react-cache.thetanstack.workers.dev",
+      "browser": "firefox",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "628d8850a30e07842f094d9d5169f1b3615af921a3f43f368ede678a6769fe26"
+      },
+      "scenarios": [
+        {
+          "name": "hydration",
+          "passed": true,
+          "durationMs": 1040
+        },
+        {
+          "name": "ids",
+          "passed": true,
+          "durationMs": 1275
+        },
+        {
+          "name": "actions",
+          "passed": true,
+          "durationMs": 991
+        },
+        {
+          "name": "direct-actions",
+          "passed": true,
+          "durationMs": 1014
+        },
+        {
+          "name": "progressive-actions",
+          "passed": true,
+          "durationMs": 1939
+        },
+        {
+          "name": "streaming",
+          "passed": true,
+          "durationMs": 2547
+        },
+        {
+          "name": "cache-components",
+          "passed": true,
+          "durationMs": 673
+        },
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1377
+        },
+        {
+          "name": "routing",
+          "passed": true,
+          "durationMs": 1273
+        },
+        {
+          "name": "boundaries",
+          "passed": true,
+          "durationMs": 3272
+        },
+        {
+          "name": "loading-cancellation",
+          "passed": true,
+          "durationMs": 992
+        },
+        {
+          "name": "navigation-cancellation",
+          "passed": true,
+          "durationMs": 1032
+        },
+        {
+          "name": "parallel-routes",
+          "passed": true,
+          "durationMs": 1770
+        },
+        {
+          "name": "mutations",
+          "passed": true,
+          "durationMs": 2823
+        },
+        {
+          "name": "components",
+          "passed": true,
+          "durationMs": 650
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1636
+        },
+        {
+          "name": "error-boundaries",
+          "passed": true,
+          "durationMs": 1529
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 676
+        },
+        {
+          "name": "transition-retains-visible-content",
+          "passed": true,
+          "observed": {
+            "pending": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 679
+        },
+        {
+          "name": "deferred-search-retains-stale-results",
+          "passed": true,
+          "observed": {
+            "query": "beta",
+            "stale": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 668
+        },
+        {
+          "name": "uncontrolled-select-action-reset",
+          "passed": true,
+          "observed": {
+            "selected": "In progress"
+          },
+          "durationMs": 1068
+        },
+        {
+          "name": "hosted-cache-invalidation",
+          "passed": true,
+          "concurrentReads": 12
+        }
+      ],
+      "browserVersion": "157.0",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "mixed",
+      "reference": true,
+      "cacheComponents": true,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-react-cache.thetanstack.workers.dev",
+      "browser": "webkit",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "628d8850a30e07842f094d9d5169f1b3615af921a3f43f368ede678a6769fe26"
+      },
+      "scenarios": [
+        {
+          "name": "hydration",
+          "passed": true,
+          "durationMs": 888
+        },
+        {
+          "name": "ids",
+          "passed": true,
+          "durationMs": 1280
+        },
+        {
+          "name": "actions",
+          "passed": true,
+          "durationMs": 990
+        },
+        {
+          "name": "direct-actions",
+          "passed": true,
+          "durationMs": 964
+        },
+        {
+          "name": "progressive-actions",
+          "passed": true,
+          "durationMs": 1901
+        },
+        {
+          "name": "streaming",
+          "passed": true,
+          "durationMs": 2716
+        },
+        {
+          "name": "cache-components",
+          "passed": true,
+          "durationMs": 670
+        },
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1340
+        },
+        {
+          "name": "routing",
+          "passed": true,
+          "durationMs": 1113
+        },
+        {
+          "name": "boundaries",
+          "passed": true,
+          "durationMs": 3246
+        },
+        {
+          "name": "loading-cancellation",
+          "passed": true,
+          "durationMs": 920
+        },
+        {
+          "name": "navigation-cancellation",
+          "passed": true,
+          "durationMs": 989
+        },
+        {
+          "name": "parallel-routes",
+          "passed": true,
+          "durationMs": 1721
+        },
+        {
+          "name": "mutations",
+          "passed": true,
+          "durationMs": 2237
+        },
+        {
+          "name": "components",
+          "passed": true,
+          "durationMs": 1026
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1552
+        },
+        {
+          "name": "error-boundaries",
+          "passed": true,
+          "durationMs": 1453
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 682
+        },
+        {
+          "name": "transition-retains-visible-content",
+          "passed": true,
+          "observed": {
+            "pending": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 671
+        },
+        {
+          "name": "deferred-search-retains-stale-results",
+          "passed": true,
+          "observed": {
+            "query": "beta",
+            "stale": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 664
+        },
+        {
+          "name": "uncontrolled-select-action-reset",
+          "passed": true,
+          "observed": {
+            "selected": "In progress"
+          },
+          "durationMs": 1033
+        },
+        {
+          "name": "hosted-cache-invalidation",
+          "passed": true,
+          "concurrentReads": 12
+        }
+      ],
+      "browserVersion": "27.2",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "mixed",
+      "reference": false,
+      "cacheComponents": true,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-redact-cache.thetanstack.workers.dev",
+      "browser": "chromium",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "2f88f6fcca7ac81e1319bf50676b126e5b14ecbda8bdae850474f9471ea33be1"
+      },
+      "scenarios": [
+        {
+          "name": "hydration",
+          "passed": true,
+          "durationMs": 1241
+        },
+        {
+          "name": "ids",
+          "passed": true,
+          "durationMs": 1175
+        },
+        {
+          "name": "actions",
+          "passed": true,
+          "durationMs": 967
+        },
+        {
+          "name": "direct-actions",
+          "passed": true,
+          "durationMs": 944
+        },
+        {
+          "name": "progressive-actions",
+          "passed": true,
+          "durationMs": 1838
+        },
+        {
+          "name": "streaming",
+          "passed": true,
+          "durationMs": 2542
+        },
+        {
+          "name": "cache-components",
+          "passed": true,
+          "durationMs": 716
+        },
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1321
+        },
+        {
+          "name": "routing",
+          "passed": true,
+          "durationMs": 1089
+        },
+        {
+          "name": "boundaries",
+          "passed": true,
+          "durationMs": 2894
+        },
+        {
+          "name": "loading-cancellation",
+          "passed": true,
+          "durationMs": 934
+        },
+        {
+          "name": "navigation-cancellation",
+          "passed": true,
+          "durationMs": 954
+        },
+        {
+          "name": "parallel-routes",
+          "passed": true,
+          "durationMs": 1536
+        },
+        {
+          "name": "mutations",
+          "passed": true,
+          "durationMs": 2401
+        },
+        {
+          "name": "components",
+          "passed": true,
+          "durationMs": 689
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1523
+        },
+        {
+          "name": "error-boundaries",
+          "passed": true,
+          "durationMs": 1338
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 651
+        },
+        {
+          "name": "transition-retains-visible-content",
+          "passed": true,
+          "observed": {
+            "pending": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 655
+        },
+        {
+          "name": "deferred-search-retains-stale-results",
+          "passed": true,
+          "observed": {
+            "query": "beta",
+            "stale": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 650
+        },
+        {
+          "name": "uncontrolled-select-action-reset",
+          "passed": true,
+          "observed": {
+            "selected": "In progress"
+          },
+          "durationMs": 1016
+        },
+        {
+          "name": "hosted-cache-invalidation",
+          "passed": true,
+          "concurrentReads": 12
+        }
+      ],
+      "browserVersion": "156.0.8078.4",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "mixed",
+      "reference": false,
+      "cacheComponents": true,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-redact-cache.thetanstack.workers.dev",
+      "browser": "firefox",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "2f88f6fcca7ac81e1319bf50676b126e5b14ecbda8bdae850474f9471ea33be1"
+      },
+      "scenarios": [
+        {
+          "name": "hydration",
+          "passed": true,
+          "durationMs": 1019
+        },
+        {
+          "name": "ids",
+          "passed": true,
+          "durationMs": 1223
+        },
+        {
+          "name": "actions",
+          "passed": true,
+          "durationMs": 978
+        },
+        {
+          "name": "direct-actions",
+          "passed": true,
+          "durationMs": 1076
+        },
+        {
+          "name": "progressive-actions",
+          "passed": true,
+          "durationMs": 1957
+        },
+        {
+          "name": "streaming",
+          "passed": true,
+          "durationMs": 2572
+        },
+        {
+          "name": "cache-components",
+          "passed": true,
+          "durationMs": 632
+        },
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1367
+        },
+        {
+          "name": "routing",
+          "passed": true,
+          "durationMs": 1217
+        },
+        {
+          "name": "boundaries",
+          "passed": true,
+          "durationMs": 3075
+        },
+        {
+          "name": "loading-cancellation",
+          "passed": true,
+          "durationMs": 962
+        },
+        {
+          "name": "navigation-cancellation",
+          "passed": true,
+          "durationMs": 1019
+        },
+        {
+          "name": "parallel-routes",
+          "passed": true,
+          "durationMs": 1691
+        },
+        {
+          "name": "mutations",
+          "passed": true,
+          "durationMs": 2723
+        },
+        {
+          "name": "components",
+          "passed": true,
+          "durationMs": 649
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1616
+        },
+        {
+          "name": "error-boundaries",
+          "passed": true,
+          "durationMs": 1416
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 669
+        },
+        {
+          "name": "transition-retains-visible-content",
+          "passed": true,
+          "observed": {
+            "pending": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 663
+        },
+        {
+          "name": "deferred-search-retains-stale-results",
+          "passed": true,
+          "observed": {
+            "query": "beta",
+            "stale": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 657
+        },
+        {
+          "name": "uncontrolled-select-action-reset",
+          "passed": true,
+          "observed": {
+            "selected": "In progress"
+          },
+          "durationMs": 1063
+        },
+        {
+          "name": "hosted-cache-invalidation",
+          "passed": true,
+          "concurrentReads": 12
+        }
+      ],
+      "browserVersion": "157.0",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "mixed",
+      "reference": false,
+      "cacheComponents": true,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-redact-cache.thetanstack.workers.dev",
+      "browser": "webkit",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "2f88f6fcca7ac81e1319bf50676b126e5b14ecbda8bdae850474f9471ea33be1"
+      },
+      "scenarios": [
+        {
+          "name": "hydration",
+          "passed": true,
+          "durationMs": 876
+        },
+        {
+          "name": "ids",
+          "passed": true,
+          "durationMs": 1277
+        },
+        {
+          "name": "actions",
+          "passed": true,
+          "durationMs": 962
+        },
+        {
+          "name": "direct-actions",
+          "passed": true,
+          "durationMs": 955
+        },
+        {
+          "name": "progressive-actions",
+          "passed": true,
+          "durationMs": 1886
+        },
+        {
+          "name": "streaming",
+          "passed": true,
+          "durationMs": 2608
+        },
+        {
+          "name": "cache-components",
+          "passed": true,
+          "durationMs": 652
+        },
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1338
+        },
+        {
+          "name": "routing",
+          "passed": true,
+          "durationMs": 1077
+        },
+        {
+          "name": "boundaries",
+          "passed": true,
+          "durationMs": 3092
+        },
+        {
+          "name": "loading-cancellation",
+          "passed": true,
+          "durationMs": 902
+        },
+        {
+          "name": "navigation-cancellation",
+          "passed": true,
+          "durationMs": 940
+        },
+        {
+          "name": "parallel-routes",
+          "passed": true,
+          "durationMs": 1482
+        },
+        {
+          "name": "mutations",
+          "passed": true,
+          "durationMs": 1879
+        },
+        {
+          "name": "components",
+          "passed": true,
+          "durationMs": 647
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1568
+        },
+        {
+          "name": "error-boundaries",
+          "passed": true,
+          "durationMs": 1460
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 670
+        },
+        {
+          "name": "transition-retains-visible-content",
+          "passed": true,
+          "observed": {
+            "pending": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 662
+        },
+        {
+          "name": "deferred-search-retains-stale-results",
+          "passed": true,
+          "observed": {
+            "query": "beta",
+            "stale": "true",
+            "retained": true,
+            "fallback": false
+          },
+          "durationMs": 655
+        },
+        {
+          "name": "uncontrolled-select-action-reset",
+          "passed": true,
+          "observed": {
+            "selected": "In progress"
+          },
+          "durationMs": 1018
+        },
+        {
+          "name": "hosted-cache-invalidation",
+          "passed": true,
+          "concurrentReads": 12
+        }
+      ],
+      "browserVersion": "27.2",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "pages-only",
+      "reference": true,
+      "cacheComponents": false,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-react-pages.thetanstack.workers.dev",
+      "browser": "chromium",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "cfa822d5387d6fd9fb795bb523c4d1b153c15e227ad1114082e2bda98e39fafa"
+      },
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1374
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1422
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 661
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "browserVersion": "156.0.8078.4",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "pages-only",
+      "reference": true,
+      "cacheComponents": false,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-react-pages.thetanstack.workers.dev",
+      "browser": "firefox",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "cfa822d5387d6fd9fb795bb523c4d1b153c15e227ad1114082e2bda98e39fafa"
+      },
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1270
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1459
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 629
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "browserVersion": "157.0",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "pages-only",
+      "reference": true,
+      "cacheComponents": false,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-react-pages.thetanstack.workers.dev",
+      "browser": "webkit",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "cfa822d5387d6fd9fb795bb523c4d1b153c15e227ad1114082e2bda98e39fafa"
+      },
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1310
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1380
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 707
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "browserVersion": "27.2",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "pages-only",
+      "reference": false,
+      "cacheComponents": false,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-redact-pages.thetanstack.workers.dev",
+      "browser": "chromium",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "446849bab55cd594abdec7a6f46102c95fcc6e142530e06f666a54e204296d66"
+      },
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1338
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1447
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 660
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "browserVersion": "156.0.8078.4",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "pages-only",
+      "reference": false,
+      "cacheComponents": false,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-redact-pages.thetanstack.workers.dev",
+      "browser": "firefox",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "446849bab55cd594abdec7a6f46102c95fcc6e142530e06f666a54e204296d66"
+      },
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1287
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1460
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 646
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "browserVersion": "157.0",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    },
+    {
+      "router": "pages-only",
+      "reference": false,
+      "cacheComponents": false,
+      "mode": "production",
+      "deployment": "cloudflare-hosted",
+      "origin": "https://redact-vinext-stable-1025-redact-pages.thetanstack.workers.dev",
+      "browser": "webkit",
+      "evidence": {
+        "suiteSha256": "18d55c65602e6399e63ca4b51431b2b8cf49153aad08c0313430e347efaf5cf4",
+        "installation": "npm-tarball",
+        "sourceSha256": "6b876a8263164e53b729c849f2cee081af35a074a28a9922f7191be45a906509",
+        "buildSha256": "a5bf346c2848e5b4878b109343fcf717c2ecca9dd9f7a2f1c45feee58111aba8",
+        "fixtureSha256": "446849bab55cd594abdec7a6f46102c95fcc6e142530e06f666a54e204296d66"
+      },
+      "scenarios": [
+        {
+          "name": "pages-router",
+          "passed": true,
+          "durationMs": 1312
+        },
+        {
+          "name": "pages-data",
+          "passed": true,
+          "durationMs": 1386
+        },
+        {
+          "name": "server-runtime",
+          "passed": true,
+          "durationMs": 707
+        },
+        {
+          "name": "pages-hydration",
+          "passed": true
+        }
+      ],
+      "browserVersion": "27.2",
+      "passed": true,
+      "expectedNavigationCancellations": 0
+    }
+  ],
+  "complete": true,
+  "passed": true,
+  "summary": {
+    "configurations": 18,
+    "scenarios": 282,
+    "passed": 282
+  }
+}

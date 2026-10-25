@@ -1,24 +1,10 @@
-export const STRING_BOOLEAN_ATTRS = new Set([
-  'contenteditable',
-  'draggable',
-  'spellcheck',
-])
+export const STRING_BOOLEAN_ATTRS = /^(contenteditable|draggable|spellcheck)$/
 
-export function attributeName(name: string, isSvg = false): string {
-  if (isSvg && name !== 'viewBox' && SVG_KEBAB_PREFIX.test(name)) {
-    return name.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase())
-  }
+export function attributeName(name: string, isSvg?: boolean): string {
   if (name === 'className') return 'class'
   if (name === 'htmlFor') return 'for'
-  if (name === 'httpEquiv') return 'http-equiv'
-  if (name === 'acceptCharset') return 'accept-charset'
-  if (name === 'crossOrigin') return 'crossorigin'
-  if (name === 'noModule') return 'nomodule'
-  if (name === 'maskType') return 'mask-type'
-  if (name === 'viewBox') return 'viewBox'
-  return name.startsWith('aria-') || name.startsWith('data-')
-    ? name
-    : name.toLowerCase()
+  if ((isSvg && /^(clip|fill|stroke)/.test(name)) || /^(httpEquiv|acceptCharset|maskType)$/.test(name)) {
+    return name.replace(/[A-Z]/g, m => '-' + m.toLowerCase())
+  }
+  return name === 'viewBox' || /^(aria|data)-/.test(name) ? name : name.toLowerCase()
 }
-
-const SVG_KEBAB_PREFIX = /^(?:clip|fill|stroke)/

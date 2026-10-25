@@ -7,8 +7,8 @@ import { discardPendingEffects, enqueueEffect, flushFiberCommits, runEffects } f
 function root() { return createFiberRoot(document.createElement('div'), { onUncaughtError: error => { throw error } }) }
 function child(root: FiberRoot) {
   const fiber = createFiber(FiberTag.Function, () => null, null)
-  fiber.root = root
-  fiber.parent = root.r
+  fiber.r = root
+  fiber.p = root.r
   return fiber
 }
 function stage(root: FiberRoot, label: string, events: string[], during?: () => void) {

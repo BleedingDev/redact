@@ -26,6 +26,14 @@
           "to": "compatibility"
         },
         {
+          "label": "Next.js",
+          "to": "next"
+        },
+        {
+          "label": "Vinext",
+          "to": "vinext"
+        },
+        {
           "label": "Feature Flags",
           "to": "feature-flags"
         },

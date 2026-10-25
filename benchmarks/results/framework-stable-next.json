@@ -1,0 +1,558 @@
+{
+  "recordedAt": "2026-10-25T11:29:31.404Z",
+  "complete": true,
+  "passed": true,
+  "matrix": {
+    "expected": 162,
+    "executed": 162,
+    "passed": 162
+  },
+  "scenarios": {
+    "executed": 2694,
+    "passed": 2694
+  },
+  "problems": [],
+  "failures": [],
+  "evidence": [
+    {
+      "file": "15.5.28-standard-turbopack-development.json",
+      "recordedAt": "2026-10-25T11:21:20.964Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "0023bfe154c724993dc8fdaf620ef146710802e0d5f859847dda680c73c5c8f7"
+    },
+    {
+      "file": "15.5.28-standard-turbopack-production.json",
+      "recordedAt": "2026-10-25T11:18:13.772Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "0023bfe154c724993dc8fdaf620ef146710802e0d5f859847dda680c73c5c8f7"
+    },
+    {
+      "file": "15.5.28-standard-turbopack-standalone.json",
+      "recordedAt": "2026-10-25T11:21:54.603Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "0023bfe154c724993dc8fdaf620ef146710802e0d5f859847dda680c73c5c8f7"
+    },
+    {
+      "file": "15.5.28-standard-turbopack-static-export.json",
+      "recordedAt": "2026-10-25T11:21:38.263Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "dbdcd0f12018a2b94e0c18d0c3297ca6770e827b91092752b0e533b37e3dae79"
+    },
+    {
+      "file": "15.5.28-standard-webpack-development.json",
+      "recordedAt": "2026-10-25T11:26:12.932Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "0023bfe154c724993dc8fdaf620ef146710802e0d5f859847dda680c73c5c8f7"
+    },
+    {
+      "file": "15.5.28-standard-webpack-production.json",
+      "recordedAt": "2026-10-25T11:27:13.163Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "0023bfe154c724993dc8fdaf620ef146710802e0d5f859847dda680c73c5c8f7"
+    },
+    {
+      "file": "15.5.28-standard-webpack-standalone.json",
+      "recordedAt": "2026-10-25T11:19:53.598Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "0023bfe154c724993dc8fdaf620ef146710802e0d5f859847dda680c73c5c8f7"
+    },
+    {
+      "file": "15.5.28-standard-webpack-static-export.json",
+      "recordedAt": "2026-10-25T11:21:12.286Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "dbdcd0f12018a2b94e0c18d0c3297ca6770e827b91092752b0e533b37e3dae79"
+    },
+    {
+      "file": "16.0.11-cache-components-turbopack-development.json",
+      "recordedAt": "2026-10-25T11:18:33.560Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "28853b91c10bb1fa3efd008daad3d69241363395c246a20f64ea886405a82b90"
+    },
+    {
+      "file": "16.0.11-cache-components-turbopack-production.json",
+      "recordedAt": "2026-10-25T11:17:46.524Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "28853b91c10bb1fa3efd008daad3d69241363395c246a20f64ea886405a82b90"
+    },
+    {
+      "file": "16.0.11-cache-components-webpack-development.json",
+      "recordedAt": "2026-10-25T11:23:13.220Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "28853b91c10bb1fa3efd008daad3d69241363395c246a20f64ea886405a82b90"
+    },
+    {
+      "file": "16.0.11-cache-components-webpack-production.json",
+      "recordedAt": "2026-10-25T11:21:04.624Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "28853b91c10bb1fa3efd008daad3d69241363395c246a20f64ea886405a82b90"
+    },
+    {
+      "file": "16.0.11-standard-turbopack-development.json",
+      "recordedAt": "2026-10-25T11:22:05.317Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "2bfc2821f0349be0bdd144ecd5535483e5b4c23c8a25fcbcf6c975d6234e9da6"
+    },
+    {
+      "file": "16.0.11-standard-turbopack-production.json",
+      "recordedAt": "2026-10-25T11:18:08.679Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "2bfc2821f0349be0bdd144ecd5535483e5b4c23c8a25fcbcf6c975d6234e9da6"
+    },
+    {
+      "file": "16.0.11-standard-webpack-development.json",
+      "recordedAt": "2026-10-25T11:19:05.432Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "2bfc2821f0349be0bdd144ecd5535483e5b4c23c8a25fcbcf6c975d6234e9da6"
+    },
+    {
+      "file": "16.0.11-standard-webpack-production.json",
+      "recordedAt": "2026-10-25T11:17:48.456Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "2bfc2821f0349be0bdd144ecd5535483e5b4c23c8a25fcbcf6c975d6234e9da6"
+    },
+    {
+      "file": "16.1.7-cache-components-turbopack-development.json",
+      "recordedAt": "2026-10-25T11:18:49.191Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "ea88f5944a816bb2ec9b9e0327c52b3fbff9561b30fb3acd3b76ae67e0ef70f8"
+    },
+    {
+      "file": "16.1.7-cache-components-turbopack-production.json",
+      "recordedAt": "2026-10-25T11:21:30.281Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "ea88f5944a816bb2ec9b9e0327c52b3fbff9561b30fb3acd3b76ae67e0ef70f8"
+    },
+    {
+      "file": "16.1.7-cache-components-webpack-development.json",
+      "recordedAt": "2026-10-25T11:26:32.090Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "ea88f5944a816bb2ec9b9e0327c52b3fbff9561b30fb3acd3b76ae67e0ef70f8"
+    },
+    {
+      "file": "16.1.7-cache-components-webpack-production.json",
+      "recordedAt": "2026-10-25T11:27:35.215Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "ea88f5944a816bb2ec9b9e0327c52b3fbff9561b30fb3acd3b76ae67e0ef70f8"
+    },
+    {
+      "file": "16.1.7-standard-turbopack-development.json",
+      "recordedAt": "2026-10-25T11:21:54.696Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "93926f38e6694681e723479295539fb4d94ef99fe7e5eac2fba1cb2d30f9bcc3"
+    },
+    {
+      "file": "16.1.7-standard-turbopack-production.json",
+      "recordedAt": "2026-10-25T11:24:34.130Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "93926f38e6694681e723479295539fb4d94ef99fe7e5eac2fba1cb2d30f9bcc3"
+    },
+    {
+      "file": "16.1.7-standard-webpack-development.json",
+      "recordedAt": "2026-10-25T11:28:51.895Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "93926f38e6694681e723479295539fb4d94ef99fe7e5eac2fba1cb2d30f9bcc3"
+    },
+    {
+      "file": "16.1.7-standard-webpack-production.json",
+      "recordedAt": "2026-10-25T11:25:13.993Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "93926f38e6694681e723479295539fb4d94ef99fe7e5eac2fba1cb2d30f9bcc3"
+    },
+    {
+      "file": "16.2.12-cache-components-turbopack-development.json",
+      "recordedAt": "2026-10-25T11:27:22.477Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "49ec2573cbf648e2c8c422161e04b5aa702a6b8f5992013ab9a67c50e3a602aa"
+    },
+    {
+      "file": "16.2.12-cache-components-turbopack-production.json",
+      "recordedAt": "2026-10-25T11:24:34.614Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "49ec2573cbf648e2c8c422161e04b5aa702a6b8f5992013ab9a67c50e3a602aa"
+    },
+    {
+      "file": "16.2.12-cache-components-webpack-development.json",
+      "recordedAt": "2026-10-25T11:28:49.417Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "49ec2573cbf648e2c8c422161e04b5aa702a6b8f5992013ab9a67c50e3a602aa"
+    },
+    {
+      "file": "16.2.12-cache-components-webpack-production.json",
+      "recordedAt": "2026-10-25T11:18:02.360Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "49ec2573cbf648e2c8c422161e04b5aa702a6b8f5992013ab9a67c50e3a602aa"
+    },
+    {
+      "file": "16.2.12-standard-turbopack-development.json",
+      "recordedAt": "2026-10-25T11:17:48.986Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "0839ca9c9a7097e6602d2b7df3e99f79d1c0de4ff17d3a15574afbe4db9d7d5b"
+    },
+    {
+      "file": "16.2.12-standard-turbopack-production.json",
+      "recordedAt": "2026-10-25T11:24:36.347Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "0839ca9c9a7097e6602d2b7df3e99f79d1c0de4ff17d3a15574afbe4db9d7d5b"
+    },
+    {
+      "file": "16.2.12-standard-webpack-development.json",
+      "recordedAt": "2026-10-25T11:19:56.945Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "0839ca9c9a7097e6602d2b7df3e99f79d1c0de4ff17d3a15574afbe4db9d7d5b"
+    },
+    {
+      "file": "16.2.12-standard-webpack-production.json",
+      "recordedAt": "2026-10-25T11:17:53.286Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "0839ca9c9a7097e6602d2b7df3e99f79d1c0de4ff17d3a15574afbe4db9d7d5b"
+    },
+    {
+      "file": "16.3.8-cache-components-turbopack-development.json",
+      "recordedAt": "2026-10-25T11:23:39.155Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "9b50ce73d13e58abc572ec317ec5a16841094b39a4919781f2f04063ceb7df6d"
+    },
+    {
+      "file": "16.3.8-cache-components-turbopack-production.json",
+      "recordedAt": "2026-10-25T11:25:03.041Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "9b50ce73d13e58abc572ec317ec5a16841094b39a4919781f2f04063ceb7df6d"
+    },
+    {
+      "file": "16.3.8-cache-components-webpack-development.json",
+      "recordedAt": "2026-10-25T11:28:11.465Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "9b50ce73d13e58abc572ec317ec5a16841094b39a4919781f2f04063ceb7df6d"
+    },
+    {
+      "file": "16.3.8-cache-components-webpack-production.json",
+      "recordedAt": "2026-10-25T11:21:10.717Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "9b50ce73d13e58abc572ec317ec5a16841094b39a4919781f2f04063ceb7df6d"
+    },
+    {
+      "file": "16.3.8-standard-turbopack-development.json",
+      "recordedAt": "2026-10-25T11:25:49.588Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "4c98b2a3e3765a492c3f429c687302db92a498436268c8c28fa5783fa0249263"
+    },
+    {
+      "file": "16.3.8-standard-turbopack-production.json",
+      "recordedAt": "2026-10-25T11:18:00.035Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "4c98b2a3e3765a492c3f429c687302db92a498436268c8c28fa5783fa0249263"
+    },
+    {
+      "file": "16.3.8-standard-webpack-development.json",
+      "recordedAt": "2026-10-25T11:19:23.715Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "4c98b2a3e3765a492c3f429c687302db92a498436268c8c28fa5783fa0249263"
+    },
+    {
+      "file": "16.3.8-standard-webpack-production.json",
+      "recordedAt": "2026-10-25T11:18:03.312Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "4c98b2a3e3765a492c3f429c687302db92a498436268c8c28fa5783fa0249263"
+    },
+    {
+      "file": "16.4.3-cache-components-turbopack-development.json",
+      "recordedAt": "2026-10-25T11:23:40.344Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "804ed75b1c2a0a0eb5a3910f932087d25c6fd27626e9c13a83e7c5e0d41d9676"
+    },
+    {
+      "file": "16.4.3-cache-components-turbopack-production.json",
+      "recordedAt": "2026-10-25T11:18:43.189Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "804ed75b1c2a0a0eb5a3910f932087d25c6fd27626e9c13a83e7c5e0d41d9676"
+    },
+    {
+      "file": "16.4.3-cache-components-turbopack-standalone.json",
+      "recordedAt": "2026-10-25T11:27:03.328Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "804ed75b1c2a0a0eb5a3910f932087d25c6fd27626e9c13a83e7c5e0d41d9676"
+    },
+    {
+      "file": "16.4.3-cache-components-webpack-development.json",
+      "recordedAt": "2026-10-25T11:26:47.972Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "804ed75b1c2a0a0eb5a3910f932087d25c6fd27626e9c13a83e7c5e0d41d9676"
+    },
+    {
+      "file": "16.4.3-cache-components-webpack-production.json",
+      "recordedAt": "2026-10-25T11:21:35.668Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "804ed75b1c2a0a0eb5a3910f932087d25c6fd27626e9c13a83e7c5e0d41d9676"
+    },
+    {
+      "file": "16.4.3-cache-components-webpack-standalone.json",
+      "recordedAt": "2026-10-25T11:21:58.379Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "804ed75b1c2a0a0eb5a3910f932087d25c6fd27626e9c13a83e7c5e0d41d9676"
+    },
+    {
+      "file": "16.4.3-standard-turbopack-development.json",
+      "recordedAt": "2026-10-25T11:18:58.186Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "3c4f543c894d9b5acd8d2157ea38b300f8490e2263bbc15b699f2eaad4d8a63c"
+    },
+    {
+      "file": "16.4.3-standard-turbopack-production.json",
+      "recordedAt": "2026-10-25T11:20:40.583Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "3c4f543c894d9b5acd8d2157ea38b300f8490e2263bbc15b699f2eaad4d8a63c"
+    },
+    {
+      "file": "16.4.3-standard-turbopack-standalone.json",
+      "recordedAt": "2026-10-25T11:17:44.440Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "3c4f543c894d9b5acd8d2157ea38b300f8490e2263bbc15b699f2eaad4d8a63c"
+    },
+    {
+      "file": "16.4.3-standard-turbopack-static-export.json",
+      "recordedAt": "2026-10-25T11:19:29.806Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "b67fb8dd4e333dcbffa272a9f549fcdbdbcd5eac0fa19c39502656cfb4ed9262"
+    },
+    {
+      "file": "16.4.3-standard-webpack-development.json",
+      "recordedAt": "2026-10-25T11:29:20.713Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "3c4f543c894d9b5acd8d2157ea38b300f8490e2263bbc15b699f2eaad4d8a63c"
+    },
+    {
+      "file": "16.4.3-standard-webpack-production.json",
+      "recordedAt": "2026-10-25T11:24:02.159Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "3c4f543c894d9b5acd8d2157ea38b300f8490e2263bbc15b699f2eaad4d8a63c"
+    },
+    {
+      "file": "16.4.3-standard-webpack-standalone.json",
+      "recordedAt": "2026-10-25T11:17:58.805Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "3c4f543c894d9b5acd8d2157ea38b300f8490e2263bbc15b699f2eaad4d8a63c"
+    },
+    {
+      "file": "16.4.3-standard-webpack-static-export.json",
+      "recordedAt": "2026-10-25T11:19:49.247Z",
+      "node": "v24.22.0",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "packageSha256": "909d436f9b7b365b60fbc9d1cad417a1d1c377c98b87f06e24584b3ab05c00e4",
+      "suiteSha256": "fdcc37d0ef1bf0a66bc1917e7713c421d0b85a51bd54b8498bd263d14ef2af2c",
+      "fixtureSha256": "b67fb8dd4e333dcbffa272a9f549fcdbdbcd5eac0fa19c39502656cfb4ed9262"
+    }
+  ]
+}

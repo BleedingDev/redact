@@ -127,7 +127,10 @@ describe('public API surface', () => {
         "preinitModule",
         "preload",
         "preloadModule",
+        "requestFormReset",
         "unstable_batchedUpdates",
+        "useFormState",
+        "useFormStatus",
         "version",
       ]
     `)
