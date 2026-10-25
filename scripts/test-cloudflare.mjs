@@ -34,12 +34,13 @@ for (const [entry, production] of [['@cloudflare/vite-plugin', false], ['@tansta
       } }
     `)
     if (production) assert.equal((await once(run(['build']), 'exit'))[0], 0, logs)
-    server = run([production ? 'preview' : 'dev', '--host', 'localhost', '--port', port, '--strictPort'])
+    // Use one loopback address for binding and requests, independent of DNS order.
+    server = run([production ? 'preview' : 'dev', '--host', '127.0.0.1', '--port', port, '--strictPort'])
     const deadline = Date.now() + 60000
     let response
     for (;;) {
       assert.equal(server.exitCode, null, logs)
-      try { response = await fetch(`http://localhost:${port}`); if (response.ok) break } catch {}
+      try { response = await fetch(`http://127.0.0.1:${port}`); if (response.ok) break } catch {}
       assert.ok(Date.now() < deadline, logs)
       await new Promise(done => setTimeout(done, 200))
     }
