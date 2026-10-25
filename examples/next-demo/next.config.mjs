@@ -10,8 +10,6 @@ const config = {
   ...(major > 16 || major === 16 && minor >= 4 ? { agentRules: false, partialPrefetching: cacheComponents } : {}),
   ...(process.env.NEXT_TEST_OUTPUT ? { output: process.env.NEXT_TEST_OUTPUT } : {}),
   ...(process.env.NEXT_TEST_BASE_PATH ? { basePath: process.env.NEXT_TEST_BASE_PATH, trailingSlash: true } : {}),
-  // Polling keeps filesystem notifications reliable in automated browser runs.
-  ...(process.env.REDACT_NEXT_TEST && (major > 16 || major === 16 && minor >= 4) ? { watchOptions: { pollIntervalMs: 100 } } : {}),
   async rewrites() { return [{ source: '/rewritten/:slug', destination: '/routing/:slug' }] },
   async redirects() { return [{ source: '/configured-redirect', destination: '/routing/redirected?from=config', permanent: false }] },
 }
