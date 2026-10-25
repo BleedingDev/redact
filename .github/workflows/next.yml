@@ -32,6 +32,9 @@ jobs:
       NEXT_TEST_CACHE_COMPONENTS: ${{ matrix.rendering == 'cache-components' && '1' || '0' }}
       NEXT_TEST_TRACE: ${{ matrix.mode == 'development' && matrix.bundler == 'webpack' && '1' || '' }}
     steps:
+      - name: Match container home ownership
+        # Firefox requires the home directory to belong to its effective user.
+        run: chown "$(id -u):$(id -g)" "$HOME"
       - name: Set test paths
         run: |
           echo "NEXT_TEST_DIR=$RUNNER_TEMP/redact-next" >> "$GITHUB_ENV"
@@ -106,6 +109,9 @@ jobs:
       NEXT_TEST_BASE_PATH: /coverage
       NEXT_TEST_CACHE_COMPONENTS: ${{ matrix.rendering == 'cache-components' && '1' || '0' }}
     steps:
+      - name: Match container home ownership
+        # Firefox requires the home directory to belong to its effective user.
+        run: chown "$(id -u):$(id -g)" "$HOME"
       - name: Set test paths
         run: |
           echo "NEXT_TEST_DIR=$RUNNER_TEMP/redact-next-deployment" >> "$GITHUB_ENV"
