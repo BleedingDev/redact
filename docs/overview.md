@@ -2,7 +2,7 @@
 title: Overview
 ---
 
-We love React, and we want to keep writing it. Redact is an alternative runtime for React apps, built around React's APIs and component model. Integrations for Vite, Next.js, and Vinext keep your application's imports unchanged. Next.js and Vinext keep native React on the server and use Redact in the browser.
+We love React, and we want to keep writing it. Redact is an alternative runtime for React apps, built around React's APIs and component model. Integrations for TanStack Start, Vite, Vinext, and Next.js keep your application's imports unchanged. Vinext and Next.js keep native React on the server and use Redact in the browser.
 
 The goal is another runtime option within the React ecosystem, not a replacement for React as a project. Redact chooses synchronous rendering and a smaller footprint; React's concurrent scheduler supports use cases that need different behavior. JSX, hooks, context, refs, memo, lazy, portals, error boundaries, streaming SSR, and hydration are supported.
 
@@ -10,7 +10,7 @@ The [compatibility guide](./compatibility.md) explains the API differences, incl
 
 ## Get started
 
-[Install Redact](./installation.md), then choose [Vite](./quick-start.md), [Next.js](./next.md), or [Vinext](./vinext.md). The framework adapters use the full runtime. In Vite apps, start with the default preset and only disable features after checking what your app uses.
+[Install Redact](./installation.md), then choose [TanStack Start](./start.md), [Vite](./quick-start.md), [Vinext](./vinext.md), or [Next.js](./next.md). Vinext and Next.js use the full runtime. In Start and Vite apps, start with the default preset and only disable features after checking what your app uses.
 
 The [feature flags guide](./feature-flags.md) explains the behavior each flag removes. The [Vite plugin reference](./vite-plugin.md) covers monorepos and manual package resolution.
 

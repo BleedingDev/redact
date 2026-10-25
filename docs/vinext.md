@@ -19,7 +19,7 @@ Keep React, React DOM, and React Server DOM installed. Keep your normal `react`,
 
 The release matrix pins Vinext 1.3.0, Vite 8.3.5, React 19.3.1, React plugin 6.1.2, and RSC plugin 0.5.38. Local Workers use stable Cloudflare Vite plugin 1.65.0 and Wrangler 4.152.0. Use Node 24.22.0 from `.nvmrc`.
 
-The adapter includes maintained corrections for the pinned Vinext release. The stable release still requires every configuration to pass. [Results and root causes](../benchmarks/VINEXT_COVERAGE.md).
+The adapter includes maintained corrections for the pinned Vinext release. The stable release still requires every configuration to pass. [Results and root causes](https://github.com/TanStack/redact/blob/main/benchmarks/VINEXT_COVERAGE.md).
 
 ## Dependency fixes
 
@@ -65,7 +65,7 @@ Install `@cloudflare/vite-plugin@1.65.0` and `wrangler@4.152.0`. The Redact entr
 
 In Vinext's benchmark suite, the same app emitted 154.9 KB of gzipped client JavaScript and CSS with React and 115.5 KB with Redact, a 39.4 KB or 25.4% reduction. All six builds returned the same sizes. These totals include lazy routes, they are not the download for one page.
 
-Production build times were effectively equal. Development startup was 2.2% faster for App Router and 4.9% faster for the large Pages fixture in this local run. Browser rendering, hydration, responsiveness, and SSR throughput were not timed. [Full measurements and limits](../benchmarks/VINEXT_BENCHMARKS.md).
+Production build times were effectively equal. Development startup was 2.2% faster for App Router and 4.9% faster for the large Pages fixture in this local run. Browser rendering, hydration, responsiveness, and SSR throughput were not timed. [Full measurements and limits](https://github.com/TanStack/redact/blob/main/benchmarks/VINEXT_BENCHMARKS.md).
 
 ## What the adapter changes
 
@@ -99,9 +99,9 @@ pnpm test:vinext
 
 The combined gate requires all 102 configurations and 1,410 scenario groups from one packed runtime. It writes `release.json` with both suite summaries. Browser errors, setup failures, missing cases, partial runs, and mismatched fingerprints fail the gate. The Pages suite still runs if the mixed suite fails.
 
-The [Vinext compatibility workflow](../.github/workflows/vinext.yml) runs on PRs, before release publication, and on manual dispatch. It also runs runtime tests, type checks, package verification, and all existing size limits. Evidence is saved even when checks fail.
+The [Vinext compatibility workflow](https://github.com/TanStack/redact/blob/main/.github/workflows/vinext.yml) runs on PRs, before release publication, and on manual dispatch. It also runs runtime tests, type checks, package verification, and all existing size limits. Evidence is saved even when checks fail.
 
-The automatic Worker matrix runs locally. A separate hosted gate deploys native React and Redact apps, with and without Cache Components, plus Pages-only apps. It runs all three browsers against the deployed versions. [Hosted verification](../benchmarks/VINEXT_COVERAGE.md#hosted-workers).
+The automatic Worker matrix runs locally. A separate hosted gate deploys native React and Redact apps, with and without Cache Components, plus Pages-only apps. It runs all three browsers against the deployed versions. [Hosted verification](https://github.com/TanStack/redact/blob/main/benchmarks/VINEXT_COVERAGE.md#hosted-workers).
 
 Deployed apps need shared data and cache storage. Vinext's default memory cache belongs to one Worker isolate, so `revalidatePath` cannot invalidate another isolate's copy. Configure a shared data-cache adapter through `vinext({ cache })`. Redact does not change server caching.
 

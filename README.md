@@ -1,6 +1,6 @@
 # redact
 
-**For the love of React, and smaller bundles.** We love React, and we want to keep writing it. Redact is an alternative runtime for React apps, with a smaller footprint and synchronous rendering. Keep your components, hooks, and imports, with integrations for Vite, Next.js, and Vinext.
+**For the love of React, and smaller bundles.** We love React, and we want to keep writing it. Redact is an alternative runtime for React apps, with a smaller footprint and synchronous rendering. Keep your components, hooks, and imports, with integrations for TanStack Start, Vite, Vinext, and Next.js.
 
 React's APIs and component model are the reason this project exists. Redact explores a different set of runtime tradeoffs within that ecosystem, not a new direction for React or a replacement for the project. Synchronous rendering keeps the runtime small, while React's concurrent scheduling supports behavior Redact doesn't provide. The [compatibility table](#compatibility) explains those differences.
 
@@ -13,6 +13,25 @@ The historical performance comparisons below use Redact 0.1.0 and pinned React 1
 ```bash
 pnpm add @tanstack/redact
 ```
+
+### TanStack Start
+
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite'
+import { tanstackStart } from '@tanstack/react-start/plugin/vite'
+import react from '@vitejs/plugin-react'
+import { redact } from '@tanstack/redact/vite'
+
+export default defineConfig({
+  ssr: { noExternal: true },
+  plugins: [tanstackStart(), react(), redact()],
+})
+```
+
+Bundling server dependencies lets Vite redirect their React imports too. [TanStack Start setup](./docs/start.md).
+
+### Vite
 
 ```ts
 // vite.config.ts
@@ -33,19 +52,6 @@ import { createRoot, hydrateRoot } from 'react-dom/client'
 
 The plugin handles client and SSR builds. It leaves the RSC environment on real React so `@vitejs/plugin-rsc` can keep owning Server Component serialization.
 
-## Next.js
-
-```js
-// next.config.mjs
-import { withRedact } from '@tanstack/redact/next'
-
-export default withRedact({})
-```
-
-Next.js integration for Turbopack and Webpack, with App Router and Pages Router coverage. Redact runs in the browser; React handles server rendering and Server Components. [Setup and version range](./docs/next.md), [release checks and remaining blockers](./benchmarks/NEXT_COVERAGE.md).
-
-Run `pnpm example:next:journey` for an interactive React and Redact comparison with the same app, server actions, streaming, and navigation. [Demo and browser checks](./examples/next-journey/README.md).
-
 ## Vinext
 
 ```js
@@ -56,7 +62,20 @@ import { redact } from '@tanstack/redact/vinext'
 export default { plugins: [vinext(), redact()] }
 ```
 
-Vinext integration with native React on the server and Redact in the browser. The release gate checks both routers against native React from an unpatched npm install, across Node, standalone output, static export, and local Workers. [Setup](./docs/vinext.md), [release checks and remaining blockers](./benchmarks/VINEXT_COVERAGE.md).
+Vinext integration with native React on the server and Redact in the browser. The release gate checks both routers against native React from an unpatched npm install, across Node, standalone output, static export, and local Workers. [Setup](./docs/vinext.md), [coverage and release checks](./benchmarks/VINEXT_COVERAGE.md).
+
+## Next.js
+
+```js
+// next.config.mjs
+import { withRedact } from '@tanstack/redact/next'
+
+export default withRedact({})
+```
+
+Next.js integration for Turbopack and Webpack, with App Router and Pages Router coverage. Redact runs in the browser; React handles server rendering and Server Components. [Setup and version range](./docs/next.md), [coverage and release checks](./benchmarks/NEXT_COVERAGE.md).
+
+Run `pnpm example:next:journey` for an interactive React and Redact comparison with the same app, server actions, streaming, and navigation. [Demo and browser checks](./examples/next-journey/README.md).
 
 ## Framework client size
 
@@ -203,7 +222,9 @@ redact({ preset: 'nano', features: { context: true } })
 
 ## Verification
 
-`pnpm test:ci` covers 1,835 passing tests, type checking, built-package verification, and all 38 source/dist size budgets. The 91 ordinary-suite skips are not passes. The built full runtime used by Next.js and Vinext is 27,921 bytes gzip, and the default Vite runtime is 23,304. Both fit their pre-integration limits of 28,183 and 23,335 bytes. [Current size measurements](./benchmarks/results/framework-release-sizes.json).
+`pnpm test:ci` covers 1,859 passing tests, type checking, built-package verification, and all 38 source/dist size budgets. The 91 ordinary-suite skips are not passes. The built full runtime used by Vinext and Next.js is 27,921 bytes gzip, and the default Vite runtime is 23,304. Both fit their pre-integration limits of 28,183 and 23,335 bytes. [Current size measurements](./benchmarks/results/framework-release-sizes.json).
+
+Vinext has a 102-configuration local gate covering 1,410 scenarios, plus 282 hosted scenarios across 18 configurations. Both App Router and Pages Router run against native React controls. [Vinext coverage](./benchmarks/VINEXT_COVERAGE.md).
 
 Next.js has a 162-configuration gate covering six pinned releases, both bundlers, three browser engines, development and production, standalone output, and static export. Results preserve individual scenario failures and require complete coverage of the configured matrix. [Coverage, measurements, and reproduction commands](./benchmarks/NEXT_COVERAGE.md). [Earlier release Chrome ledger](./benchmarks/SHIP_CHROME_FINAL.md).
 

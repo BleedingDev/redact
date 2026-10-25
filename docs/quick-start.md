@@ -6,11 +6,12 @@ Choose the integration that owns your build:
 
 | Build | Integration | Server rendering |
 | --- | --- | --- |
-| [Next.js](./next.md) | `withRedact` from `@tanstack/redact/next` | Native React |
-| [Vinext](./vinext.md) | `redact` from `@tanstack/redact/vinext` | Native React |
+| [TanStack Start](./start.md) | `redact` from `@tanstack/redact/vite` | Redact |
 | Vite | `redact` from `@tanstack/redact/vite` | Redact, with native React in the RSC environment |
+| [Vinext](./vinext.md) | `redact` from `@tanstack/redact/vinext` | Native React |
+| [Next.js](./next.md) | `withRedact` from `@tanstack/redact/next` | Native React |
 
-The Next.js and Vinext guides record the stable release blockers and version coverage. For Vite, add Redact to your existing configuration and keep your React or framework plugin in place.
+The Vinext and Next.js guides record the tested versions and coverage. For Vite, add Redact to your existing configuration and keep your React or framework plugin in place.
 
 ```ts
 import { defineConfig } from 'vite'
