@@ -1,0 +1,163 @@
+{
+  "recordedAt": "2026-10-25T08:08:22.152Z",
+  "nextVersion": "16.2.12",
+  "sourceBackport": true,
+  "results": [
+    {
+      "id": "firefox-turbo",
+      "cacheComponents": false,
+      "browser": "firefox",
+      "bundler": "turbo",
+      "exitCode": 0,
+      "log": "/private/tmp/redact-next162-firefox-turbo.log",
+      "summary": [
+        "Test Suites: 2 passed, 2 total",
+        "Tests:       5 passed, 5 total",
+        "Time:        8.679 s"
+      ]
+    },
+    {
+      "id": "firefox-webpack",
+      "cacheComponents": false,
+      "browser": "firefox",
+      "bundler": "webpack",
+      "exitCode": 0,
+      "log": "/private/tmp/redact-next162-firefox-webpack.log",
+      "summary": [
+        "Test Suites: 2 passed, 2 total",
+        "Tests:       5 passed, 5 total",
+        "Time:        11.155 s"
+      ]
+    },
+    {
+      "id": "chrome-turbo",
+      "cacheComponents": false,
+      "browser": "chrome",
+      "bundler": "turbo",
+      "exitCode": 0,
+      "log": "/private/tmp/redact-next162-chrome-turbo.log",
+      "summary": [
+        "Test Suites: 2 passed, 2 total",
+        "Tests:       5 passed, 5 total",
+        "Time:        9.033 s, estimated 12 s"
+      ]
+    },
+    {
+      "id": "chrome-webpack",
+      "cacheComponents": false,
+      "browser": "chrome",
+      "bundler": "webpack",
+      "exitCode": 0,
+      "log": "/private/tmp/redact-next162-chrome-webpack.log",
+      "summary": [
+        "Test Suites: 2 passed, 2 total",
+        "Tests:       5 passed, 5 total",
+        "Time:        9.49 s, estimated 10 s"
+      ]
+    },
+    {
+      "id": "safari-turbo",
+      "cacheComponents": false,
+      "browser": "safari",
+      "bundler": "turbo",
+      "exitCode": 0,
+      "log": "/private/tmp/redact-next162-safari-turbo.log",
+      "summary": [
+        "Test Suites: 2 passed, 2 total",
+        "Tests:       5 passed, 5 total",
+        "Time:        12.948 s"
+      ]
+    },
+    {
+      "id": "safari-webpack",
+      "cacheComponents": false,
+      "browser": "safari",
+      "bundler": "webpack",
+      "exitCode": 0,
+      "log": "/private/tmp/redact-next162-safari-webpack.log",
+      "summary": [
+        "Test Suites: 2 passed, 2 total",
+        "Tests:       5 passed, 5 total",
+        "Time:        8.922 s, estimated 13 s"
+      ]
+    },
+    {
+      "id": "firefox-turbo-cache",
+      "cacheComponents": true,
+      "browser": "firefox",
+      "bundler": "turbo",
+      "exitCode": 0,
+      "log": "/private/tmp/redact-next162-firefox-turbo-cache.log",
+      "summary": [
+        "Test Suites: 2 passed, 2 total",
+        "Tests:       5 passed, 5 total",
+        "Time:        6.862 s, estimated 9 s"
+      ]
+    },
+    {
+      "id": "firefox-webpack-cache",
+      "cacheComponents": true,
+      "browser": "firefox",
+      "bundler": "webpack",
+      "exitCode": 0,
+      "log": "/private/tmp/redact-next162-firefox-webpack-cache.log",
+      "summary": [
+        "Test Suites: 2 passed, 2 total",
+        "Tests:       5 passed, 5 total",
+        "Time:        9.921 s"
+      ]
+    },
+    {
+      "id": "chrome-turbo-cache",
+      "cacheComponents": true,
+      "browser": "chrome",
+      "bundler": "turbo",
+      "exitCode": 0,
+      "log": "/private/tmp/redact-next162-chrome-turbo-cache.log",
+      "summary": [
+        "Test Suites: 2 passed, 2 total",
+        "Tests:       5 passed, 5 total",
+        "Time:        5.308 s, estimated 10 s"
+      ]
+    },
+    {
+      "id": "chrome-webpack-cache",
+      "cacheComponents": true,
+      "browser": "chrome",
+      "bundler": "webpack",
+      "exitCode": 0,
+      "log": "/private/tmp/redact-next162-chrome-webpack-cache.log",
+      "summary": [
+        "Test Suites: 2 passed, 2 total",
+        "Tests:       5 passed, 5 total",
+        "Time:        8.749 s"
+      ]
+    },
+    {
+      "id": "safari-turbo-cache",
+      "cacheComponents": true,
+      "browser": "safari",
+      "bundler": "turbo",
+      "exitCode": 0,
+      "log": "/private/tmp/redact-next162-safari-turbo-cache.log",
+      "summary": [
+        "Test Suites: 2 passed, 2 total",
+        "Tests:       5 passed, 5 total",
+        "Time:        5.742 s, estimated 9 s"
+      ]
+    },
+    {
+      "id": "safari-webpack-cache",
+      "cacheComponents": true,
+      "browser": "safari",
+      "bundler": "webpack",
+      "exitCode": 0,
+      "log": "/private/tmp/redact-next162-safari-webpack-cache.log",
+      "summary": [
+        "Test Suites: 2 passed, 2 total",
+        "Tests:       5 passed, 5 total",
+        "Time:        11.442 s"
+      ]
+    }
+  ]
+}

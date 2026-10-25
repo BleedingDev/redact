@@ -1,6 +1,6 @@
 # redact
 
-**For the love of React, and smaller bundles.** We love React, and we want to keep writing it. Redact is an alternative runtime for React apps, with a smaller footprint and synchronous rendering. Keep your components, hooks, and imports, and try it with one Vite plugin.
+**For the love of React, and smaller bundles.** We love React, and we want to keep writing it. Redact is an alternative runtime for React apps, with a smaller footprint and synchronous rendering. Keep your components, hooks, and imports, with integrations for Vite, Next.js, and Vinext.
 
 React's APIs and component model are the reason this project exists. Redact explores a different set of runtime tradeoffs within that ecosystem, not a new direction for React or a replacement for the project. Synchronous rendering keeps the runtime small, while React's concurrent scheduling supports behavior Redact doesn't provide. The [compatibility table](#compatibility) explains those differences.
 
@@ -57,6 +57,12 @@ export default { plugins: [vinext(), redact()] }
 ```
 
 Vinext integration with native React on the server and Redact in the browser. The release gate checks both routers against native React from an unpatched npm install, across Node, standalone output, static export, and local Workers. [Setup](./docs/vinext.md), [release checks and remaining blockers](./benchmarks/VINEXT_COVERAGE.md).
+
+## Framework client size
+
+The framework release candidate cut emitted client output in Vinext's benchmark from **154.9 KB to 115.5 KB gzip**, saving **39.4 KB, or 25.4%**, across six identical builds. Both runs use the same Vinext app and dependencies. The total includes lazy routes, it is not one page's download.
+
+Production builds took about 18 ms longer, or 1.9%, and startup differences were inconclusive. This suite does not measure browser rendering, hydration, responsiveness, or production SSR throughput. [Measurements, versions, and raw results](./benchmarks/VINEXT_BENCHMARKS.md).
 
 ## Bundle size
 

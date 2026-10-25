@@ -46,7 +46,7 @@ node benchmarks/upstream/cloudflare-dev-eval.mjs /path/to/fixed-consumer
 node benchmarks/upstream/cloudflare-dev-eval.mjs /path/to/fixed-consumer --production --expect-unsupported
 ```
 
-[Upstream PR #16466](https://github.com/cloudflare/workers-sdk/pull/16466) was submitted, then automatically closed because the contributing account is not on Cloudflare's vouched-collaborator list. A maintainer can reopen it. [Contribution text](./cloudflare-dev-eval-pr.md). This fix is not applied by Redact or by the release consumer.
+[Upstream PR #16466](https://github.com/cloudflare/workers-sdk/pull/16466) was submitted, then automatically closed by Cloudflare's contributor gate. A maintainer added the account to the contributor list on October 25 while reopening the separate security fix below, but #16466 still needs a maintainer to reopen it. The author's reopen request was rejected by GitHub. [Contribution text](./cloudflare-dev-eval-pr.md). This fix is not applied by Redact or by the release consumer.
 
 ## React Flight development profiler
 
@@ -71,8 +71,28 @@ Next's current [release policy](https://github.com/vercel/next.js/blob/canary/co
 The final upstream fix has two parts: [PR 97505](https://github.com/vercel/next.js/pull/97505) restores `no-store` for development documents and data responses, then [PR 97510](https://github.com/vercel/next.js/pull/97510) removes the cache replay machinery. Removing replay alone would break cached document restores on the old line. Both changes, their browser history tests, and the applicable release-workflow prerequisite need maintainer review for a 16.2 release. No duplicate PR was opened against the frozen branch, and the Redact version range and required checks remain unchanged.
 
 
+### Tested Next 16.2 source backport
+
+The [backport branch](https://github.com/tannerlinsley/next.js/tree/taren/backport-next-162-development-cache), commit `6ebceaf5becb273501452938baf8d85b0298c36c`, applies both development cache changes to tag `v16.2.12`. It preserves the 16.2 debug-stream API and handles stream cancellation without leaving a rejected cleanup promise. [Patch](./next-16.2-development-cache.patch).
+
+The complete source bootstrap passed all 17 build tasks. The existing development cache suite now covers document headers, unchanged static-asset ETags and 304 responses, and a streamed document that must finish without reloading. The existing browser-history interactivity regression is unchanged. All five tests pass in Chromium, Firefox, and WebKit, with Turbopack and Webpack, and with Cache Components on and off: 60 checks across 12 configurations. ESLint and formatting pass. [Recorded upstream matrix](../results/next-16.2-backport-upstream.json).
+
+The source-built Next package also passes the unchanged full development journeys with native React and Redact: all 24 browser configurations and 444 scenario groups, with both bundlers and Cache Components on and off. Each renderer passes 222 scenarios. These are [backport diagnostics](../results/next-16.2-backport-integration.json), separate from the required unmodified-dependency release gate. The frozen Redact package hash remains `8a9d69cc858ad6ce31fce298e2e20312e75db92f2f2e1aaf10ded56b44bcba97`.
+
+This branch is ready for backport review. It cannot become a 16.2 release until a Next.js maintainer creates the active release branch and accepts the backport. It is not installed by the Redact release fixture.
+
+
 ## Cloudflare tooling dependency advisory
 
 The PR dependency scan reports [GHSA-xjj6-f33q-929c](https://github.com/advisories/GHSA-xjj6-f33q-929c). The installed Miniflare `5.20261019.2-beta` pins Undici `7.29.1`; the corrected 7.x release is `7.30.1`. A malicious HTTP response with excessive content encodings can crash the local Node process. This dependency belongs to the verification/deployment tooling, not either Redact client bundle.
 
 Wrangler `4.152.0` and Cloudflare Vite plugin `1.65.0` remain the latest published versions checked on October 25, 2026, and both resolve the affected Miniflare dependency. The upstream workspace catalog also still pins `7.29.1`. The advisory is not dismissed. A published tooling update and fresh unpatched verification are needed before calling this stack release-ready.
+
+
+### Tested Cloudflare dependency fix
+
+[Workers SDK PR #16476](https://github.com/cloudflare/workers-sdk/pull/16476) updates the shared Undici and Undici-types catalog to 7.30.1, regenerates the lockfile, and includes Changesets for the bundled consumers. A maintainer reopened it after the automatic contributor-gate closure. [Patch](./cloudflare-undici.patch), [contribution text](./cloudflare-undici-pr.md).
+
+The regression sends excessive content encodings and closes the response early. The untouched published Miniflare exits with an unhandled Readable error. Source-built Miniflare with Undici 7.30.1 rejects the fetch and exits cleanly, with no stderr. [Before and after output](../results/cloudflare-undici-regression.json).
+
+All 75 Miniflare HTTP tests across five files pass, along with the nine dependency build tasks, Miniflare type checking, catalog and pinned-dependency checks, and formatting and lint for the changed test. The full Workers SDK matrix was not run locally. The advisory remains open in the Redact dependency gate until patched tooling is published and the unmodified consumer is reverified.

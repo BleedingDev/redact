@@ -2,7 +2,24 @@
 title: Bundle Size and Performance
 ---
 
-These measurements describe the 0.1.0 release and its frozen pre-release timing snapshot, compared with React 19.3.0 on September 11, 2026. They are not measurements of every later release.
+## Framework client bundles
+
+The October 25, 2026 run of Vinext's benchmark suite compares the same generated app and published Vinext 1.3.0 dependencies, changing only the browser renderer. It uses the frozen Redact framework release candidate, identified by its package hash in the report.
+
+| Gzipped client output | React | Redact | Saving |
+| --- | ---: | ---: | ---: |
+| All emitted JavaScript and CSS | 154.9 KB | 115.5 KB | 39.4 KB, 25.4% |
+| Browser entry and eager JavaScript imports | 144.2 KB | 105.0 KB | 39.2 KB, 27.2% |
+
+KB means 1,000 bytes. All six builds returned the same client sizes. Total output includes lazy routes, it is not one page's download. This is the Vinext comparison, not a measurement of adding Redact to Next.js.
+
+Production builds took a median 18 ms longer, about 1.9%. Startup differences were inconclusive. The suite does not time hydration, rendering, interaction responsiveness, or production SSR throughput. Both implementations use native React on the server. [Workloads, versions, raw measurements, and uncertainty](../benchmarks/VINEXT_BENCHMARKS.md).
+
+The framework integration stays within the existing runtime size limits: 27,921 bytes gzip for the full built runtime, against 28,183, and 23,304 for default Vite, against 23,335. [All 38 size checks](../benchmarks/results/framework-release-sizes.json).
+
+## Earlier runtime measurements
+
+The remaining measurements describe the 0.1.0 release and its frozen pre-release timing snapshot, compared with React 19.3.0 on September 11, 2026. They are not measurements of every later release.
 
 React and Redact make different runtime tradeoffs. These comparisons help you choose for your app, they don't rank the projects or imply that React's broader capabilities are unnecessary.
 

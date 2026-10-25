@@ -21,6 +21,12 @@ The release matrix pins Vinext 1.3.0, Vite 8.3.5, React 19.3.1, React plugin 6.1
 
 The stable release remains blocked by failures in the unpatched Vinext stack, including failures reproduced with native React. These remain failures in the release gate. [Results, root causes, and upstream fixes](../benchmarks/VINEXT_COVERAGE.md).
 
+## Client size and performance
+
+In Vinext's benchmark suite, the same app emitted 154.9 KB of gzipped client JavaScript and CSS with React and 115.5 KB with Redact, a 39.4 KB or 25.4% reduction. All six builds returned the same sizes. These totals include lazy routes, they are not the download for one page.
+
+Production builds took about 18 ms longer, or 1.9%. Startup differences were inconclusive. Browser rendering, hydration, responsiveness, and SSR throughput were not timed. [Full measurements and limits](../benchmarks/VINEXT_BENCHMARKS.md).
+
 ## What the adapter changes
 
 The browser resolver replaces React, React DOM, the JSX and compiler runtimes, and Scheduler. It uses the React ID and Flight bridges shared with the Next.js adapter and keeps the replaced browser modules out of dependency prebundling.
