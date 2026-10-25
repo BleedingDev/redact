@@ -6,10 +6,9 @@ import { resolve } from 'node:path'
 import { vinextPackageEvidence } from './vinext-results.mjs'
 
 export const vinextExample = process.env.VINEXT_TEST_CONSUMER || fileURLToPath(new URL('../examples/vinext-demo/', import.meta.url))
-export async function prepareVinextPackage(source = process.env.VINEXT_TEST_PACKAGE || fileURLToPath(new URL('../packages/redact/', import.meta.url))) {
+export async function prepareVinextPackage(source = process.env.VINEXT_TEST_PACKAGE || fileURLToPath(new URL('../packages/redact/', import.meta.url)), parent = resolve(vinextExample, '.fixtures')) {
   assert.ok(existsSync(resolve(source, 'dist/vinext/index.js')), 'Build Redact before preparing Vinext checks')
   const before = await vinextPackageEvidence(source)
-  const parent = resolve(vinextExample, '.fixtures')
   await mkdir(parent, { recursive: true })
   const directory = await mkdtemp(resolve(parent, 'runtime-'))
   try {

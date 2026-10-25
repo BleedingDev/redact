@@ -50,11 +50,23 @@ jobs:
           status=0
           for browser in chromium firefox webkit; do
             PLAYWRIGHT_BROWSER=$browser pnpm test:browser:actions || status=1
+            PLAYWRIGHT_BROWSER=$browser node scripts/test-browser-lifecycle.mjs || status=1
           done
           exit "$status"
       - name: Verify Next.js
+        id: verify
         if: ${{ !cancelled() && steps.fixture.outcome == 'success' }}
         run: node scripts/test-next.mjs ${{ matrix.mode == 'production' && '--production' || '' }} ${{ matrix.bundler == 'webpack' && '--webpack' || '' }}
+      - name: Compare failing cases with native React
+        if: ${{ !cancelled() && steps.verify.outcome == 'failure' }}
+        run: node scripts/test-next-controls.mjs ${{ matrix.mode == 'production' && '--production' || '' }} ${{ matrix.bundler == 'webpack' && '--webpack' || '' }}
+      - name: Save native React diagnostics
+        if: ${{ !cancelled() && steps.verify.outcome == 'failure' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: native-next-${{ matrix.version }}-${{ matrix.rendering }}-${{ matrix.bundler }}-${{ matrix.mode }}
+          path: ${{ env.NEXT_TEST_RESULT }}.native.json
+          if-no-files-found: warn
       - name: Save compatibility results
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -101,11 +113,22 @@ jobs:
       - name: Prepare packed fixture
         run: node scripts/prepare-next-fixture.mjs ${{ matrix.version }} "$NEXT_TEST_DIR" ${{ matrix.deployment == 'static-export' && 'next-static' || 'next-demo' }} ${{ matrix.rendering }}
       - name: Verify standalone output
+        id: verify
         if: matrix.deployment == 'standalone'
         run: node scripts/test-next.mjs --production --standalone ${{ matrix.bundler == 'webpack' && '--webpack' || '' }}
       - name: Verify static output
         if: matrix.deployment == 'static-export'
         run: node scripts/test-next-static.mjs ${{ matrix.bundler == 'webpack' && '--webpack' || '' }}
+      - name: Compare failing cases with native React
+        if: ${{ !cancelled() && steps.verify.outcome == 'failure' }}
+        run: node scripts/test-next-controls.mjs --production --standalone ${{ matrix.bundler == 'webpack' && '--webpack' || '' }}
+      - name: Save native React diagnostics
+        if: ${{ !cancelled() && steps.verify.outcome == 'failure' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: native-next-${{ matrix.version }}-${{ matrix.rendering }}-${{ matrix.bundler }}-${{ matrix.deployment }}
+          path: ${{ env.NEXT_TEST_RESULT }}.native.json
+          if-no-files-found: warn
       - name: Save compatibility results
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

@@ -52,14 +52,15 @@ export function watchBrowserErrors(page, errors) {
     addEventListener('error', event => {
       if (leaving && event.target?.tagName === 'SCRIPT') report('script', event.target.src)
     }, true)
-  }, marker)
+  }, marker).then(() => null, error => error)
   const queueError = message => {
     const entry = { message, document: currentDocument, discarded: !!currentDocument?.discarded }
     queued.push(entry)
     return entry
   }
   const flush = async (deferUnfinishedNavigation = false) => {
-    await initialized
+    const initializationError = await initialized
+    if (initializationError) throw initializationError
     await Promise.all([...consoleWork])
     const unloaded = entry => entry.document && { ...entry.document, discarded: entry.discarded, finished: entry.document.finished || page.isClosed() }
     // WebKit can reject an unloading document's fetch before a request event.

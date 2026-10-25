@@ -114,3 +114,14 @@ it.each(['NS_BINDING_ABORTED', 'connection reset'])('keeps module cancellation e
   await observed.flush()
   expect(errors).toEqual(canceled ? [message] : [message, message])
 })
+
+
+it('preserves observer setup failures without an unhandled rejection before teardown', async () => {
+  const failure = new Error('Target page, context or browser has been closed')
+  const page = { addInitScript: async () => { throw failure }, on() {}, isClosed: () => true }
+  const observed = watchBrowserErrors(page, [])
+  // A page can close before its caller reaches the next flush. Keep the error
+  // available to that caller instead of crashing the process and losing results.
+  await new Promise(resolve => setTimeout(resolve, 10))
+  await expect(observed.flush()).rejects.toBe(failure)
+})

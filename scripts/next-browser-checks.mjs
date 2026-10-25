@@ -9,7 +9,7 @@ export async function checkNext({ browser, origin, production, cwd, cacheCompone
   const context = await browser.newContext()
   let page = await context.newPage()
   let observed = watchBrowserErrors(page, errors)
-  const cancellations = [], scenarios = []
+  const cancellations = [], scenarios = [], scriptReleases = new Set()
   const selected = scenarioNames || process.env.NEXT_TEST_SCENARIOS?.split(',')
   const flushErrors = () => observed.flush()
   const settle = async () => {
@@ -33,7 +33,17 @@ export async function checkNext({ browser, origin, production, cwd, cacheCompone
     page.setDefaultNavigationTimeout(30000)
     await page.route('**/favicon.ico', route => route.fulfill({ status: 204 }))
   }
+  const holdScripts = async () => {
+    let release
+    const ready = new Promise(resolve => { release = resolve })
+    const resume = () => { scriptReleases.delete(resume); release() }
+    scriptReleases.add(resume)
+    await page.route('**/*.js*', async route => { await ready; await route.continue() })
+    return resume
+  }
   const closePage = async () => {
+    for (const release of scriptReleases) release()
+    await page.unrouteAll({ behavior: 'wait' })
     await observed.navigate(() => page.close())
     cancellations.push(...observed.cancellations)
   }
@@ -59,9 +69,7 @@ export async function checkNext({ browser, origin, production, cwd, cacheCompone
   page.setDefaultNavigationTimeout(30000)
   await page.route('**/favicon.ico', route => route.fulfill({ status: 204 }))
   await scenario('hydration', async () => {
-    let releaseScripts
-    const scriptsReady = new Promise(resolve => { releaseScripts = resolve })
-    await page.route('**/*.js*', async route => { await scriptsReady; await route.continue() })
+    const releaseScripts = await holdScripts()
     console.log('Checking server DOM hydration')
     await visit(origin, { waitUntil: 'commit' })
     await page.getByRole('button', { name: 'Count: 0', exact: true }).waitFor()
@@ -86,10 +94,7 @@ export async function checkNext({ browser, origin, production, cwd, cacheCompone
   await scenario('ids', async () => {
     console.log('Checking server-generated IDs')
     await freshPage()
-    let releaseIdScripts
-    const idScriptsReady = new Promise(resolve => { releaseIdScripts = resolve })
-    await page.unroute('**/*.js*')
-    await page.route('**/*.js*', async route => { await idScriptsReady; await route.continue() })
+    const releaseIdScripts = await holdScripts()
     await visit(`${origin}/ids`, { waitUntil: 'commit' })
     await page.getByLabel('Deep', { exact: true }).waitFor()
     const serverIds = await page.locator('input').evaluateAll(inputs => {
@@ -129,9 +134,7 @@ export async function checkNext({ browser, origin, production, cwd, cacheCompone
   await scenario('progressive-actions', async () => {
     console.log('Checking submission before JavaScript loads')
     await freshPage()
-    let releaseFormScripts
-    const formScriptsReady = new Promise(resolve => { releaseFormScripts = resolve })
-    await page.route('**/*.js*', async route => { await formScriptsReady; await route.continue() })
+    const releaseFormScripts = await holdScripts()
     await visit(`${origin}/actions/direct`, { waitUntil: 'commit' })
     await page.getByRole('textbox', { name: 'Name' }).fill('Before JS')
     assert.equal(await page.locator('main').getAttribute('data-ready'), 'false', 'The application must not have hydrated before submission')
@@ -201,7 +204,8 @@ export async function checkNext({ browser, origin, production, cwd, cacheCompone
     await page.getByRole('button', { name: 'Count: 1', exact: true }).waitFor()
   })
   await checkExtended({ page, context, origin, production, errors, visit, reload, flushErrors, scenario, beforeBoundaryReset, isExpectedBoundaryLog, scenarios: scenarioNames })
-  await context.close()
+  try { await closePage(); assert.deepEqual(errors, [], 'Unexpected browser errors during cleanup') }
+  finally { await context.close() }
   assert.ok(scenarios.length > 0, 'At least one scenario must run')
   return { passed: scenarios.every(result => result.passed), scenarios, expectedNavigationCancellations: cancellations.length }
 }

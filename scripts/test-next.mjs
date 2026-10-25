@@ -91,7 +91,7 @@ try {
     result.browserVersion = browser.version()
     const observed = await checkNext({ browser, origin, production, cwd, cacheComponents, reference: !!process.env.NEXT_TEST_REFERENCE })
     Object.assign(result, observed)
-    if (!result.passed) process.exitCode = 1
+    if (!result.passed) { process.exitCode = 1; console.error(logs.slice(-24000)) }
     console.log((result.passed ? 'PASS' : 'FAIL') + ' Next compatibility ' + JSON.stringify(result))
     } catch (error) {
       Object.assign(result, { passed: false, error: error.stack || String(error) })

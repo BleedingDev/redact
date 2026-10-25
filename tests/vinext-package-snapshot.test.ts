@@ -18,7 +18,7 @@ it('pins the tested source and built runtime while the workspace is rebuilt', as
     await writeFile(join(source, 'src/index.ts'), 'export const value = 1')
     await writeFile(join(source, 'dist/vinext/index.js'), 'export const value = 1')
     const original = await vinextPackageEvidence(source)
-    snapshot = await prepareVinextPackage(source)
+    snapshot = await prepareVinextPackage(source, join(source, '.snapshots'))
     expect(await vinextPackageEvidence(snapshot)).toEqual(original)
     await rm(join(source, 'dist'), { recursive: true })
     await writeFile(join(source, 'src/index.ts'), 'export const value = 2')
@@ -33,6 +33,6 @@ it('pins the tested source and built runtime while the workspace is rebuilt', as
 
 it('rejects a package without a built Vinext entry', async () => {
   const source = await mkdtemp(join(tmpdir(), 'vinext-package-'))
-  try { await expect(prepareVinextPackage(source)).rejects.toThrow('Build Redact before preparing Vinext checks') }
+  try { await expect(prepareVinextPackage(source, join(source, '.snapshots'))).rejects.toThrow('Build Redact before preparing Vinext checks') }
   finally { await rm(source, { recursive: true, force: true }) }
 })
