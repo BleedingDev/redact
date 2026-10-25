@@ -2,6 +2,13 @@
   "name": "next-static",
   "private": true,
   "type": "module",
-  "scripts": { "build": "next build" },
-  "dependencies": { "@tanstack/redact": "workspace:*", "next": "16.4.3", "react": "19.2.3", "react-dom": "19.2.3" }
+  "scripts": {
+    "build": "next build"
+  },
+  "dependencies": {
+    "@tanstack/redact": "workspace:*",
+    "next": "16.4.3",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  }
 }

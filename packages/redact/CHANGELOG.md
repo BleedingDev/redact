@@ -1,5 +1,31 @@
 # @tanstack/redact
 
+## 0.2.0
+
+### Minor Changes
+
+- Add `withRedact` for Next.js 15.5 and 16.0 through 16.4 with Turbopack and Webpack. Keep native React for server rendering and Server Components while Redact renders in the browser. Support both routers, Cache Components, streamed Suspense, hydration IDs, async actions, forms, metadata, and Fast Refresh. ([#52](https://github.com/TanStack/redact/pull/52))
+
+  Keep visible transitions independent of suspended hidden Activity trees, preserve retained DOM and effect lifecycles, and expose promised children in the public types. Keep action hooks and pending transition inspection working with React DevTools. Reduce shared runtime code so both the full client and default Vite client remain below their pre-integration bundle limits.
+
+  Require complete packed-package compatibility checks across all pinned versions, three browser engines, development, production, standalone output, and static export before release publication. Reject prerelease and untested Next.js minor versions at configuration time.
+
+  Correct Next 16.2 development cache detection through a version-scoped browser loader, preserving cached debug-channel replay without changing installed Next files.
+
+- Add a Vinext browser adapter that keeps native React for SSR and Server Components. Resolve browser entries per Vite environment so server imports remain intact. ([#52](https://github.com/TanStack/redact/pull/52))
+
+  Retain committed content during suspended transitions and deferred updates, rebase urgent and transition updates in source order, and preserve error boundaries and class callbacks. Preserve hydration, refs, controlled and uncontrolled form resets, and the existing bundle limits.
+
+  Require paired native React and Redact verification from an unpatched npm install. Cover mixed App and Pages Router apps and separate Pages-only apps across Node, standalone output, static export, and local Workers in Chromium, Firefox, and WebKit. Use stable Cloudflare tooling and keep setup, browser, and completeness failures in the release gate.
+
+  Ship maintained Vinext module-identity and Pages data corrections, plus an optional Cloudflare integration with the development evaluator fix. Keep native React controls on the same corrected platform. Validate development Flight timing bounds without suppressing real application errors. Upgrade the verification toolchain to the published Undici and fflate security fixes through standard dependency overrides.
+
+### Patch Changes
+
+- Flush renderer work and effects through the public act utility, including nested and awaited scopes, and preserve synchronous errors. Share the implementation with react-dom/test-utils. ([#52](https://github.com/TanStack/redact/pull/52))
+
+  Correct pointer-capture event names, bubble focus and blur handlers, and accept native change events for text fields without repeating an input notification.
+
 ## 0.1.5
 
 ### Patch Changes
