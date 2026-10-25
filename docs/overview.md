@@ -12,8 +12,6 @@ The [compatibility guide](./compatibility.md) explains the API differences, incl
 
 [Install Redact](./installation.md), then choose [Vite](./quick-start.md), [Next.js](./next.md), or [Vinext](./vinext.md). The framework adapters use the full runtime. In Vite apps, start with the default preset and only disable features after checking what your app uses.
 
-The Next.js and Vinext stable release is waiting on upstream fixes. The guides link to the current release evidence and required checks.
-
 The [feature flags guide](./feature-flags.md) explains the behavior each flag removes. The [Vite plugin reference](./vite-plugin.md) covers monorepos and manual package resolution.
 
 ## Measurements

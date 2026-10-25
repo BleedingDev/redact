@@ -1,18 +1,16 @@
 # Vinext release evidence
 
-The stable release requires both the mixed-router and Pages-only suites to pass from the same unpatched npm consumer. No workspace links or dependency patches satisfy this gate.
+The stable release requires both the mixed-router and Pages-only suites to pass from the same fresh npm consumer using the documented integrations. Workspace links or edits to installed dependency files do not satisfy this gate.
 
 ## Recorded run
 
-The recorded local packed-runtime run passes all 36 Pages-only configurations and all 150 Pages scenarios. Both router suites record the same source and build fingerprints.
+The October 25 release candidate passes all 102 configurations and all 1,410 scenarios from one fresh npm consumer. The mixed-router suite passes 66 configurations and 1,260 scenarios. The separate Pages-only suite passes 36 configurations and 150 scenarios. There are no missing cases, browser failures, or observed differences in the paired transition checks.
 
-The mixed suite attempts all 66 configurations. It completes 54 and passes 41. Of 1,002 executed scenarios, 989 pass and 13 fail. Twelve Workers development configurations fail setup, leaving 258 required scenarios unexecuted. The gate reports incomplete coverage and fails.
+Both renderers use the maintained corrections shipped in Redact. The consumer uses published Vinext and Cloudflare tooling, the owned Redact Cloudflare entry, and the documented dependency overrides. No installed dependency files are edited. Source and build fingerprints match across both router suites and the hosted run.
 
-Twelve scenario failures are Pages data navigation in standalone output, affecting native React and Redact equally. One native React WebKit component case failed to load its image after a lost network connection. Ten separate diagnostic runs, including two full journeys per renderer, did not reproduce that image failure. The original failure is retained.
+[Mixed-router report](./results/framework-stable-vinext.json), [Pages-only report](./results/framework-stable-vinext-pages.json), [combined release result](./results/framework-stable-vinext-combined.json), [runtime, package, size, and audit checks](./results/framework-stable-validation.json).
 
-In that local run, no executed scenario failed only with Redact, and the paired transition checks recorded no behavior differences. This does not turn shared failures or missing scenarios into passes.
-
-[Mixed-router report](./results/framework-release-vinext.json), [Pages-only report](./results/framework-release-vinext-pages.json), [combined release result](./results/framework-release-vinext-combined.json).
+The earlier failing runs remain available: [mixed-router report](./results/framework-release-vinext.json), [Pages-only report](./results/framework-release-vinext-pages.json), [combined result](./results/framework-release-vinext-combined.json). Their shared Pages redirects and Worker setup failures led to the shipped corrections. The one native React WebKit image-loading failure was not reproduced in ten diagnostic runs, and the original failure remains recorded.
 
 ## Matrix
 
@@ -44,23 +42,25 @@ PR checks and release publication both require the complete gate. The workflow u
 
 The published full client measures 27,921 bytes gzip against the original 28,183-byte total limit. The default Vite client measures 23,304 bytes against 23,335. All 38 existing size gates pass. [Full measurements](./results/framework-release-sizes.json).
 
-## Remaining dependency failures
+## Maintained framework corrections
 
-[Root causes, native React controls, and upstream fixes](./upstream/README.md). The unpatched mixed-router stack has Pages data redirects and Workers development prebundling failures. Correcting the optimizer also exposes a Cloudflare development eval failure during Cache Components rendering. React's development Flight profiler has a separately reproduced negative timestamp failure. These failures remain visible in the strict reports.
+The adapter corrects Vinext shim module identity, Pages instrumentation state, and Pages JSON redirects. Its development Flight transform validates profiler timing bounds. The owned Cloudflare integration corrects development evaluation while preserving production behavior. Standard package-manager overrides select the published Undici and fflate security fixes. [Configuration and maintenance details](../docs/vinext.md), [root causes and upstream contributions](./upstream/README.md).
+
+These corrections passed the complete package gate above. The release does not depend on another upstream publication.
 
 ## Upstream fix validation
 
 An isolated consumer with the proposed dependency fixes passes all 24 affected configurations and all 504 scenarios: 12 standalone configurations for the Pages data redirect fix, and 12 Workers development configurations for the optimizer and development evaluator fixes. Both renderers and all three browser engines pass, with Cache Components enabled and disabled.
 
-These are [diagnostic results](./results/framework-upstream-fix-diagnostics.json) from modified dependencies. They do not replace the unpatched release result above. The [Cloudflare Worker contract checks](./results/cloudflare-dev-eval-diagnostic.json) separately verify corrected development behavior and unchanged production restrictions.
+These earlier [diagnostic results](./results/framework-upstream-fix-diagnostics.json) used modified dependencies. They established the root causes before the corrections were shipped in Redact. The final package result above supersedes them for release readiness. The [Cloudflare Worker contract checks](./results/cloudflare-dev-eval-diagnostic.json) separately verify corrected development behavior and unchanged production restrictions.
 
 ## Hosted Workers
 
-The deployed run passes all 18 configurations and all 282 scenarios using the same unpatched package as the local matrix. It covers native React and Redact in Chromium, Firefox, and WebKit, with standard rendering, Cache Components, and Pages-only apps. [Complete hosted report](./results/framework-release-vinext-hosted.json).
+The deployed run passes all 18 configurations and all 282 scenarios using the same packed package and consumer lockfile as the local matrix. It covers native React and Redact in Chromium, Firefox, and WebKit, with standard rendering, Cache Components, and Pages-only apps. [Complete hosted report](./results/framework-stable-vinext-hosted.json).
 
-[Redact preview](https://redact-vinext-mvna4dza-redact-app.thetanstack.workers.dev), [native React preview](https://redact-vinext-mvna4dza-react-app.thetanstack.workers.dev), [Redact Pages-only preview](https://redact-vinext-mvna4dza-redact-pages.thetanstack.workers.dev).
+[Redact preview](https://redact-vinext-stable-1025-redact-app.thetanstack.workers.dev), [native React preview](https://redact-vinext-stable-1025-react-app.thetanstack.workers.dev), [Redact Pages-only preview](https://redact-vinext-stable-1025-redact-pages.thetanstack.workers.dev).
 
-`pnpm test:vinext:hosted --deploy` creates six application Workers and one shared fixture service in an explicitly selected Cloudflare account. It requires an unpatched packed-package consumer and runs all 18 configurations and 282 scenarios. It checks each deployed version before opening browsers and records deployment IDs, runtime hashes, fixture hashes, and results.
+`pnpm test:vinext:hosted --deploy` creates six application Workers and one shared fixture service in an explicitly selected Cloudflare account. It requires a fresh packed-package consumer and runs all 18 configurations and 282 scenarios. It checks each deployed version before opening browsers and records deployment IDs, runtime hashes, fixture hashes, and results.
 
 ```sh
 pnpm build

@@ -13,7 +13,7 @@ The October 25, 2026 run of Vinext's benchmark suite compares the same generated
 
 KB means 1,000 bytes. All six builds returned the same client sizes. Total output includes lazy routes, it is not one page's download. This is the Vinext comparison, not a measurement of adding Redact to Next.js.
 
-Production builds took a median 18 ms longer, about 1.9%. Startup differences were inconclusive. The suite does not time hydration, rendering, interaction responsiveness, or production SSR throughput. Both implementations use native React on the server. [Workloads, versions, raw measurements, and uncertainty](../benchmarks/VINEXT_BENCHMARKS.md).
+Production build times were effectively equal. Development startup was 2.2% faster for App Router and 4.9% faster for the large Pages fixture in this local run. The suite does not time hydration, rendering, interaction responsiveness, or production SSR throughput. Both implementations use native React on the server. [Workloads, versions, raw measurements, and uncertainty](../benchmarks/VINEXT_BENCHMARKS.md).
 
 The framework integration stays within the existing runtime size limits: 27,921 bytes gzip for the full built runtime, against 28,183, and 23,304 for default Vite, against 23,335. [All 38 size checks](../benchmarks/results/framework-release-sizes.json).
 

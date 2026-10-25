@@ -11,7 +11,7 @@ The current release candidate carries these corrections in Redact, so publicatio
 
 The Vinext development transform also applies the React Flight timing guards from PR 37572. Tests execute both real compiled error and cancellation tracks with the captured negative timestamp, preserve valid measurements, and require real measurement errors to propagate.
 
-The complete release matrix remains required. These targeted results do not replace it. See [configuration and maintenance details](../../docs/vinext.md).
+The final packed candidate passes all 162 Next.js configurations and 2,694 scenarios, all 102 local Vinext configurations and 1,410 scenarios, and all 18 hosted configurations and 282 scenarios. The complete gates remain required for publication. See [Next.js evidence](../NEXT_COVERAGE.md), [Vinext evidence](../VINEXT_COVERAGE.md), and [configuration and maintenance details](../../docs/vinext.md).
 
 ## Historical upstream investigation
 

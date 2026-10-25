@@ -62,7 +62,7 @@ Vinext integration with native React on the server and Redact in the browser. Th
 
 The framework release candidate cut emitted client output in Vinext's benchmark from **154.9 KB to 115.5 KB gzip**, saving **39.4 KB, or 25.4%**, across six identical builds. Both runs use the same Vinext app and dependencies. The total includes lazy routes, it is not one page's download.
 
-Production builds took about 18 ms longer, or 1.9%, and startup differences were inconclusive. This suite does not measure browser rendering, hydration, responsiveness, or production SSR throughput. [Measurements, versions, and raw results](./benchmarks/VINEXT_BENCHMARKS.md).
+Production build times were effectively equal. Development startup was 2.2% faster for App Router and 4.9% faster for the large Pages fixture in this local run. This suite does not measure browser rendering, hydration, responsiveness, or production SSR throughput. [Measurements, versions, and raw results](./benchmarks/VINEXT_BENCHMARKS.md).
 
 ## Bundle size
 
