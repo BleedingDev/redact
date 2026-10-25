@@ -1,5 +1,19 @@
 # Framework release blockers
 
+## Maintained release adapters
+
+The current release candidate carries these corrections in Redact, so publication does not depend on another upstream release. The historical reproductions below still record the original failures.
+
+- Next 16.2 uses a browser development loader that requires decoded body bytes before treating a zero transfer size as a cache hit. Debug-channel replay remains intact. All 222 targeted development scenarios pass with published Next 16.2.12, both bundlers, both cache modes, and three browsers.
+- The Vinext adapter corrects shim optimizer identity, shares Pages instrumentation state, and preserves Pages data URLs during trailing-slash canonicalization. Node and Worker request handlers use the same transform path. Both native React and Redact controls use these shipped corrections.
+- `@tanstack/redact/cloudflare` supplies a reproducible owned copy of Cloudflare Vite plugin 1.65.0 with the development evaluator fix. The four installed-package checks cover the original and owned distributions in development and production. Production results match the original plugin.
+- Standard npm and pnpm overrides resolve Miniflare's Undici dependency to the published 7.30.1 security fix. The malformed-response negative control still crashes on 7.29.1; the upgraded dependency rejects safely. Miniflare's JavaScript is byte-identical. The fresh consumer audit reports zero vulnerabilities.
+
+The complete release matrix remains required. These targeted results do not replace it. See [configuration and maintenance details](../../docs/vinext.md).
+
+## Historical upstream investigation
+
+
 These reproductions investigate dependency failures. The Redact release consumer installs the published dependencies without patches, and its failures remain in the release gate.
 
 ## Vinext Pages data redirects

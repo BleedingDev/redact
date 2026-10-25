@@ -31,13 +31,14 @@ export async function prepareVinextConsumer(destination) {
     name: 'redact-vinext-consumer', private: true, type: 'module',
     dependencies: { ...pkg.dependencies, '@tanstack/redact': `file:./${packedName}` },
     devDependencies: pkg.devDependencies,
+    overrides: pkg.overrides,
   }, null, 2) + '\n')
   for (const name of ['vite.config.mjs', 'next.config.mjs', 'wrangler.jsonc', 'fixtures']) await cp(join(source, name), join(directory, name), { recursive: true })
   // npm installs the package a consumer receives, without workspace patches or links.
   await rm(join(directory, 'node_modules'), { recursive: true, force: true })
   const install = spawn('npm', ['install', '--no-audit', '--no-fund'], { cwd: directory, stdio: 'inherit' })
   assert.equal((await once(install, 'exit'))[0], 0, 'Could not install the Vinext consumer')
-  await writeFile(join(directory, 'package-evidence.json'), JSON.stringify({ tarball: packedName, sha256, patches: false }, null, 2) + '\n')
+  await writeFile(join(directory, 'package-evidence.json'), JSON.stringify({ tarball: packedName, sha256, patches: false, overrides: pkg.overrides }, null, 2) + '\n')
   return directory
 }
 

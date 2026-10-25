@@ -10,7 +10,7 @@ describe('Vinext integration', () => {
       const original = structuredClone(config)
       expect(plugin.configEnvironment.handler(name, config)).toBeUndefined()
       expect(config).toEqual(original)
-      expect(plugin.resolveId.call({ environment: { name, config } }, 'react')).toBeNull()
+      expect(plugin.resolveId.handler.call({ environment: { name, config } }, 'react')).toBeNull()
     }
   })
 
@@ -18,7 +18,7 @@ describe('Vinext integration', () => {
     const plugin = redact()
     const config: any = { consumer: 'client' }
     plugin.configEnvironment.handler('client', config)
-    const resolve = (id: string) => plugin.resolveId.call({ environment: { name: 'client', config } }, id)
+    const resolve = (id: string) => plugin.resolveId.handler.call({ environment: { name: 'client', config } }, id)
     expect(resolve('react')).toMatch(/\/next\/react\.js$/)
     expect(resolve('react-dom/client')).toMatch(/\/next\/client\.js$/)
     for (const entry of ['react/jsx-runtime', 'react/jsx-dev-runtime', 'react/compiler-runtime', 'react-dom', 'react-dom/test-utils', 'scheduler']) expect(resolve(entry)).toMatch(/\/src\/.+\.js$/)
@@ -44,6 +44,6 @@ describe('Vinext integration', () => {
     plugin.configEnvironment.handler('browser', config)
     expect(config.resolve.alias.at(-1)).toBe(alias)
     expect(config.resolve.alias).toHaveLength(1)
-    expect(plugin.resolveId.call({ environment: { name: 'browser', config } }, 'react')).toMatch(/\/next\/react\.js$/)
+    expect(plugin.resolveId.handler.call({ environment: { name: 'browser', config } }, 'react')).toMatch(/\/next\/react\.js$/)
   })
 })

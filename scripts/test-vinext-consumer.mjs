@@ -10,8 +10,8 @@ import { collectVinextPagesCoverage } from './report-vinext-pages-coverage.mjs'
 const consumer = await prepareVinextConsumer(process.env.VINEXT_TEST_CONSUMER)
 const output = resolve(process.env.VINEXT_TEST_RESULTS || 'benchmarks/results/vinext')
 const pagesOutput = resolve(process.env.VINEXT_TEST_PAGES_RESULTS || output + '-pages')
-for (const script of ['test-vinext-coverage.mjs', 'test-vinext-pages.mjs']) {
-  const child = spawn(process.execPath, [fileURLToPath(new URL(script, import.meta.url))], {
+for (const script of ['test-cloudflare.mjs', 'test-vinext-coverage.mjs', 'test-vinext-pages.mjs']) {
+  const child = spawn(process.execPath, [fileURLToPath(new URL(script, import.meta.url)), ...(script === 'test-cloudflare.mjs' ? [consumer] : [])], {
     stdio: 'inherit',
     env: { ...process.env, VINEXT_TEST_CONSUMER: consumer, VINEXT_TEST_PACKAGE: join(consumer, 'node_modules/@tanstack/redact'), VINEXT_TEST_RESULTS: output, VINEXT_TEST_PAGES_RESULTS: pagesOutput },
   })

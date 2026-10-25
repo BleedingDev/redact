@@ -53,6 +53,14 @@ export function withRedact<T extends Record<string, any> | ((...args: any[]) => 
       }
     }
   }
+  const devCacheLoader = version.startsWith('16.2.')
+    ? fileURLToPath(new URL('./dev-cache-loader.cjs', import.meta.url))
+    : undefined
+  const devCachePath = /(?:^|[/\\])node_modules[/\\]next[/\\]dist[/\\](?:esm[/\\])?client[/\\]dev[/\\]debug-channel\.js$/
+  if (devCacheLoader) rules['*.js'].push({
+    condition: { all: ['browser', { path: /(?:^|\/)node_modules\/next\/dist\/(?:esm\/)?client\/dev\/debug-channel\.js$/ }, 'development'] },
+    loaders: [{ loader: devCacheLoader }],
+  })
   return {
     ...config,
     turbopack: {
@@ -62,6 +70,11 @@ export function withRedact<T extends Record<string, any> | ((...args: any[]) => 
     webpack(webpackConfig: any, context: any) {
       const result = config.webpack ? config.webpack(webpackConfig, context) : webpackConfig
       if (!context.isServer) {
+        if (context.dev && devCacheLoader) {
+          result.module ||= {}
+          result.module.rules ||= []
+          result.module.rules.push({ test: devCachePath, use: [{ loader: devCacheLoader }] })
+        }
         result.plugins ||= []
         result.plugins.push(new context.webpack.NormalModuleReplacementPlugin(
           /^(?:react(?:\/.*)?|react-dom(?:\/.*)?|scheduler|next\/dist\/compiled\/react(?:-dom)?(?:-experimental)?(?:\/.*)?)$/,

@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import vinext from 'vinext'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { resolve } from 'node:path'
-import { cloudflare } from '@cloudflare/vite-plugin'
+import { cloudflare } from '@tanstack/redact/cloudflare'
 
 const root = process.env.VINEXT_TEST_DIR || fileURLToPath(new URL('./.fixture/', import.meta.url))
 const { redact } = process.env.VINEXT_TEST_PACKAGE
@@ -13,11 +13,11 @@ export default defineConfig({
   cacheDir: `${root}/.vite`,
   plugins: [
     vinext({ appDir: root }),
-    ...(process.env.VINEXT_TEST_WORKERS ? [cloudflare({
+    ...(process.env.VINEXT_TEST_WORKERS ? [await cloudflare({
       configPath: resolve(root, 'wrangler.jsonc'),
       viteEnvironment: { name: 'rsc', childEnvironments: ['ssr'] },
       inspectorPort: false, persistState: false, remoteBindings: false, tunnel: false,
     })] : []),
-    ...(process.env.VINEXT_TEST_REFERENCE ? [] : [redact()]),
+    redact({ renderer: process.env.VINEXT_TEST_REFERENCE ? 'react' : 'redact' }),
   ],
 })

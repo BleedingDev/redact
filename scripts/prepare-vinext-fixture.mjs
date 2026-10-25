@@ -12,7 +12,7 @@ export async function prepareVinextPackage(source = process.env.VINEXT_TEST_PACK
   await mkdir(parent, { recursive: true })
   const directory = await mkdtemp(resolve(parent, 'runtime-'))
   try {
-    for (const name of ['package.json', 'src', 'dist']) await cp(resolve(source, name), resolve(directory, name), { recursive: true })
+    for (const name of ['package.json', 'src', 'dist', ...(existsSync(resolve(source, 'vendor')) ? ['vendor'] : [])]) await cp(resolve(source, name), resolve(directory, name), { recursive: true })
     assert.deepEqual(await vinextPackageEvidence(directory), before, 'The runtime changed while its snapshot was copied')
     assert.deepEqual(await vinextPackageEvidence(source), before, 'The runtime changed while its snapshot was copied')
     return directory

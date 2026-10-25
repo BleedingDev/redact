@@ -18,13 +18,15 @@ Keep `react` and `react-dom` installed. Keep importing from `react`, `react-dom`
 
 The adapter accepts stable Next.js 15.5 and 16.0 through 16.4 releases. It rejects prereleases and untested minor versions. The release matrix pins 15.5.28, 16.0.11, 16.1.7, 16.2.12, 16.3.8, and 16.4.3. It uses the full Redact runtime, so Vite feature presets do not apply.
 
-The stable release remains blocked until the complete matrix passes. Known framework failures also reproduced with native React stay in the gate. [Current release evidence](../benchmarks/NEXT_COVERAGE.md). The 16.2 Firefox development reload loop has a [tested source backport](../benchmarks/upstream/README.md#tested-next-162-source-backport), awaiting an upstream release. Diagnostic backport results do not replace the published-package gate.
+The stable release requires the complete matrix to pass. [Current release evidence](../benchmarks/NEXT_COVERAGE.md). The adapter now includes a development cache correction for Next 16.2, so that fix does not require a separate Next release.
 
 ## Bundlers
 
 The wrapper configures both Turbopack and Webpack. Use the normal `next dev` and `next build` commands for Turbopack, or add `--webpack` for Webpack.
 
 Webpack replaces browser imports through `NormalModuleReplacementPlugin`. Turbopack's built-in App Router React aliases override user aliases, so the integration uses browser-only loader rules on the resolved React entry files. Neither path rewrites server imports or replaces the Flight implementation.
+
+On Next 16.2, a browser development loader corrects debug-channel cache detection. A zero transfer size only indicates a cached response once decoded body bytes exist. This preserves debug-channel replay while preventing an unfinished Firefox stream from triggering a reload. The correction is scoped to that module and version, leaves installed Next files intact, and does not run in production.
 
 Existing Next.js options, Webpack configuration callbacks, and unrelated Turbopack rules are preserved. Custom transforms of React's own entry files can conflict with this integration.
 

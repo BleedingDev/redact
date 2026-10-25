@@ -1,7 +1,9 @@
 import { fileURLToPath } from 'node:url'
+import { vinextCompatibility } from './compatibility'
 
 /** Use Redact in Vinext's browser environment, with native React for SSR and RSC. */
-export function redact(): any {
+export function redact(options: { renderer?: 'redact' | 'react' } = {}): any {
+  const compatibility = vinextCompatibility()
   const entries: Record<string, string> = {
     react: '../next/react.js',
     'react/jsx-runtime': '../react/jsx-runtime.js',
@@ -14,12 +16,14 @@ export function redact(): any {
   }
   const resolved = Object.fromEntries(Object.entries(entries).map(([name, target]) => [name, fileURLToPath(new URL(target, import.meta.url))]))
   return {
+    ...compatibility,
     name: 'redact:vinext',
     enforce: 'pre',
     configEnvironment: {
       order: 'post',
       handler(name: string, config: any) {
-        if (name !== 'client' && config.consumer !== 'client') return
+        compatibility.configEnvironment.handler(name, config)
+        if (options.renderer === 'react' || (name !== 'client' && config.consumer !== 'client')) return
         config.optimizeDeps = {
           ...config.optimizeDeps,
           exclude: [...new Set([...(config.optimizeDeps?.exclude || []), ...Object.keys(entries), '@tanstack/redact'])],
@@ -27,11 +31,15 @@ export function redact(): any {
         }
       },
     },
-    resolveId(this: any, id: string) {
-      // Vite's alias table is global, even inside configEnvironment. Resolve
-      // through the environment-aware hook so SSR and Flight keep native React.
-      if (this.environment?.config.consumer !== 'client') return null
-      return resolved[id] ?? null
+    resolveId: {
+      order: 'pre',
+      handler(this: any, id: string) {
+        if (this.environment?.config.consumer !== 'client') return compatibility.resolveHandler(id)
+        // Vite aliases are global. Browser React must resolve here so SSR and
+        // Flight retain their native React module and export conditions.
+        if (options.renderer === 'react') return null
+        return resolved[id] ?? null
+      },
     },
   }
 }

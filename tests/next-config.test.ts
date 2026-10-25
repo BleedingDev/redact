@@ -43,6 +43,32 @@ describe('withRedact', () => {
     }
   })
 
+  it('corrects Next 16.2 cache detection only in development browser modules', () => {
+    nextVersion.value = '16.2.12'
+    const config = withRedact() as any
+    const rules = config.turbopack.rules['*.js']
+    const rule = rules.find((item: any) => item.loaders[0].loader.endsWith('/dev-cache-loader.cjs'))
+    expect(rule.condition.all[0]).toBe('browser')
+    expect(rule.condition.all[2]).toBe('development')
+    for (const folder of ['client', 'esm/client']) {
+      const path = `/app/node_modules/next/dist/${folder}/dev/debug-channel.js`
+      expect(rule.condition.all[1].path.test(path)).toBe(true)
+      const browser = config.webpack({}, { isServer: false, dev: true, webpack })
+      expect(browser.module.rules[0].test.test(path)).toBe(true)
+      expect(browser.module.rules[0].use[0].loader).toBe(rule.loaders[0].loader)
+    }
+    expect(rule.condition.all[1].path.test('/app/node_modules/next/dist/server/dev/debug-channel.js')).toBe(false)
+    expect(config.webpack({}, { isServer: true, dev: true, webpack }).module).toBeUndefined()
+    expect(config.webpack({}, { isServer: false, dev: false, webpack }).module).toBeUndefined()
+  })
+
+  it.each(['15.5.28', '16.0.11', '16.1.7', '16.3.8', '16.4.3'])('leaves Next %s debug channels unchanged', version => {
+    nextVersion.value = version
+    const config = withRedact() as any
+    expect(JSON.stringify(config.turbopack)).not.toContain('dev-cache-loader')
+    expect(config.webpack({}, { isServer: false, dev: true, webpack }).module).toBeUndefined()
+  })
+
   it('preserves existing loader arrays without mutating the input', () => {
     const rule = { condition: 'browser', loaders: ['existing-loader'] }
     const input = { turbopack: { rules: { '*.js': [rule] } } }

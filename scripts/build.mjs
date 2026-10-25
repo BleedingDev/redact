@@ -26,6 +26,7 @@ import { fileURLToPath } from 'node:url'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = resolve(__dirname, '..')
 const pkgDir = realpathSync(resolve(root, process.env.BUILD_PACKAGE_ROOT || 'packages/redact'))
+await import('./vendor-cloudflare.mjs')
 const srcDir = resolve(pkgDir, 'src')
 const distDir = resolve(pkgDir, 'dist')
 
@@ -165,7 +166,7 @@ async function buildPackage() {
     const relPath = relative(srcDir, tsFile).replace(/\.ts$/, '')
     // Build adapters run in Node and can leave builtins external. The Next
     // React bridge is browser code, so only its config entry uses Node.
-    const isNodeEntry = relPath.startsWith('vite' + sep) || relPath === 'next' + sep + 'index' || relPath === 'vinext' + sep + 'index'
+    const isNodeEntry = relPath.startsWith('vite' + sep) || relPath === 'next' + sep + 'index' || relPath.startsWith('vinext' + sep) || relPath.startsWith('cloudflare' + sep)
     await build({
       absWorkingDir: pkgDir,
       entryPoints: [{ in: tsFile, out: relPath }],
@@ -184,7 +185,9 @@ async function buildPackage() {
     })
   }
 
-  writeFileSync(resolve(distDir, 'next/loader.cjs'), readFileSync(resolve(srcDir, 'next/loader.cjs')))
+  for (const loader of ['loader.cjs', 'dev-cache-loader.cjs']) {
+    writeFileSync(resolve(distDir, 'next', loader), readFileSync(resolve(srcDir, 'next', loader)))
+  }
 
   // Generate .d.ts files. tsc --emitDeclarationOnly.
   const tsconfig = {
@@ -223,9 +226,12 @@ declare module 'node:path' {
 }
 declare module 'node:url' {
   export const fileURLToPath: any
+  export const pathToFileURL: any
 }
 declare module 'node:module' {
+  export const findPackageJSON: any
   export const createRequire: any
+  export const registerHooks: any
 }
 `)
   try {

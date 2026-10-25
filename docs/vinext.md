@@ -19,7 +19,44 @@ Keep React, React DOM, and React Server DOM installed. Keep your normal `react`,
 
 The release matrix pins Vinext 1.3.0, Vite 8.3.5, React 19.3.1, React plugin 6.1.2, and RSC plugin 0.5.38. Local Workers use stable Cloudflare Vite plugin 1.65.0 and Wrangler 4.152.0. Use Node 24.22.0 from `.nvmrc`.
 
-The stable release remains blocked by failures in the unpatched Vinext stack, including failures reproduced with native React. These remain failures in the release gate. [Results, root causes, and upstream fixes](../benchmarks/VINEXT_COVERAGE.md).
+The adapter includes maintained corrections for the pinned Vinext release. The stable release still requires every configuration to pass. [Results and root causes](../benchmarks/VINEXT_COVERAGE.md).
+
+## Cloudflare Workers
+
+Use the Redact Cloudflare entry with the pinned Cloudflare plugin. Await the factory while loading the config so Vinext can identify the resolved Worker plugins:
+
+```js
+import { defineConfig } from 'vite'
+import vinext from 'vinext'
+import { redact } from '@tanstack/redact/vinext'
+import { cloudflare } from '@tanstack/redact/cloudflare'
+
+export default defineConfig({
+  plugins: [
+    vinext(),
+    await cloudflare({
+      viteEnvironment: { name: 'rsc', childEnvironments: ['ssr'] },
+    }),
+    redact(),
+  ],
+})
+```
+
+For a Pages-only app, set `viteEnvironment: { name: 'ssr' }`.
+
+Install `@cloudflare/vite-plugin@1.65.0` and `wrangler@4.152.0`. The Redact entry supplies an owned copy of that plugin with its development evaluator correction. It uses the installed plugin's dependencies and preserves production evaluation behavior. Its source, license, and reproducible file hashes ship with Redact. This adds Node tooling to the package download, not to either client bundle.
+
+Miniflare in this toolchain pins an affected Undici release. Use the published security fix through your package manager. For npm, add this to the application's `package.json`:
+
+```json
+{
+  "overrides": {
+    "miniflare": { "undici": "7.30.1" }
+  }
+}
+```
+
+For pnpm, use `"pnpm": { "overrides": { "miniflare>undici": "7.30.1" } }` in the workspace root. Commit the updated lockfile. This upgrades the dependency without editing installed packages or suppressing its advisory.
 
 ## Client size and performance
 
@@ -33,6 +70,10 @@ The browser resolver replaces React, React DOM, the JSX and compiler runtimes, a
 
 Vite's alias table is shared across environments. The adapter uses environment-specific resolution hooks so native server React and Flight remain intact. It uses the full Redact renderer. The separate Vite plugin's feature presets do not apply.
 
+The adapter also keeps Vinext's Next shims out of server and App Router dependency prebundling, so router state has one module identity. Pages-only clients retain their prebundled pipeline, with shared instrumentation state. A version-scoped transform prevents Pages JSON requests from receiving document trailing-slash redirects. These corrections run through Vite's normal plugin hooks, including its separate optimizer, and leave installed Vinext files intact.
+
+Use `redact({ renderer: 'react' })` to compare native React on the same corrected platform. It retains the framework corrections and leaves all React browser entries native. The release gate uses this mode for its React controls.
+
 ## Rendering behavior
 
 Redact keeps committed content visible when a transition suspends, tracks pending state until it commits, and retains stale results for `useDeferredValue`. Urgent updates can proceed while suspended work waits, with queued updates rebased in their original order. The browser journeys check intermediate states against native React, along with the eventual result.
@@ -41,7 +82,7 @@ Hidden Activity trees can suspend without holding a visible route transition ope
 
 ## Verification
 
-`pnpm test:vinext` packs Redact, installs it with npm outside the workspace, and runs both router suites against that same package. No dependency patches are applied. Reusing a test consumer reinstalls its dependencies, so previous local edits cannot carry into the release checks. Results fingerprint the package, consumer lockfile, fixture, and checks.
+`pnpm test:vinext` packs Redact, installs it with npm outside the workspace, and runs both router suites against that same package. No installed dependency files are patched. Both renderers use the shipped framework corrections and the documented security override. Reusing a test consumer reinstalls its dependencies, so previous local edits cannot carry into the release checks. Results fingerprint the package, consumer lockfile, fixture, and checks.
 
 The mixed App Router and Pages Router suite contains 66 configurations and 1,260 scenario groups. It runs native React and Redact in Chromium, Firefox, and WebKit across development, production, Cache Components, standalone Node output, static export, and local Cloudflare Workers. Standalone and static cases use `/coverage` as a base path with trailing slashes.
 

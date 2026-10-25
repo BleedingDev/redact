@@ -1,0 +1,26 @@
+{
+  "name": "@cloudflare/vite-plugin",
+  "version": "1.65.0",
+  "source": "https://registry.npmjs.org/@cloudflare/vite-plugin/-/vite-plugin-1.65.0.tgz",
+  "fix": "https://github.com/cloudflare/workers-sdk/pull/16466",
+  "changes": {
+    "dist/workers/runner-worker/index.js": "Connect indirect eval to the existing development evaluator before loading application modules."
+  },
+  "files": {
+    "dist/chunk-U6NEESU5-BmLHqeIt.mjs": "f1f8d90d26d523101f5745607bd581151b04c1e1210092d63a7b0a8fd17822d5",
+    "dist/index.d.mts": "d0f9fa2a4c2aa3a22fa1f64b6eaae3c3aeb102a04040ad136a2ad1fdf7c70312",
+    "dist/index.mjs": "3c4cfbbc47293d3e84adf9ec2eb9c5a850fe6e5c101d3183b0e760feb2a15f3e",
+    "dist/open-PCXX3ZDZ-DYH87NhH.mjs": "ea9af7eb9d46e50d1d365e2befe0f76c123295f6a07f92bde3fd62e241cc90ee",
+    "dist/package-4cnqy5mM.mjs": "25b37231278d9db42f692f61f2b8e58e6233c1c9a0b7cc26915e96e884af12a9",
+    "dist/workers/asset-worker/index.js": "d3b3034555d5a68df00b4057c148c85fa7093c240597bb12719c880eab5a23c9",
+    "dist/workers/router-worker/index.js": "670e62f2432f96cc444aee439ed7530048dd24d7d6152cf8965acc0b264e3a0b",
+    "dist/workers/runner-worker/index.js": "ae9a9766f5864d95bb2f33aa12a52ba4f6b88474642581af14f2d5fe60796cb7",
+    "dist/workers/runner-worker/module-runner-legacy.js": "9c2bd5aa73b1e31f896503a8644eab19728fae73c20fad2a9b2f2208857c756a",
+    "dist/workers/runner-worker/module-runner.js": "2d1e87c9048c4d76da20468c88df0872b05da2d4ea39421bebe7a80026434437",
+    "dist/workers/vite-proxy-worker/index.js": "126d68d4665c28d88a25e44d240d3f770b7b58f5085981eb33dbe5fb77114019",
+    "LICENSE": "9bb3b077cc8628334bab25961223dd8207252c8a56aa054195be38f1c042aaf4",
+    "package.json": "6b88eeac185b602fd44efe5c07017c67ccda9902e3ac5e178b131e0140b5a7c1"
+  },
+  "integrity": "sha512-6Oot0UAqh0Lr1nzZbacUyBGi4xbmNXDpbkWdSvpudxFkrFAXJ8gYF+XMzVyytWqrWM23WGuPE+9/vQaEVSGrcg==",
+  "originalRunnerSha256": "06bf40065438a8fa39af0c06743ca92ea8d4be7c2e954af3dd21fc6e220994d1"
+}
