@@ -71,7 +71,8 @@
   "files": [
     "dist",
     "src",
-    "vendor"
+    "vendor",
+    "LICENSE"
   ],
   "sideEffects": [
     "./src/dom/features/**",
@@ -113,5 +114,6 @@
     "type": "git",
     "url": "git+https://github.com/TanStack/redact.git",
     "directory": "packages/redact"
-  }
+  },
+  "license": "MIT"
 }
