@@ -9,3 +9,11 @@ export function attributeName(name: string, isSvg?: boolean): string {
   }
   return name === 'viewBox' || /^(aria|data)-/.test(name) ? name : name.toLowerCase()
 }
+
+// Share property coercion with hydration without creating resource-bearing probes.
+export function attributeValue(name: string, value: any, attr: string): string | null {
+  if (/^on|^default(Value|Checked)$/.test(name)) return null
+  if (name === 'className' || name === 'class' || name === 'htmlFor' || STRING_BOOLEAN_ATTRS.test(attr)) return value == null ? null : '' + value
+  if (BOOLEAN_ATTRS.test(attr)) return value ? '' : null
+  return value == null || value === false ? null : value === true ? '' : `${value}`
+}

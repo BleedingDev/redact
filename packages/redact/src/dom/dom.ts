@@ -1,7 +1,8 @@
+import { createSyntheticEvent } from './synthetic-event';
 import { UNITLESS_STYLE } from '../core/unitless-style';
 import { devToolsMetadata } from '../core/devtools';
 import { formActions } from './form-actions';
-import { attributeName, STRING_BOOLEAN_ATTRS, BOOLEAN_ATTRS } from '../core/attributes';
+import { attributeName, attributeValue } from '../core/attributes';
 import { isString } from "../core/functions";
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const IDL_ATTRS = /^(value|checked|selected|disabled|multiple|muted|readonly)$/;
@@ -62,28 +63,15 @@ export function setProp(el: Element, name: string, next: any, prev: any, isSvg: 
         return;
     }
     const attr = attributeName(name, isSvg);
-    if (name === 'className' || name === 'class' || name === 'htmlFor' || STRING_BOOLEAN_ATTRS.test(attr)) {
-        if (next != null)
-            next = '' + next;
+    if (!isSvg && IDL_ATTRS.test(name) && name in el) {
+        try {
+            (el as any)[name] = next == null ? '' : next;
+            return;
+        } catch {}
     }
-    else {
-        if (!isSvg && IDL_ATTRS.test(name) && name in el) {
-            try {
-                ;
-                (el as any)[name] = next == null ? '' : next;
-                return;
-            }
-            catch { }
-        }
-        if (BOOLEAN_ATTRS.test(attr))
-            next = !!next;
-    }
-    if (next == null || next === false) {
-        el.removeAttribute(attr);
-    }
-    else {
-        el.setAttribute(attr, next === true ? '' : next);
-    }
+    const value = attributeValue(name, next, attr);
+    if (value === null) el.removeAttribute(attr);
+    else el.setAttribute(attr, value);
 }
 function setStyleProperty(style: CSSStyleDeclaration, key: string, value: any): void {
     if (key[0] === '-') {
@@ -138,6 +126,7 @@ function setEventHandler(el: Element, name: string, next: any): void {
         for (const event of existing.e)
             el.removeEventListener(event, existing, capture);
         existing = handlers[name] = null;
+        (el as any).__v = undefined;
     }
     if (!enabled)
         return;
@@ -145,26 +134,21 @@ function setEventHandler(el: Element, name: string, next: any): void {
         const entry = ((e: Event) => {
             if (events.length > 1) {
                 const value = (el as HTMLInputElement).value;
-                if (e.type === 'change' && entry.v === value)
+                if (e.type === 'change' && (el as any).__v === value)
                     return;
-                entry.v = e.type === 'input' ? value : undefined;
+                (el as any).__v = e.type === 'input' ? value : undefined;
             }
-            // React hands handlers a SyntheticEvent that carries `.nativeEvent`.
-            // Many libraries check `event.nativeEvent.isComposing` (react-instantsearch)
-            // or `event.nativeEvent.shiftKey` (UI kits) — without the alias they throw
-            // on `undefined.foo`. Aliasing the native event to itself is the cheapest
-            // way to satisfy the shape without building a full synthetic layer.
-            if ((e as any).nativeEvent === undefined)
-                (e as any).nativeEvent = e;
-            if (process.env.NODE_ENV !== 'production') {
-                const previous = devToolsMetadata.current;
-                devToolsMetadata.current = devToolsMetadata.hosts.get(el) || null;
-                try { entry.c(e); } finally { devToolsMetadata.current = previous; }
-            } else entry.c(e);
+            const event = createSyntheticEvent(e);
+            try {
+                if (process.env.NODE_ENV !== 'production') {
+                    const previous = devToolsMetadata.current;
+                    devToolsMetadata.current = devToolsMetadata.hosts.get(el) || null;
+                    try { entry.c(event); } finally { devToolsMetadata.current = previous; }
+                } else entry.c(event);
+            } finally { event.currentTarget = null; }
         }) as ((e: Event) => void) & {
             c: Function;
             e: string[];
-            v?: string | undefined;
         };
         entry.e = events;
         existing = handlers[name] = entry;
@@ -173,6 +157,7 @@ function setEventHandler(el: Element, name: string, next: any): void {
     }
     existing.c = next;
 }
+
 export interface SyntheticEvent extends Event {
     nativeEvent: Event;
     isDefaultPrevented(): boolean;
@@ -180,11 +165,11 @@ export interface SyntheticEvent extends Event {
     persist(): void;
     currentTarget: EventTarget & Element;
 }
-export function createHostNode(type: string, isSvg: boolean): Element {
+export function createHostNode(type: string, isSvg: boolean, owner: Document = document): Element {
     if (isSvg || type === 'svg') {
-        return document.createElementNS(SVG_NS, type);
+        return owner.createElementNS(SVG_NS, type);
     }
-    return document.createElement(type);
+    return owner.createElement(type);
 }
 import { isObject } from '../core/functions';
 import { isFunction, isReservedProp } from '../core/functions';
@@ -192,8 +177,5 @@ import { isFunction, isReservedProp } from '../core/functions';
 // Renderer writes have already been observed by the app. Native change events
 // should only report a value that differs from that renderer-owned value.
 export function trackInputValue(el: HTMLInputElement | HTMLTextAreaElement): void {
-    for (const key of ['onChange', 'onChangeCapture']) {
-        const handler = (el as any).__h?.[key];
-        if (handler?.e.length > 1) handler.v = el.value;
-    }
+    (el as any).__v = el.value;
 }

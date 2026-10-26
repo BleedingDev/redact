@@ -57,7 +57,6 @@ export const findHostParent = (fiber: Fiber): Fiber => (fiber)
 
 export function drainReplayQueue(): void {}
 
-export function installHydrationScrollGuard(): void {}
 
 export interface HydrationBailoutError extends Error {
   f: Fiber | null

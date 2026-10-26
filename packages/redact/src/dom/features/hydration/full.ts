@@ -2,7 +2,7 @@ import { readOwnerStack, runWithOwnerStack } from '../../../core/devtools';
 import { drainReplayQueue } from '../../event-replay';
 import { attachRootFiber, createFiberRoot } from '../../root-internal';
 import { createHostNode, setProp } from '../../dom';
-import { attributeName, STRING_BOOLEAN_ATTRS } from '../../../core/attributes';
+import { attributeName, attributeValue, STRING_BOOLEAN_ATTRS } from '../../../core/attributes';
 import { getCurrentRoot, scheduleUpdate, discardPendingWork, discardPendingEffects, isThenable, findRoot, flushSyncWork, renderRoot, scheduleRootRender, recoverRootError, removeFiber } from '../../reconcile';
 import { isFunction, isReservedProp } from '../../../core/functions';
 import { clearHostContainer, documentMetadataParent, DOCUMENT_HEAD_TAGS, DOCUMENT_SHELL_TAGS } from '../../document-metadata';
@@ -203,74 +203,47 @@ export function adoptTextDom(fiber: Fiber, parent: Fiber, text: string): boolean
     return true;
 }
 export const getHydrationCursor = (hostFiber: Fiber): HydrationCursor | undefined => (hostFiber.hc);
+let hydrationProbeDocument: Document | undefined;
 function hydrateProps(fiber: Fiber, el: Element, props: Record<string, any>, tag: string, isSvg: boolean): void {
-    const validate = !props.suppressHydrationWarning;
     const recoverInPlace = canRecoverHydrationPropMismatch(el, tag);
     let expected: Element | undefined;
     for (const k in props) {
         const value = props[k];
-        if (isReservedProp(k) ||
-            k === 'suppressHydrationWarning' || k === 'suppressContentEditableWarning' ||
-            isHydrationFormProp(tag, k))
-            continue;
-        const event = isFunction(value) &&
-            (k === 'action' || k === 'formAction' || k[0] === 'o' && k[1] === 'n');
-        if (event || validate && recoverInPlace && (k !== 'nonce' || hydrationAttribute(el, k) !== value)) {
-            queueProp(el, k, value, undefined, isSvg);
-        }
-        if (event || !validate)
-            continue;
+        if (isReservedProp(k) || k === 'suppressHydrationWarning' || k === 'suppressContentEditableWarning' || isHydrationFormProp(tag, k)) continue;
+        const event = isFunction(value) && (k === 'action' || k === 'formAction' || k[0] === 'o' && k[1] === 'n');
+        if (event) queueProp(el, k, value, undefined, isSvg);
+        if (event || props.suppressHydrationWarning) continue;
+        let mismatch: boolean;
         if (k === 'dangerouslySetInnerHTML') {
             let html = value?.__html;
-            if (html == null)
-                continue;
+            if (html == null || html === el.innerHTML) continue;
             if (tag !== 'script' && tag !== 'style') {
-                const probe = createHostNode(tag, isSvg);
+                // Raw HTML must use the live document's parsing context.
+                // Template content treats noscript differently when scripting is enabled.
+                const probe = createHostNode(tag, isSvg, el.ownerDocument);
                 probe.innerHTML = html;
                 html = probe.innerHTML;
             }
-            if ((el as HTMLElement).innerHTML !== '' + html) {
-                failHydration(fiber, process.env.NODE_ENV !== 'production'
-                    ? new Error(`Hydration HTML mismatch inside <${tag}>.`)
-                    : undefined, recoverInPlace);
+            mismatch = (el as HTMLElement).innerHTML !== '' + html;
+        } else {
+            const attr = attributeName(k, isSvg);
+            if (k === 'style' || k === 'value' && value != null && value !== false) {
+                expected ??= createHostNode(tag, isSvg, hydrationProbeDocument ??= el.ownerDocument.implementation.createHTMLDocument(''));
+                setProp(expected, k, value, undefined, isSvg);
+                mismatch = k === 'style'
+                    ? !hydrationStylesMatch((el as HTMLElement).style, (expected as HTMLElement).style)
+                    : expected.getAttribute(attr) !== hydrationAttribute(el, attr);
+            } else {
+                const stringified = STRING_BOOLEAN_ATTRS.test(attr) || /^(aria|data)-./.test(k);
+                const desired = stringified ? value == null ? null : '' + value
+                    : value === false ? null : attributeValue(k, value, attr);
+                mismatch = desired !== hydrationAttribute(el, attr);
             }
-            continue;
         }
-        if (k === 'style') {
-            expected ??= createHostNode(tag, isSvg);
-            setProp(expected, k, value, undefined, isSvg);
-            if (!hydrationStylesMatch((el as HTMLElement).style, (expected as HTMLElement).style)) {
-                failHydration(fiber, process.env.NODE_ENV !== 'production'
-                    ? new Error(`Hydration style mismatch on <${tag}>.`)
-                    : undefined, recoverInPlace);
-            }
-            continue;
-        }
-        const attr = attributeName(k, isSvg);
-        const stringifiedBoolean = STRING_BOOLEAN_ATTRS.test(attr) || k.startsWith('aria-') || k.startsWith('data-');
-        let expectedValue: string | null;
-        if (value == null || (value === false && !stringifiedBoolean)) {
-            expectedValue = null;
-        }
-        else if (k === 'muted' && !isSvg && (tag === 'video' || tag === 'audio')) {
-            // The muted property controls playback; defaultMuted reflects the SSR attribute.
-            expectedValue = value ? '' : null;
-        }
-        else if (stringifiedBoolean && k.length > 5) {
-            // These attributes use setAttribute string coercion, not DOM property normalization.
-            expectedValue = '' + value;
-        }
-        else {
-            expected ??= createHostNode(tag, isSvg);
-            setProp(expected, k, value, undefined, isSvg);
-            expectedValue = expected.getAttribute(attr);
-        }
-        const actualValue = hydrationAttribute(el, attr);
-        if (expectedValue !== actualValue) {
-            failHydration(fiber, process.env.NODE_ENV !== 'production'
-                ? new Error(`Hydration attribute mismatch on <${tag}> for "${attr}": ` +
-                    `expected ${formatHydrationValue(expectedValue)} but found ${formatHydrationValue(actualValue)}.`)
-                : undefined, recoverInPlace);
+
+        if (mismatch) {
+            if (recoverInPlace) queueProp(el, k, value, undefined, isSvg);
+            failHydration(fiber, process.env.NODE_ENV !== 'production' ? new Error(`Hydration mismatch on <${tag}> for "${k}".`) : undefined, recoverInPlace);
         }
     }
 }
@@ -578,7 +551,6 @@ export function hydrateRootImpl(container: Element | Document, initialChildren: 
                 return (marker as Comment).data === 'F!';
             },
         });
-    installHydrationScrollGuard();
     let generation = 0;
     let active = true;
     function hydrate(children: ReactNode): void {
@@ -633,48 +605,5 @@ export function hydrateRootImpl(container: Element | Document, initialChildren: 
                     clearHydrationContainer(container);
             });
         },
-    };
-}
-/**
- * Preserve the user's scroll position across hydration. If the user scrolled
- * between SSR paint and hydrate (common in dev where JS takes seconds to
- * load), libraries that wire scroll-restoration into a `useLayoutEffect`
- * near the root (e.g. TanStack Router) will run during our synchronous
- * hydrate and call `window.scrollTo(savedFromLastVisit)` — overwriting the
- * user's fresh scroll. We install a short-lived wrapper around scrollTo that
- * suppresses programmatic calls when a user-initiated scroll happened
- * recently. Only runs in the hydration feature — the stub skips it.
- */
-export function installHydrationScrollGuard(): void {
-    if (typeof window === 'undefined')
-        return;
-    const w = window as any;
-    if (w._r)
-        return;
-    const time = Date.now;
-    const guardStartedAt = w._r = time();
-    let lastUserScrollAt = 0;
-    let programmatic = false;
-    w.addEventListener('scroll', () => {
-        if (!programmatic) {
-            lastUserScrollAt = time();
-        }
-    }, { capture: true, passive: true });
-    const origScrollTo = w.scrollTo;
-    w.scrollTo = function (...args: any[]) {
-        const now = time();
-        if (now - guardStartedAt < 3000 &&
-            now - lastUserScrollAt < 1500) {
-            return;
-        }
-        programmatic = true;
-        try {
-            return (origScrollTo as any).apply(w, args);
-        }
-        finally {
-            queueMicrotask(() => {
-                programmatic = false;
-            });
-        }
     };
 }
