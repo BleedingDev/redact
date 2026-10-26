@@ -1,3 +1,4 @@
+import { resolveClassProps } from '../../../core/class-props';
 import { isFunction } from '../../../core/functions';
 import { FiberTag, type Fiber, type ReactNode } from '../../../core';
 import { installRenderer, reconcileRaw, childrenToArray, scheduleUpdate, isThenable, handleSuspended, handleErrorInRender, } from '../../reconcile';
@@ -16,7 +17,7 @@ import { installRenderer, reconcileRaw, childrenToArray, scheduleUpdate, isThena
 function renderClassStub(fiber: Fiber): void {
     const Ctor = fiber.type as any;
     let instance = fiber.i;
-    const props = fiber.v ?? {};
+    const props = resolveClassProps(Ctor, fiber.v ?? {});
     if (!instance) {
         instance = new Ctor(props, undefined);
         instance.props = props;

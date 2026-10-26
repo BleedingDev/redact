@@ -1,4 +1,5 @@
 import { devToolsMetadata } from '../../../core/devtools';
+import { resolveClassProps } from '../../../core/class-props';
 import { invokeCommit } from '../../reconcile';
 import { installRenderer, reconcileRaw, childrenToArray, scheduleUpdate, scheduleLifecycle, isThenable, handleSuspended, handleErrorInRender, readContext, attachRef, syncRefIfChanged, isActivityHidden, layoutIsDisconnected, RenderErrorCapture, handleCommitError, } from '../../reconcile';
 import { checkpointCommit, rewindCommit, queueBeforeMutation, queueMutation } from '../../commit';
@@ -30,7 +31,7 @@ function renderClass(fiber: Fiber): void {
     fiber.cx?.clear();
     const Ctor = fiber.type as any;
     let instance = fiber.i;
-    const props = fiber.v ?? {};
+    const props = resolveClassProps(Ctor, fiber.v ?? {});
     const isNew = !instance;
     const previous = fiber.b?.c;
     let didRender = true;

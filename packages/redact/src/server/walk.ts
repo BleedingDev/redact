@@ -1,4 +1,5 @@
 import { isFunction, isThenable } from '../core/functions'
+import { resolveClassProps } from '../core/class-props'
 import {
   REACT_ELEMENT_TYPE,
   REACT_LEGACY_ELEMENT_TYPE,
@@ -421,6 +422,7 @@ function walkComponent(
   }
   try {
   if ((fn as any).prototype?.isReactComponent) {
+    props = resolveClassProps(fn, props)
     const ctxType = (fn as any).contextType
     const ctxValue = ctxType ? ctxType._currentValue : undefined
     const instance = new (fn as any)(props, ctxValue)
