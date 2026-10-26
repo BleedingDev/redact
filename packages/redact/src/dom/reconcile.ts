@@ -86,7 +86,7 @@ function collectHostDoms(fiber: Fiber, out: Node[]): void {
     if (fiber.t === FiberTag.Suspense && fiber.b?.f)
         collectHostDoms(fiber.b.f, out);
 }
-function stageCommit(fiber: Fiber, work: Effect | (() => void), ref = false): void {
+export function stageCommit(fiber: Fiber, work: Effect | (() => void), ref = false): void {
     let entries = stagedCommits.get(fiber);
     if (!entries) {
         stagedCommits.set(fiber, entries = []);
@@ -1260,13 +1260,13 @@ export function removeFiber(fiber: Fiber, remove = true): void {
 // layout work after its children, without another tree walk at commit time.
 export function flushFiberCommits(fiber: Fiber): void {
     const entries = stagedCommits.get(fiber);
-    if (!entries)
+    if (!entries || layoutIsDisconnected(fiber))
         return;
     stagedCommits.delete(fiber);
     if (placeFragmentCommits(fiber, entries, pendingCommits))
         return;
-    if (fiber.t === FiberTag.Class || fiber.i?._f === fiber)
-        entries.sort((a, b) => +a[2] - +b[2]);
+    // Commit phase, rather than the wrapper's fiber tag, determines order.
+    entries.sort((a, b) => +a[2] - +b[2]);
     for (const entry of entries)
         pendingCommits.push(entry);
 }

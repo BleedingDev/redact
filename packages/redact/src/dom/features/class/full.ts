@@ -1,6 +1,6 @@
 import { devToolsMetadata } from '../../../core/devtools';
 import { resolveClassProps } from '../../../core/class-props';
-import { invokeCommit } from '../../reconcile';
+import { invokeCommit, stageCommit } from '../../reconcile';
 import { installRenderer, reconcileRaw, childrenToArray, scheduleUpdate, scheduleLifecycle, isThenable, handleSuspended, handleErrorInRender, readContext, attachRef, syncRefIfChanged, isActivityHidden, layoutIsDisconnected, RenderErrorCapture, handleCommitError, } from '../../reconcile';
 import { checkpointCommit, rewindCommit, queueBeforeMutation, queueMutation } from '../../commit';
 import { FiberTag, type Fiber, type ReactNode } from '../../../core';
@@ -69,7 +69,7 @@ function renderClass(fiber: Fiber): void {
         };
         instance._u = (cb?: () => void) => {
             if (cb)
-                (fiber.e ||= []).push(cb);
+                stageCommit(fiber, () => cb.call(instance), true);
             scheduleUpdate(fiber);
         };
         if (process.env.NODE_ENV !== 'production') {
@@ -80,7 +80,7 @@ function renderClass(fiber: Fiber): void {
     }
     if (fiber.h && reduceTransition?.(fiber.h[0]!, (state, update) => {
         if (update[1])
-            scheduleLifecycle(fiber, () => { const callback = update[1]; update[1] = null; callback?.call(instance); });
+            stageCommit(fiber, () => { const callback = update[1]; update[1] = null; callback?.call(instance); }, true);
         return updateState(state, update[0], props);
     }))
         instance.state = fiber.h[0]!.s;
