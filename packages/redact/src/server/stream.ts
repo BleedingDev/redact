@@ -114,6 +114,7 @@ export async function streamHtml(
           onSuspend: (b) => boundaries.push(b),
           nextBoundaryId: () => state.nextId++,
           onBrowserBailout: options.onBrowserBailout,
+          onError: options.onError,
           onHead: () => { head = shellChunks.length },
         })
         shellRendered = true
@@ -215,6 +216,7 @@ function streamBoundary(
         onSuspend: (n) => sub.push(n),
         nextBoundaryId: () => state.nextId++,
         onBrowserBailout: options.onBrowserBailout,
+          onError: options.onError,
         componentStack: b.componentStack,
         resourceScope,
       })

@@ -60,6 +60,7 @@ export interface WalkOptions {
   onHead?: () => void
   onSuspend?: ((boundary: SuspendedBoundary) => void) | undefined
   onBrowserBailout?: BrowserBailoutCallback | undefined
+  onError?: ((error: unknown) => unknown) | undefined
   componentStack?: string | undefined
   thrownInfo?: { componentStack?: string | undefined }
   nextBoundaryId: () => number
@@ -473,36 +474,24 @@ function walkSuspense(
     })
   } catch (thenable: any) {
     nested.length = 0
-    if (isThenable(thenable) || isBrowserError(thenable)) {
-      const fallbackParts: string[] = []
-        walkNode(props.fallback, {
-          ...opts,
-          emit: (s) => fallbackParts.push(s),
-          onSuspend: opts.onSuspend ? (boundary) => nested.push(boundary) : undefined,
-          nextBoundaryId: opts.nextBoundaryId,
-        })
-      if (isBrowserError(thenable)) {
-        opts.onBrowserBailout?.(thenable, { componentStack: (thenable as any).componentStack || opts.componentStack || '' })
-        opts.emit(`<!--$!${id}-->${fallbackParts.join('')}<!--/$-->`)
-        for (const boundary of nested) opts.onSuspend?.(boundary)
-        return
-      }
-      emitBoundary(opts, id, fallbackParts.join(''))
-      for (const boundary of nested) opts.onSuspend?.(boundary)
-
-      if (opts.onSuspend) {
-        opts.onSuspend({
-          id,
-          fallbackHTML: fallbackParts.join(''),
-          children: props.children,
-          thenable,
-          contextSnapshot,
-          componentStack: thrownInfo.componentStack || opts.componentStack || '',
-        })
-      }
-      return
-    }
-    throw thenable
+    const fallbackParts: string[] = []
+    walkNode(props.fallback, {
+      ...opts,
+      emit: (s) => fallbackParts.push(s),
+      onSuspend: opts.onSuspend ? (boundary) => nested.push(boundary) : undefined,
+      nextBoundaryId: opts.nextBoundaryId,
+    })
+    if (!isThenable(thenable)) {
+      if (isBrowserError(thenable)) opts.onBrowserBailout?.(thenable, { componentStack: (thenable as any).componentStack || opts.componentStack || '' })
+      else opts.onError?.(thenable)
+      opts.emit(`<!--${isBrowserError(thenable) ? '$!' : '$E'}${id}-->${fallbackParts.join('')}<!--/$-->`)
+    } else emitBoundary(opts, id, fallbackParts.join(''))
+    for (const boundary of nested) opts.onSuspend?.(boundary)
+    if (isThenable(thenable)) opts.onSuspend?.({
+      id, fallbackHTML: fallbackParts.join(''), children: props.children, thenable, contextSnapshot,
+      componentStack: thrownInfo.componentStack || opts.componentStack || '',
+    })
+    return
   }
 
   if (resourceScope) currentSSRFrame().resources?.mergeScope(resourceScope, opts.resourceScope)
