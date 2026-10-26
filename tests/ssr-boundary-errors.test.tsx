@@ -18,10 +18,11 @@ it('keeps root errors fatal and reports them once', async () => {
  expect(errors).toEqual([failure])
 })
 it('lets the nearest parent boundary handle errors thrown by a fallback', async () => {
- const errors: unknown[] = []
- const stream = await renderToReadableStream(h(Suspense, { fallback: h('p', null, 'outer') }, h(Suspense, { fallback: h(Thrower) }, h(Thrower))), { onError: error => { errors.push(error) } })
+ const errors: unknown[] = [], fallbackFailure = new Error('fallback failure')
+ function Fallback(): never { throw fallbackFailure }
+ const stream = await renderToReadableStream(h(Suspense, { fallback: h('p', null, 'outer') }, h(Suspense, { fallback: h(Fallback) }, h(Thrower))), { onError: error => { errors.push(error) } })
  const html = await new Response(stream).text()
- expect(html).toContain('outer'); expect(errors).toEqual([failure])
+ expect(html).toContain('outer'); expect(errors).toEqual([failure, fallbackFailure])
 })
 it('keeps rejected lazy components on the existing streaming failure path', async () => {
  const errors: unknown[] = [], Lazy = lazy(() => Promise.reject(failure))
