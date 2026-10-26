@@ -1,11 +1,11 @@
+import { UNITLESS_STYLE } from '../core/unitless-style';
 import { devToolsMetadata } from '../core/devtools';
 import { formActions } from './form-actions';
-import { attributeName, STRING_BOOLEAN_ATTRS } from '../core/attributes';
+import { attributeName, STRING_BOOLEAN_ATTRS, BOOLEAN_ATTRS } from '../core/attributes';
 import { isString } from "../core/functions";
 const SVG_NS = 'http://www.w3.org/2000/svg';
-const BOOLEAN_ATTRS = /^(allowfullscreen|async|autofocus|autoplay|checked|controls|credentialless|default|defer|disabled|formnovalidate|hidden|inert|ismap|itemscope|loop|multiple|muted|nomodule|novalidate|open|playsinline|readonly|required|reversed|selected)$/;
 const IDL_ATTRS = /^(value|checked|selected|disabled|multiple|muted|readonly)$/;
-export const isSvgElement = (el: Element): boolean => ((el as any).ownerSVGElement !== undefined || el.tagName === 'svg');
+export const isSvgElement = (el: Element): boolean => (el.namespaceURI === SVG_NS);
 export function setProp(el: Element, name: string, next: any, prev: any, isSvg: boolean): void {
     if (isReservedProp(name))
         return;
@@ -92,7 +92,7 @@ function setStyleProperty(style: CSSStyleDeclaration, key: string, value: any): 
     else {
         ;
         (style as any)[key] = value == null || value === '' ? ''
-            : typeof value === 'number' && !UNITLESS_STYLE.test(key) ? value + 'px' : '' + value;
+            : value + (typeof value === 'number' && !UNITLESS_STYLE.test(key) ? 'px' : '');
     }
 }
 function setStyle(el: HTMLElement, next: any, prev: any): void {
@@ -173,7 +173,6 @@ function setEventHandler(el: Element, name: string, next: any): void {
     }
     existing.c = next;
 }
-const UNITLESS_STYLE = /^(animationIterationCount|borderImage(Outset|Slice|Width)|box(Flex(Group)?|OrdinalGroup)|column(Count|s)|flex(Grow|Positive|Shrink|Negative|Order)?|grid(Area|(Row|Column)(End|Span|Start)?)|fontWeight|line(Clamp|Height)|opacity|order|orphans|tabSize|widows|zIndex|zoom|(fill|flood|stop|stroke)Opacity|stroke(Dasharray|Dashoffset|Miterlimit|Width))$/;
 export interface SyntheticEvent extends Event {
     nativeEvent: Event;
     isDefaultPrevented(): boolean;

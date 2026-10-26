@@ -1,3 +1,4 @@
+export const BOOLEAN_ATTRS = /^(allowfullscreen|async|autofocus|autoplay|checked|controls|credentialless|default|defer|disabled|formnovalidate|hidden|inert|ismap|itemscope|loop|multiple|muted|nomodule|novalidate|open|playsinline|readonly|required|reversed|selected)$/;
 export const STRING_BOOLEAN_ATTRS = /^(contenteditable|draggable|spellcheck)$/
 
 export function attributeName(name: string, isSvg?: boolean): string {
