@@ -1,3 +1,4 @@
+import { devToolsMetadata } from '../core/devtools';
 import { formActions } from './form-actions';
 import { attributeName, STRING_BOOLEAN_ATTRS } from '../core/attributes';
 import { isString } from "../core/functions";
@@ -156,7 +157,11 @@ function setEventHandler(el: Element, name: string, next: any): void {
             // way to satisfy the shape without building a full synthetic layer.
             if ((e as any).nativeEvent === undefined)
                 (e as any).nativeEvent = e;
-            entry.c(e);
+            if (process.env.NODE_ENV !== 'production') {
+                const previous = devToolsMetadata.current;
+                devToolsMetadata.current = devToolsMetadata.hosts.get(el) || null;
+                try { entry.c(e); } finally { devToolsMetadata.current = previous; }
+            } else entry.c(e);
         }) as ((e: Event) => void) & {
             c: Function;
             e: string[];

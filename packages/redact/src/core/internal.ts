@@ -83,6 +83,7 @@ export interface FiberRoot {
     er?: Array<{
         error: unknown;
         stack: string;
+        ownerStack?: string | null;
     }> | undefined;
     eb?: boolean;
     sp?: boolean;

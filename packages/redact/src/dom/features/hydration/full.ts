@@ -1,3 +1,4 @@
+import { readOwnerStack, runWithOwnerStack } from '../../../core/devtools';
 import { drainReplayQueue } from '../../event-replay';
 import { attachRootFiber, createFiberRoot } from '../../root-internal';
 import { createHostNode, setProp } from '../../dom';
@@ -148,7 +149,8 @@ const hydrationAttribute = (el: Element, name: string): string | null => (name =
 function failHydration(fiber: Fiber, error: Error = new Error(PROD_HYDRATION_ERROR), recoverInPlace?: boolean): boolean {
     const root = findRoot(fiber);
     if (root?.re) {
-        root.re(error, { componentStack: componentStack(fiber) });
+        if (process.env.NODE_ENV !== 'production') runWithOwnerStack(readOwnerStack(fiber), () => root.re!(error, { componentStack: componentStack(fiber) }));
+        else root.re(error, { componentStack: componentStack(fiber) });
     }
     if (recoverInPlace)
         return true;

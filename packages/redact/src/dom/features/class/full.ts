@@ -1,3 +1,4 @@
+import { devToolsMetadata } from '../../../core/devtools';
 import { invokeCommit } from '../../reconcile';
 import { installRenderer, reconcileRaw, childrenToArray, scheduleUpdate, scheduleLifecycle, isThenable, handleSuspended, handleErrorInRender, readContext, attachRef, syncRefIfChanged, isActivityHidden, layoutIsDisconnected, RenderErrorCapture, handleCommitError, } from '../../reconcile';
 import { checkpointCommit, rewindCommit, queueBeforeMutation, queueMutation } from '../../commit';
@@ -162,13 +163,26 @@ function renderClass(fiber: Fiber): void {
         const error = captured.e;
         const info = { componentStack: captured.s };
         scheduleLifecycle(fiber, () => {
+            const previousCurrent = process.env.NODE_ENV !== 'production' ? devToolsMetadata.current : null;
+            const previousStack = process.env.NODE_ENV !== 'production' ? devToolsMetadata.errorStack : undefined;
+            if (process.env.NODE_ENV !== 'production') {
+                devToolsMetadata.current = null;
+                devToolsMetadata.errorStack = captured!.o ?? null;
+            }
             try {
-                fiber.r?.ce?.(error, { ...info, errorBoundary: instance });
+                try {
+                    fiber.r?.ce?.(error, { ...info, errorBoundary: instance });
+                }
+                catch (callbackError) {
+                    setTimeout(() => { throw callbackError; });
+                }
+                instance.componentDidCatch?.(error, info);
+            } finally {
+                if (process.env.NODE_ENV !== 'production') {
+                    devToolsMetadata.current = previousCurrent;
+                    devToolsMetadata.errorStack = previousStack;
+                }
             }
-            catch (callbackError) {
-                setTimeout(() => { throw callbackError; });
-            }
-            instance.componentDidCatch?.(error, info);
         });
     }
 }

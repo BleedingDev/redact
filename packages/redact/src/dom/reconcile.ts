@@ -1,3 +1,4 @@
+import { devToolsMetadata, readOwnerStack, runWithOwnerStack } from '../core/devtools';
 import { getRootContainer } from './root-internal';
 export { getHostParent, findRoot, getAnchor, firstDomNode } from './tree';
 export { isThenable } from '../core/functions';
@@ -182,6 +183,7 @@ function captureRootError(root: FiberRoot, stack: string, error: unknown): void 
     if (!errors.length)
         root.u = undefined;
     errors.push({ error, stack });
+    if (process.env.NODE_ENV !== 'production') errors[errors.length - 1]!.ownerStack = devToolsMetadata.errorStack ?? null;
     scheduleUpdate(root.r);
 }
 function captureError(capture: RenderErrorCapture): void {
@@ -485,8 +487,10 @@ export function handleErrorInRender(fiber: Fiber, err: any): void {
     const root = currentRoot ?? findRoot(fiber);
     if (root && currentCommit && (flushing || root.ue))
         throw new RenderErrorCapture(root.r, err, fiber);
-    if (root?.ue)
-        root.ue(err, { componentStack: componentStack(fiber) });
+    if (root?.ue) {
+        if (process.env.NODE_ENV !== 'production') runWithOwnerStack(readOwnerStack(fiber), () => root.ue!(err, { componentStack: componentStack(fiber) }));
+        else root.ue(err, { componentStack: componentStack(fiber) });
+    }
     else
         throw err;
 }
@@ -497,9 +501,10 @@ export function handleCommitError(fiber: Fiber, error: unknown): void {
         return;
     }
     const root = findRoot(fiber);
-    if (root)
-        captureRootError(root, componentStack(fiber), error);
-    else
+    if (root) {
+        if (process.env.NODE_ENV !== 'production') runWithOwnerStack(readOwnerStack(fiber), () => captureRootError(root, componentStack(fiber), error));
+        else captureRootError(root, componentStack(fiber), error);
+    } else
         queueMicrotask(() => { throw error; });
 }
 export function invokeCommit<T>(fiber: Fiber | undefined, callback: () => T): T | undefined {
@@ -653,8 +658,10 @@ export function scheduleRootRender(root: FiberRoot, render: () => void): void {
 }
 export class RenderErrorCapture {
     s: string;
+    declare o?: string | null;
     constructor(public b: Fiber, public e: unknown, source: Fiber = b) {
         this.s = componentStack(source);
+        if (process.env.NODE_ENV !== 'production') this.o = readOwnerStack(source);
     }
 }
 function flushRootErrors(root: FiberRoot): void {
@@ -669,8 +676,10 @@ function flushRootErrors(root: FiberRoot): void {
                 if (process.env.NODE_ENV !== 'production' && ReactSharedInternals.A) {
                     ReactSharedInternals.A.push(() => { throw captured.error; });
                 }
-                else if (root.ue)
-                    root.ue(captured.error, { componentStack: captured.stack });
+                else if (root.ue) {
+                    if (process.env.NODE_ENV !== 'production') runWithOwnerStack(captured.ownerStack ?? null, () => root.ue!(captured.error, { componentStack: captured.stack }));
+                    else root.ue(captured.error, { componentStack: captured.stack });
+                }
                 else if (isFunction(reportError))
                     reportError(captured.error);
                 else
@@ -983,6 +992,15 @@ function renderHost(fiber: Fiber): void {
     }
     else if (prev !== props) {
         queueMutation(() => applyHostProps(fiber.n as Element, props, prev, isSvg, isInput, isTextarea, deferValue));
+    }
+    if (process.env.NODE_ENV !== 'production') {
+        const node = fiber.n!;
+        const previous = devToolsMetadata.hosts.get(node);
+        onCommitRollback(() => {
+            if (previous) devToolsMetadata.hosts.set(node, previous);
+            else devToolsMetadata.hosts.delete(node);
+        });
+        devToolsMetadata.hosts.set(node, fiber);
     }
     if (type === 'form')
         queueMutation(() => bindForm(fiber, handleCommitError));
@@ -1416,7 +1434,8 @@ export function recoverRootError(error: unknown, abort?: () => void): boolean {
     abort?.();
     discardPendingWork(root);
     discardPendingEffects(root);
-    captureRootError(root, error.s, error.e);
+    if (process.env.NODE_ENV !== 'production') runWithOwnerStack(error.o ?? null, () => captureRootError(root, error.s, error.e));
+    else captureRootError(root, error.s, error.e);
     return true;
 }
 // Memo, lazy and ref wrappers render through the same fiber. Always restore
