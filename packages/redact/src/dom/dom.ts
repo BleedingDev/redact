@@ -142,13 +142,12 @@ function setEventHandler(el: Element, name: string, next: any): void {
     if (!enabled)
         return;
     if (!existing) {
-        let inputValue: string | undefined;
         const entry = ((e: Event) => {
             if (events.length > 1) {
                 const value = (el as HTMLInputElement).value;
-                if (e.type === 'change' && inputValue === value)
+                if (e.type === 'change' && entry.v === value)
                     return;
-                inputValue = e.type === 'input' ? value : undefined;
+                entry.v = e.type === 'input' ? value : undefined;
             }
             // React hands handlers a SyntheticEvent that carries `.nativeEvent`.
             // Many libraries check `event.nativeEvent.isComposing` (react-instantsearch)
@@ -165,6 +164,7 @@ function setEventHandler(el: Element, name: string, next: any): void {
         }) as ((e: Event) => void) & {
             c: Function;
             e: string[];
+            v?: string | undefined;
         };
         entry.e = events;
         existing = handlers[name] = entry;
@@ -189,3 +189,12 @@ export function createHostNode(type: string, isSvg: boolean): Element {
 }
 import { isObject } from '../core/functions';
 import { isFunction, isReservedProp } from '../core/functions';
+
+// Renderer writes have already been observed by the app. Native change events
+// should only report a value that differs from that renderer-owned value.
+export function trackInputValue(el: HTMLInputElement | HTMLTextAreaElement): void {
+    for (const key of ['onChange', 'onChangeCapture']) {
+        const handler = (el as any).__h?.[key];
+        if (handler?.e.length > 1) handler.v = el.value;
+    }
+}
