@@ -125,8 +125,8 @@ function setEventHandler(el: Element, name: string, next: any): void {
     if (existing && (!enabled || existing.e[0] !== events[0])) {
         for (const event of existing.e)
             el.removeEventListener(event, existing, capture);
+        if (enabled) delete (el as any).__v;
         existing = handlers[name] = null;
-        (el as any).__v = undefined;
     }
     if (!enabled)
         return;

@@ -40,3 +40,11 @@ it('binds native keyboard methods and carries capture prevention into bubbling',
  expect(held.key).toBe('A');expect(held.getModifierState('Control')).toBe(true);expect(held.isDefaultPrevented()).toBe(true)
  expect(during).toBe(input);expect(held.currentTarget).toBeNull();expect(held.nativeEvent).toBe(native)
 })
+it('keeps input deduplication when an unrelated listener is removed',async()=>{
+ const container=document.createElement('div');document.body.append(container);root=createRoot(container);let changes=0
+ const onChange=()=>changes++;const render=(click:boolean)=>root!.render(h('input',{onChange,...(click?{onClick:()=>{}}:{})}))
+ await act(()=>render(true));const input=container.querySelector('input')!;input.value='changed'
+ await act(()=>input.dispatchEvent(new Event('input',{bubbles:true})))
+ expect(changes).toBe(1);await act(()=>render(false));await act(()=>input.dispatchEvent(new Event('change',{bubbles:true})))
+ expect(changes).toBe(1)
+})
