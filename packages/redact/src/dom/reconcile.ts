@@ -680,8 +680,8 @@ function flushRootErrors(root: FiberRoot): void {
                     if (process.env.NODE_ENV !== 'production') runWithOwnerStack(captured.ownerStack ?? null, () => root.ue!(captured.error, { componentStack: captured.stack }));
                     else root.ue(captured.error, { componentStack: captured.stack });
                 }
-                else if (isFunction(reportError))
-                    reportError(captured.error);
+                else if (isFunction(globalThis.reportError))
+                    globalThis.reportError(captured.error);
                 else
                     queueMicrotask(() => { throw captured.error; });
             }

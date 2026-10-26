@@ -172,6 +172,10 @@ const ALIASES: Record<string, string> = {
   'use-sync-external-store/shim/with-selector.js': '@tanstack/redact',
   'use-sync-external-store/with-selector': '@tanstack/redact',
   'use-sync-external-store/with-selector.js': '@tanstack/redact',
+  // Explicit file subpaths (react-aria imports `shim/index.js`). Without these,
+  // dev resolves the raw CJS shim and its named ESM import fails.
+  'use-sync-external-store/shim/index.js': '@tanstack/redact',
+  'use-sync-external-store/index.js': '@tanstack/redact',
   'use-sync-external-store/shim': '@tanstack/redact',
   'use-sync-external-store': '@tanstack/redact',
 

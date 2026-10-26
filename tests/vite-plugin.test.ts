@@ -385,6 +385,32 @@ describe('redact vite plugin', () => {
     )
   })
 
+  it('aliases use-sync-external-store file subpaths to the React entry', async () => {
+    const packageRoot = resolve(import.meta.dirname, '../packages/redact')
+    const plugin = findPlugin(redact({
+      packageRoots: {
+        '@tanstack/redact': packageRoot,
+      },
+    }), 'redact')
+
+    plugin.configResolved?.({
+      root: resolve(import.meta.dirname, '..'),
+      server: { fs: { allow: [] } },
+    } as any)
+
+    const context = { environment: { name: 'client' } }
+    const reactEntry = await plugin.resolveId.call(context, 'react')
+    expect(reactEntry).toMatch(/packages\/redact\/dist\//)
+    for (const specifier of [
+      'use-sync-external-store',
+      'use-sync-external-store/index.js',
+      'use-sync-external-store/shim',
+      'use-sync-external-store/shim/index.js',
+    ]) {
+      await expect(plugin.resolveId.call(context, specifier)).resolves.toBe(reactEntry)
+    }
+  })
+
   it('prunes force-included React optimizer deps outside RSC', () => {
     const plugin = findPlugin(redact({
       skip: ['scheduler'],
