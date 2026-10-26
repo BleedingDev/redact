@@ -122,8 +122,11 @@ export function childrenToArray(children: ReactNode): NormalizedChild[] {
 // ---------------------------------------------------------------------------
 export const fiberDepth = (fiber: Fiber): number => (fiber.d ??= fiber.p ? fiberDepth(fiber.p) + 1 : 0);
 function pushChildren(node: ReactNode, out: NormalizedChild[], ids?: bigint[], path = 1n): void {
-    if (node == null || typeof node === 'boolean')
+    if (node == null || typeof node === 'boolean' || node === '') {
+        out.push(null);
+        ids?.push(path);
         return;
+    }
     if (isString(node) || typeof node === 'number') {
         if (node !== '') {
             out.push('' + node);
@@ -747,7 +750,7 @@ export function batchedUpdates<T>(fn: () => T): T {
  * Mutates parent.c and the sibling chain.
  * DOM placement runs after mutations and before layout effects.
  */
-export function reconcileChildren(parent: Fiber, nodes: Parameters<typeof reconcile>[1], _domParent: Node, _anchor: Node | null): void { reconcile(parent, nodes.some(node => node == null) ? Object.assign(nodes.filter(node => node != null), { ip: (nodes as any).ip }) : nodes); }
+export function reconcileChildren(parent: Fiber, nodes: Parameters<typeof reconcile>[1], _domParent: Node, _anchor: Node | null): void { reconcile(parent, nodes); }
 export function installRenderer(tag: FiberTag, fn: RenderFn): void {
     RENDERERS[tag] = fn;
 }
@@ -1078,128 +1081,71 @@ export function renderNode(fiber: Fiber): void {
  * Mutates parent.c and the sibling chain.
  * Mounts new host DOM into `domParent` before `anchor` (or appends if anchor === null).
  */
+function indexChildren(parent: Fiber, next: Fiber | null): Map<string | number, Fiber> {
+    rememberChildList(parent, collectChildren(parent));
+    const remaining = new Map<string | number, Fiber>();
+    for (; next; next = next.s) remaining.set(next.key ?? next.ix!, next);
+    return remaining;
+}
 export function reconcile(parent: Fiber, newChildren: NormalizedChild[]): void {
     // Keep positional updates allocation-free. Only a structural difference
     // needs the key index and deletion set; both paths share the same writes.
     let next = parent.c;
     let previous: Fiber | null = null;
-    let existing: Array<Fiber | null> | undefined;
-    let keyed: Record<string, number> | undefined;
-    let existingIdx = 0;
-    let budget = 0;
+    let remaining: Map<string | number, Fiber> | undefined;
     const hydrating = !!currentRoot?.h;
     for (let i = 0; i < newChildren.length; i++) {
-        const child = newChildren[i]!;
-        let match: Fiber | null = null;
-        let matchIndex = -1;
-        if (!existing && !hydrating && next && sameType(next, child)) {
+        const child = newChildren[i];
+        if (child == null) continue;
+        let match: Fiber | undefined;
+        if (!remaining && !hydrating && next && next.ix === i && sameType(next, child)) {
             match = next;
             next = next.s;
-            existingIdx++;
-        }
-        else {
-            if (!existing) {
-                existing = collectChildren(parent);
-                rememberChildList(parent, existing.slice() as Fiber[]);
-                if (existing.length) {
-                    keyed = Object.create(null);
-                    for (let index = 0; index < existing.length; index++) {
-                        const fiber = existing[index]!;
-                        if (fiber.key == null)
-                            budget--;
-                        else if (index >= existingIdx)
-                            keyed![fiber.key] = index;
-                        if (index < existingIdx)
-                            existing[index] = null;
-                    }
-                }
-                budget += newChildren.length;
+        } else {
+            if (!remaining) {
+                remaining = indexChildren(parent, next);
             }
-            if (!isString(child) && child.key != null) {
-                const index = keyed?.[child.key];
-                const candidate = index === undefined ? null : existing[index];
-                if (process.env.NODE_ENV !== 'production' && candidate && sameRefreshFamily(candidate.type, child.type))
-                    candidate.type = child.type;
-                if (candidate && sameType(candidate, child)) {
-                    match = candidate;
-                    matchIndex = index!;
-                }
-            }
-            if (!match) {
-                while (existingIdx < existing.length) {
-                    const candidate = existing[existingIdx]!;
-                    if (!candidate || candidate.key != null) {
-                        existingIdx++;
-                        continue;
-                    }
-                    if (sameType(candidate, child)) {
-                        match = candidate;
-                        matchIndex = existingIdx++;
-                        break;
-                    }
-                    if (budget > 0)
-                        break;
-                    existingIdx++;
-                    budget++;
-                }
-            }
-            if (match) {
-                existing[matchIndex] = null;
+            const key = isString(child) ? i : child.key ?? i;
+            const candidate = remaining.get(key);
+            if (candidate && sameType(candidate, child)) {
+                match = candidate;
+                remaining.delete(key);
             }
         }
-        let fiber: Fiber;
+        const fiber = match ?? fiberFromChild(child, parent);
         if (match) {
-            fiber = match;
-            if (isString(child))
-                fiber.v = child;
+            if (isString(child)) fiber.v = child;
             else {
-                if (fiber.type !== child.type)
-                    fiber.t = tagForType(child.type);
+                if (fiber.type !== child.type) fiber.t = tagForType(child.type);
                 fiber.type = child.type;
                 fiber.v = child.props;
                 if (process.env.NODE_ENV !== 'production') rememberDevToolsFiber(fiber, child);
                 fiber.ref = (child as any).ref ?? null;
             }
         }
-        else {
-            fiber = fiberFromChild(child, parent);
-            if (budget > 0)
-                budget--;
-        }
-        if (existing) {
+        fiber.ix = i;
+        if (remaining) {
             fiber.p = parent;
-            if (previous)
-                previous.s = fiber;
-            else
-                parent.c = fiber;
+            if (previous) previous.s = fiber;
+            else parent.c = fiber;
         }
         previous = fiber;
     }
-    if (!existing && !next && !hydrating) {
+    if (!remaining && !next && !hydrating) {
         renderChildChain(parent);
         return;
     }
-    // A shorter positional list has a deletion suffix without a keyed lookup.
-    if (!existing && next) {
-        existing = collectChildren(parent);
-        rememberChildList(parent, existing.slice() as Fiber[]);
-        existing.fill(null, 0, existingIdx);
+    if (!remaining && next) {
+        remaining = indexChildren(parent, next);
     }
-    if (previous)
-        previous.s = null;
-    else
-        parent.c = null;
-    if (hydrating)
-        assignReactIds(parent, newChildren);
-    renderChildChain(parent);
-    // Unmatched head nodes belong to server metadata and remain additive.
+    if (previous) previous.s = null;
+    else parent.c = null;
+    // Deletions must commit before replacement document roots are placed.
     if (!(parent.t === FiberTag.Host && parent.type.toLowerCase() === 'head')) {
-        for (const fiber of existing ?? []) {
-            if (fiber) {
-                removeFiber(fiber);
-            }
-        }
+        for (const fiber of remaining?.values() ?? []) removeFiber(fiber);
     }
+    if (hydrating) assignReactIds(parent, newChildren);
+    renderChildChain(parent);
 }
 // ---------------------------------------------------------------------------
 // Effects

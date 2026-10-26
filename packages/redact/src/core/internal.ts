@@ -30,6 +30,7 @@ export interface Effect {
     s?: boolean | undefined; // Store subscriptions run in layout but stay connected in Suspense.
 }
 export interface Fiber {
+    ix?: number; // Logical child position, including empty slots.
     t: FiberTag; // Tag.
     type: any;
     key: string | null;
