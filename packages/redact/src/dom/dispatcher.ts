@@ -170,7 +170,7 @@ function useEffectImpl(type: Effect['t'], create: () => any, deps?: ReadonlyArra
             return hook.c;
         },
     };
-    if (type === 1 && !subscription)
+    if (type !== 2 && !subscription)
         effect.d = () => cleanupEffect(hook, fiber);
     (hookEffects ||= []).push(hook, previous, effect, changed);
 }

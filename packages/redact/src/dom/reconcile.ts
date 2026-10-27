@@ -585,9 +585,6 @@ function renderText(fiber: Fiber): void {
     if (fiber.n && fiber.m !== null && !fiber.n.parentNode &&
         domParent.firstChild?.nodeType === 3 && !domParent.firstChild.nextSibling) {
         fiber.n = domParent.firstChild;
-        queueText(fiber.n as Text, text);
-        fiber.m = text;
-        return;
     }
     // Identity-unchanged fast path: skip the native Text.data write entirely.
     if (fiber.n && fiber.m === text)
@@ -852,6 +849,8 @@ export function runEffects(root: FiberRoot): void {
                 // Passive fx on microtask
                 if (batch.length) {
                     const passive = () => {
+                        for (const [fiber, effect] of batch)
+                            if (!fiber.u && !isActivityHidden(fiber) && !activityIsDisconnected(fiber)) effect.d?.();
                         for (const [fiber, effect] of batch)
                             runEffect(fiber, effect);
                     };
