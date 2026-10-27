@@ -1,5 +1,39 @@
 # @tanstack/redact
 
+## 0.2.1
+
+### Patch Changes
+
+- Add the development-only captureOwnerStack API to named and default React exports. Track creator stacks without requiring DevTools, fixing fully prefetched Next.js links with Cache Components. ([#76](https://github.com/TanStack/redact/pull/76))
+
+- Apply class component default props during client and server rendering, including elements created by automatic JSX runtimes. Preserve explicit null values and caller-owned props. ([#76](https://github.com/TanStack/redact/pull/76))
+
+- Reset React Compiler memo caches during Fast Refresh while preserving component state. ([#76](https://github.com/TanStack/redact/pull/76))
+
+- Keep controlled text input and textarea change tracking in sync with values written by the renderer, so blur does not report the app's own value as user input. ([#76](https://github.com/TanStack/redact/pull/76))
+
+- Preserve unkeyed sibling identity across conditional empty children so inputs retain their DOM, focus, and state. ([#76](https://github.com/TanStack/redact/pull/76))
+
+- Preserve synthetic event values after dispatch and avoid resource-bearing probes during hydration. Keep canonical SVG attribute casing, support ES5 component subclasses, run class update callbacks after commit lifecycles, forward batchedUpdates callback arguments, and render synchronous server Suspense fallbacks while reporting boundary errors. ([#76](https://github.com/TanStack/redact/pull/76))
+
+  Normalize SVG focus and CORS attribute names, clean up removed head children, preserve refreshed child positions, and report only errors from the retained streaming shell attempt.
+
+- Declare the MIT license and include its full text in the published package. ([#76](https://github.com/TanStack/redact/pull/76))
+
+- Use the Redact server renderer for browser-side react-dom/server imports in Next.js, including renderToStaticMarkup, while keeping Next server rendering on native React. ([#76](https://github.com/TanStack/redact/pull/76))
+
+- Preserve the original uncaught render error in hosts without the optional reportError API. ([#76](https://github.com/TanStack/redact/pull/76))
+
+- Detect React 18 in Vite consumers and adapt its element markers, context shapes, and version string at build time, without adding runtime version checks or increasing production bundles. React 19 runtime code stays unchanged. Add packed-package browser comparisons against React 18 and 19, plus a strict bundle-size comparison against the base branch. Concurrent features keep their synchronous behavior. Deprecated legacy ReactDOM roots are not included. ([#77](https://github.com/TanStack/redact/pull/77))
+
+- Keep the last committed external-store selection through abandoned Suspense renders so equal selections retain their identity and do not rerun dependent effects. ([#76](https://github.com/TanStack/redact/pull/76))
+
+- Put `useSyncExternalStoreWithSelector` on the default export. The Vite plugin aliases `use-sync-external-store/shim/with-selector` here, and zustand reads it as a CJS default import (`import shim from '...'; const { useSyncExternalStoreWithSelector } = shim`), so anything built on zustand's `useStoreWithEqualityFn`, React Flow, for one, threw `useSyncExternalStoreWithSelector is not a function`. ([#76](https://github.com/TanStack/redact/pull/76))
+
+- Keep numeric scale, aspectRatio, and vendor-prefixed unitless styles valid in client rendering and server markup. Share style and boolean-attribute classification between renderers. ([#76](https://github.com/TanStack/redact/pull/76))
+
+- Alias `use-sync-external-store/shim/index.js` and `use-sync-external-store/index.js` in the Vite plugin. Libraries such as react-aria import the explicit file subpath, which previously fell through to the raw CJS shim in dev and failed with "does not provide an export named 'useSyncExternalStore'". ([#76](https://github.com/TanStack/redact/pull/76))
+
 ## 0.2.0
 
 ### Minor Changes
