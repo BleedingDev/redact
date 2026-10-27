@@ -7,6 +7,7 @@ export function attributeName(name: string, isSvg?: boolean): string {
   if ((isSvg && /^(clip|fill|stroke)/.test(name)) || /^(httpEquiv|acceptCharset|maskType)$/.test(name)) {
     return name.replace(/[A-Z]/g, m => '-' + m.toLowerCase())
   }
+  if (name === 'tabIndex' || name === 'crossOrigin') return name.toLowerCase()
   return isSvg || /^(aria|data)-/.test(name) ? name : name.toLowerCase()
 }
 

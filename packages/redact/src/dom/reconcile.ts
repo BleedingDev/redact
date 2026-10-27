@@ -1035,6 +1035,7 @@ export function renderNode(fiber: Fiber): void {
                         siblings[i]!.s = siblings[i + 1] ?? null;
                 });
                 const next = fiberFromChild({ $$typeof: REACT_ELEMENT_TYPE, type: fiber.type, key: fiber.key, ref: fiber.ref, props: fiber.v }, parent);
+                if (fiber.ix !== undefined) next.ix = fiber.ix;
                 next.s = fiber.s;
                 const previous = siblings[siblings.indexOf(fiber) - 1];
                 if (previous)
@@ -1143,9 +1144,7 @@ export function reconcile(parent: Fiber, newChildren: NormalizedChild[]): void {
     if (previous) previous.s = null;
     else parent.c = null;
     // Deletions must commit before replacement document roots are placed.
-    if (!(parent.t === FiberTag.Host && parent.type.toLowerCase() === 'head')) {
-        for (const fiber of remaining?.values() ?? []) removeFiber(fiber);
-    }
+    for (const fiber of remaining?.values() ?? []) removeFiber(fiber);
     if (hydrating) assignReactIds(parent, newChildren);
     renderChildChain(parent);
 }

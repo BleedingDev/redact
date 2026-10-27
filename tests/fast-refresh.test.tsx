@@ -366,3 +366,16 @@ it('resets compiler memo slots on refresh while preserving component state', () 
   click(container)
   expect(container.textContent).toBe('after:2')
 })
+
+it('keeps the child index after a signature-changing refresh remount', () => {
+  const Before = counter('before'), update = family(Before, 'old-signature')
+  const { root, container } = setup(<Before />)
+  const After = counter('after')
+  update(After, 'new-signature')
+  Refresh.performReactRefresh()
+  click(container)
+  const button = container.firstChild
+  root.render(<After />)
+  expect(container.textContent).toBe('after:1')
+  expect(container.firstChild).toBe(button)
+})
