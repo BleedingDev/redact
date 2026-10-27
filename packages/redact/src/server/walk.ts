@@ -1,4 +1,5 @@
 import { isFunction, isThenable } from '../core/functions'
+import { resolveClassProps } from '../core/class-props'
 import {
   REACT_ELEMENT_TYPE,
   REACT_LEGACY_ELEMENT_TYPE,
@@ -59,6 +60,7 @@ export interface WalkOptions {
   onHead?: () => void
   onSuspend?: ((boundary: SuspendedBoundary) => void) | undefined
   onBrowserBailout?: BrowserBailoutCallback | undefined
+  onError?: ((error: unknown) => unknown) | undefined
   componentStack?: string | undefined
   thrownInfo?: { componentStack?: string | undefined }
   nextBoundaryId: () => number
@@ -421,6 +423,7 @@ function walkComponent(
   }
   try {
   if ((fn as any).prototype?.isReactComponent) {
+    props = resolveClassProps(fn, props)
     const ctxType = (fn as any).contextType
     const ctxValue = ctxType ? ctxType._currentValue : undefined
     const instance = new (fn as any)(props, ctxValue)
@@ -471,36 +474,27 @@ function walkSuspense(
     })
   } catch (thenable: any) {
     nested.length = 0
-    if (isThenable(thenable) || isBrowserError(thenable)) {
-      const fallbackParts: string[] = []
-        walkNode(props.fallback, {
-          ...opts,
-          emit: (s) => fallbackParts.push(s),
-          onSuspend: opts.onSuspend ? (boundary) => nested.push(boundary) : undefined,
-          nextBoundaryId: opts.nextBoundaryId,
-        })
-      if (isBrowserError(thenable)) {
-        opts.onBrowserBailout?.(thenable, { componentStack: (thenable as any).componentStack || opts.componentStack || '' })
-        opts.emit(`<!--$!${id}-->${fallbackParts.join('')}<!--/$-->`)
-        for (const boundary of nested) opts.onSuspend?.(boundary)
-        return
-      }
-      emitBoundary(opts, id, fallbackParts.join(''))
-      for (const boundary of nested) opts.onSuspend?.(boundary)
-
-      if (opts.onSuspend) {
-        opts.onSuspend({
-          id,
-          fallbackHTML: fallbackParts.join(''),
-          children: props.children,
-          thenable,
-          contextSnapshot,
-          componentStack: thrownInfo.componentStack || opts.componentStack || '',
-        })
-      }
-      return
+    const suspended = isThenable(thenable)
+    if (!suspended) {
+      if (isBrowserError(thenable)) opts.onBrowserBailout?.(thenable, { componentStack: (thenable as any).componentStack || opts.componentStack || '' })
+      else opts.onError?.(thenable)
     }
-    throw thenable
+    const fallbackParts: string[] = []
+    walkNode(props.fallback, {
+      ...opts,
+      emit: (s) => fallbackParts.push(s),
+      onSuspend: opts.onSuspend ? (boundary) => nested.push(boundary) : undefined,
+      nextBoundaryId: opts.nextBoundaryId,
+    })
+    if (!suspended) {
+      opts.emit(`<!--${isBrowserError(thenable) ? '$!' : '$E'}${id}-->${fallbackParts.join('')}<!--/$-->`)
+    } else emitBoundary(opts, id, fallbackParts.join(''))
+    for (const boundary of nested) opts.onSuspend?.(boundary)
+    if (suspended) opts.onSuspend?.({
+      id, fallbackHTML: fallbackParts.join(''), children: props.children, thenable, contextSnapshot,
+      componentStack: thrownInfo.componentStack || opts.componentStack || '',
+    })
+    return
   }
 
   if (resourceScope) currentSSRFrame().resources?.mergeScope(resourceScope, opts.resourceScope)

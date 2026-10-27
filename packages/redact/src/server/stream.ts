@@ -99,6 +99,7 @@ export async function streamHtml(
     let rootRetries = 0
     let resources: SSRFrame['resources']
     while (!shellRendered) {
+      const shellErrors: unknown[] = []
       const chunkCount = shellChunks.length
       const boundaryCount = boundaries.length
       const nextId = state.nextId
@@ -114,6 +115,7 @@ export async function streamHtml(
           onSuspend: (b) => boundaries.push(b),
           nextBoundaryId: () => state.nextId++,
           onBrowserBailout: options.onBrowserBailout,
+          onError: error => { shellErrors.push(error) },
           onHead: () => { head = shellChunks.length },
         })
         shellRendered = true
@@ -131,6 +133,7 @@ export async function streamHtml(
         resources = currentSSRFrame().resources
         endSSR(previous)
       }
+      if (shellRendered) for (const error of shellErrors) options.onError?.(error)
       if (suspended) await Promise.race([suspended, state.cancelled])
     }
 
@@ -215,6 +218,7 @@ function streamBoundary(
         onSuspend: (n) => sub.push(n),
         nextBoundaryId: () => state.nextId++,
         onBrowserBailout: options.onBrowserBailout,
+          onError: options.onError,
         componentStack: b.componentStack,
         resourceScope,
       })

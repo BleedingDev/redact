@@ -1,3 +1,4 @@
+import { readOwnerStack, runWithOwnerStack } from '../../../core/devtools';
 import { a as transitionRender } from '../suspense-runtime';
 import { cleanupEffect } from '../../dispatcher';
 import { checkpointCommit, rewindCommit, queueMutation, onCommitFailure } from '../../commit';
@@ -73,8 +74,10 @@ interface SuspenseState {
 function reportServerFailure(fiber: Fiber): void {
     const error = new Error(process.env.NODE_ENV !== 'production' ? 'Switched to client rendering because the server render did not complete.' : '');
     const handler = findRoot(fiber)?.re;
-    if (handler)
-        handler(error, { componentStack: null });
+    if (handler) {
+        if (process.env.NODE_ENV !== 'production') runWithOwnerStack(readOwnerStack(fiber), () => handler(error, { componentStack: null }));
+        else handler(error, { componentStack: null });
+    }
     else
         console.error(error);
 }
