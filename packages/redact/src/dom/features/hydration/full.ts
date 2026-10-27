@@ -10,7 +10,7 @@ import { componentStack } from '../../error-info';
 export { reactId, forkId, assignReactIds } from '../../react-ids';
 import { FiberTag, type Fiber, type FiberRoot, type ReactNode, } from '../../../core';
 import { hydratedFormStates } from '../../../react/form-state';
-import { queueMutation, queueProp, queueText } from '../../commit';
+import { queueMutation, queueProp, queueText, onCommitRollback } from '../../commit';
 import { syncTextareaValue } from '../../form-controls';
 // Re-export from event-replay so all hydration concerns live behind one
 // feature boundary — the plugin's stub swap strips drainReplayQueue too.
@@ -77,7 +77,7 @@ export class HydrationCursor {
             if (scan.nodeType === 1 &&
                 (scan as Element).tagName.toLowerCase() === target &&
                 headAttrsMatch(scan as Element, props, keyAttrs)) {
-                CLAIMED.add(scan);
+                claimHydrationNode(scan);
                 return scan;
             }
             scan = scan.nextSibling;
@@ -128,6 +128,10 @@ const HEAD_KEY_ATTRS: Record<string, ReadonlyArray<string>> = {
 };
 // DOM elements already claimed by some fiber during this hydration pass.
 const CLAIMED = new WeakSet<Node>();
+function claimHydrationNode(node: Node): void {
+    CLAIMED.add(node);
+    onCommitRollback(() => CLAIMED.delete(node));
+}
 function headAttrsMatch(el: Element, props: Record<string, any>, keys: ReadonlyArray<string> | undefined): boolean {
     if (CLAIMED.has(el))
         return false;
@@ -313,7 +317,7 @@ export function adoptHostDom(fiber: Fiber, parent: Fiber): boolean {
     if (isFunction(tag === 'form' ? props.action : props.formAction)) {
         for (const child of (candidate as Element).children) {
             if (child.tagName === 'INPUT' && child.getAttribute('type') === 'hidden' && child.getAttribute('name')?.startsWith('$ACTION_'))
-                CLAIMED.add(child);
+                claimHydrationNode(child);
         }
     }
     // Set up child cursor for this host's children
@@ -507,35 +511,11 @@ export function recoverHydration(root: FiberRoot, error: unknown): boolean {
     return true;
 }
 const formatHydrationValue = (value: string | null): string => (value == null ? 'nothing' : JSON.stringify(value));
-export function deferHydration(fiber: Fiber, thenable: Promise<any>, restartInitial?: boolean): boolean {
-    const currentRoot = getCurrentRoot();
-    if (!currentRoot?.h)
-        return false;
-    // Until the initial tree commits, a suspended component's host range is
-    // unknown. Stop the pass instead of sharing its cursor with later siblings.
-    const hostParent = findHostParent(fiber);
-    if (restartInitial && (currentRoot.r.m === null || currentRoot.ri) || hostParent.t === FiberTag.Root)
-        throw thenable;
-    const inheritedCursor = getHydrationCursor(hostParent);
-    if (inheritedCursor)
-        setHydrationCursor(fiber, inheritedCursor);
-    ((fiber.b ??= {}) as any).p = true;
-    let sus: Fiber | null = fiber.p;
-    while (sus && sus.t !== FiberTag.Suspense)
-        sus = sus.p;
-    if (sus && sus.b) {
-        ;
-        (sus.b as any).a = true;
-    }
-    const clearAwait = () => {
-        if (sus && sus.b) {
-            ;
-            (sus.b as any).a = false;
-        }
-        scheduleUpdate(fiber);
-    };
-    thenable.then(clearAwait, clearAwait);
-    return true;
+export function deferHydration(_fiber: Fiber, thenable: Promise<any>): boolean {
+    // A suspended component does not own a known host range. Its hydration
+    // owner, either the root or a marked boundary, must pause and retry it.
+    if (getCurrentRoot()?.h) throw thenable;
+    return false;
 }
 export function hydrateRootImpl(container: Element | Document, initialChildren: ReactNode, options: HydrateRootOptions): HydratedRoot {
     const root = createFiberRoot(container, options);
