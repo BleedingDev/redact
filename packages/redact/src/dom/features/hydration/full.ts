@@ -1,4 +1,4 @@
-import { readOwnerStack, runWithOwnerStack } from '../../../core/devtools';
+import { devToolsMetadata, readOwnerStack, runWithOwnerStack } from '../../../core/devtools';
 import { drainReplayQueue } from '../../event-replay';
 import { attachRootFiber, createFiberRoot } from '../../root-internal';
 import { createHostNode, setProp } from '../../dom';
@@ -114,6 +114,7 @@ interface HydratedRoot {
     unmount(): void;
 }
 export function beginHydration(root: FiberRoot): void {
+    if (process.env.NODE_ENV !== 'production') devToolsMetadata.hydratedRoots.add(root);
     root.ic = 0;
     root.h = true;
     root.r.hc = new HydrationCursor(root.c);
