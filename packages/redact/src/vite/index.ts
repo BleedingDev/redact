@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, realpathSync } from 'node:fs'
 import { dirname, resolve as resolvePath } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { adaptReact18 } from './react18'
 
 export type RedactPreset = 'nano' | 'full'
 
@@ -323,6 +324,8 @@ export function redact(options: RedactOptions = {}): any {
 
   const resolvedMap: Record<string, string> = {}
   let done = false
+  let react18Version: string | undefined
+  let runtimeRoot: string | undefined
 
   function resolveAll(root: string): void {
     if (done) return
@@ -377,6 +380,14 @@ export function redact(options: RedactOptions = {}): any {
 
     configResolved(config: any) {
       resolveAll(config.root)
+      const reactDir = findPackageDir('react', options.resolveFrom ?? config.root)
+      if (reactDir) {
+        const installedVersion = JSON.parse(readFileSync(resolvePath(reactDir, 'package.json'), 'utf8')).version
+        if (/^18\./.test(installedVersion)) react18Version = installedVersion
+      }
+      if (resolvedMap.react) {
+        runtimeRoot = resolvePath(dirname(resolvedMap.react), '..').replaceAll('\\', '/') + '/'
+      }
       // With `packageRoots`, package sources live outside the consumer's Vite
       // project root, so the default server.fs.allow list blocks them. Append
       // to the resolved allow list rather than replacing via `config()`, so we
@@ -430,6 +441,16 @@ export function redact(options: RedactOptions = {}): any {
       }
 
       return resolvedMap[id] ?? null
+    },
+  }, {
+    name: 'redact:react18',
+    enforce: 'post',
+    transform(this: any, code: string, id: string) {
+      if (!react18Version || !runtimeRoot || this?.environment?.name === 'rsc') return null
+      const path = id.split('?')[0]!.replaceAll('\\', '/')
+      if (!path.startsWith(runtimeRoot)) return null
+      const module = path.slice(runtimeRoot.length).replace(/\.[jt]s$/, '')
+      return adaptReact18(code, id, module, react18Version, (source) => this.parse(source))
     },
   }, {
     name: 'redact:optimize-deps-guard',
