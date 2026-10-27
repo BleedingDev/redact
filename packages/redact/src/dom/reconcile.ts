@@ -1,3 +1,4 @@
+import { isTextContent } from '../core/functions';
 import { devToolsMetadata, readOwnerStack, runWithOwnerStack } from '../core/devtools';
 import { getRootContainer } from './root-internal';
 export { getHostParent, findRoot, getAnchor, firstDomNode } from './tree';
@@ -127,7 +128,7 @@ function pushChildren(node: ReactNode, out: NormalizedChild[], ids?: bigint[], p
         ids?.push(path);
         return;
     }
-    if (isString(node) || typeof node === 'number') {
+    if (isTextContent(node)) {
         if (node !== '') {
             out.push('' + node);
             ids?.push(path);
