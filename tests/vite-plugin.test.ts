@@ -2,10 +2,13 @@
 import { describe, it, expect } from 'vitest'
 import { resolve } from 'node:path'
 import { createRequire } from 'node:module'
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { redact } from '@tanstack/redact/vite'
 import { build } from 'vite'
 
 const { JSDOM } = createRequire(import.meta.url)('jsdom')
+const { parseAst } = createRequire(createRequire(import.meta.url).resolve('vite'))('rollup/parseAst')
 
 function flattenPlugins(plugins: any): Array<any> {
   return [plugins].flat(Infinity)
@@ -18,6 +21,28 @@ function findPlugin(plugins: any, name: string): any {
 }
 
 describe('redact vite plugin', () => {
+  it.each(['18.2.0', '18.3.1', '19.3.1'])('targets the consumer React %s without changing unrelated modules or RSC', async (version) => {
+    const root = mkdtempSync(resolve(tmpdir(), 'redact-version-'))
+    try {
+      const react = resolve(root, 'node_modules/react')
+      mkdirSync(react, { recursive: true })
+      writeFileSync(resolve(react, 'package.json'), JSON.stringify({ version }))
+      const plugins = redact({ resolveFrom: root, packageRoots: { '@tanstack/redact': resolve(import.meta.dirname, '../packages/redact') } })
+      const plugin = findPlugin(plugins, 'redact')
+      const compiler = findPlugin(plugins, 'redact:react18')
+      plugin.configResolved({ root })
+      const id = await plugin.resolveId.call({}, 'react')
+      const code = `export const version = '19.2.3'; export default { version: '19.2.3' };`
+      const result = compiler.transform.call({ parse: parseAst }, code, id)
+      if (version.startsWith('18.')) {
+        expect(result.code).toContain(JSON.stringify(version))
+        expect(() => compiler.transform.call({ parse: parseAst }, '', id)).toThrow('React 18 adaptation failed')
+      } else expect(result).toBeNull()
+      expect(compiler.transform.call({}, '', '/unrelated/react/index.js')).toBeNull()
+      expect(compiler.transform.call({ environment: { name: 'rsc' } }, '', id)).toBeNull()
+    } finally { rmSync(root, { recursive: true, force: true }) }
+  })
+
   it.each(['ts', 'js'])('redirects disabled registration imports in %s modules', async (extension) => {
     const plugin = findPlugin(redact({ preset: 'nano' }), 'redact')
     const importer = `/package/${extension === 'ts' ? 'src' : 'dist'}/dom/features/index.${extension}`

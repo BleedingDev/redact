@@ -4,6 +4,12 @@ title: Compatibility
 
 React's APIs and behavior are the reference for Redact. The default Vite configuration uses synchronous rendering, so some APIs behave differently from React's concurrent implementation. These are runtime tradeoffs, not recommendations to change how React works.
 
+For React 18 apps, the Vite plugin detects the installed React version and adapts element and context markers at build time, so checks from libraries such as `react-is` keep working. No extra plugin option or runtime version check is needed. React 19 runtime code is unchanged.
+
+Packed-package Chromium checks compare React 18.0.0, 18.2.0, 18.3.1, 19.0.0, and 19.3.1 against Redact in development and production bundles, covering `createRoot`, SSR, hydration, refs, context, portals, lazy loading, and external stores. Run a version with `REACT_VERSION=18.3.1 pnpm test:react18`. `pnpm test:compatibility:size` compares both targets against `origin/main` and rejects increases in minified, gzip, or Brotli size across the full, default, and nano profiles.
+
+Use `createRoot` and `hydrateRoot` from `react-dom/client`. The deprecated `ReactDOM.render`, `ReactDOM.hydrate`, `unmountComponentAtNode`, and public `findDOMNode` exports aren't implemented. React 18 detection applies to the Vite integration, not direct imports or the Next.js adapter. The synchronous scheduling and debugging differences below still apply.
+
 | Area | Redact behavior |
 |---|---|
 | Core rendering | JSX, hooks (including `use`, `useEffectEvent`, `useId`, and `useSyncExternalStore`), context, refs, memo, lazy, portals, error boundaries, and modern class lifecycles. Legacy class lifecycles are no-ops. |
