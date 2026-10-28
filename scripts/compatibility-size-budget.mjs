@@ -40,5 +40,6 @@ const allowances = {
 
 export function compatibilitySizeAllowance(base, row, metric) {
   if (base !== approvedBase) return 0
-  return allowances[`${row.profile}:${row.entry}:${row.target}`]?.[metric] ?? 0
+  const value = allowances[`${row.profile}:${row.entry}:${row.target}`]?.[metric]
+  return typeof value === 'number' ? value : 0
 }
