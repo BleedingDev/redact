@@ -38,7 +38,52 @@ const allowances = {
   }
 }
 
+// Measured SSR correctness costs against the exact PR base.
+const ssrBase = '0c7274e17a3fade8396169bc6ed024903cd1252d'
+const ssrAllowances = {
+  "full:server/index:react19": {
+    "min": 955,
+    "gzip": 381,
+    "brotli": 365
+  },
+  "full:server/index:react18": {
+    "min": 955,
+    "gzip": 381,
+    "brotli": 352
+  },
+  "full:client-total:react18": {
+    "brotli": 16
+  },
+  "default:server/index:react19": {
+    "min": 955,
+    "gzip": 381,
+    "brotli": 365
+  },
+  "default:server/index:react18": {
+    "min": 955,
+    "gzip": 381,
+    "brotli": 352
+  },
+  "default:client-total:react18": {
+    "brotli": 4
+  },
+  "nano:server/index:react19": {
+    "min": 955,
+    "gzip": 381,
+    "brotli": 365
+  },
+  "nano:server/index:react18": {
+    "min": 955,
+    "gzip": 381,
+    "brotli": 352
+  }
+}
+
 export function compatibilitySizeAllowance(base, row, metric) {
+  if (base === ssrBase) {
+    const value = ssrAllowances[`${row.profile}:${row.entry}:${row.target}`]?.[metric]
+    return typeof value === 'number' ? value : 0
+  }
   if (base !== approvedBase) return 0
   const value = allowances[`${row.profile}:${row.entry}:${row.target}`]?.[metric]
   return typeof value === 'number' ? value : 0
