@@ -170,7 +170,7 @@ function useEffectImpl(type: Effect['t'], create: () => any, deps?: ReadonlyArra
             return hook.c;
         },
     };
-    if (type === 1 && !subscription)
+    if (type !== 2 && !subscription)
         effect.d = () => cleanupEffect(hook, fiber);
     (hookEffects ||= []).push(hook, previous, effect, changed);
 }
@@ -318,10 +318,8 @@ const DISPATCHER = {
         const hook = nextHook();
         const store: {
             g: () => T;
-            s: (() => T) | undefined;
         } = hook.q ||= {};
         store.g = getSnapshot;
-        store.s = getServerSnapshot;
         // During hydration, use the server snapshot (if provided) so the tree
         // matches the SSR output. Components like TanStack Router's ClientOnly
         // rely on this: they render `false` on server, `true` on client — and
@@ -344,8 +342,6 @@ const DISPATCHER = {
                 scheduleUpdate(fiber);
             };
             const unsubscribe = subscribe(check);
-            if (isHydrating && store.s)
-                queueMicrotask(() => queueMicrotask(check));
             check();
             return () => {
                 active = false;
