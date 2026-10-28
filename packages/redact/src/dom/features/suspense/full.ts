@@ -215,8 +215,12 @@ function hydrateSuspenseBoundary(fiber: Fiber, props: any, boundary: [
     finally {
         clearHydrationCursor(fiber);
     }
+    // The server range remains owned even when its fallback has child fibers.
+    fiber.b.w = true;
     advanceCursorPast(fiber.p!, endMark);
-    (globalThis as any).$RH?.(id, () => rehydrateBoundary(fiber));
+    (globalThis as any).$RH?.(id, () => {
+        if (!fiber.u && !fiber.pd) rehydrateBoundary(fiber);
+    });
     // If the inline runtime isn't present, nothing external will mark us dy.
     fiber.m = props;
 }
@@ -313,7 +317,7 @@ function renderSuspense(fiber: Fiber): void {
         }
     }
     if (state.w && state.b && state.e) {
-        if (state.b.data === '$?' || state.b.data === '$~') {
+        if (state.b.data.startsWith('$?') || state.b.data === '$~') {
             if (!root?.h && props.children !== fiber.m?.children) {
                 ;
                 (state.b as any)._reactRetry = undefined;
