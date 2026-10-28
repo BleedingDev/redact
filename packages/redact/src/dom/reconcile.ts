@@ -20,7 +20,7 @@ import { isObject } from '../core/functions';
 import { FiberTag, createFiber, REACT_ELEMENT_TYPE, REACT_LEGACY_ELEMENT_TYPE, REACT_FRAGMENT_TYPE, type Fiber, type FiberRoot, type ReactElement, type ReactNode, type Effect, type Hook, } from '../core';
 import { createHostNode, setProp } from './dom';
 import { rememberRefreshRender, scheduleRefreshRoot, commitRefreshRoot, failRefreshRoot, failRefreshBoundary, resolveRefreshType, sameRefreshFamily, needsRefreshRemount } from './refresh';
-import { forkId, assignReactIds, deferHydration, endHydration, finishHydration, adoptHostDom, adoptTextDom, setHydrationCursor, getHydrationCursor, clearHydrationCursor, findHostParent as findHydrationHost, abortHydration, recoverHydration, isHydrationBailout, resumeHydration, } from './features/hydration';
+import { forkId, assignReactIds, deferHydration, queueHydrationEnd, finishHydration, adoptHostDom, adoptTextDom, setHydrationCursor, getHydrationCursor, clearHydrationCursor, findHostParent as findHydrationHost, abortHydration, recoverHydration, isHydrationBailout, resumeHydration, } from './features/hydration';
 import { rememberRetainedEffect, setRetainedFlag, disconnectClass } from './retained-effects';
 import { readThenable } from '../react/thenable';
 import { bindForm } from './form-actions';
@@ -905,8 +905,7 @@ export function renderRoot(root: FiberRoot, children: ReactNode): void {
         currentRoot = null;
     }
     // Layout effects can synchronously update stores, after hydration has ended.
-    if (root.h)
-        queueBeforeMutation(() => endHydration(root));
+    queueHydrationEnd?.(root);
     runEffects(root);
     if (process.env.NODE_ENV !== 'production')
         commitRefreshRoot(root);
@@ -1378,7 +1377,7 @@ function applyHostProps(el: Element, props: any, prev: any, isSvg: boolean, isIn
         syncTextareaValue(el as HTMLTextAreaElement, props, mounting);
 }
 export function renderFiber(fiber: Fiber, _domParent: Node, _anchor: Node | null): void { renderNode(fiber); }
-import { currentCommit, commitSynchronously, queueBeforeMutation, queueMutation, queueText, queueCommitEffects, setCommitCheckpointHook, onCommitRollback, onCommitFailure, checkpointCommit, rewindCommit, rememberChildList, queuePlacement, setCommitPlacementHook } from './commit';
+import { currentCommit, commitSynchronously, queueMutation, queueText, queueCommitEffects, setCommitCheckpointHook, onCommitRollback, onCommitFailure, checkpointCommit, rewindCommit, rememberChildList, queuePlacement, setCommitPlacementHook } from './commit';
 import { isFunction, isReservedProp, isThenable } from '../core/functions';
 import { renderWithDevTools, rememberDevToolsFiber, markDevToolsUpdate, invokeDevToolsCallback } from './devtools';
 import { measureDevToolsLayout, wrapDevToolsLayout, wrapDevToolsPassive } from './devtools-effects';

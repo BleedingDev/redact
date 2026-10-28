@@ -37,6 +37,8 @@ export function beginHydration(_root: FiberRoot): never {
 
 export function endHydration(_root: FiberRoot): void {}
 
+export const queueHydrationEnd = undefined
+
 export const tryConsumeBoundary = (_parent: Fiber): BoundaryInfo | null => (null)
 
 export function advanceCursorPast(_parent: Fiber, _node: Node): void {}

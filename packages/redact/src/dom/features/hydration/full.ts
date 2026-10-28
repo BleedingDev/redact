@@ -10,7 +10,7 @@ import { componentStack } from '../../error-info';
 export { reactId, forkId, assignReactIds } from '../../react-ids';
 import { FiberTag, type Fiber, type FiberRoot, type ReactNode, } from '../../../core';
 import { hydratedFormStates } from '../../../react/form-state';
-import { queueMutation, queueProp, queueText, onCommitRollback } from '../../commit';
+import { queueBeforeMutation, queueMutation, queueProp, queueText, onCommitRollback } from '../../commit';
 import { syncTextareaValue } from '../../form-controls';
 // Re-export from event-replay so all hydration concerns live behind one
 // feature boundary — the plugin's stub swap strips drainReplayQueue too.
@@ -112,6 +112,10 @@ interface HydrateRootOptions {
 interface HydratedRoot {
     render(children: ReactNode): void;
     unmount(): void;
+}
+// Complete hydration before layout effects can synchronously update a store.
+export function queueHydrationEnd(root: FiberRoot): void {
+    if (root.h) queueBeforeMutation(() => endHydration(root));
 }
 export function beginHydration(root: FiberRoot): void {
     if (process.env.NODE_ENV !== 'production') devToolsMetadata.hydratedRoots.add(root);
