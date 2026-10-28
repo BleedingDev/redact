@@ -205,7 +205,12 @@ const DISPATCHER = {
         const hook = nextHook(), fiber = getCurrentFiber();
         const queue = hook.q ||= { p: 0, f: false, e: undefined };
         hook.c ||= (fn: () => void) => {
-            const scope = transitionScope(() => runAction(fn));
+            const scope = transitionScope(() => runAction(fn, fiber.r, scope => {
+                scope.n = undefined;
+                queue.p++;
+                scheduleUpdate(fiber);
+                fiber.bt = false;
+            }));
             const finish = () => {
                 if (scope.f && !scope.h) {
                     queue.f = true;
@@ -215,17 +220,12 @@ const DISPATCHER = {
                     queue.p--;
                 scheduleUpdate(fiber);
             };
-            scope.n = () => {
-                delete scope.n;
-                queue.p++;
-                scheduleUpdate(fiber);
-            };
             if (!scope.p) {
                 finish();
                 return;
             }
             if (scope.p > (scope.v || 0))
-                scope.n();
+                scope.n?.(scope);
             scope.d.then(finish);
         };
         if (queue.f)

@@ -596,6 +596,7 @@ export function hydrateRootImpl(container: Element | Document, initialChildren: 
                 scheduleRootRender(root, () => renderRoot(root, children));
         },
         unmount() {
+            discardPendingWork(root);
             active = false;
             generation++;
             const pending = root.r.m === null;
