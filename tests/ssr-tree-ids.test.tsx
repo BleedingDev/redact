@@ -42,7 +42,9 @@ it.each([undefined, 'modern-js-'])('hydrates tree-position IDs after boundaries 
   roots.push(hydrateRoot(container, tree, { ...options, onRecoverableError: error }))
   expect(error).not.toHaveBeenCalled()
   expect(container.firstElementChild).toBe(main)
-  expect([...container.querySelectorAll('input, label, span, section')]).toEqual(nodes)
+  const hydratedNodes = [...container.querySelectorAll('input, label, span, section')]
+  expect(hydratedNodes).toHaveLength(nodes.length)
+  hydratedNodes.forEach((node, index) => expect(node).toBe(nodes[index]))
   const ids = [...container.querySelectorAll('[id]')].map(node => node.id)
   expect(new Set(ids).size).toBe(ids.length)
 })
