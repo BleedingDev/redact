@@ -487,7 +487,7 @@ function walkSuspense(
       nextBoundaryId: opts.nextBoundaryId,
     })
     if (!suspended) {
-      opts.emit(`<!--${isBrowserError(thenable) ? '$!' : '$E'}${id}-->${fallbackParts.join('')}<!--/$-->`)
+      emitBoundary(opts, id, fallbackParts.join(''), isBrowserError(thenable) ? '$!' : '$E')
     } else emitBoundary(opts, id, fallbackParts.join(''))
     for (const boundary of nested) opts.onSuspend?.(boundary)
     if (suspended) opts.onSuspend?.({
@@ -506,16 +506,18 @@ function walkSuspense(
   // range to adopt on resolve — it creates fresh DOM next to the SSR content,
   // producing visible duplicates (e.g. double navbar logos). Markers let the
   // client treat this as a resolved boundary and hydrate in-place.
-  opts.emit(`<!--$${id}-->`)
-  opts.emit(childParts.join(''))
-  opts.emit(`<!--/$-->`)
+  emitBoundary(opts, id, childParts.join(''), '$')
   for (const boundary of nested) opts.onSuspend?.(boundary)
 }
 
-function emitBoundary(opts: WalkOptions, id: number, fallbackHTML: string): void {
-  // A template is allowed in table insertion modes and does not break out of
-  // SVG/MathML. The visible fallback is a sibling, not an HTML div wrapper.
-  opts.emit(`<!--$?${id}--><template id="B:${id}"></template>`)
-  opts.emit(fallbackHTML)
-  opts.emit(`<!--/$-->`)
+function emitBoundary(opts: WalkOptions, id: number, content: string, marker = '$?'): void {
+  // A pending template is allowed in table insertion modes and does not break
+  // out of SVG/MathML. The visible fallback is a sibling, not an HTML div wrapper.
+  // Bare rows/columns create implicit containers. Close them on both sides so
+  // neither preceding rows nor the fallback can move a marker inside one.
+  // These end tags are ignored when no such container is open.
+  const close = opts.insertionContext === 'table' ? '</tbody></colgroup>' : ''
+  opts.emit(`${close}<!--${marker}${id}-->${marker === '$?' ? `<template id="B:${id}"></template>` : ''}`)
+  opts.emit(content)
+  opts.emit(`${close}<!--/$-->`)
 }

@@ -43,7 +43,7 @@ export const BOUNDARY_REVEAL_RUNTIME =
       `var p=b.parentNode,m=b.previousSibling;` +
       `var n=b.nextSibling,d=0;while(n){var t=n.nextSibling;if(n.nodeType===8){if(n.data==="/$"){if(d===0)break;d--}else if(/^\\$(?:[?!E~])?\\d*$/.test(n.data))d++}p.removeChild(n);n=t}` +
       `while(s.firstChild)p.insertBefore(s.firstChild,b);` +
-      `var w=/^(TBODY|TR|COLGROUP)$/.test(s.nodeName)?s.closest("table"):s;w.parentNode.removeChild(w);` +
+      `var w=/^(TBODY|TR|COLGROUP|mtext)$/.test(s.nodeName)?s.closest("table,math"):s;w.parentNode.removeChild(w);` +
       `p.removeChild(b);` +
       `if(m&&m.nodeType===8)m.data="$"+i;` +
       `if(c[i]){var f=c[i];delete c[i];f()}` +

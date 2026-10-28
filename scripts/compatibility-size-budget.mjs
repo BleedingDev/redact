@@ -42,40 +42,40 @@ const allowances = {
 const ssrBase = '0c7274e17a3fade8396169bc6ed024903cd1252d'
 const ssrAllowances = {
   "full:server/index:react19": {
-    "min": 955,
-    "gzip": 381,
-    "brotli": 365
+    "min": 1199,
+    "gzip": 486,
+    "brotli": 430
   },
   "full:server/index:react18": {
-    "min": 955,
-    "gzip": 381,
-    "brotli": 352
+    "min": 1199,
+    "gzip": 487,
+    "brotli": 452
   },
   "full:client-total:react18": {
     "brotli": 16
   },
   "default:server/index:react19": {
-    "min": 955,
-    "gzip": 381,
-    "brotli": 365
+    "min": 1199,
+    "gzip": 486,
+    "brotli": 430
   },
   "default:server/index:react18": {
-    "min": 955,
-    "gzip": 381,
-    "brotli": 352
+    "min": 1199,
+    "gzip": 487,
+    "brotli": 452
   },
   "default:client-total:react18": {
     "brotli": 4
   },
   "nano:server/index:react19": {
-    "min": 955,
-    "gzip": 381,
-    "brotli": 365
+    "min": 1199,
+    "gzip": 486,
+    "brotli": 430
   },
   "nano:server/index:react18": {
-    "min": 955,
-    "gzip": 381,
-    "brotli": 352
+    "min": 1199,
+    "gzip": 487,
+    "brotli": 452
   }
 }
 
