@@ -1,10 +1,16 @@
 import { afterEach, expect, it, vi } from 'vitest'
-import { Suspense, createElement as h } from 'react'
+import { Suspense, createElement as h, useLayoutEffect, useState } from 'react'
+import { flushSync } from 'react-dom'
 import { hydrateRoot } from 'react-dom/client'
 import { renderToReadableStream, renderToString } from 'react-dom/server'
 
 const roots: Array<{ unmount(): void }> = []
-afterEach(() => { for (const root of roots.splice(0)) root.unmount(); document.body.innerHTML = '' })
+afterEach(() => {
+  for (const root of roots.splice(0)) root.unmount()
+  ;(window as any).$RE_stop?.()
+  for (const name of ['$RH', '$RC', '$RR', '$RB', '$RE_q', '$RE_stop']) delete (window as any)[name]
+  document.body.innerHTML = ''
+})
 function gate() {
   let resolve!: () => void, ready = false
   const promise = new Promise<void>(r => { resolve = r })
@@ -59,29 +65,57 @@ it('emits prefixed hexadecimal boundary/segment IDs and two-ID $RC calls', async
   expect(container.querySelectorAll('span')).toHaveLength(18)
 })
 
-it('keeps prefixes isolated for two streams revealed after both shells arrive', async () => {
-  const a = gate(), b = gate()
-  function Async({ pending, label }: { pending: ReturnType<typeof gate>; label: string }) { pending.read(); return <span>{label}</span> }
-  const one = await renderToReadableStream(<Suspense fallback={null}><Async pending={a} label="one" /></Suspense>, { identifierPrefix: 'one-' })
-  const two = await renderToReadableStream(<Suspense fallback={null}><Async pending={b} label="two" /></Suspense>, { identifierPrefix: 'two-' })
+it.each(['before hydration', 'after first hydration'])('keeps pending roots interactive when the second shell arrives %s', async arrival => {
+  const a = gate(), b = gate(), effects = vi.fn(), error = vi.fn()
+  function Async({ pending, label }: { pending: ReturnType<typeof gate>; label: string }) {
+    pending.read()
+    const [count, setCount] = useState(0)
+    useLayoutEffect(() => { effects(label) }, [])
+    return <button onClick={() => setCount(n => n + 1)}>{label}{count}</button>
+  }
+  const ta = <Suspense fallback={null}><Async pending={a} label="one" /></Suspense>
+  const tb = <Suspense fallback={null}><Async pending={b} label="two" /></Suspense>
+  const one = await renderToReadableStream(ta, { identifierPrefix: 'one-' })
+  const two = await renderToReadableStream(tb, { identifierPrefix: 'two-' })
   const ra = one.getReader(), rb = two.getReader(), decoder = new TextDecoder()
-  const ca = install(decoder.decode((await ra.read()).value)), cb = install(decoder.decode((await rb.read()).value))
+  const ca = install(decoder.decode((await ra.read()).value))
+  let cb: HTMLDivElement
+  if (arrival === 'before hydration') cb = install(decoder.decode((await rb.read()).value))
+  roots.push(hydrateRoot(ca, ta, { identifierPrefix: 'one-', onRecoverableError: error }))
+  if (arrival === 'after first hydration') cb = install(decoder.decode((await rb.read()).value))
+  roots.push(hydrateRoot(cb!, tb, { identifierPrefix: 'two-', onRecoverableError: error }))
+  expect(effects).not.toHaveBeenCalled()
   a.resolve(); b.resolve()
-  for (const [reader, container] of [[ra, ca], [rb, cb]] as const) {
+  for (const [reader, container] of [[ra, ca], [rb, cb!]] as const) {
     let html = ''
     for (;;) { const { done, value } = await reader.read(); if (done) break; html += decoder.decode(value) }
     const transport = document.createElement('div'); transport.innerHTML = html
     const scripts = [...transport.querySelectorAll('script')]
+    const serverButton = transport.querySelector('button')!
     while (transport.firstChild) container.appendChild(transport.firstChild)
     for (const script of scripts) new Function(script.textContent!)()
+    expect(container.querySelector('button')).toBe(serverButton)
   }
-  expect(ca.querySelector('span')!.textContent).toBe('one')
-  expect(cb.querySelector('span')!.textContent).toBe('two')
+  await vi.waitFor(() => expect(effects.mock.calls).toEqual([['one'], ['two']]))
+  for (const [container, label] of [[ca, 'one'], [cb!, 'two']] as const) {
+    const button = container.querySelector('button')!
+    expect(button.textContent).toBe(label + '0')
+    flushSync(() => button.click())
+    expect(container.querySelector('button')).toBe(button)
+    expect(button.textContent).toBe(label + '1')
+  }
+  expect(error).not.toHaveBeenCalled()
 })
 
 it('finds a prefixed hexadecimal placeholder when hydration precedes reveal', async () => {
   const pending = gate(), prefix = 'modern-js-'
-  function Async() { pending.read(); return <button>ready</button> }
+  const effect = vi.fn()
+  function Async() {
+    pending.read()
+    const [count, setCount] = useState(0)
+    useLayoutEffect(effect, [])
+    return <button onClick={() => setCount(n => n + 1)}>ready{count}</button>
+  }
   const tree = <main>{Array.from({ length: 10 }, (_, index) => <Suspense key={index} fallback={null}><span>{index}</span></Suspense>)}<Suspense fallback={<i>loading</i>}><Async /></Suspense></main>
   const stream = await renderToReadableStream(tree, { identifierPrefix: prefix }), reader = stream.getReader(), decoder = new TextDecoder()
   const container = install(decoder.decode((await reader.read()).value)), main = container.firstElementChild, error = vi.fn()
@@ -92,11 +126,17 @@ it('finds a prefixed hexadecimal placeholder when hydration precedes reveal', as
   for (;;) { const { done, value } = await reader.read(); if (done) break; html += decoder.decode(value) }
   const transport = document.createElement('div'); transport.innerHTML = html
   const scripts = [...transport.querySelectorAll('script')]
+  const serverButton = transport.querySelector('button')!
   while (transport.firstChild) container.appendChild(transport.firstChild)
   for (const script of scripts) new Function(script.textContent!)()
   expect(error).not.toHaveBeenCalled()
   expect(container.firstElementChild).toBe(main)
-  expect(container.querySelector('button')!.textContent).toBe('ready')
+  await vi.waitFor(() => expect(effect).toHaveBeenCalledTimes(1))
+  const button = container.querySelector('button')!
+  expect(button).toBe(serverButton)
+  expect(button.textContent).toBe('ready0')
+  flushSync(() => button.click())
+  expect(button.textContent).toBe('ready1')
 })
 
 it('uses recognized $RR stylesheet instructions and safely escapes transport prefixes', async () => {
@@ -140,4 +180,36 @@ it('uses recognized $RR stylesheet instructions and safely escapes transport pre
   } finally {
     stylesheet?.remove()
   }
+})
+
+it('captures a later stream click after the first root has hydrated', async () => {
+  const pending = gate(), error = vi.fn()
+  function Counter({ label }: { label: string }) {
+    const [count, setCount] = useState(0)
+    return <button onClick={() => setCount(n => n + 1)}>{label}{count}</button>
+  }
+  function Async() { pending.read(); return <span>ready</span> }
+  const firstTree = <Suspense fallback={null}><Async /></Suspense>
+  const first = await renderToReadableStream(firstTree, { identifierPrefix: 'first-' })
+  const ra = first.getReader(), decoder = new TextDecoder()
+  const ca = install(decoder.decode((await ra.read()).value))
+  roots.push(hydrateRoot(ca, firstTree, { identifierPrefix: 'first-', onRecoverableError: error }))
+
+  const laterTree = <main><Counter label="later" /><Suspense fallback={null}><Async /></Suspense></main>
+  const later = await renderToReadableStream(laterTree, { identifierPrefix: 'later-' })
+  const rb = later.getReader()
+  const cb = install(decoder.decode((await rb.read()).value))
+  const button = cb.querySelector('button')!
+  button.click()
+  const queue = (window as any).$RE_q
+  expect(queue).toHaveLength(1)
+  expect(button.textContent).toBe('later0')
+
+  flushSync(() => roots.push(hydrateRoot(cb, laterTree, { identifierPrefix: 'later-', onRecoverableError: error })))
+  expect(cb.querySelector('button')).toBe(button)
+  expect(button.textContent).toBe('later1')
+  expect(queue).toHaveLength(0)
+  expect(error).not.toHaveBeenCalled()
+  pending.resolve()
+  for (const reader of [ra, rb]) while (!(await reader.read()).done) {}
 })

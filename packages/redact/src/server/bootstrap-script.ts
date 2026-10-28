@@ -25,6 +25,8 @@ import { escapeAttr } from './escape'
 
 export const BOUNDARY_REVEAL_RUNTIME =
   `(function(){` +
+    // All independently prefixed streams in a document share one reveal registry.
+    `if(!window.$RH){` +
     `var c={},r=new Map;` +
     `function place(n,v){` +
       `var a=document.head.querySelectorAll('link[rel="stylesheet"][data-precedence],style[data-precedence]'),t=a.length?a[a.length-1]:null,p=t;` +
@@ -69,6 +71,7 @@ export const BOUNDARY_REVEAL_RUNTIME =
       `var m=b.previousSibling;if(m&&m.nodeType===8)m.data=(e?"$E":"$!")+m.data.replace(/^\\$[?~!E]?/,"");` +
       `b.removeAttribute("id");if(c[i]){var f=c[i];delete c[i];f()}` +
     `};` +
+    `}` +
     `var q=[];window.$RE_q=q;` +
     `var evs=["click","submit","input","change","keydown"];` +
     `function h(e){q.push([e.type,e.target,e.timeStamp])}` +
