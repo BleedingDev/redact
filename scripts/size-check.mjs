@@ -65,7 +65,8 @@ const STORE_HYDRATION_SIZE_ALLOWANCE = {
 
 // Measured pending-range deletion correctness cost, [source, built] gzip bytes.
 const PENDING_RANGE_SIZE_ALLOWANCE = {
-  'redact/dom-client (hydration=stub)': [11, 16],
+  'redact/dom-client (hydration=stub)': [35, 42],
+  'redact/server': [16, 15],
 }
 
 let failed = false

@@ -1,7 +1,7 @@
 import { readOwnerStack, runWithOwnerStack } from '../../../core/devtools';
 import { a as transitionRender } from '../suspense-runtime';
 import { cleanupEffect } from '../../dispatcher';
-import { checkpointCommit, rewindCommit, queueMutation, onCommitFailure, commitSynchronously } from '../../commit';
+import { checkpointCommit, rewindCommit, queueMutation, onCommitFailure, onCommitRollback, commitSynchronously } from '../../commit';
 import { REACT_SUSPENSE_TYPE, ReactSharedInternals, startTransition } from '../../../react';
 import { FiberTag, createFiber, type Fiber } from '../../../core';
 import { disconnectClass, inSuspensePrimary, setRetainedFlag, walkRetained } from '../../retained-effects';
@@ -62,6 +62,7 @@ interface SuspenseState {
     e?: Comment;
     r?: any;
     w?: boolean;
+    x?: () => void;
     u?: boolean;
     // Re-suspend preservation:
     d?: Array<[
@@ -82,6 +83,8 @@ function reportServerFailure(fiber: Fiber): void {
 }
 function recoverBoundaryHydration(fiber: Fiber, children: any, parent: Node, startMark: Comment | null, endMark: Comment | null, retryBoundary?: boolean): void {
     const clear = () => {
+        const dispose = fiber.b?.x;
+        if (dispose) queueMutation(dispose);
         if (startMark && endMark)
             clearBoundaryRange(startMark, endMark);
         else
@@ -218,9 +221,11 @@ function hydrateSuspenseBoundary(fiber: Fiber, props: any, boundary: [
     // The server range remains owned even when its fallback has child fibers.
     fiber.b.w = true;
     advanceCursorPast(fiber.p!, endMark);
-    (globalThis as any).$RH?.(id, () => {
+    const dispose = (globalThis as any).$RH?.(id, () => {
         if (!fiber.u && !fiber.pd) rehydrateBoundary(fiber);
     });
+    fiber.b.x = dispose;
+    if (dispose) onCommitRollback(dispose);
     // If the inline runtime isn't present, nothing external will mark us dy.
     fiber.m = props;
 }
