@@ -33,6 +33,7 @@ export const BOUNDARY_REVEAL_RUNTIME =
       `for(var k=0;k<a.length;k++){if(a[k].getAttribute("data-precedence")===v)p=a[k];else if(p!==t)break}` +
       `document.head.insertBefore(n,p?p.nextSibling:document.head.firstChild);` +
     `}` +
+    `function drop(s){var w=/^(TBODY|TR|COLGROUP|mtext)$/.test(s.nodeName)?s.closest("table,math"):s;w.remove()}` +
     `function load(n,e){return new Promise(function(y,x){n.onload=function(){e.p=null;y()};n.onerror=function(){e.p=null;x()}})}` +
     `window.$RH=function(i,f){` +
       `if(!document.getElementById(i))f();` +
@@ -64,9 +65,10 @@ export const BOUNDARY_REVEAL_RUNTIME =
         `}` +
         `var m=e.n.getAttribute("media");if(e.p&&(!m||matchMedia(m).matches))w.push(e.p);` +
       `}` +
-      `Promise.all(w).then(function(){$RC(i,s)},function(){$RB(i,1)});` +
+      `Promise.all(w).then(function(){$RC(i,s)},function(){$RB(i,1,s)});` +
     `};` +
-    `window.$RB=function(i,e){` +
+    `window.$RB=function(i,e,j){` +
+      `var s=j&&document.getElementById(j);if(s)drop(s);` +
       `var b=document.getElementById(i);if(!b)return;` +
       `var m=b.previousSibling;if(m&&m.nodeType===8)m.data=(e?"$E":"$!")+m.data.replace(/^\\$[?~!E]?/,"");` +
       `b.removeAttribute("id");if(c[i]){var f=c[i];delete c[i];f()}` +

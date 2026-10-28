@@ -67,8 +67,8 @@ const STORE_HYDRATION_SIZE_ALLOWANCE = {
 // Increase only entries exceeding the existing caps, by their exact deficit.
 const SSR_SIZE_ALLOWANCE = {
   "redact/server": [
-    107,
-    110
+    186,
+    188
   ],
   "redact/dom-client (hydration=stub)": [
     1,

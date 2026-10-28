@@ -213,3 +213,43 @@ it('captures a later stream click after the first root has hydrated', async () =
   pending.resolve()
   for (const reader of [ra, rb]) while (!(await reader.read()).done) {}
 })
+
+it('discards a deleted boundary segment when its late stylesheet fails', async () => {
+  const pending = gate(), effect = vi.fn(), error = vi.fn()
+  function Async() {
+    pending.read()
+    useLayoutEffect(effect, [])
+    return <><link rel="stylesheet" href="/deleted-late.css" precedence="default" /><button>obsolete</button></>
+  }
+  const tree = <main><Suspense fallback={<i>loading</i>}><Async /></Suspense><em>stays</em></main>
+  const stream = await renderToReadableStream(tree, { identifierPrefix: 'deleted-' })
+  const reader = stream.getReader(), decoder = new TextDecoder()
+  const container = install(decoder.decode((await reader.read()).value))
+  const root = hydrateRoot(container, tree, { identifierPrefix: 'deleted-', onRecoverableError: error })
+  roots.push(root)
+  flushSync(() => root.render(<section><strong>replacement</strong><em>stays</em></section>))
+  expect(document.getElementById('deleted-B:0')).toBeNull()
+  pending.resolve()
+  let tail = ''
+  for (;;) { const chunk = await reader.read(); if (chunk.done) break; tail += decoder.decode(chunk.value) }
+  const transport = document.createElement('div'); transport.innerHTML = tail
+  const scripts = [...transport.querySelectorAll('script')]
+  while (transport.firstChild) container.appendChild(transport.firstChild)
+  for (const script of scripts) new Function(script.textContent!)()
+  const segment = document.getElementById('deleted-S:0')!
+  const stylesheet = document.head.querySelector<HTMLLinkElement>('link[href="/deleted-late.css"]')!
+  try {
+    expect(segment).not.toBeNull()
+    expect(segment.querySelector('button')?.textContent).toBe('obsolete')
+    expect(stylesheet).not.toBeNull()
+    stylesheet.dispatchEvent(new Event('error'))
+    await vi.waitFor(() => expect(document.getElementById('deleted-S:0')).toBeNull())
+    expect(segment.isConnected).toBe(false)
+    expect(container.querySelector('section')?.textContent).toBe('replacementstays')
+    expect(container.querySelector('button')).toBeNull()
+    expect(effect).not.toHaveBeenCalled()
+    expect(error).not.toHaveBeenCalled()
+  } finally {
+    stylesheet?.remove()
+  }
+})
