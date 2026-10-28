@@ -103,11 +103,41 @@ it('uses recognized $RR stylesheet instructions and safely escapes transport pre
   const pending = gate()
   function Async() { pending.read(); return <><link rel="stylesheet" href="/late.css" precedence="default" /><span>ready</span></> }
   const prefix = 'quote-"</script><script>throw 1</script>&'
-  const stream = await renderToReadableStream(<Suspense fallback={null}><Async /></Suspense>, { identifierPrefix: prefix, nonce: 'test-nonce' })
+  const tree = <main>{Array.from({ length: 10 }, (_, index) => <Suspense key={index} fallback={null}><span>{index}</span></Suspense>)}<Suspense fallback={<i>loading</i>}><Async /></Suspense></main>
+  const stream = await renderToReadableStream(tree, { identifierPrefix: prefix, nonce: 'test-nonce' })
   pending.resolve()
   const html = await new Response(stream).text()
+  const boundaryId = `${prefix}B:a`, segmentId = `${prefix}S:a`
+  const scriptId = (id: string) => JSON.stringify(id).replace(/</g, '\\u003c')
   expect(html).not.toContain('</script><script>throw 1')
-  expect(html).toContain('$RR(')
+  expect(html).toContain(`$RR(${scriptId(boundaryId)},${scriptId(segmentId)},`)
   expect(html).toContain('nonce="test-nonce"')
   expect(html).toContain('\\u003c/script>')
+
+  const container = install(html)
+  const boundary = document.getElementById(boundaryId)!
+  const segment = document.getElementById(segmentId) as HTMLDivElement
+  const ready = segment.querySelector('span')!
+  const stylesheet = document.head.querySelector<HTMLLinkElement>('link[href="/late.css"]')!
+  try {
+    expect(stylesheet).not.toBeNull()
+    // Let an incorrectly ungated $RR promise reveal before checking the fallback.
+    await new Promise(resolve => setTimeout(resolve, 0))
+    expect(document.getElementById(boundaryId)).toBe(boundary)
+    expect(boundary.textContent).toBe('loading')
+    expect(segment.hidden).toBe(true)
+    expect(ready.parentElement).toBe(segment)
+    expect(container.querySelector('i')!.textContent).toBe('loading')
+
+    stylesheet.dispatchEvent(new Event('load'))
+    await vi.waitFor(() => {
+      expect(document.getElementById(boundaryId)).toBeNull()
+      expect(document.getElementById(segmentId)).toBeNull()
+      expect(container.querySelector('i')).toBeNull()
+      expect(ready.parentElement).toBe(container.querySelector('main'))
+      expect(ready.textContent).toBe('ready')
+    })
+  } finally {
+    stylesheet?.remove()
+  }
 })
