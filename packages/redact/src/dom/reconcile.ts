@@ -13,7 +13,7 @@ export { deferHydration } from './features/hydration';
 import { m as markTransitionUpdate, d as deferTransition, c as cancelTransitions, l as deferTransitionLayout, p as deferTransitionPassive } from './features/view-transition';
 import { clearAttributes, clearHostContainer, documentMetadataParent, documentSingleton, DOCUMENT_HEAD_TAGS } from './document-metadata';
 import { acquireResource } from './resources';
-import { a as transitionRender, p as hasTransition, t as flushTransitions, c as cancelPendingTransitions } from './features/suspense-runtime';
+import { a as transitionRender, p as hasTransition, t as flushTransitions, c as cancelPendingTransitions, s as scheduleTransitionRoot } from './features/suspense-runtime';
 import { commitFragmentRef, placeFragmentCommits, updateFragmentHost, refreshFragmentInstances } from './features/fragment-refs';
 import { isObject } from '../core/functions';
 import { FiberTag, createFiber, REACT_ELEMENT_TYPE, REACT_LEGACY_ELEMENT_TYPE, REACT_FRAGMENT_TYPE, type Fiber, type FiberRoot, type ReactElement, type ReactNode, type Effect, type Hook, } from '../core';
@@ -333,11 +333,12 @@ const ACCEPTED_ELEMENT_MARKERS = new Set<symbol>([
 // fallback branch. Features register here for element types that aren't
 // marker-based (e.g. Portal, where element.type IS the symbol).
 const TYPE_MATCHERS: TypeMatcher[] = [];
-function renderUpdates(root: FiberRoot, pending: Fiber[]): void {
+function renderUpdates(root: FiberRoot, pending: Fiber[], update?: () => void): void {
     pending.sort((a, b) => fiberDepth(a) - fiberDepth(b));
     if (transitionRender)
         for (const fiber of pending)
             fiber.g = true;
+    update?.();
     for (const fiber of pending) {
         if (!fiber.g || fiber.u || fiber.pd)
             continue;
@@ -650,7 +651,7 @@ export function scheduleRootRender(root: FiberRoot, render: () => void): void {
     if (process.env.NODE_ENV !== 'production')
         rememberRefreshRender(root, render);
     markTransitionUpdate && markTransitionUpdate(root);
-    root.u = render;
+    if (!scheduleTransitionRoot?.(root, render)) root.u = render;
     pendingRoots.add(root);
     if (isBatching)
         return;

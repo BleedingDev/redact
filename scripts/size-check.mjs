@@ -51,11 +51,18 @@ const QUEUE_SIZE_ALLOWANCE = {
   'redact/dom-client (hydration=stub)': [18, 18],
 }
 
+// Approved root-transition correctness cost on main 20f6dd6, [source, built].
+// Only entries exceeding existing limits receive their measured increment.
+const ROOT_TRANSITION_SIZE_ALLOWANCE = {
+  'client total (default Vite)': [132, 111],
+  'redact/dom-client (viewTransitions=stub)': [97, 81],
+}
+
 let failed = false
 for (const tree of ['src', 'dist']) {
   for (const row of await measureSizes(tree)) {
     const baseBudget = BUDGETS[row.name]
-    const budget = baseBudget === undefined ? undefined : baseBudget + (QUEUE_SIZE_ALLOWANCE[row.name]?.[tree === 'src' ? 0 : 1] ?? 0)
+    const budget = baseBudget === undefined ? undefined : baseBudget + (ROOT_TRANSITION_SIZE_ALLOWANCE[row.name]?.[tree === 'src' ? 0 : 1] ?? 0) + (QUEUE_SIZE_ALLOWANCE[row.name]?.[tree === 'src' ? 0 : 1] ?? 0)
     const ok = budget !== undefined && row.gz <= budget
     failed ||= !ok
     console.log(`${ok ? 'PASS' : 'FAIL'} ${tree} ${row.name}: ${row.gz} B gzip, budget ${budget ?? 'missing'}`)
